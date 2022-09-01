@@ -1,9 +1,6 @@
-
+import { error, redirect } from '@sveltejs/kit';
 
 export async function load() {
-        return {
-            status: 302,
-            redirect: "/overview/general"
-        };
-    }
+    throw redirect(307, '/overview/general');
+}
 export const prerender = true;
