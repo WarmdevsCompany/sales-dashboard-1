@@ -1,33 +1,7 @@
-<script context="module">
-	import { goto } from '$app/navigation';
-	import { browser } from '$app/environment';
-  
-	import {userAuthToken} from '$lib/globalStore'
-  
-	// import your user store here.
-  
-	// if (browser && $user)
-  
-	// Add your specific guard logic here, you need to include the 'browser' 
-	//check otherwise Vite tries to process it on the server side
-  
-	// if (browser) {
-	//     // Use Goto to redirect users if neccessary
-	//     const userToken = localStorage.getItem("token")
-	//     if(userToken){
-	//       console.log("User Token Exist")
-	//     }else{
-	//       goto('/auth/login');
-	//     }
-		
-	// }
-  
-  </script>
   <script>
 	import Header from "$lib/header/Header.svelte";
 	import Sidebar from "$lib/sidebar/Sidebar.svelte";
 	import "../../app.css";
-	import "$lib/api/api";
 	import logoForBg from "$lib/assets/img/logo-big.svg";
 	import Loader from "$lib/components/Loader.svelte";
 	import { onMount } from "svelte";
