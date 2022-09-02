@@ -223,7 +223,20 @@
   @media only screen and (max-width: 991px) {
     #modal {
       max-width: 100%;
+      max-height: 90vh;
+      overflow: auto;
       margin: auto;
+    }
+    #modal-content {
+      overflow: hidden;
+    }
+    #modal.greenForm {
+      max-width: 90%;
+      border-radius: 0.5rem;
+    }
+    #modal.greenForm #modal-content {
+      padding-left: 20px;
+      padding-right: 20px;
     }
   }
 </style>

@@ -492,6 +492,9 @@
   .align-center {
 	align-items: center;
   }
+  .align-base {
+	align-items: baseline;
+  }
   .align-top {
 	align-items: flex-start;
   }
@@ -608,18 +611,22 @@
 	width: 0px;
 	background: transparent;
   }
-  @media only screen and (max-width: 991px) {
+@media only screen and (max-width: 991px) {
 	.mobile-block {
-	  display: block;
+		display: block;
 	}
 	.modal_main {
-	  overflow: hidden;
+		overflow: hidden;
 	}
 	.mt-3 {
-	  margin-top: 2rem;
+		margin-top: 2rem;
 	}
 	.grid-2, 
 	.grid-3 {
-	  grid-template-columns: 1fr;
+		grid-template-columns: 1fr;
 	}
-  }
+	.modal_head_medium {
+		font-size: var(--text-size-big);
+		line-height: var(--text-line-big);
+	}
+}
