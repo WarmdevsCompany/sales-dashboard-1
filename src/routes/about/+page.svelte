@@ -1,3 +1,7 @@
+<script>
+		export let data;
+		console.log(data.todos)
+</script>
 <svelte:head>
 	<title>About</title>
 	<meta name="description" content="About this app" />

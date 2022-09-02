@@ -1,22 +1,10 @@
 import * as cookie from 'cookie';
-
 export const handle = async ({ event, resolve }) => {
+	// get cookies
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
-	event.locals.userid = cookies['userid'] || crypto.randomUUID();
-
+	// set cookies in locals object
+	event.locals.token = cookies['token'] || null;
+	// resolve event
 	const response = await resolve(event);
-
-	if (!cookies['userid']) {
-		// if this is the first time the user has visited this app,
-		// set a cookie so that we recognise them when they return
-		response.headers.set(
-			'set-cookie',
-			cookie.serialize('userid', event.locals.userid, {
-				path: '/',
-				httpOnly: true
-			})
-		);
-	}
-
 	return response;
 };

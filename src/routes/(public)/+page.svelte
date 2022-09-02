@@ -1,8 +1,7 @@
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Main page" />
+	<title>General</title>
+	<meta name="description" content="General page" />
 </svelte:head>
-
 <section>
 
 

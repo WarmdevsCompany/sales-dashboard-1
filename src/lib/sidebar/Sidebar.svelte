@@ -13,6 +13,7 @@
 	import MenuIcon from '$lib/components/icons/menu-icon/MenuIcon.svelte';
 	import CloseMenuIcon from '$lib/components/icons/menu-icon/CloseMenuIcon.svelte';
 	import clickOutside from '$lib/functions/clickOutside';
+	import { logout } from '$lib/functions/logout.js';
 
 	let current = null;
 	let openedMenu = false;
@@ -91,9 +92,8 @@
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/overview/general'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/overview/general"
-										on:click={handleClickOutside}
 										>General
 									</a>
 								</li>
@@ -110,27 +110,24 @@
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/manage/contribution'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/manage/contribution"
-										on:click={handleClickOutside}
 										>Contribution
 									</a>
 								</li>
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/manage/plan'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/manage/plan"
-										on:click={handleClickOutside}
 										>Plan
 									</a>
 								</li>
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/manage/withdraw'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/manage/withdraw"
-										on:click={handleClickOutside}
 										>Withdraw
 									</a>
 								</li>
@@ -147,45 +144,40 @@
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/profile/general-info'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/profile/general-info"
-										on:click={handleClickOutside}
 										>General info
 									</a>
 								</li>
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/profile/security'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/profile/security"
-										on:click={handleClickOutside}
 										>Security
 									</a>
 								</li>
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/profile/payment'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/profile/payment"
-										on:click={handleClickOutside}
 										>Payment
 									</a>
 								</li>
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/profile/notifications'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/profile/notifications"
-										on:click={handleClickOutside}
 										>Notifications
 									</a>
 								</li>
 								<li class="text-xsm">
 									<a
 										class:active={$page.url.pathname === '/profile/settings'}
-										sveltekit:prefetch
+										sveltekit:data-sveltekit-prefetch
 										href="/profile/settings"
-										on:click={handleClickOutside}
 										>Settings
 									</a>
 								</li>
@@ -198,10 +190,10 @@
 	</div>
 	<div class="sidebar__bottom d-flex justify-sb align-center">
 		<img src={logo} alt="logo" />
-		<div class="logout ">
-			<a on:click={handleClickOutside} href="#" class="d-flex text-sm"
+		<div class="logout">
+			<button class="btn d-flex text-sm" on:click={logout}
 				><img src={logoutIcon} alt="logout" />
-				<span>Logout</span></a
+				<span>Logout</span></button
 			>
 		</div>
 	</div>
@@ -286,9 +278,17 @@
 	.sidebar__bottom {
 		padding: 0 2rem 3.5rem 1.5rem;
 	}
+	.logout button {
+		appearance: none;
+		background: transparent;
+		border: none;
+		font-weight: var(--font-weight-medium);
+		font-size: var(--text-font-small);
+		line-height: var(--text-line-height-small);
+	}
 	.logout img {
 		margin-right: 0.5rem;
-	}
+	}      
 	@media only screen and (max-width: 1200px) {
 		.sidebar {
 			min-width: 20vw;

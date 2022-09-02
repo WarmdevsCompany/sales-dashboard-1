@@ -6,11 +6,13 @@
   import * as yup from "yup";
   import Checkbox from "$lib/components/inputs/Checkbox.svelte";
   import { goto } from "$app/navigation";
-  import { esiPublic } from "$lib/api/api";
+  import {setCookie} from '$lib/functions/setCookies.js'
+  import {publicApi} from '$lib/api/publicApi.js'
 
   function routeToPage(route, replaceState = false) {
     goto(`/${route}`, { replaceState });
   }
+  let buttonText = "Log In"
   let remember = [];
   let errorMessages = null;
   const { form, errors, state, handleChange, handleSubmit } = createForm({
@@ -28,25 +30,31 @@
       };
 
       try {
-        const rawResponse = await fetch(`${esiPublic}/login`, {
-          method: "POST",
-          headers,
-          body: JSON.stringify({
+        buttonText = "Loading..."
+        const rawResponse =  await publicApi('POST','/login', {
             login: values.userName,
             password: values.password,
-          }),
-        });
+        })
+        // await fetch(`${esiPublic}/login`, {
+        //   method: "POST",
+        //   headers,
+        //   body: JSON.stringify({
+        //     login: values.userName,
+        //     password: values.password,
+        //   }),
+        // });
 
         const response = await rawResponse.json();
-        console.log(response);
+
         if (response.status) {
-          localStorage.setItem("token", response.data.token);
+          setCookie('token', response.data.token, {secure: true, 'max-age': 86400} )
           routeToPage("overview/general");
         } else {
-          console.log(response);
           errorMessages = response.errorMessage;
+          buttonText = "Log In"
         }
       } catch (e) {
+        buttonText = "Log In"
         errorMessages = e;
       }
     },
@@ -109,7 +117,7 @@
         >Start Now</a
       >
     </div>
-    <button class="btn login"> Log In</button>
+    <button class="btn login">{buttonText}</button>
   </div>
 </form>
 
