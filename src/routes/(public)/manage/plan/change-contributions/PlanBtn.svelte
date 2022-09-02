@@ -61,7 +61,7 @@
       background:#5d0bc987;
     }
     @media only screen and (max-width: 991px) {
-    .wrapper {
+      .wrapper {
         display: none;
       }
     }

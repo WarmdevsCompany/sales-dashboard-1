@@ -25,7 +25,7 @@
       This is where you withdraw your available balance*
     </div>
   </div>
-  <div class="withdraw__main d-flex justify-sb align-top">
+  <div class="withdraw__main d-flex justify-sb align-top mobile-block">
     <div class="d-flex align-center withdraw__input--body mr-2">
       <div class="withdraw__input">
         <input class="" type="text" placeholder="1000" id="name" name="name" />
@@ -61,9 +61,17 @@
     width: 100%;
   }
 
-  @media only screen and (max-width: 1280px) {
+  @media only screen and (max-width: 991px) {
     .withdraw__manager {
-      padding-right: 7vw;
+      padding: 2rem 1rem;
+    }
+    .withdraw__input--body {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
+    .withdraw__label {
+      padding-left: 1rem;
     }
   }
 </style>
