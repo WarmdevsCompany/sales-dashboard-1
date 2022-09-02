@@ -26,6 +26,7 @@
     padding: 0.5625rem 1.25rem;
     border-radius: 8px 8px 0px 0px;
     font-weight: var(--font-weight-bold);
+    text-transform: uppercase;
   }
   .plan--item--main {
     padding: 1.24rem 1.5rem 1.5rem 1.5rem;
