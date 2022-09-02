@@ -45,4 +45,18 @@
       margin-right: 14vw;
     }
   }
+  @media only screen and (max-width: 991px) {
+    .settings_main, :global(.settings_card) {
+      padding: 2rem 1rem;
+    }
+    .settings_main {
+      margin-bottom: 4rem;
+    }
+    .settings_main .grid-2 {
+      margin: 0;
+    }
+    .settings_btn {
+      margin-top: 2rem;
+    }
+  }
 </style>

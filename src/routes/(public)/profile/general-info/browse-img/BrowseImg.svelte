@@ -109,4 +109,16 @@
       margin-top: 2vw;
     }
   }
+  @media only screen and (max-width: 991px) {
+    .browse__wrapper {
+      width: 100%;
+      min-height: 286px;
+    }
+    .add-placeholder {
+      margin-top: auto;
+    }
+    .supported-files {
+      margin-bottom: auto;
+    }
+	}
 </style>

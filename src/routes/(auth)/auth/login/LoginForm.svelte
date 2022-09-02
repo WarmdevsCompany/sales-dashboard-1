@@ -154,4 +154,9 @@
   .register a {
     font-weight: var(--font-weight-bolder);
   }
+  @media only screen and (max-width: 991px) {
+    .btn.login {
+      width: 100%;
+    }
+  }
 </style>

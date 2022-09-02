@@ -34,4 +34,15 @@
   .general {
     flex-grow: 1;
   }
+  @media only screen and (max-width: 991px) {
+		.profile__wrapper {
+			flex-wrap: wrap;
+      padding: 2rem 20px;
+      margin-bottom: 4rem;
+		}
+    .general {
+      margin-top: 24px;
+      margin-left: 0;
+    }
+	}
 </style>

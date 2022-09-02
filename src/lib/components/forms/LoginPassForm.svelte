@@ -93,5 +93,9 @@
   .form__bottom {
     margin-top: 2.125rem;
   }
-
+  @media only screen and (max-width: 991px) {
+    .btn.login {
+      width: 100%;
+    }
+  }
 </style>

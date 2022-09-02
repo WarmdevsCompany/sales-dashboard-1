@@ -17,7 +17,7 @@
 
 <li
   out:fade
-  class="notifications__item box_shadow-medium mt-1_25 b-radius-8 {objAttributes.status}"
+  class="notifications__item box_shadow-medium mt-1_25 b-radius-8 relative {objAttributes.status}"
 >
   <div class="d-flex justify-sb">
     <div
@@ -83,5 +83,21 @@
   }
   .dots {
     cursor: pointer;
+  }
+  @media only screen and (max-width: 991px) {
+    .notifications__item {
+      padding: 72px 1rem 40px 1rem;
+    }
+    .date {
+      position: absolute;
+      top: 2rem;
+      left: 1rem;
+    }
+    .dots {
+      position: absolute;
+      top: 2rem;
+      left: auto;
+      right: 1rem;
+    }
   }
 </style>

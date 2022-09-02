@@ -59,4 +59,20 @@
   input#search::placeholder {
     color: var(--grey-color);
   }
+  @media only screen and (max-width: 991px) {
+    .filters button span {
+      display: none;
+    }
+    .filter-wrapper {
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      width: 100%;
+      margin: 0;
+    }
+    .filter-wrapper .search {
+      margin: 1rem 0;
+      width: 100%;
+    }
+  }
 </style>

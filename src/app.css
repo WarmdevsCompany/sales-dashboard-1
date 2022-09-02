@@ -621,6 +621,9 @@
 	.mt-3 {
 		margin-top: 2rem;
 	}
+	.mt-1_5 {
+		margin-top: 10px;
+	}
 	.grid-2, 
 	.grid-3 {
 		grid-template-columns: 1fr;
@@ -628,5 +631,18 @@
 	.modal_head_medium {
 		font-size: var(--text-size-big);
 		line-height: var(--text-line-big);
+	}
+	.form__bottom {
+		flex-wrap: wrap;
+		margin-top: 1rem !important;
+	}
+	.forgot__pass {
+		padding-top: 0 !important;
+		margin-bottom: 0.75rem;
+	}
+	#modal-content .btn.login,
+	#modal-content .btn._218,
+	.finish__content .btn.success {
+		min-width: 100%;
 	}
 }
