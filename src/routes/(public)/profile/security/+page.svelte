@@ -37,4 +37,12 @@
     margin: 2.125rem auto 0 auto;
     width: 215px;
   }
+  @media only screen and (max-width: 991px) {
+    .change__password {
+      padding-top: 4rem;
+      padding-bottom: 80px;
+      min-height: 0;
+      margin-bottom: 4rem;
+    }
+  }
 </style>
