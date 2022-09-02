@@ -94,6 +94,7 @@
 										class:active={$page.url.pathname === '/overview/general'}
 										sveltekit:data-sveltekit-prefetch
 										href="/overview/general"
+										on:click={handleClickOutside}
 										>General
 									</a>
 								</li>
@@ -112,6 +113,7 @@
 										class:active={$page.url.pathname === '/manage/contribution'}
 										sveltekit:data-sveltekit-prefetch
 										href="/manage/contribution"
+										on:click={handleClickOutside}
 										>Contribution
 									</a>
 								</li>
@@ -120,6 +122,7 @@
 										class:active={$page.url.pathname === '/manage/plan'}
 										sveltekit:data-sveltekit-prefetch
 										href="/manage/plan"
+										on:click={handleClickOutside}
 										>Plan
 									</a>
 								</li>
@@ -128,6 +131,7 @@
 										class:active={$page.url.pathname === '/manage/withdraw'}
 										sveltekit:data-sveltekit-prefetch
 										href="/manage/withdraw"
+										on:click={handleClickOutside}
 										>Withdraw
 									</a>
 								</li>
@@ -146,6 +150,7 @@
 										class:active={$page.url.pathname === '/profile/general-info'}
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/general-info"
+										on:click={handleClickOutside}
 										>General info
 									</a>
 								</li>
@@ -154,6 +159,7 @@
 										class:active={$page.url.pathname === '/profile/security'}
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/security"
+										on:click={handleClickOutside}
 										>Security
 									</a>
 								</li>
@@ -162,6 +168,7 @@
 										class:active={$page.url.pathname === '/profile/payment'}
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/payment"
+										on:click={handleClickOutside}
 										>Payment
 									</a>
 								</li>
@@ -170,6 +177,7 @@
 										class:active={$page.url.pathname === '/profile/notifications'}
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/notifications"
+										on:click={handleClickOutside}
 										>Notifications
 									</a>
 								</li>
@@ -178,6 +186,7 @@
 										class:active={$page.url.pathname === '/profile/settings'}
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/settings"
+										on:click={handleClickOutside}
 										>Settings
 									</a>
 								</li>
@@ -278,7 +287,7 @@
 	.sidebar__bottom {
 		padding: 0 2rem 3.5rem 1.5rem;
 	}
-	.logout button {
+    .logout button {
 		appearance: none;
 		background: transparent;
 		border: none;
