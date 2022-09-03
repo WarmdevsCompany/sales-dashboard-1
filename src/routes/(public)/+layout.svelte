@@ -11,11 +11,10 @@
 	export let data;
 	$globalData = data.general
 	let loading = true;
+	
 	onMount(() => {
 		loading = false;
 	});
-	
-	console.log($globalData)
 	
 </script>
 
