@@ -37,7 +37,7 @@ import Tooltip from "./Tooltip.svelte";
       </div>
     </div>
   </div>
-  <div class="grid-2 mt-3">
+  <div class="grid-2 mt-3 mob_fix">
     <div class="input__wrapper">
       <label for="name" class="label">Gender</label>
       <div class="relative">
@@ -98,4 +98,15 @@ import Tooltip from "./Tooltip.svelte";
       grid-column-end: 3;
     }
   }
+  @media only screen and (max-width: 991px) {
+		.grid-2 {
+      grid-gap: 10px;
+    }
+    .mob_fix {
+      margin-top: 10px;
+    }
+    .contact {
+      padding-bottom: 2rem;
+    }
+	}
 </style>

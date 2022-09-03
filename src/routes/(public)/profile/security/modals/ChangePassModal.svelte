@@ -94,11 +94,6 @@
     margin: 0 auto 0 auto;
     color: #000;
   }
-  .btn.login {
-    width: 229px;
-    margin: 0;
-    transition: none;
-  }
   .btn.success {
     margin: 2.125rem auto 0 auto;
   }

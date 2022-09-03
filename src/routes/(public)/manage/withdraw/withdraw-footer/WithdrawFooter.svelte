@@ -77,4 +77,9 @@
   .buttons-confirm{
     margin-top: 4rem;
   }
+  @media only screen and (max-width: 991px) {
+    .buttons {
+      margin-bottom: 4rem;
+    }
+  }
 </style>

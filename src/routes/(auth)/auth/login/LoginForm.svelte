@@ -108,36 +108,41 @@
 </form>
 
 <style>
-	form {
-		width: 100%;
-		max-width: 587px;
-		color: var(--text-color);
-	}
-	.btn.login {
-		width: 229px;
-		margin: 0 0 0 auto;
-		transition: none;
-	}
-	.forgot__pass {
-		padding: 0.875rem;
-	}
-	.forgot__btn {
-		appearance: none;
-		border: none;
-		background-color: transparent;
-		padding: 0;
-		width: auto;
-		margin: 0;
-		color: #ababab;
-		font-weight: var(--font-weight-normal);
-	}
-	.login__btn__wrapper {
-		margin-top: 22px;
-	}
-	.register__head {
-		font-weight: var(--font-weight-medium);
-	}
-	.register a {
-		font-weight: var(--font-weight-bolder);
-	}
-</style>
+form {
+    width: 100%;
+    max-width: 587px;
+    color: var(--text-color);
+  }
+  .btn.login {
+    width: 229px;
+    margin: 0 0 0 auto;
+    transition: none;
+  }
+  .forgot__pass {
+    padding: 0.875rem;
+  }
+  .forgot__btn {
+    appearance: none;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    width: auto;
+    margin: 0;
+    color: #ababab;
+    font-weight: var(--font-weight-normal);
+  }
+  .login__btn__wrapper {
+    margin-top: 22px;
+  }
+  .register__head {
+    font-weight: var(--font-weight-medium);
+  }
+  .register a {
+    font-weight: var(--font-weight-bolder);
+  }
+  @media only screen and (max-width: 991px) {
+    .btn.login {
+      width: 100%;
+    }
+  }
+  </style>

@@ -57,8 +57,8 @@
   ];
 </script>
 
-<div class="d-flex justify-sb flex-wrap align-center">
-  <div class="text-3">Notifications and news</div>
+<div class="d-flex justify-sb flex-wrap align-center relative">
+  <div class="text-3 title">Notifications and news</div>
   <FilterPanel />
 </div>
 
@@ -82,5 +82,15 @@
     padding: 24px 32px;
     background-color: var(--white);
     margin-bottom: 10px;
+  }
+  @media only screen and (max-width: 991px) {
+    .title {
+      position: absolute;
+      top: 20px;
+      font-size: var(--text-font-small);
+    }
+    ul {
+      margin-bottom: 4rem;
+    }
   }
 </style>
