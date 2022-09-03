@@ -39,10 +39,10 @@ import {getMonthName} from '$lib/functions/getMonthName'
     },
   };
   const data = {
-    labels: [2022, 2023, 2024, 2025, 2026, 2027],
+    labels: $$props.yearsArray,
     datasets: [
       {
-        data: [0, 1200, 13437, 19437, 23437, 30437],
+        data: $$props.currentTraject,
         backgroundColor: "#6cc800",
         borderColor: "white",
         pointStyle: "circle",
@@ -52,7 +52,7 @@ import {getMonthName} from '$lib/functions/getMonthName'
         tooltipText: "some text",
       },
       {
-        data: [0, 282, 502, 635, 24437, 33437],
+        data: $$props.prevTraject,
         pointBackgroundColor: "#6cc800",
         borderColor: "#6cc800",
         pointBorderColor: "white",

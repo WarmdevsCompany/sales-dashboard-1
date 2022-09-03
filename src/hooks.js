@@ -4,8 +4,8 @@ export const handle = async ({ event, resolve }) => {
 	const cookies = cookie.parse(event.request.headers.get('cookie') || '');
 	// set cookies in locals object
 	event.locals.token = cookies['token'] || null;
+	event.locals.generalData = false;
 	// resolve event
-	console.log(event.locals.token)
-	const response = await resolve(event);
+	const response = await resolve(event); 
 	return response;
 };

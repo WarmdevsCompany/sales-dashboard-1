@@ -19,20 +19,20 @@
   <MembershipItem
     chartName="Seed"
     className="seed"
-    chartValue={33}
-    totalSafe={400}
+    chartValue={$$props.seedVal}
+    totalSafe={$$props.seedTotal}
   />
   <MembershipItem
   chartName="Eucalyptus"
   className="eucalyptus"
-  chartValue={67}
-  totalSafe={800}
+  chartValue={$$props.eucalyptusVal}
+  totalSafe={$$props.eucalyptusTotal}
 />
 <MembershipItem
 chartName="Sequoia"
 className="sequoia"
-chartValue={0}
-totalSafe={0}
+chartValue={$$props.sequoiaVal}
+totalSafe={$$props.sequoiaTotal}
 />
 </div>
 
