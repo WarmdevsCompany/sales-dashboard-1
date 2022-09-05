@@ -6,14 +6,16 @@
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+
 	import { locale } from "$lib/translations/i18n.js";
 	import { globalData } from '$lib/globalStore';
 	
 	// set general data to store
 	export let data;
 	$globalData = data.general;
+  
 	let loading = true;
-	
+
 	onMount(() => {
 		let lang = localStorage.getItem('lang');
 		locale.set(lang || 'english');
