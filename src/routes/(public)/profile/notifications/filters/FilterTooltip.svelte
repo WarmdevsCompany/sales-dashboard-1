@@ -3,6 +3,7 @@
   import clickOutside from "$lib/functions/clickOutside";
   import { modalClassName } from "../../general-info/profileStore";
   import { notificationList } from "../notificationsStore";
+  import { t } from '$lib/translations/i18n.js';
 
   let active = false;
 
@@ -51,10 +52,10 @@
     style="width: {$$props.width}px; left: -{$$props.width + 10}px"
   >
     <ul>
-      <li on:click={() => filterByDefault()}>All notifications</li>
-      <li on:click={() => filterByDate()}>Date Added</li>
-      <li on:click={() => filterByReadItems()}>Read</li>
-      <li on:click={() => filterByUnreadItems()}>Unread</li>
+      <li on:click={() => filterByDefault()}>{$t('SETTINGS.ALL_NOTIFICATIONS')}</li>
+      <li on:click={() => filterByDate()}>{$t('SETTINGS.DATE_ADDED')}</li>
+      <li on:click={() => filterByReadItems()}>{$t('SETTINGS.READ')}</li>
+      <li on:click={() => filterByUnreadItems()}>{$t('SETTINGS.UNREAD')}</li>
     </ul>
   </div>
 {/if}
@@ -62,7 +63,7 @@
 <style>
   .tooltip {
     box-shadow: 0px 14px 30px rgba(0, 0, 0, 0.14);
-    background: white;
+    background: var(--white);
     padding: 1.875rem 1.5rem;
     position: absolute;
     top: -50px;
