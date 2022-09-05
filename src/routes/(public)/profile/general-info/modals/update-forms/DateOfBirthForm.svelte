@@ -32,16 +32,11 @@ import { onMount } from "svelte";
     position: relative;
     padding: 0;
   }
-  .date-input.error input::placeholder{
-    color: var(--error-color)
-  }
   input.date {
+    text-align: left;
   }
   input.date::placeholder {
     color: #000;
-  }
-  input[type="date"] {
-    text-align: left;
   }
   input.date:before {
     color: #000;

@@ -45,12 +45,12 @@ import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
       </div>
       <div class="last__step--body">
         <div>
-          SAFE PLAN: <span class="text-green">$600</span>
+          SAFE PLAN: <span class="text-green mobile-block">$600</span>
           <div class="inline">
-            ADVENTURE PLAN: <span class="text-green">$400</span>
+            ADVENTURE PLAN: <span class="text-green mobile-block">$400</span>
           </div>
 
-          FOUNDER PLAN:<span class="text-green">$0</span>
+          FOUNDER PLAN:<span class="text-green mobile-block">$0</span>
         </div>
         <div class="line mt-1_5 mb-1_5" />
         <WithdrawFooter

@@ -42,7 +42,7 @@
       padding-top: 4rem;
       padding-bottom: 80px;
       min-height: 0;
-      margin-bottom: 4rem;
+      margin-bottom: 7rem;
     }
   }
 </style>

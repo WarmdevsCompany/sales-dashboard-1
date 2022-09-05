@@ -11,7 +11,7 @@
 </script>
 
 <div class="mt-1_5">
-  <div class="grid">
+  <div class="grid mobile-block">
     <div class="text-sm">Total Withdrawal Amount:</div>
     <div class="grid-item-value text-sm">$1,000</div>
     <div class="text-sm">Withdrawal fee:</div>
@@ -80,6 +80,17 @@
   @media only screen and (max-width: 991px) {
     .buttons {
       margin-bottom: 4rem;
+    }
+    .buttons-confirm {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+    button.cancel {
+      margin: 1rem auto 0 auto;
+    }
+    .buttons-confirm button.cancel, 
+    .btn.confirm-wd {
+      width: 100%;
     }
   }
 </style>
