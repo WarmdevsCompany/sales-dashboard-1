@@ -3,6 +3,7 @@
   import NotificationItem from "./notification-item/NotificationItem.svelte";
   import { notificationList } from "./notificationsStore";
   import { fade } from "svelte/transition";
+  import { t } from '$lib/translations/i18n.js';
 
   //mocks data
   $notificationList = [
@@ -58,7 +59,7 @@
 </script>
 
 <div class="d-flex justify-sb flex-wrap align-center relative">
-  <div class="text-3 title">Notifications and news</div>
+  <div class="text-3 title">{$t('SETTINGS.NOTIFICATIONS_AND_NEWS')}</div>
   <FilterPanel />
 </div>
 
@@ -67,7 +68,7 @@
     in:fade
     class="notifications__empty box_shadow-medium mt-1_25 b-radius-8"
   >
-    No notifications yet
+    {$t('SETTINGS.NO_NOTIFICATIONS')}
   </div>
 {:else}
   <ul id="notifications">
@@ -87,6 +88,7 @@
     .title {
       position: absolute;
       top: 20px;
+      padding-right: 80px;
       font-size: var(--text-font-small);
     }
     ul {

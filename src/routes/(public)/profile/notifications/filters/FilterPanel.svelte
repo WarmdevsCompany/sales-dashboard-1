@@ -3,6 +3,7 @@
   import FilterIcon from "$lib/components/icons/FilterIcon.svelte";
   import searchFilter from "$lib/functions/searchFilter";
   import FilterTooltip from "./FilterTooltip.svelte";
+  import { t } from '$lib/translations/i18n.js';
 </script>
 
 <div class="filter-wrapper d-flex align-center">
@@ -14,19 +15,19 @@
       <input
         id="search"
         type="search"
-        placeholder="Search..."
+        placeholder="{$t('SEARCH')}..."
         class="box_shadow-medium b-radius-10"
         on:keyup={searchFilter}
       />
     </form>
   </div>
   <div class="filters relative">
-    <FilterTooltip width={160}>
+    <FilterTooltip width={220}>
       <button
         class="btn__filter box_shadow-medium b-radius-10 d-flex align-center"
       >
         <FilterIcon />
-        <span>Filters</span>
+        <span>{$t('SETTINGS.FILTERS')}</span>
       </button>
     </FilterTooltip>
   </div>
