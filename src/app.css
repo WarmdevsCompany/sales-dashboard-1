@@ -301,6 +301,7 @@
   .input__wrapper {
 	position: relative;
   }
+  .date-input.error input::placeholder,
   .input__wrapper.error label {
 	color: var(--red-color);
   }

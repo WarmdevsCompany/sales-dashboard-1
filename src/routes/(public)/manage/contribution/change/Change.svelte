@@ -41,11 +41,11 @@
     <img src={greenLogo} alt="esi logo img" />
     <div class="modal_head_medium mt-2">We've updated your contribution</div>
     <div class="modal_main-row d-flex justify-sb align-bottom">
-      <div class="text-xsm d-flex align-center">
-        New Contribution: <span class="text-3 text-blue">$1,000/mo</span>
+      <div class="text-xsm d-flex align-center mobile-block">
+        New Contribution: <span class="text-3 text-blue mobile-block">$1,000/mo</span>
       </div>
-      <div class="text-xsm d-flex align-center">
-        Next contribution date: <span class="text-3 text-blue">01 Jul 2022</span
+      <div class="text-xsm d-flex align-center mobile-block">
+        Next contribution date: <span class="text-3 text-blue mobile-block">01 Jul 2022</span
         >
       </div>
     </div>
