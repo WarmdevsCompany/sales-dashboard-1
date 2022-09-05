@@ -6,16 +6,16 @@
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import {globalData} from '$lib/globalStore'
+	import { globalData } from '$lib/globalStore';
 	// set general data to store
 	export let data;
-	$globalData = data.general
+	$globalData = data.general;
+	console.log($globalData);
 	let loading = true;
-	
+
 	onMount(() => {
 		loading = false;
 	});
-	
 </script>
 
 <svelte:head>
