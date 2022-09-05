@@ -1,6 +1,8 @@
 <script>
   import addImage from "$lib/assets/img/image-add.svg";
   import border from "$lib/assets/img/border.png";
+  import { t } from "$lib/translations/i18n.js";
+
   let input;
   let container;
   let image;
@@ -30,9 +32,9 @@
   {:else}
     <img src={addImage} alt="browse" class="add-placeholder" />
     <div class="browse--head text-sm text-center">
-      Drop your image here, or <span class="text-blue"> browse</span>
+      {$t("PROFILE.GENERAL.DROP")} <span class="text-blue"> {$t("PROFILE.GENERAL.BROWSE")}</span>
     </div>
-    <div class="supported-files">Supports: JPG, JPEG2000, PNG</div>
+    <div class="supported-files">{$t("PROFILE.GENERAL.SUPPORTS")}: JPG, JPEG2000, PNG</div>
     <img src={border} alt="border" class="browse-border" />
   {/if}
   <input bind:this={input} on:change={onChange} type="file" />

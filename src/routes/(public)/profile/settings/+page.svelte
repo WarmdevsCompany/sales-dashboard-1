@@ -1,17 +1,18 @@
 <script>
   import SettingsLanguage from "./SettingsLanguage.svelte";
   import SettingsNotifications from "./SettingsNotifications.svelte";
+  import { t } from '$lib/translations/i18n.js';
 </script>
 
 <div class="settings_main box_shadow-medium b-radius-8 p-2 d-flex flex-col justify-sb">
   <div>
-    <div class="text-3 mb-1_5">Settings</div>
+    <div class="text-3 mb-1_5">{$t('SETTINGS')}</div>
     <div class="grid-2">
       <SettingsNotifications />
       <SettingsLanguage />
     </div>
   </div>
-  <button class="btn confirm settings_btn" disabled>Closing an account</button>
+  <button class="btn confirm settings_btn" disabled>{$t('SETTINGS.CLOSING_AN_ACCOUNT')}</button>
 </div>
 
 <style>
