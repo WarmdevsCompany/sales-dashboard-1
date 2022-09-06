@@ -13,7 +13,7 @@
 	import MenuIcon from '$lib/components/icons/menu-icon/MenuIcon.svelte';
 	import CloseMenuIcon from '$lib/components/icons/menu-icon/CloseMenuIcon.svelte';
 	import clickOutside from '$lib/functions/clickOutside';
-	import { goto } from '$app/navigation';
+	import {logout} from '$lib/api/functions/logout'
 
 	let current = null;
 	let openedMenu = false;
@@ -25,20 +25,7 @@
 	} else if ($page.url.pathname.includes('/profile')) {
 		current = 'profile';
 	}
-	const logout = async () => {
-		const responseRaw = await fetch('/api/logout', {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'Access-Control-Allow-Origin': '*',
-				'Access-Control-Allow-Credentials': true
-			}
-		});
-		let response = await responseRaw.json();
-		if (response.status) {
-			goto('/auth/login');
-		}
-	};
+	
 
 	export let firstName = 'Antonin',
 		lastName = 'John';

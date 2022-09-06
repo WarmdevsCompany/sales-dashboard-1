@@ -1,8 +1,7 @@
-const base = 'https://be.esi.kdg.com.ua/esi_public/esi_public/backend';
-
+import { variables } from '$lib/variables';
 
 export function publicApi(method, resource, data) {
-	return fetch(`${base}/${resource}`, {
+	return fetch(`${variables.publicPath}/${resource}`, {
 		method,
 		headers: {
 			'content-type': 'application/json'

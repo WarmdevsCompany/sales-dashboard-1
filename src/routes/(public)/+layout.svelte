@@ -14,7 +14,7 @@
 	console.log(data)
   
 	let loading = true;
-
+	
 	onMount(() => {
 		loading = false;
 	});
