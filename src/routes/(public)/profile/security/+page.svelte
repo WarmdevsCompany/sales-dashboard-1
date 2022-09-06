@@ -2,17 +2,18 @@
   import lockImg from "$lib/assets/img/padlock.svg";
   import { getModal } from "$lib/components/Modal.svelte";
   import ChangePassModal from "./modals/ChangePassModal.svelte";
+  import { t } from "$lib/translations/i18n.js";
 </script>
 
 <div class="change__password box_shadow-medium b-radius-8 d-flex justify-cc ">
   <div class="change__password--main text-center">
     <img src={lockImg} alt="change password" class="lock_icon" />
-    <div class="text-3">Change password</div>
+    <div class="text-3">{$t("CHANGE_PASSWORD")}</div>
     <div class="text-xsm mt-0_5">
-      last date of password change - <span class="text-green">27.07.21</span>
+      {$t("SETTINGS.LAST_PW_CHANGE")} - <span class="text-green">27.07.21</span>
     </div>
     <button class="btn" on on:click={() => getModal("change-password").open()}
-      >Change password</button
+      >{$t("CHANGE_PASSWORD")}</button
     >
   </div>
 </div>

@@ -2,13 +2,14 @@
   import { slide } from "svelte/transition";
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
+  import { t } from "$lib/translations/i18n.js";
 
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
       email: "",
     },
     validationSchema: yup.object().shape({
-      email: yup.string().email().required("Email is required"),
+      email: yup.string().email().required($t("ENTER_EMAIL")),
     }),
     onSubmit: () => {
       $$props.sendVerifyCallback();
@@ -33,5 +34,5 @@
     <small transition:slide|local class="error_text last">{$errors.email}</small
     >
   {/if}
-  <button class="btn _218">Send</button>
+  <button class="btn _218">{$t("SEND")}</button>
 </form>

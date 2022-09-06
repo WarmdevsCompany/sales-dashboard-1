@@ -2,6 +2,7 @@
   import { slide } from "svelte/transition";
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
+  import { t } from "$lib/translations/i18n.js";
 
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
@@ -22,7 +23,7 @@
 <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
   <input
     type="number"
-    placeholder="Phone"
+    placeholder={$t("PHONE")}
     class:error={$errors.phone}
     autocomplete
     on:change={handleChange}
@@ -33,5 +34,5 @@
     <small transition:slide|local class="error_text last">{$errors.phone}</small
     >
   {/if}
-  <button class="btn _218">Send</button>
+  <button class="btn _218">{$t("SEND")}</button>
 </form>

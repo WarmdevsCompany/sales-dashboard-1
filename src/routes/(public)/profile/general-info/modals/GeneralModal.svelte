@@ -14,8 +14,9 @@
   import GenderForm from "./update-forms/GenderForm.svelte";
   import DateOfBirthForm from "./update-forms/DateOfBirthForm.svelte";
   import VerifyTabs from "$lib/components/forms/verify/VerifyTabs.svelte";
-import LoginPassForm from "$lib/components/forms/loginPassForm.svelte";
-import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
+  import LoginPassForm from "$lib/components/forms/loginPassForm.svelte";
+  import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
+  import { t } from "$lib/translations/i18n.js";
 
   let formStep = 1;
 
@@ -35,21 +36,21 @@ import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
 <Modal id="general-info" className={$modalClassName}>
   <div class="modal_main text-center">
     <img src={greenLogo} alt="esi logo img" />
-    <div class="modal_head_medium text-1">Welcome</div>
+    <div class="modal_head_medium text-1">{$t("WELCOME")}</div>
     <div class="modal_main-body ">
       {#if formStep === 1}
-        <div class=" mt-1">First, verify that this is your account.</div>
+        <div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>
 
         <LoginPassForm authDataCallback={login} />
       {:else if formStep === 2}
-        <div class="mt-1">First, verify that this is your account.</div>
+        <div class="mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <div class="modal_main-row">
    
             <VerifyTabs sendVerifyCallback={()=>(formStep = 3)}/>
           
         </div>
       {:else if formStep === 3}
-        <div class=" mt-1">First, verify that this is your account.</div>
+        <div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <div class="modal_main-row">
           <VerifyCodeForm submitVerificationCode={()=>(formStep = 4)}/>
         </div>
@@ -74,10 +75,10 @@ import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
     <div class="confirm__form text-center">
       <div class="finish__content">
         <div class="modal_head_medium text-1">
-          Profile info information successfully updated
+          {$t("PROFILE_UPDATED")}
         </div>
         <button class="btn success" on:click={() => closeModals("general-info")}
-          >Back</button
+          >{$t("BACK")}</button
         >
       </div>
       <img

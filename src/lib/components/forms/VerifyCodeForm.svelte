@@ -2,13 +2,14 @@
   import { createForm } from "svelte-forms-lib";
   import { slide } from "svelte/transition";
   import * as yup from "yup";
+  import { t } from "$lib/translations/i18n.js";
 
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
       code: "",
     },
     validationSchema: yup.object().shape({
-        code: yup.number().required("Verification code is required"),
+        code: yup.number().required($t("ENTER_CODE")),
     }),
     onSubmit: () => {
       $$props.submitVerificationCode();
@@ -29,7 +30,7 @@
 <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
   <input
     type="number"
-    placeholder="Enter verification code"
+    placeholder={$t("SETTINGS_VERIFY_CODE")}
     class:error={$errors.code}
     autocomplete
     on:mousewheel={(e) => {
@@ -44,5 +45,5 @@
   {#if $errors.code}
     <small transition:slide|local class="error_text last">{$errors.code}</small>
   {/if}
-  <button class="btn _218">Continue</button>
+  <button class="btn _218">{$t("CONTINUE")}</button>
 </form>
