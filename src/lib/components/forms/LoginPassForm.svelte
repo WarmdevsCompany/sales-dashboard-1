@@ -5,6 +5,7 @@
   import EyePwIco from "../icons/EyePW_ico.svelte";
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
+  import { t } from "$lib/translations/i18n.js";
   
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
@@ -14,8 +15,8 @@
     validationSchema: yup.object().shape({
       userName: yup
         .string()
-        .required("User name is required"),
-      password: yup.string().required("Password is required"),
+        .required($t("ENTER_USER_NAME")),
+      password: yup.string().required($t("ENTER_USER_PW")),
     }),
     onSubmit: () => {
       authDataCallback();
@@ -29,7 +30,7 @@
 <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
   <input
     type="text"
-    placeholder="User Name"
+    placeholder={$t("USER_NAME")}
     class="mb-0_625"
     class:error={$errors.userName}
     autocomplete
@@ -46,7 +47,7 @@
     </div>
     <input
       type="password"
-      placeholder="Password"
+      placeholder={$t("PW")}
       class:error={$errors.password}
       autocomplete
       on:change={handleChange}
@@ -64,10 +65,10 @@
     <div class="forgot__pass">
       <button
         on:click|preventDefault={console.log(true)}
-        class="btn forgot__btn">Forgot the Password?</button
+        class="btn forgot__btn">{$t("FORGOT_PW")}</button
       >
     </div>
-    <button class="btn login"> Log In</button>
+    <button class="btn login">{$t("LOGIN")}</button>
   </div>
 </form>
 

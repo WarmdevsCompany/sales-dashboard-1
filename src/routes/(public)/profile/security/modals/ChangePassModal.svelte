@@ -8,13 +8,14 @@
   import LoginPassForm from "$lib/components/forms/LoginPassForm.svelte";
   import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   import ChangePassForm from "./ChangePassForm.svelte";
+  import { t } from "$lib/translations/i18n.js";
   let formStep = 1;
-  let heading = "Change password";
+  let heading = $t("CHANGE_PASSWORD");
 
   $: {
     formStep;
     if (formStep === 4) {
-      heading = "New password";
+      heading = $t("NEW_PASSWORD");
     }
   }
   const login = () => (formStep = 2);
@@ -35,15 +36,15 @@
     <div class="modal_head_medium text-1">{heading}</div>
     <div class="modal_main-body ">
       {#if formStep === 1}
-        <div class=" mt-1">First, verify that this is your account.</div>
+        <div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <LoginPassForm authDataCallback={login} />
       {:else if formStep === 2}
-        <div class="mt-1">First, verify that this is your account.</div>
+        <div class="mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <div class="modal_main-row">
           <VerifyTabs sendVerifyCallback={() => (formStep = 3)} />
         </div>
       {:else if formStep === 3}
-        <div class=" mt-1">First, verify that this is your account.</div>
+        <div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <div class="modal_main-row">
           <VerifyCodeForm submitVerificationCode={() => (formStep = 4)} />
         </div>
@@ -60,11 +61,11 @@
     <div class="confirm__form text-center">
       <div class="finish__content">
         <div class="modal_head_medium text-1">
-          Password successfully changed
+          {$t("PROFILE_PW_CHANDED")}
         </div>
         <button
           class="btn success"
-          on:click={() => closeModals("change-password")}>Back</button
+          on:click={() => closeModals("change-password")}>{$t("BACK")}</button
         >
       </div>
       <img

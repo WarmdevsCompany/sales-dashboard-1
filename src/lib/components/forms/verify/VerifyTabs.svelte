@@ -2,6 +2,7 @@
   import Radio from "$lib/components/inputs/Radio.svelte";
   import VerifyEmail from "./inputs/VerifyEmail.svelte";
   import VerifyPhone from "./inputs/VerifyPhone.svelte";
+  import { t } from "$lib/translations/i18n.js";
   export let sendVerifyCallback;
   export let activeTabValue = 1;
   let radioValue;
@@ -16,7 +17,7 @@
     {
       value: "phone",
       id: 2,
-      label: "Phone",
+      label: $t("PHONE"),
     },
   ];
 </script>

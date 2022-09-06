@@ -1,5 +1,6 @@
 <script>
   import Radio from "$lib/components/inputs/Radio.svelte";
+  import { t } from "$lib/translations/i18n.js";
 
   let radioValue;
   const options = [
@@ -22,7 +23,7 @@
   <div>
     <div class="text-3">Withdraw manager</div>
     <div class="text-xsm mt-0_5">
-      This is where you withdraw your available balance*
+      {$t("WHERE_WITHDRAW")}*
     </div>
   </div>
   <div class="withdraw__main d-flex justify-sb align-top mobile-block">

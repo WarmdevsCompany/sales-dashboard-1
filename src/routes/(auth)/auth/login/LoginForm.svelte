@@ -6,8 +6,9 @@
 	import * as yup from 'yup';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { goto } from '$app/navigation';
+	import { t } from "$lib/translations/i18n.js";
 
-	let buttonText = 'Log In';
+	let buttonText = $t("LOGIN");
 	let remember = [];
 	let errorMessages = null;
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
@@ -16,8 +17,8 @@
 			password: ''
 		},
 		validationSchema: yup.object().shape({
-			userName: yup.string().required('User name is required'),
-			password: yup.string().required('Password is required')
+			userName: yup.string().required($t("ENTER_USER_NAME")),
+			password: yup.string().required($t("ENTER_USER_PW"))
 		}),
 		onSubmit: async (values) => {
 			const headers = {
@@ -25,7 +26,7 @@
 			};
 
 			try {
-				buttonText = 'Loading...';
+				buttonText = `${$t("LOADING")}...`;
 
 				const responseRaw = await fetch('/api/login', {
 					method: 'POST',
@@ -40,12 +41,12 @@
 
 				if (!response.status) {
 					errorMessages = response.errorMessage;
-					buttonText = 'Log In';
+					buttonText = $t("LOGIN");
 				} else {
 					goto('/overview/general');
 				}
 			} catch (e) {
-				buttonText = 'Log In';
+				buttonText = $t("LOGIN");
 				errorMessages = e;
 			}
 		}
@@ -59,7 +60,7 @@
 <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
 	<input
 		type="text"
-		placeholder="User Name"
+		placeholder={$t("USER_NAME")}
 		class="mb-0_625"
 		class:error={$errors.userName}
 		autocomplete
@@ -76,7 +77,7 @@
 		</div>
 		<input
 			type="password"
-			placeholder="Password"
+			placeholder={$t("PW")}
 			class:error={$errors.password}
 			autocomplete
 			on:change={handleChange}
@@ -92,16 +93,16 @@
 	{/if}
 	<div class="d-flex justify-sb align-center">
 		<div class="remember">
-			<Checkbox bind:group={remember} value={1}>Remember me</Checkbox>
+			<Checkbox bind:group={remember} value={1}>{$t("REMEMBER_ME")}</Checkbox>
 		</div>
 		<div class="forgot__pass">
-			<a href="#" class="forgot__btn">Forgot the Password?</a>
+			<a href="#" class="forgot__btn">{$t("FORGOT_PW")}</a>
 		</div>
 	</div>
 	<div class="login__btn__wrapper d-flex justify-sb align-center ">
 		<div class="register">
-			<div class="register__head">Not a Green Saver yet?</div>
-			<a href="https://esi.webflow.io/subscribe-test" class="text-green">Start Now</a>
+			<div class="register__head">{$t("NOT_GREENSAVER")}</div>
+			<a href="https://esi.webflow.io/subscribe-test" class="text-green">{$t("START_NOW")}</a>
 		</div>
 		<button class="btn login">{buttonText}</button>
 	</div>

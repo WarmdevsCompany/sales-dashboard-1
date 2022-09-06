@@ -6,7 +6,8 @@
   import { fade } from "svelte/transition";
   import closeIcon from "$lib/assets/img/close.svg";
   import VerifyTabs from "$lib/components/forms/verify/VerifyTabs.svelte";
-import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
+  import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
+  import { t } from "$lib/translations/i18n.js";
   let formStep = 1;
   $: formStep;
   const submitEmailOrPhone = () => (formStep = 2);
@@ -23,10 +24,10 @@ import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
 <Modal id="withdraw" className={$modalClassName}>
   <div class="modal_main text-center">
     <img src={greenLogo} alt="esi logo img" />
-    <div class="modal_head_medium text-1">Withdraw</div>
+    <div class="modal_head_medium text-1">{$t("WITHDRAW")}</div>
 
     <div class="modal_main-row ">
-      <div class=" mt-1">First, verify that this is your account.</div>
+      <div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>
       {#if formStep === 1}
         <VerifyTabs sendVerifyCallback={submitEmailOrPhone} />
       {:else if formStep === 2}
@@ -39,18 +40,18 @@ import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   <div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
     <div class="confirm__form text-center">
       <img src={greenLogo} alt="esi logo img" />
-      <div class="modal_head_medium text-1">Withdraw</div>
+      <div class="modal_head_medium text-1">{$t("WITHDRAW")}</div>
       <div class="text-xsm last__step--subhead mb-1_5">
-        This is where you withdraw your available balance*
+        {$t("WHERE_WITHDRAW")}*
       </div>
       <div class="last__step--body">
         <div>
-          SAFE PLAN: <span class="text-green mobile-block">$600</span>
+          {$t("SAFE_PLAN_BIG")}: <span class="text-green mobile-block">$600</span>
           <div class="inline">
-            ADVENTURE PLAN: <span class="text-green mobile-block">$400</span>
+            {$t("SAFE_ADVENTURE_BIG")}: <span class="text-green mobile-block">$400</span>
           </div>
 
-          FOUNDER PLAN:<span class="text-green mobile-block">$0</span>
+          {$t("FOUNDER_BIG")}:<span class="text-green mobile-block">$0</span>
         </div>
         <div class="line mt-1_5 mb-1_5" />
         <WithdrawFooter

@@ -1,14 +1,15 @@
 <script>
   import WithdrawChart from "./WithdrawChart.svelte";
+  import { t } from "$lib/translations/i18n.js";
   export let totalWithdraw;
 </script>
 
 <div class="withdraw__body white_box d-flex justify-sb mt-2">
   <WithdrawChart />
   <div class="withdraw">
-    <div class="text-3 ">Withdraws Details</div>
+    <div class="text-3 ">{$t("OVERVIEW_WITHDRAWS_DETAILS")}</div>
     <div class="text-4 mt-1">$1,680</div>
-    <div class="text-sm">total</div>
+    <div class="text-sm">{$t("OVERVIEW_TOTAL")}</div>
   </div>
 </div>
 

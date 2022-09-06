@@ -5,17 +5,18 @@
 	import SaveProjectionChart from './projection-chart/SaveProjectionChart.svelte';
 	import WithdrawMain from './withdraw-chart/WithdrawMain.svelte'
 	import {globalData} from '$lib/globalStore'
+	import { t } from "$lib/translations/i18n.js";
 </script>
 
 <svelte:head>
-	<title>General</title>
+	<title>{$t("GENERAL")}</title>
 	<meta name="description" content="General page" />
 </svelte:head>
 
 <div class="grid-3 mb-2">
 	<GeneralPlan
 		className="safe"
-		planName="SAFE PLAN"
+		planName={$t("SAFE_PLAN_BIG")}
 		currencySymbol={$globalData.data.currencySymbol}
 		contribution={$globalData.data.contributions.safePlan.contribution}
 		revenue={$globalData.data.contributions.safePlan.revenue}
@@ -23,7 +24,7 @@
 	/>
 	<GeneralPlan
 		className="adventure"
-		planName="Adventure PLAN"
+		planName={$t("ADVENTURE_BIG")}
 		currencySymbol={$globalData.data.currencySymbol}
 		contribution={$globalData.data.contributions.adventurePlan.contribution}
 		revenue={$globalData.data.contributions.adventurePlan.revenue}
@@ -31,7 +32,7 @@
 	/>
 	<GeneralPlan
 		className="founder"
-		planName="Founder PLAN"
+		planName={$t("FOUNDER_BIG")}
 		currencySymbol={$globalData.data.currencySymbol}
 		contribution={$globalData.data.contributions.founderPlan.contribution}
 		revenue={$globalData.data.contributions.founderPlan.revenue}

@@ -3,6 +3,7 @@
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
   import { confirmModalState } from "../../profileStore";
+  import { t } from "$lib/translations/i18n.js";
 
   const emailrRegEx =
     /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
@@ -14,8 +15,8 @@
     validationSchema: yup.object().shape({
       email: yup
         .string()
-        .matches(emailrRegEx, "Incorrect E-mail format")
-        .required("Please put your email"),
+        .matches(emailrRegEx, $t("INCORRECT_EMAIL"))
+        .required($t("ENTER_EMAIL")),
     }),
     onSubmit: () => {
       $confirmModalState = true;
@@ -27,12 +28,12 @@
   };
 </script>
 
-<div class=" mt-1">Change Email</div>
+<div class=" mt-1">{$t("CHANGE_EMAIL")}</div>
 <div class="modal_main-row">
   <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
     <input
       type="text"
-      placeholder="Enter New Email"
+      placeholder={$t("NEW_EMAIL")}
       class:error={$errors.email}
       autocomplete
       on:change={handleChange}
@@ -44,6 +45,6 @@
         >{$errors.email}</small
       >
     {/if}
-    <button class="btn _218">Continue</button>
+    <button class="btn _218">{$t("CONTINUE")}</button>
   </form>
 </div>

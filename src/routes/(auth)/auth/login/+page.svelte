@@ -1,12 +1,13 @@
 <script>
 	import greenLogo from "$lib/assets/img/logo-green.svg";
 	import LoginForm from "./LoginForm.svelte";
+	import { t } from "$lib/translations/i18n.js";
   </script>
   <div class="greenForm">
 	<div class="box_shadow-medium form__content">
 	  <div class="content d-flex flex-col justify-cc align-center">
 		<img src={greenLogo} alt="esi logo img" />
-		<div class="text-1 mb-1">Log In</div>
+		<div class="text-1 mb-1">{$t("LOGIN")}</div>
 		<LoginForm />
 	  </div>
 	  <div class="absolute">

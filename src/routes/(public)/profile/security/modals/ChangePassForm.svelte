@@ -5,6 +5,7 @@
   import { confirmModalState } from "../securityStore";
   import EyePwIco from "$lib/components/icons/EyePW_ico.svelte";
   import { validatePasswordType } from "$lib/functions/validatePasswordType";
+  import { t } from "$lib/translations/i18n.js";
 
   const passwordRegEx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
   const { form, errors, state, handleChange, handleSubmit } = createForm({
@@ -15,23 +16,17 @@
     validationSchema: yup.object().shape({
       password: yup
         .string()
-        .min(8, "Password should be at least 8 symbols length")
-        .max(16, "Password should not be more then 16 symbols length")
-        .matches(
-          passwordRegEx,
-          "Password should have at least 1 capital letter, 1 number, 1 special symbol"
-        )
-        .required("Password is required"),
+        .min(8, $t("PW_RANGE"))
+        .max(16, $t("PW_RANGE"))
+        .matches(passwordRegEx, $t("PW_CHARS"))
+        .required($t("ENTER_USER_PW")),
       confirmPassword: yup
         .string()
-        .min(8, "Password should be at least 8 symbols length")
-        .max(16, "Password should not be more then 16 symbols length")
-        .matches(
-          passwordRegEx,
-          "Password should have at least 1 capital letter, 1 number, 1 special symbol"
-        )
-        .required("Password is required")
-        .oneOf([yup.ref("password")], "Your passwords do not match."),
+        .min(8, $t("PW_RANGE"))
+        .max(16, $t("PW_RANGE"))
+        .matches(passwordRegEx, $t("PW_CHARS"))
+        .required($t("ENTER_USER_PW"))
+        .oneOf([yup.ref("password")], $t("PW_NOT_MATCH")),
     }),
     onSubmit: () => {
       $confirmModalState = true;
@@ -50,7 +45,7 @@
     <input
       type="password"
       class="mb-0_625"
-      placeholder="New password"
+      placeholder={$t("NEW_PASSWORD")}
       class:error={$errors.password}
       autocomplete
       on:change={handleChange}
@@ -67,7 +62,7 @@
     </div>
     <input
       type="password"
-      placeholder="Repeat new password"
+      placeholder={$t("REPEAT_PASSWORD")}
       class:error={$errors.confirmPassword}
       autocomplete
       on:change={handleChange}
@@ -80,5 +75,5 @@
       >{$errors.confirmPassword}</small
     >
   {/if}
-  <button class="btn _218">Continue</button>
+  <button class="btn _218">{$t("CONTINUE")}</button>
 </form>

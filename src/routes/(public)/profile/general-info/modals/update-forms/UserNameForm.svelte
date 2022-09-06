@@ -3,6 +3,7 @@
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
   import { confirmModalState } from "../../profileStore";
+  import { t } from "$lib/translations/i18n.js";
 
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
@@ -11,9 +12,9 @@
     validationSchema: yup.object().shape({
       userName: yup
         .string()
-        .min(3, "User name should be at least 3 symbols length")
-        .max(20, "User name must be no more than 20 characters")
-        .required("Please put your User name"),
+        .min(3, $t("USER_NAME_RANGE"))
+        .max(20, $t("USER_NAME_RANGE"))
+        .required($t("ENTER_USER_NAME")),
     }),
     onSubmit: () => {
       $confirmModalState = true;
@@ -25,12 +26,12 @@
   };
 </script>
 
-<div class=" mt-1">Change User name</div>
+<div class=" mt-1">{$t("CHANGE_USER_NAME")}</div>
 <div class="modal_main-row">
   <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
     <input
       type="text"
-      placeholder="Edit User name"
+      placeholder={$t("ENTER_USER_NAME")}
       class:error={$errors.userName}
       autocomplete
       on:change={handleChange}
@@ -42,6 +43,6 @@
         >{$errors.userName}</small
       >
     {/if}
-    <button class="btn _218">Continue</button>
+    <button class="btn _218">{$t("CONTINUE")}</button>
   </form>
 </div>
