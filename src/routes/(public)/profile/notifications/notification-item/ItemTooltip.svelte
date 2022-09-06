@@ -3,6 +3,7 @@
   import clickOutside from "$lib/functions/clickOutside";
   import { modalClassName } from "../../general-info/profileStore";
   import { notificationList } from "../notificationsStore";
+  import { t } from '$lib/translations/i18n.js';
 
   let active = false;
 
@@ -50,9 +51,9 @@
   >
     <ul>
       {#if $$props.status === "readed"}
-        <li on:click={() => unreadItem($$props.id)}>Mark as unread</li>
+        <li on:click={() => unreadItem($$props.id)}>{$t('SETTINGS.MAKE_UNREAD')}</li>
       {/if}
-      <li on:click={() => removeItem($$props.id)}>Remove</li>
+      <li on:click={() => removeItem($$props.id)}>{$t('REMOVE')}</li>
       <!-- <li on:click={() => muteItem(id)}>Mute News and updates</li> -->
     </ul>
   </div>

@@ -27,7 +27,7 @@
       {objAttributes.name}
     </div>
     <div class="relative dots">
-      <ItemTooltip id={objAttributes.id} status={objAttributes.status} width={160}
+      <ItemTooltip id={objAttributes.id} status={objAttributes.status} width={240}
         ><ThreeDotsIcon bgColor="green" /></ItemTooltip
       >
     </div>

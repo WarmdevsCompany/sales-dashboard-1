@@ -1,5 +1,4 @@
 export default {
-  //ENGLISH LANG
   english: {
     //GLOBAL__EN
     "USER_NAME": "User name",
@@ -18,6 +17,7 @@ export default {
     "NOTIFICATIONS": "Notifications",
     "SETTINGS": "Settings",
     "SEARCH": "Search",
+    "REMOVE": "Remove",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -39,9 +39,9 @@ export default {
     "SETTINGS.DATE_ADDED": "Date Added",
     "SETTINGS.READ": "Read",
     "SETTINGS.UNREAD": "Unread",
+    "SETTINGS.MAKE_UNREAD": "Mark as unread",
   },
 
-  //GERMAN LANG
   germany: {
     //GLOBAL__DE
     "USER_NAME": "Nutzername",
@@ -60,6 +60,7 @@ export default {
     "NOTIFICATIONS": "Benachrichtigungen",
     "SETTINGS": "Einstellungen",
     "SEARCH": "Suche",
+    "REMOVE": "Entfernen",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -81,9 +82,9 @@ export default {
     "SETTINGS.DATE_ADDED": "Datum hinzugefügt",
     "SETTINGS.READ": "Lesen",
     "SETTINGS.UNREAD": "Ungelesen",
+    "SETTINGS.MAKE_UNREAD": "Als ungelesen markieren",
   },
   
-  //FRENCH LANG
   french: {
     //GLOBAL__FR
     "USER_NAME": "Nom d'utilisateur",
@@ -102,6 +103,7 @@ export default {
     "NOTIFICATIONS": "Avis",
     "SETTINGS": "Réglages",
     "SEARCH": "Search",
+    "REMOVE": "Retirer",
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",
@@ -123,5 +125,6 @@ export default {
     "SETTINGS.DATE_ADDED": "Date ajoutée",
     "SETTINGS.READ": "Lis",
     "SETTINGS.UNREAD": "Non lu",
+    "SETTINGS.MAKE_UNREAD": "Marquer comme non lu",
   },
 };
