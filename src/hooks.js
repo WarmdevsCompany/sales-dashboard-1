@@ -5,6 +5,7 @@ export const handle = async ({ event, resolve }) => {
 	// set cookies in locals object
 	event.locals.esiToken = cookies['esiToken'] || null;
 	event.locals.isAuthUser = false;
+	console.log(event.locals.esiToken)
 	// resolve event
 	const response = await resolve(event); 
 	return response;
