@@ -5,7 +5,7 @@ import { locale } from "$lib/translations/i18n.js";
 export async function load({ data }) {
 	if (browser) {
 		let lang = localStorage.getItem('lang');
-		locale.set(lang || 'english');
+		locale.set(lang || 'en');
 	// 	if (sessionStorage.getItem('generalData')) {
 	// 		console.info('General data exist')
 	// 	} else {

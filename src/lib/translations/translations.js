@@ -1,5 +1,5 @@
 export default {
-  english: {
+  en: {
     //GLOBAL__EN
     "USER_NAME": "User name",
     "PW": "Password",
@@ -51,6 +51,31 @@ export default {
     "NEW_EMAIL": "Enter New Email",
     "ENTER_EMAIL": "Enter Email",
     "INCORRECT_EMAIL": "Email contain incorrect format",
+    "GENERAL": "General",
+    "TO": "to",
+
+    //OVERVIEW__general__EN
+    "OVERVIEW_CONTRIBUTION": "Your contribution",
+    "OVERVIEW_REVENUE": "Your revenue",
+    "OVERVIEW_TOTAL_SAFE": "Total Safe",
+    "OVERVIEW_SAVING_PROJECTION": "Saving Projection",
+    "OVERVIEW_TOTAL_SAVE_5": "Total Save over 5 years",
+    "OVERVIEW_CURRENT_TRAJECTORY": "Current Trajectory",
+    "OVERVIEW_PREV_TRAJECTORY": "Previous Trajectory",
+    "OVERVIEW_STATUS": "Membership status",
+    "OVERVIEW_SINCE": "since",
+    "OVERVIEW_EUCALYPTUS": "Eucalyptus",
+    "OVERVIEW_TOTAL": "total",
+    "OVERVIEW_WITHDRAWS_DETAILS": "Withdraws Details",
+    "OVERVIEW_SEED": "Seed",
+    "OVERVIEW_SEQUOIA": "Sequoia",
+    "OVERVIEW_CONTRIBUTION_UNDER": "Contribution under",
+    "OVERVIEW_MONTH": "month",
+    "OVERVIEW_STILL": "are still not converted",
+    "OVERVIEW_WITHDRAW_FEE": "Withdraw Fee",
+    "OVERVIEW_AGO": "ago",
+    "OVERVIEW_CONTRIBUTION_BETWEEN": "Contribution made between",
+    "OVERVIEW_CONTRIBUTION_OVER": "Contribution made over",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -81,7 +106,7 @@ export default {
     "SETTINGS_VERIFY_CODE": "Enter verification code",
   },
 
-  germany: {
+  de: {
     //GLOBAL__DE
     "USER_NAME": "Nutzername",
     "PW": "Passwort",
@@ -128,11 +153,36 @@ export default {
     "PW_CHARS": "Es sollte mindestens acht Zeichen lang sein und zwei Arten von Groß- und Kleinschreibung enthalten, Zahlen und Sonderzeichen.",
     "PW_NOT_MATCH": "Falsches Bestätigungspasswort",
     "WELCOME": "Willkommen",
-    "PROFILE_UPDATED": "Profile info information successfully updated",
+    "PROFILE_UPDATED": "Profilinformationen erfolgreich aktualisiert",
     "USER_NAME_RANGE": "Der Benutzername muss zwischen 3 und 20 Zeichen lang sein!",
     "NEW_EMAIL": "Geben Sie Neue E-Mail ein",
     "ENTER_EMAIL": "Email eingeben",
     "INCORRECT_EMAIL": "E-Mail enthält falsches Format",
+    "GENERAL": "Allgemein",
+    "TO": "bis",
+
+    //OVERVIEW__general__DE
+    "OVERVIEW_CONTRIBUTION": "Ihr Beitrag",
+    "OVERVIEW_REVENUE": "Ihr Umsatz",
+    "OVERVIEW_TOTAL_SAFE": "Total sicher",
+    "OVERVIEW_SAVING_PROJECTION": "Projektion speichern",
+    "OVERVIEW_TOTAL_SAVE_5": "Gesamtersparnis über 5 Jahre",
+    "OVERVIEW_CURRENT_TRAJECTORY": "Aktuelle Flugbahn",
+    "OVERVIEW_PREV_TRAJECTORY": "Vorherige Flugbahn",
+    "OVERVIEW_STATUS": "Mitgliedschaftsstatus",
+    "OVERVIEW_SINCE": "seit",
+    "OVERVIEW_EUCALYPTUS": "Eukalyptus",
+    "OVERVIEW_TOTAL": "gesamt",
+    "OVERVIEW_WITHDRAWS_DETAILS": "Entzieht Details",
+    "OVERVIEW_SEED": "Samen",
+    "OVERVIEW_SEQUOIA": "Mammutbaum",
+    "OVERVIEW_CONTRIBUTION_UNDER": "Beitrag unter",
+    "OVERVIEW_MONTH": "monat",
+    "OVERVIEW_STILL": "sind immer noch nicht konvertiert",
+    "OVERVIEW_WITHDRAW_FEE": "Abhebungsgebühr",
+    "OVERVIEW_AGO": "ago",
+    "OVERVIEW_CONTRIBUTION_BETWEEN": "Beitrag geleistet zwischen",
+    "OVERVIEW_CONTRIBUTION_OVER": "Beitrag geleistet",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -163,7 +213,7 @@ export default {
     "SETTINGS_VERIFY_CODE": "Bestätigungscode eingeben",
   },
   
-  french: {
+  fr: {
     //GLOBAL__FR
     "USER_NAME": "Nom d'utilisateur",
     "PW": "Mot de passe",
@@ -210,11 +260,36 @@ export default {
     "PW_CHARS": "Il doit comporter au moins huit caractères et comprend deux types de casse, des chiffres et des caractères spéciaux.",
     "PW_NOT_MATCH": "Mauvais mot de passe de confirmation",
     "WELCOME": "Bienvenue",
-    "PROFILE_UPDATED": "Profile info information successfully updated",
+    "PROFILE_UPDATED": "Informations sur le profil mises à jour avec succès",
     "USER_NAME_RANGE": "Le nom d'utilisateur doit être compris entre 3 et 20 caractères !",
     "NEW_EMAIL": "Entrer un nouvel e-mail",
     "ENTER_EMAIL": "Entrez l'e-mail",
     "INCORRECT_EMAIL": "L'e-mail contient un format incorrect",
+    "GENERAL": "Général",
+    "TO": "à",
+
+    //OVERVIEW__general__FR
+    "OVERVIEW_CONTRIBUTION": "Votre contribution",
+    "OVERVIEW_REVENUE": "Vos revenus",
+    "OVERVIEW_TOTAL_SAFE": "Sécurité totale",
+    "OVERVIEW_SAVING_PROJECTION": "Sauvegarder la projection",
+    "OVERVIEW_TOTAL_SAVE_5": "Total des économies sur 5 ans",
+    "OVERVIEW_CURRENT_TRAJECTORY": "Trajectoire actuelle",
+    "OVERVIEW_PREV_TRAJECTORY": "Trajectoire précédente",
+    "OVERVIEW_STATUS": "Statut de membre",
+    "OVERVIEW_SINCE": "puisque",
+    "OVERVIEW_EUCALYPTUS": "Eucalyptus",
+    "OVERVIEW_TOTAL": "total",
+    "OVERVIEW_WITHDRAWS_DETAILS": "Détails sur les retraits",
+    "OVERVIEW_SEED": "Planter",
+    "OVERVIEW_SEQUOIA": "Séquoia",
+    "OVERVIEW_CONTRIBUTION_UNDER": "Cotisation sous",
+    "OVERVIEW_MONTH": "mois",
+    "OVERVIEW_STILL": "ne sont toujours pas convertis",
+    "OVERVIEW_WITHDRAW_FEE": "Frais de retrait",
+    "OVERVIEW_AGO": "ago",
+    "OVERVIEW_CONTRIBUTION_BETWEEN": "Contribution versée entre",
+    "OVERVIEW_CONTRIBUTION_OVER": "Contribution versée sur",
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",

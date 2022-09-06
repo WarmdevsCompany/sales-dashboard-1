@@ -9,6 +9,7 @@
     { date: date3, sum: 843 },
   ];
   let dates = [date1, date2, date3];
+  const lang = localStorage.getItem('lang');
 
   function findObjValueByDate(array, dateItem) {
     let sum;
@@ -75,13 +76,13 @@
               },
               label: function (tooltipItem) {
                 let date = new Date(parseInt(tooltipItem.label));
-                let ye = new Intl.DateTimeFormat("en", {
+                let ye = new Intl.DateTimeFormat(lang, {
                   year: "numeric",
                 }).format(date);
-                let mo = new Intl.DateTimeFormat("en", {
+                let mo = new Intl.DateTimeFormat(lang, {
                   month: "short",
                 }).format(date);
-                let da = new Intl.DateTimeFormat("en", {
+                let da = new Intl.DateTimeFormat(lang, {
                   day: "2-digit",
                 }).format(date);
                 return `${mo} ${da},${ye}`;

@@ -1,6 +1,7 @@
 <script>
   import flatpickr from "flatpickr";
-import { onMount } from "svelte";
+  import { onMount } from "svelte";
+  import { t } from "$lib/translations/i18n.js";
   let datePicker;
   let selectedDate = new Date();
   $: datePicker;
@@ -14,17 +15,17 @@ import { onMount } from "svelte";
   });
 </script>
 
-<div class=" mt-1">Change Date Of Birth</div>
+<div class=" mt-1">{$t("CHANGE_DATE_OF_BIRTH")}</div>
 <div class="modal_main-row">
   <form on:submit|preventDefault={$$props.submitChanges} class="mt-1_5">
     <div class="input-sv small date-input" >
     <input
       class="date"
       bind:this={datePicker}
-      placeholder={selectedDate || "Date Of Birth*"}
+      placeholder={selectedDate || `${$t("DATE_OF_BIRTH")}*`}
     />
   </div>
-    <button class="btn _218">Continue</button>
+    <button class="btn _218">{$t("CONTINUE")}</button>
   </form>
 </div>
 <style>

@@ -1,6 +1,7 @@
 <script>
   import StatusIcon from "$lib/components/icons/StatusIcon.svelte";
   import MembershipChat from "./MembershipChat.svelte";
+  import { t } from "$lib/translations/i18n.js";
   export let chartName, className, chartValue, totalSafe;
 
   import { createPopperActions } from "svelte-popperjs";
@@ -32,22 +33,22 @@
         use:popperContent={extraOpts}
       >
         {#if (className = "seed")}
-          Contribution under
-          <span class="text-green">12 month</span> are still not converted<span
+          {$t("OVERVIEW_CONTRIBUTION_UNDER")}
+          <span class="text-green">12 {$t("OVERVIEW_MONTH")}</span> {$t("OVERVIEW_STILL")}<span
             class="text-green">*4.9%</span
           >
-          Withdraw Fee
+          {$t("OVERVIEW_WITHDRAW_FEE")}
         {:else if (className = "eucalyptus")}
-          Contribution made between <span class="text-green"
-            >12 to 36 month</span
+          {$t("OVERVIEW_CONTRIBUTION_BETWEEN")} <span class="text-green"
+            >12 {$t("TO")} 36 {$t("OVERVIEW_MONTH")}</span
           >
-          ago <span class="text-green">*0.5%</span> Withdraw Fee
+          {$t("OVERVIEW_AGO")} <span class="text-green">*0.5%</span> {$t("OVERVIEW_WITHDRAW_FEE")}
         {:else}
-          Contribution made over
-          <span class="text-green">36 month</span> ago *<span class="text-green"
+          {$t("OVERVIEW_CONTRIBUTION_OVER")}
+          <span class="text-green">36 {$t("OVERVIEW_MONTH")}</span> {$t("OVERVIEW_AGO")} *<span class="text-green"
             >0.25%</span
           >
-          Withdraw Fee
+          {$t("OVERVIEW_WITHDRAW_FEE")}
         {/if}
 
         <div id="arrow" data-popper-arrow />
@@ -59,7 +60,7 @@
   </div>
   <div class="chat__item--footer text-center mt-1">
     <span class="text-3 {className}">${totalSafe}</span>
-    <span class="text-xsm mt-0_25">total safe</span>
+    <span class="text-xsm mt-0_25">{$t("OVERVIEW_TOTAL_SAFE")}</span>
   </div>
 </div>
 
