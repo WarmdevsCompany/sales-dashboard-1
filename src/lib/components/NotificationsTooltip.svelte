@@ -76,7 +76,6 @@
 		active = !active;
 	}
 </script>
-
 <div use:clickOutside on:click_outside={hide}>
 	<div on:click={toggleAction}>
 		<slot />
