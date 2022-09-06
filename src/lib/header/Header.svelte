@@ -9,6 +9,7 @@
 	import MediaQuery from '$lib/components/MediaQuery.svelte';
 	import { globalData } from '$lib/globalStore';
 	import NotificationsTooltip from '../components/NotificationsTooltip.svelte';
+	import HeaderPagesTooltip from '../components/HeaderPagesTooltip.svelte';
 	export let currencySymbol = $globalData.data.currencySymbol,
 		allMoney = '7,437',
 		monthlyContribution = 500,
@@ -49,13 +50,20 @@
 	</div>
 	<MediaQuery query="(min-width: 992px)" let:matches>
 		{#if matches}
-			<div class="d-flex header__rigth--column relative">
-				<NotificationsTooltip width={300}>
-					<div class="mr-1 pointer">
-						<Notification bgColor="white" />
-					</div>
-				</NotificationsTooltip>
-				<div class="pointer"><ThreeDotsIcon bgColor="white" /></div>
+			<div class="d-flex header__rigth--column">
+				<div class="relative">
+					<NotificationsTooltip width={300}>
+						<div class="mr-1 pointer">
+							<Notification bgColor="white" />
+						</div>
+					</NotificationsTooltip>
+				</div>
+
+				<div class="relative">
+					<HeaderPagesTooltip
+						><div class="pointer"><ThreeDotsIcon bgColor="white" /></div></HeaderPagesTooltip
+					>
+				</div>
 			</div>
 		{/if}
 	</MediaQuery>

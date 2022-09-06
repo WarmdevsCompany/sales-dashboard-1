@@ -3,6 +3,10 @@
 	import LoginForm from "./LoginForm.svelte";
 	import { t } from "$lib/translations/i18n.js";
   </script>
+  <svelte:head>
+	<title>Login</title>
+	<meta name="description" content="Login page" />
+</svelte:head>
   <div class="greenForm">
 	<div class="box_shadow-medium form__content">
 	  <div class="content d-flex flex-col justify-cc align-center">

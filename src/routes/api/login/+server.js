@@ -1,6 +1,6 @@
 import * as cookie from 'cookie';
 import { publicApi } from '$lib/api/publicApi.js';
-import { redirect } from '@sveltejs/kit';
+
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, setHeaders }) {
 	const body = await request.json();
