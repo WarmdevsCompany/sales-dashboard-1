@@ -3,11 +3,9 @@
   import Dropdown from "$lib/components/Dropdown.svelte";
   import greenLogo from "$lib/assets/img/logo-green.svg";
   import { t } from '$lib/translations/i18n.js';
+import ChangeForm from "./ChangeForm.svelte";
   let disabledState = false;
   let errorState = false;
-  function onSubmit() {
-    console.log("Form submited");
-  }
 </script>
 
 <div
@@ -18,24 +16,7 @@
     {$t('MANAGE_RECURRING_CONTRIBUTION')}*
   </div>
   <div class="text-xsm mt-0_25">{$t('MANAGE_NEXT_RECURRING_CONTRIBUTION')}</div>
-  <form
-    on:submit|preventDefault={onSubmit}
-    class="d-flex justify-sb align-bottom"
-  >
-    <div class="input__wrapper">
-      <label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
-      <input class="" type="text" id="amount" placeholder="$1,000" disabled = {disabledState || errorState}/>
-    </div>
-    <div class="input__wrapper">
-      <div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
-      <div class="dropdown__wrapper ">
-        <Dropdown itemsData={[$t('MONTHLY'), $t('BI_MONTHLY')]} disabled = {disabledState || errorState}/>
-      </div>
-    </div>
-    <button class="btn confirm " on:click={() => getModal('confirm').open() } disabled = {disabledState || errorState}
-      >{$t('CONFIRM_CHANGES')}</button
-    >
-  </form>
+<ChangeForm disabledState={disabledState} errorState={errorState}/>
 </div>
 <Modal id="confirm">
   <div class="modal_main confirm text-center">
@@ -74,19 +55,7 @@
     border: 1px solid var(--red-color);
     padding: 2.125rem 2rem 3.25rem 2rem;
   }
-  form {
-    margin: 0.875rem auto 0 auto;
-    max-width: 721px;
-  }
-  .dropdown__wrapper {
-    min-width: 207px;
-  }
-  .input__wrapper {
-    max-width: 207px;
-  }
-  input::placeholder {
-    color: var(--green-dark-medium);
-  }
+ 
   .modal_main {
     max-width: 687px;
       margin: 0 auto;

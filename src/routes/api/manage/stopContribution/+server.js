@@ -1,9 +1,14 @@
-import { privateApiWithBody } from '$lib/api/privateApi';
-
+import { variables } from '$lib/variables';
 /** @type {import('./$types').RequestHandler} */
 export async function POST({locals}) {
-
-	const rawResponse = await privateApiWithBody('stopContribution', locals.esiToken);
+    const resource = 'stopContribution';
+	const rawResponse = await fetch(`${variables.privatePath}/${resource}`, {
+        method: 'POST',
+        headers: {
+            accept: 'application/json',
+            Authorization:  locals.esiToken
+        },
+    });
 	const response = await rawResponse.json();
 	if (!response.status) {
 		return {
@@ -13,5 +18,5 @@ export async function POST({locals}) {
 			}
 		  };
 	}
-	return new Response(JSON.stringify({ status: response.status}), { status: 200 }) 
+	return new Response(JSON.stringify({ status: response.status, message: response.data.message}), { status: 200 }) 
 }
