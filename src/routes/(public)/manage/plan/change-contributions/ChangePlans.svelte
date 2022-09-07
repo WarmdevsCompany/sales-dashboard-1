@@ -85,11 +85,11 @@
 	<div class="plans__wrapper__head">
 		<h3 class="h3-sv desktop">
 			{#if sumOfPlans < 100}
-				Please allocate <span class="plan_percentage_val" class:error={$errorMessageState}
+				{$t('MANAGE_ALLOCATE')} <span class="plan_percentage_val" class:error={$errorMessageState}
 					>{100 - sumOfPlans}%</span
-				> of your contribution between our plans
+				> {$t('MANAGE_CONTR_BETW')}
 			{:else if sumOfPlans === 100}
-				You have allocated all of your <span class="green">contribution!</span>
+				{$t('MANAGE_ALLOCATE_ALL')} <span class="green">{$t('MANAGE_CONTRIBUTION_LC')}!</span>
 			{/if}
 		</h3>
 
@@ -100,20 +100,20 @@
 			</div>
 			<MediaQuery query="(min-width: 992px)" let:matches>
 				{#if matches}
-					<div class="subscribe__text">Subscribe to All Plan</div>
+					<div class="subscribe__text">{$t('MANAGE_SUBS_ALL')}</div>
 				{:else}
-					<div class="subscribe__text">All Plan</div>
+					<div class="subscribe__text">{$t('MANAGE_ALL')}</div>
 				{/if}
 			</MediaQuery>
 		</div>
 	</div>
 	<h3 class="h3-sv mob">
 		{#if sumOfPlans < 100}
-			Please allocate <span class="plan_percentage_val" class:error={$errorMessageState}
+			{$t('MANAGE_ALLOCATE')} <span class="plan_percentage_val" class:error={$errorMessageState}
 				>{100 - sumOfPlans}%</span
-			> of your contribution
+			> {$t('MANAGE_OF_CONTRIBUTION')}
 		{:else if sumOfPlans === 100}
-			You have allocated all of your <span class="green">contribution!</span>
+			{$t('MANAGE_ALLOCATE_ALL')} <span class="green">{$t('MANAGE_CONTRIBUTION_LC')}!</span>
 		{/if}
 	</h3>
 
@@ -128,7 +128,7 @@
 			currentPrice={safePrice}
 			activeClass={'activeDropdownSave'}
 			activeState={activeDropdownSave}
-			btnText={'Green Safe info'}
+			btnText={$t('MANAGE_SAFE_INFO')}
 			btnClass={'blue'}
 		/>
 		<ChangePlanItem
@@ -141,7 +141,7 @@
 			currentPrice={adventurePrice}
 			activeClass={'activeDropdownAdv'}
 			activeState={activeDropdownAdv}
-			btnText={'Green Adventure info'}
+			btnText={$t('MANAGE_ADV_INFO')}
 			btnClass={'green'}
 		/>
 		<ChangePlanItem
@@ -154,7 +154,7 @@
 			currentPrice={founderPrice}
 			activeClass={'activeDropdownFound'}
 			activeState={activeDropdownFound}
-			btnText={'Green Founder info'}
+			btnText={$t('MANAGE_FOUNDER_INFO')}
 			btnClass={'violet'}
 		/>
 	</div>

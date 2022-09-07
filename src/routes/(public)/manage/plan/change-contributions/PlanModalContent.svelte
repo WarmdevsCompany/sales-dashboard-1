@@ -1,6 +1,7 @@
 <script>
   import { plansModalState, plansModalData } from "./planStore";
   import { afterUpdate } from "svelte";
+  import { t } from '$lib/translations/i18n.js';
 
   let lottieWidth = 450;
   let windowWidth;
@@ -8,6 +9,21 @@
   if ($plansModalData.class === "safe") {
     lottieWidth = 370;
   }
+  
+  let name = ''
+  switch ($plansModalData.name) {
+    case "Green Safe":
+      name = $t('MANAGE_GREEN_SAFE')
+      break;
+    case "Green Adventure":
+      name = $t('MANAGE_GREEN_ADV')
+      break;
+    case "Green Change":
+      name = $t('MANAGE_GREEN_CHANGE')
+      break;
+    default:
+      console.log("no translate for " + $plansModalData.name + ".");
+}
 
   afterUpdate(() => {
     if (windowWidth < 1100) {
@@ -26,7 +42,7 @@
 >
   <div class="column">
     <div class="content">
-      <div class="content__head text-2">{$plansModalData.name}</div>
+      <div class="content__head text-2">{name}</div>
       <div class="content__text">{$plansModalData.desc}</div>
     </div>
   </div>
