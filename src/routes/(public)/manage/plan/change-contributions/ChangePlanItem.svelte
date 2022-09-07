@@ -28,6 +28,7 @@
 	export let current,
 		currentPlan,
 		className = '',
+		label,
 		allowPercentageVal,
 		savePercentages,
 		currentPrice,
@@ -100,7 +101,7 @@
 		<div class="column">
 			<img class="plan__icon" src={currentSvgIcon} alt="" />
 
-			<div class="item__head__name">Select GREEN {className}</div>
+			<div class="item__head__name">Select GREEN {label}</div>
 		</div>
 		<div class="column">
 			<div class="item__head__checkbox" class:visible={$allocatedContributions[className] != 0}>

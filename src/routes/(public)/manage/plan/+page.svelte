@@ -4,10 +4,11 @@
 	import ChangePlans from './change-contributions/ChangePlans.svelte';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import UpdatedPlanItems from './UpdatedPlanItems.svelte';
+	import { t } from '$lib/translations/i18n.js';
 </script>
 
 <svelte:head>
-	<title>Plan</title>
+	<title>{$t('PLAN')}</title>
 	<meta name="description" content="Plan page" />
 	<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </svelte:head>
@@ -15,23 +16,23 @@
 <ChangePlans />
 <div class="d-flex justify-cc">
 	<button class="btn mt-1_5 box_shadow-medium" on:click={() => getModal('confirmPlan').open()}
-		>Confirm changes</button
+		>{$t('CONFIRM_CHANGES')}</button
 	>
 </div>
 
 <Modal id="confirmPlan">
 	<div class="modal_main confirm text-center">
 		<img src={greenLogo} alt="esi logo img" />
-		<div class="modal_head_medium mt-2">We've updated your contribution</div>
+		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-cc ">
 			<div class="text-xsm d-flex align-base">
-				New Contribution: <span class="text-3 text-blue">$1,000/mo</span>
+				{$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue">$1,000/mo</span>
 			</div>
 		</div>
 		<div class="updated__items">
 			<UpdatedPlanItems />
 		</div>
-		<button class="btn" on:click={() => getModal('confirmPlan').close()}>Close</button>
+		<button class="btn" on:click={() => getModal('confirmPlan').close()}>{$t('CLOSE')}</button>
 	</div>
 </Modal>
 <PlansMain />

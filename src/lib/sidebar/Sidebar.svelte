@@ -13,7 +13,8 @@
 	import MenuIcon from '$lib/components/icons/menu-icon/MenuIcon.svelte';
 	import CloseMenuIcon from '$lib/components/icons/menu-icon/CloseMenuIcon.svelte';
 	import clickOutside from '$lib/functions/clickOutside';
-	import {logout} from '$lib/api/functions/logout'
+	import {logout} from '$lib/api/functions/logout';
+	import { t } from '$lib/translations/i18n.js';
 
 	let current = null;
 	let openedMenu = false;
@@ -87,7 +88,7 @@
 							on:click={() => (current = 'overview')}
 						>
 							<div class="menu__item--main d-flex text-sm mb-1_25">
-								<OverviewIcon class={''} /> <span>Overview</span>
+								<OverviewIcon class={''} /> <span>{$t('OVERVIEW')}</span>
 							</div>
 							<ul>
 								<li class="text-xsm">
@@ -96,7 +97,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/overview/general"
 										on:click={handleClickOutside}
-										>General
+										>{$t('GENERAL')}
 									</a>
 								</li>
 							</ul>
@@ -106,7 +107,7 @@
 							on:click={() => (current = 'manage')}
 						>
 							<div class="menu__item--main d-flex text-sm mb-1_25">
-								<ManageIcon class={''} /> <span>Manage</span>
+								<ManageIcon class={''} /> <span>{$t('MANAGE')}</span>
 							</div>
 							<ul>
 								<li class="text-xsm">
@@ -115,7 +116,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/manage/contribution"
 										on:click={handleClickOutside}
-										>Contribution
+										>{$t('CONTRIBUTION')}
 									</a>
 								</li>
 								<li class="text-xsm">
@@ -124,7 +125,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/manage/plan"
 										on:click={handleClickOutside}
-										>Plan
+										>{$t('PLAN')}
 									</a>
 								</li>
 								<li class="text-xsm">
@@ -133,7 +134,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/manage/withdraw"
 										on:click={handleClickOutside}
-										>Withdraw
+										>{$t('WITHDRAW')}
 									</a>
 								</li>
 							</ul>
@@ -143,7 +144,7 @@
 							on:click={() => (current = 'profile')}
 						>
 							<div class="menu__item--main d-flex text-sm mb-1_25">
-								<ProfileIcon class={''} /> <span>Profile</span>
+								<ProfileIcon class={''} /> <span>{$t('PROFILE')}</span>
 							</div>
 							<ul>
 								<li class="text-xsm">
@@ -152,7 +153,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/general-info"
 										on:click={handleClickOutside}
-										>General info
+										>{$t('PROFILE.GENERAL.TITLE')}
 									</a>
 								</li>
 								<li class="text-xsm">
@@ -161,7 +162,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/security"
 										on:click={handleClickOutside}
-										>Security
+										>{$t('SECURITY')}
 									</a>
 								</li>
 								<li class="text-xsm">
@@ -170,7 +171,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/payment"
 										on:click={handleClickOutside}
-										>Payment
+										>{$t('PAYMENT')}
 									</a>
 								</li>
 								<li class="text-xsm">
@@ -179,7 +180,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/notifications"
 										on:click={handleClickOutside}
-										>Notifications
+										>{$t('NOTIFICATIONS')}
 									</a>
 								</li>
 								<li class="text-xsm">
@@ -188,7 +189,7 @@
 										sveltekit:data-sveltekit-prefetch
 										href="/profile/settings"
 										on:click={handleClickOutside}
-										>Settings
+										>{$t('SETTINGS')}
 									</a>
 								</li>
 							</ul>
@@ -203,7 +204,7 @@
 		<div class="logout">
 			<button class="btn d-flex text-sm" on:click={logout}
 				><img src={logoutIcon} alt="logout" />
-				<span>Logout</span></button
+				<span>{$t('LOGOUT')}</span></button
 			>
 		</div>
 	</div>

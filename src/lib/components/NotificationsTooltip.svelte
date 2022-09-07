@@ -1,6 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
+	import { t } from '$lib/translations/i18n.js';
 	//import { notificationList } from "";
 	const notificationList = [
 		{
@@ -88,7 +89,7 @@
 			class="tooltip text-sm b-radius-8"
 			style="width: {$$props.width}px; left: -270px"
 		>
-			<div class="semi-bold mb-1">Notifications</div>
+			<div class="semi-bold mb-1">{$t('NOTIFICATIONS')}</div>
 			<ul class="notification__wrapper">
 				{#each notificationList as item}
 					<li class:active={item.status === 'unreaded'}>

@@ -58,6 +58,13 @@ export default {
     "CONFIRM_CHANGES": "Confirm changes",
     "CLOSE": "Close",
     "CONTRIBUTION": "Contribution",
+    "LOGOUT": "Logout",
+    "OVERVIEW": "Overview",
+    "MANAGE": "Manage",
+    "PLAN": "Plan",
+    "PROFILE": "Profile",
+    "SECURITY": "Security",
+    "PAYMENT": "Payment",
 
     //OVERVIEW__general__EN
     "OVERVIEW_CONTRIBUTION": "Your contribution",
@@ -80,7 +87,7 @@ export default {
     "OVERVIEW_WITHDRAW_FEE": "Withdraw Fee",
     "OVERVIEW_AGO": "ago",
     "OVERVIEW_CONTRIBUTION_BETWEEN": "Contribution made between",
-    "OVERVIEW_CONTRIBUTION_OVER": "Contribution made over",
+    "OVERVIEW_CONTRIBUTION_OVER": "Contribution made over", 
 
     //MANAGE__EN
     "MANAGE_CONTRIBUTIONS": "Contributions",
@@ -109,6 +116,9 @@ export default {
     "MANAGE_NEXT_RECURRING": "Next Recurring Contribution",
     "MANAGE_NEXT_DATE": "Next contribution date",
     "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
+    "MANAGE_PAUSE_1": "Pause for 1 month",
+    "MANAGE_PAUSE_2": "Pause for 2 month",
+    "MANAGE_PAUSE_3": "Pause for 3 month",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -137,6 +147,11 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Mark as unread",
     "SETTINGS.LAST_PW_CHANGE": "last date of password change",
     "SETTINGS_VERIFY_CODE": "Enter verification code",
+
+    //MANAGE__PLAN__EN
+    "MANAGE_PLAN_CURRENT": "current",
+    "MANAGE_PLAN_NEW": "new",
+    "MANAGE_CHANGED": "Your changes",
   },
 
   de: {
@@ -198,6 +213,13 @@ export default {
     "CONFIRM_CHANGES": "Änderungen bestätigen",
     "CLOSE": "Nah dran",
     "CONTRIBUTION": "Beitrag",
+    "LOGOUT": "Ausloggen",
+    "OVERVIEW": "Überblick",
+    "MANAGE": "Verwalten",
+    "PLAN": "Planen",
+    "PROFILE": "Profil",
+    "SECURITY": "Sicherheit",
+    "PAYMENT": "Zahlung",
 
     //OVERVIEW__general__DE
     "OVERVIEW_CONTRIBUTION": "Ihr Beitrag",
@@ -242,13 +264,16 @@ export default {
     "MANAGE_STOP": "Beitrag stoppen",
     "MANAGE_RES": "Beitrag neu starten",
     "MANAGE_PAUSE_TITLE": "Pause stoppt ihren Beitrag für den nächsten Zeitplanbeitrag und startet automatisch neu",
-    "MANAGE_CHOOSE_TIMEFRAME": "Choose timeframe",
+    "MANAGE_CHOOSE_TIMEFRAME": "Zeitraum wählen",
     "MANAGE_STOP_TITLE": "Sie stoppen den Beitrag und er startet nicht automatisch wieder. Sie können die Einzahlung über die Schaltfläche Neustart fortsetzen!",
-    "MANAGE_RES_TITLE": "Restore the contribution, so that it starts working again automatically!",
+    "MANAGE_RES_TITLE": "Stellen Sie den Beitrag wieder her, damit er automatisch wieder funktioniert!",
     "MANAGE_TOTAL_SAVE": "Gesamteinsparungen + Einnahmen",
     "MANAGE_NEXT_RECURRING": "Nächster wiederkehrender Beitrag",
     "MANAGE_NEXT_DATE": "Nächster Beitragstermin",
-    "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
+    "MANAGE_AGREE": "Ich stimme allen Allgemeinen Geschäftsbedingungen, Vertragsvereinbarung, Datenschutz und Cookie zu",
+    "MANAGE_PAUSE_1": "1 Monat pausieren",
+    "MANAGE_PAUSE_2": "2 Monate pausieren",
+    "MANAGE_PAUSE_3": "3 Monate pausieren",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -277,6 +302,11 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Als ungelesen markieren",
     "SETTINGS.LAST_PW_CHANGE": "letztes Datum der Passwortänderung",
     "SETTINGS_VERIFY_CODE": "Bestätigungscode eingeben",
+    
+    //MANAGE__PLAN__DE
+    "MANAGE_PLAN_CURRENT": "aktuell",
+    "MANAGE_PLAN_NEW": "neu",
+    "MANAGE_CHANGED": "Ihre Änderungen",
   },
   
   fr: {
@@ -338,6 +368,13 @@ export default {
     "CONFIRM_CHANGES": "Confirmer les modifications",
     "CLOSE": "Proche",
     "CONTRIBUTION": "Contribution",
+    "LOGOUT": "Se déconnecter",
+    "OVERVIEW": "Aperçu",
+    "MANAGE": "Faire en sorte",
+    "PLAN": "Planifier",
+    "PROFILE": "Profil",
+    "SECURITY": "Sécurité",
+    "PAYMENT": "Paiement",
 
     //OVERVIEW__general__FR
     "OVERVIEW_CONTRIBUTION": "Votre contribution",
@@ -382,13 +419,16 @@ export default {
     "MANAGE_STOP": "Arrêter la cotisation",
     "MANAGE_RES": "Redémarrer la cotisation",
     "MANAGE_PAUSE_TITLE": "Pause arrêtera leur contribution pour la prochaine contribution planifiée et recommencera automatiquement",
-    "MANAGE_CHOOSE_TIMEFRAME": "Choose timeframe",
+    "MANAGE_CHOOSE_TIMEFRAME": "Choisissez la période",
     "MANAGE_STOP_TITLE": "Vous arrêterez la contribution et elle ne recommencera pas automatiquement. Vous pouvez reprendre le dépôt en utilisant le bouton Redémarrer !",
-    "MANAGE_RES_TITLE": "Restore the contribution, so that it starts working again automatically!",
+    "MANAGE_RES_TITLE": "Restaurez la contribution, pour qu'elle recommence à fonctionner automatiquement !",
     "MANAGE_TOTAL_SAVE": "Économies totales + revenus",
     "MANAGE_NEXT_RECURRING": "Prochaine contribution récurrente",
     "MANAGE_NEXT_DATE": "Prochaine date de cotisation",
-    "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
+    "MANAGE_AGREE": "J'accepte toutes les conditions générales, l'accord contractuel, la confidentialité et les cookies",
+    "MANAGE_PAUSE_1": "Pause pendant 1 mois",
+    "MANAGE_PAUSE_2": "Pause de 2 mois",
+    "MANAGE_PAUSE_3": "Pause de 3 mois",
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",
@@ -417,5 +457,10 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Marquer comme non lu",
     "SETTINGS.LAST_PW_CHANGE": "dernière date de changement de mot de passe",
     "SETTINGS_VERIFY_CODE": "Entrez le code de vérification",
+
+    //MANAGE__PLAN__FR
+    "MANAGE_PLAN_CURRENT": "courant",
+    "MANAGE_PLAN_NEW": "nouveau",
+    "MANAGE_CHANGED": "Vos modifications",
   },
 };
