@@ -10,6 +10,7 @@
 	import ChangePlanItem from './ChangePlanItem.svelte';
 	import SubscribeAllIco from '$lib/components/icons/plan-icons/SubscribeAllIco.svelte';
 	import MediaQuery from '$lib/components/MediaQuery.svelte';
+	import { t } from '$lib/translations/i18n.js';
 
 	let savePercentages;
 
@@ -121,6 +122,7 @@
 			{current}
 			currentPlan={savePlan}
 			className="safe"
+			label={$t('MANAGE_SAFE')}
 			{allowPercentageVal}
 			{savePercentages}
 			currentPrice={safePrice}
@@ -133,6 +135,7 @@
 			{current}
 			currentPlan={advPlan}
 			className="adventure"
+			label={$t('MANAGE_ADVENTURE')}
 			{allowPercentageVal}
 			{savePercentages}
 			currentPrice={adventurePrice}
@@ -145,6 +148,7 @@
 			{current}
 			currentPlan={foundPlan}
 			className="founder"
+			label={$t('MANAGE_FOUNDER')}
 			{allowPercentageVal}
 			{savePercentages}
 			currentPrice={founderPrice}

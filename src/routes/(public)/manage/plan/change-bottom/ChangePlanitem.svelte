@@ -1,16 +1,19 @@
+<script>
+	import { t } from '$lib/translations/i18n.js';
+</script>
 <div class="plan__item b-radius-8 p-1_5 box_shadow-medium text-white {$$props.planClass}">
 	<div class="d-flex justify-sb">
 		<div class="text-3 uppercase">{$$props.planName}</div>
 		<div class="plan__item--medium">{$$props.planPersentage}%</div>
 	</div>
 	<div class="d-flex justify-sb align-center w_113 plan__item--current">
-		<div class="text-12px">current:</div>
+		<div class="text-12px">{$t('MANAGE_PLAN_CURRENT')}:</div>
 		<div class="plan__item--medium">${$$props.planCurrentMoney}</div>
 	</div>
 	<div class="d-flex justify-sb align-center">
-		<div class="text-xsm">Contribution</div>
+		<div class="text-xsm">{$t('CONTRIBUTION')}</div>
 		<div class="d-flex justify-sb align-center w_113">
-			<div class="text-12px">new:</div>
+			<div class="text-12px">{$t('MANAGE_PLAN_NEW')}:</div>
 			<div class="text-3 semi-bold">${$$props.planNewMoney}</div>
 		</div>
 	</div>

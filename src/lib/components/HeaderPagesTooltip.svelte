@@ -2,6 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
 	import { logout } from '$lib/api/functions/logout';
+	import { t } from '$lib/translations/i18n.js';
 	let active = false;
 
 	function hide() {
@@ -26,17 +27,17 @@
 			on:click={() => handleClickOnTooltip()}
 			in:fade={{ duration: 200 }}
 			class="tooltip text-sm b-radius-8"
-			style="width: 154px; left: -154px"
+			style="width: 212px; left: -212px"
 		>
 			<ul class="notification__wrapper">
 				<li>
-					<a href="/profile/general-info">General info</a>
+					<a href="/profile/general-info">{$t('PROFILE.GENERAL.TITLE')}</a>
 				</li>
 				<li>
-					<a href="/profile/settings">Language</a>
+					<a href="/profile/settings">{$t('SETTINGS.LANG')}</a>
 				</li>
 				<li>
-					<button class="btn text-sm logout" on:click={logout}> <span>Logout</span></button>
+					<button class="btn text-sm logout" on:click={logout}> <span>{$t('LOGOUT')}</span></button>
 				</li>
 			</ul>
 		</div>
