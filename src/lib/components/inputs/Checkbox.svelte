@@ -1,10 +1,11 @@
 <script>
   export let group = undefined;
   export let value = undefined;
+  export let checkboxStatus = false;
 </script>
 
 <label class="container-checkbox">
-  <input type="checkbox" bind:group {value} />
+  <input type="checkbox" bind:group {value} bind:checked={checkboxStatus}/>
   <span class="checkmark"></span>
   <slot />
 </label>
