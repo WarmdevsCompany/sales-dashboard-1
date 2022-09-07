@@ -2,37 +2,35 @@
   import Modal, { getModal } from "$lib/components/Modal.svelte";
   import greenLogo from "$lib/assets/img/logo-green.svg";
   import Dropdown from "$lib/components/Dropdown.svelte";
-import Checkbox from "$lib/components/inputs/Checkbox.svelte";
+  import Checkbox from "$lib/components/inputs/Checkbox.svelte";
+  import { t } from '$lib/translations/i18n.js';
 </script>
 
 <div
   class="b-radius-8 box_shadow-medium take__break text-center text-dark-green mt-2"
 >
-  <div class="text-3">Take a break</div>
-  <div class="text-xsm mt-0_5">This is where you pause stop restart</div>
+  <div class="text-3">{$t('MANAGE_TAKE_BREAK')}</div>
+  <div class="text-xsm mt-0_5">{$t('MANAGE_PSR')}</div>
 
   <div class="contribution__btns d-flex justify-sb mt-1_5">
     <button class="btn pause mb-1" on:click={() => getModal("pause").open()}
-      >Pause contribution</button
+      >{$t('MANAGE_PAUSE')}</button
     >
-
-    <button class="btn stop mb-1" on:click={() => getModal("stop").open()}>Stop contribution</button>
-
-    <button class="btn restart mb-1" on:click={() => getModal("restart").open()}>Restart contribution</button>
+    <button class="btn stop mb-1" on:click={() => getModal("stop").open()}>{$t('MANAGE_STOP')}</button>
+    <button class="btn restart mb-1" on:click={() => getModal("restart").open()}>{$t('MANAGE_RES')}</button>
   </div>
 </div>
 <Modal id="pause">
   <div class="modal_main pause text-center">
     <img src={greenLogo} alt="esi logo img" />
     <div class="modal_head_medium mt-2">
-      Pause will stop their contribution for the next schedule contribution and
-      start again automatically
+      {$t('MANAGE_PAUSE_TITLE')}
     </div>
     <div class="pause__modal--main">
-      <div class="dropdown__head">Choose timeframe</div>
+      <div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
       <Dropdown itemsData={["Pause for 1 month", "Pause for 2 month", 'Pause for 3 month']}/>
         <button class="btn confirm pause__modal--btn " on:click={() => getModal("pause").close()}
-      >Pause contribution</button
+      >{$t('MANAGE_PAUSE')}</button
     >
     </div>
   
@@ -42,11 +40,11 @@ import Checkbox from "$lib/components/inputs/Checkbox.svelte";
   <div class="modal_main stop text-center">
     <img src={greenLogo} alt="esi logo img" />
     <div class="modal_head_medium mt-2">
-      You will stop the contribution and it will not start again automatically. You can resume the deposit using the Restart button!
+      {$t('MANAGE_STOP_TITLE')}
     </div>
     <div class="stop__modal--main ">
         <button class="btn confirm stop__modal--btn" on:click={() => getModal("stop").close()}
-      >Stop contribution</button
+      >{$t('MANAGE_STOP')}</button
     >
     </div>
   
@@ -56,28 +54,28 @@ import Checkbox from "$lib/components/inputs/Checkbox.svelte";
   <div class="modal_main restart text-center">
     <img src={greenLogo} alt="esi logo img" />
     <div class="modal_head_medium mt-2">
-      Restore the contribution, so that it starts working again automatically!
+      {$t('MANAGE_RES_TITLE')}
     </div>
     <div class="restart__modal--main ">
       <div class="d-flex justify-sb mt-2 mobile-block">
         <div >
-          <div class="text-sm">Total savings + revenue</div>
+          <div class="text-sm">{$t('MANAGE_TOTAL_SAVE')}</div>
           <div class="restart__value text-green text-2 mt-1_5">$7,437</div>
         </div>
         <div >
-          <div class="text-sm">Next Recurring Contribution</div>
+          <div class="text-sm">{$t('MANAGE_NEXT_RECURRING')}</div>
           <div class="restart__value text-green text-2 mt-1_5">$1,000/mo</div>
         </div>
         <div >
-          <div class="text-sm">Next contribution date</div>
+          <div class="text-sm">{$t('MANAGE_NEXT_DATE')}</div>
           <div class="restart__value text-green text-2 mt-1_5">01 July 2022</div>
         </div>
       </div>
       <div class="terms__checkbox">
-        <Checkbox group={'terms'} value={1}>I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie</Checkbox>
+        <Checkbox group={'terms'} value={1}>{$t('MANAGE_AGREE')}</Checkbox>
       </div>
         <button class="btn confirm restart__modal--btn" on:click={() => getModal("restart").close()}
-      >Stop contribution</button
+      >{$t('MANAGE_STOP')}</button
     >
     </div>
   

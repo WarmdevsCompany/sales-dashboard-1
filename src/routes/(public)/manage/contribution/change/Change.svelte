@@ -2,6 +2,7 @@
   import Modal, { getModal } from "$lib/components/Modal.svelte";
   import Dropdown from "$lib/components/Dropdown.svelte";
   import greenLogo from "$lib/assets/img/logo-green.svg";
+  import { t } from '$lib/translations/i18n.js';
   let disabledState = false;
   let errorState = false;
   function onSubmit() {
@@ -12,47 +13,47 @@
 <div
   class="change__body b-radius-8 text-center text-dark-green box_shadow-medium {disabledState? 'disabled': ''} {errorState? 'error': ''}"
 >
-  <div class="text-3">Change your contribution</div>
+  <div class="text-3">{$t('MANAGE_CHANGE_CONTRIBUTIONS')}</div>
   <div class="text-xsm mt-0_5">
-    This is where you manage your Recurring Contribution*
+    {$t('MANAGE_RECURRING_CONTRIBUTION')}*
   </div>
-  <div class="text-xsm mt-0_25">Your Next Recurring Contribution</div>
+  <div class="text-xsm mt-0_25">{$t('MANAGE_NEXT_RECURRING_CONTRIBUTION')}</div>
   <form
     on:submit|preventDefault={onSubmit}
     class="d-flex justify-sb align-bottom"
   >
     <div class="input__wrapper">
-      <label for="amount" class="label">Amount</label>
+      <label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
       <input class="" type="text" id="amount" placeholder="$1,000" disabled = {disabledState || errorState}/>
     </div>
     <div class="input__wrapper">
-      <div class="dropdown__label label">Recurring</div>
+      <div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
       <div class="dropdown__wrapper ">
-        <Dropdown itemsData={["Monthly", "Bi-Monthly"]} disabled = {disabledState || errorState}/>
+        <Dropdown itemsData={[$t('MONTHLY'), $t('BI_MONTHLY')]} disabled = {disabledState || errorState}/>
       </div>
     </div>
     <button class="btn confirm " on:click={() => getModal('confirm').open() } disabled = {disabledState || errorState}
-      >Confirm changes</button
+      >{$t('CONFIRM_CHANGES')}</button
     >
   </form>
 </div>
 <Modal id="confirm">
   <div class="modal_main confirm text-center">
     <img src={greenLogo} alt="esi logo img" />
-    <div class="modal_head_medium mt-2">We've updated your contribution</div>
+    <div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
     <div class="modal_main-row d-flex justify-sb align-bottom">
       <div class="text-xsm d-flex align-center mobile-block">
-        New Contribution: <span class="text-3 text-blue mobile-block">$1,000/mo</span>
+        {$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue mobile-block">$1,000/mo</span>
       </div>
       <div class="text-xsm d-flex align-center mobile-block">
-        Next contribution date: <span class="text-3 text-blue mobile-block">01 Jul 2022</span
+        {$t('MANAGE_NEXT_CONTRIBUTION')}: <span class="text-3 text-blue mobile-block">01 Jul 2022</span
         >
       </div>
     </div>
     <p class="mt-1 modal-bootom-text">
-      Do you want to review your plan selection?
+      {$t('MANAGE_REVIEW')}
     </p>
-    <button class="btn secondary mb-1" on:click={() => getModal('confirm').close()}>Close</button>
+    <button class="btn secondary mb-1" on:click={() => getModal('confirm').close()}>{$t('CLOSE')}</button>
   </div>
 </Modal>
 
