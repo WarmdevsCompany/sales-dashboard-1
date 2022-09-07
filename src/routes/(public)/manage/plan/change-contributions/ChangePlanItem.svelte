@@ -16,6 +16,7 @@
 	import MobArrow_ico from '$lib/components/icons/plan-icons/MobArrow_ico.svelte';
 	import Checkbox_ico from '$lib/components/icons/plan-icons/Checkbox_ico.svelte';
 	import Dropdown_ico from '$lib/components/icons/plan-icons/Dropdown_ico.svelte';
+	import { t } from '$lib/translations/i18n.js';
 
 	// images
 	import safeImage from '$lib/assets/img/plans/safe-icon.svg';
@@ -101,7 +102,7 @@
 		<div class="column">
 			<img class="plan__icon" src={currentSvgIcon} alt="" />
 
-			<div class="item__head__name">Select GREEN {label}</div>
+			<div class="item__head__name">{$t('MANAGE_SELECT')} {label}</div>
 		</div>
 		<div class="column">
 			<div class="item__head__checkbox" class:visible={$allocatedContributions[className] != 0}>
@@ -115,7 +116,7 @@
 	<div class="item__body">
 		<div>
 			<div class="item__top">
-				<div class="item__top__head">You contribute to Green Safe</div>
+				<div class="item__top__head">{$t('MANAGE_TO_GREEN')}</div>
 				<div class="dropdown__wrapper">
 					<div
 						class="dropdown  {activeState ? activeClass : ''} plan__dropdown"
@@ -131,13 +132,13 @@
 								activeState = !activeState;
 							}}
 						>
-							{$allocatedContributions[className]}% Total Contribution
+							{$allocatedContributions[className]}% {$t('MANAGE_TOTAL')}
 						</div>
 						<div class="dropdown__items">
 							{#each savePercentages as item}
 								{#if item.persentage > allowPercentageVal && allowPercentageVal + $allocatedContributions[className] < item.persentage}
 									<div style="position:relative">
-										<Tooltip title={'Remove allocation from other plans'}>
+										<Tooltip title={$t('MANAGE_REMOVE')}>
 											<div
 												class="dropdown__item"
 												class:disabled={item.persentage > allowPercentageVal &&
