@@ -1,3 +1,4 @@
+
 <div class="loader__wrapper">
     <div class="loader" style="width: {$$props.loaderWidth}rem; height: {$$props.loaderHeight}rem; border-width: {$$props.borderWidth}rem;"></div>
 </div>

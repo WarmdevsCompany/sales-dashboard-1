@@ -23,7 +23,7 @@
 </script>
 
 <div class="mt-1_5">
-  <div class="d-flex justify-cc mb-1_5">
+  <!-- <div class="d-flex justify-cc mb-1_5">
     <Radio
       {options}
       fontSize={16}
@@ -31,12 +31,12 @@
       verify={true}
       flexDirection={"row"}
       bind:tabId={activeTabValue}
-    />
+    /> -->
   </div>
 
-  {#if activeTabValue == 1}
+  <!-- {#if activeTabValue == 1} -->
     <VerifyEmail sendVerifyCallback={sendVerifyCallback}/>
-  {:else if activeTabValue == 2}
+  <!-- {:else if activeTabValue == 2}
     <VerifyPhone sendVerifyCallback={sendVerifyCallback} />
-  {/if}
-</div>
+  {/if} -->
+<!-- </div> -->

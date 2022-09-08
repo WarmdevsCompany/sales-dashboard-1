@@ -26,6 +26,7 @@
 		if (stopCheckboxValue) {
 			let rawResponse = await fetch('/api/manage/restartContribution', {
 				method: 'POST'
+				
 			});
 			const response = await rawResponse.json();
 			if (response.status) {
@@ -35,13 +36,20 @@
 			chackboxErrorStatus = true;
 		}
 	}
-	async function changeContribution() {
-		let rawResponse = await fetch('/api/manage/stopContribution', {
-			method: 'POST'
+  async function pauseContribution() {
+	const data = {};
+		let rawResponse = await fetch('/api/manage/pauseContribution', {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Credentials': true
+			},
+			body: data && JSON.stringify(data)
 		});
 		const response = await rawResponse.json();
 		if (response.status) {
-			getModal('stop').close();
+			getModal('pause').close();
 		}
 	}
 </script>
@@ -116,7 +124,7 @@
 					>{$t('MANAGE_AGREE')}</Checkbox
 				>
 				{#if chackboxErrorStatus}
-					<small class="error_text mt-0_5">{$t('FILL_FIELDS')}</small>
+					<small class="error_text mt-0_5">Fill required field</small>
 				{/if}
 			</div>
 
@@ -191,6 +199,12 @@
 		max-width: 500px;
 		margin: 1.375rem auto 0 auto;
 	}
+	.restart__modal--grid {
+	}
+	.restart__grid--item {
+	}
+	.restart__value {
+	}
 	@media only screen and (max-width: 991px) {
 		.contribution__btns {
 			display: block;
@@ -205,15 +219,6 @@
 		}
 		.take__break {
 			margin-bottom: 4rem;
-		}
-	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
-		.take__break {
-			padding: 2rem 1rem;
-		}
-		.contribution__btns {
-			gap: 1vw;
-			grid-gap: 1vw;
 		}
 	}
 </style>
