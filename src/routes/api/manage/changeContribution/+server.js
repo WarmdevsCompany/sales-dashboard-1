@@ -8,6 +8,7 @@ export async function POST({ locals, request }) {
 			method: 'POST',
 			headers: {
 				accept: 'application/json',
+				'content-type': 'application/json',
 				Authorization: locals.esiToken
 			},
 			body: body && JSON.stringify(body)
@@ -25,5 +26,4 @@ export async function POST({ locals, request }) {
 	} catch (error) {
 		return new Response(JSON.stringify(error));
 	}
-	
 }

@@ -201,7 +201,7 @@
 	<div class="sidebar__bottom d-flex justify-sb align-center">
 		<img src={logo} alt="logo" />
 		<div class="logout">
-			<button class="btn d-flex text-sm" on:click={logout}
+			<button class="btn d-flex text-sm" style="min-width:auto;" on:click={logout}
 				><img src={logoutIcon} alt="logout" />
 				<span>{$t('LOGOUT')}</span></button
 			>
