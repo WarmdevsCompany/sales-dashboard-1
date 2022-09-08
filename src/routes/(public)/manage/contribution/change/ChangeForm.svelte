@@ -2,13 +2,31 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
+	import { publicApi } from '$lib/api/publicApi';
+	import { onMount } from 'svelte';
+	import Preloader from '$lib/components/Preloader.svelte';
+	import { fade, slide } from "svelte/transition";
 	export let disabledState;
 	export let errorState;
 	let requrring;
-	let amountValue;
+	let requrringArray = [];
+	let amountValue = null;
+	let amountErrorState = false;
+	$: requrringArray;
+
+
+
 	function onSubmit() {
-		console.log('Form submited');
-		console.log(requrring);
+		if(amountValue < 20){
+			amountErrorState = true
+			return false
+		}else{
+			amountErrorState = false
+			getRecurringData();
+			getModal('confirm').open()
+		    console.log(requrring);
+		}
+		
 	}
 	function checkInputValue() {
 		this.value = this.value.replace(/[^0-9]/g, '');
@@ -16,14 +34,21 @@
 			this.value = this.value.slice(0, this.maxLength);
 		} else if (parseInt(this.value) < 20) {
 			this.classList.add('error');
-			
 		} else if (parseInt(this.value) >= 20) {
 			if (this.classList.contains('error')) {
 				this.classList.remove('error');
-				
 			}
 		}
 	}
+
+	async function getRecurringData() {
+		const rawResponse = await publicApi('GET', 'getPeriods');
+		const response = await rawResponse.json();
+		requrringArray = response.data.map((item) => {
+			return item.periodName;
+		});
+	}
+	onMount(getRecurringData);
 </script>
 
 <form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
@@ -32,6 +57,7 @@
 		<input
 			type="number"
 			id="amount"
+			class:error={amountErrorState}
 			placeholder="0"
 			min="20"
 			max="9999"
@@ -43,20 +69,36 @@
 			on:input={checkInputValue}
 			bind:value={amountValue}
 		/>
+		<small></small>
 	</div>
 	<div class="input__wrapper">
 		<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
 		<div class="dropdown__wrapper ">
-			<Dropdown
-				bind:activeItem={requrring}
-				itemsData={[$t('MONTHLY'), $t('BI_MONTHLY')]}
-				disabled={disabledState || errorState}
-			/>
+			{#if requrringArray.length === 0}
+				<div class="relative">
+					<Dropdown
+						bind:activeItem={requrring}
+						itemsData={requrringArray}
+						disabled={disabledState || errorState}
+					/>
+					<div class="absolute d-flex align-center justify-cc">
+						<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
+					</div>
+				</div>
+			{:else}
+			<div in:fade={{  duration: 200, delay : 0 }}>
+					<Dropdown
+					bind:activeItem={requrring}
+					itemsData={requrringArray}
+					disabled={disabledState || errorState}
+				/>
+			</div>
+			
+			{/if}
 		</div>
 	</div>
 	<button
-		class="btn confirm "
-		on:click={() => getModal('confirm').open()}
+		class="btn confirm"
 		disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
 	>
 </form>
@@ -72,14 +114,22 @@
 	.input__wrapper {
 		max-width: 207px;
 	}
-	input[type="number"]{
+	input[type='number'] {
 		min-width: 207px;
 	}
-	input.error::placeholder{
+	input.error::placeholder {
 		color: var(--red-color);
 	}
 	::placeholder {
 		color: var(--green-dark-medium);
 	}
-	
+	.absolute {
+		position: absolute;
+		top: 0;
+		z-index: 2;
+		background-color: var(--white);
+		width: 100%;
+		height: 100%;
+		border-radius: 10px;
+	}
 </style>

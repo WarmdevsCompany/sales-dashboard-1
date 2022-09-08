@@ -89,7 +89,7 @@
     text-align: left;
   }
   .dropdown__item--current {
-    padding: 23px 30px;
+    padding: 22px 30px;
     text-align: left;
     background: var(--white);
   }

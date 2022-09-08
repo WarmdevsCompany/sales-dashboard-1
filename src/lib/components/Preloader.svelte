@@ -10,6 +10,7 @@
   place-items: center;
 }
 
+
 .loader {
   border-radius: 50%;
   border: solid;
