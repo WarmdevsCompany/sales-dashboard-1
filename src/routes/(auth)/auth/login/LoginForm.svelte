@@ -92,9 +92,7 @@
 		<small transition:slide|local class="error_text last">{errorMessages}</small>
 	{/if}
 	<div class="d-flex justify-sb align-center">
-		<div class="remember">
-			<Checkbox bind:group={remember} value={1}>{$t("REMEMBER_ME")}</Checkbox>
-		</div>
+
 		<div class="forgot__pass">
 			<a href="#" class="forgot__btn">{$t("FORGOT_PW")}</a>
 		</div>

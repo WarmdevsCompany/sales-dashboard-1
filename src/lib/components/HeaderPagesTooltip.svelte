@@ -37,7 +37,7 @@
 					<a href="/profile/settings">{$t('SETTINGS.LANG')}</a>
 				</li>
 				<li>
-					<button class="btn text-sm logout" on:click={logout}> <span>{$t('LOGOUT')}</span></button>
+					<button class="btn text-sm logout" style="min-width: auto;" on:click={logout}> <span>{$t('LOGOUT')}</span></button>
 				</li>
 			</ul>
 		</div>
@@ -66,7 +66,7 @@
 	ul li:not(:last-child) {
 		margin-bottom: 15px;
 	}
-	button.logout {
+	button.btn.logout {
 		appearance: none;
 		background: transparent;
 		border: none;

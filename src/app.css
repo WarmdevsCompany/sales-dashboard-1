@@ -361,6 +361,7 @@ input[type='number'] {
 	align-items: center;
 	padding: 21px 20px;
 	display: flex;
+	min-width: 207px;
 	justify-content: center;
 	border-radius: 10px;
 	display: flex;
@@ -469,7 +470,7 @@ button:focus:not(:focus-visible) {
 	outline: none;
 }
 button.btn._218 {
-	width: 218px;
+	min-width: 218px;
 	margin: 2.125rem auto 0 auto;
 	transition: none;
 }

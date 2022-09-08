@@ -23,7 +23,6 @@
 			return false;
 		} else {
 			amountErrorState = false;
-			getRecurringData();
 			const periodId = getPeriodId(requrring);
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
