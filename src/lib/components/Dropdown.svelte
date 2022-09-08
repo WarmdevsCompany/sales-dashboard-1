@@ -3,10 +3,9 @@
   import Dropdown_ico from "../components/icons/Dropdown_ico.svelte";
   let active = false;
   let errorMessageState = false;
-
   export let disabled;
   export let itemsData = [];
-  let activeItem = itemsData[0];
+  export let activeItem = itemsData[0];
   $: activeItem;
   // click outside dropdown
   function handleClickOutside() {
