@@ -7,6 +7,7 @@ export function privateApi(resource, esiToken) {
 			method: 'POST',
 			headers: {
 				accept: 'application/json',
+				"Content-Type": "application/json",
 				Authorization: esiToken
 			}
 		});

@@ -5,7 +5,8 @@ export async function POST({locals}) {
 	const rawResponse = await fetch(`${variables.privatePath}/${resource}`, {
         method: 'POST',
         headers: {
-            accept: 'application/json',
+			accept: 'application/json',
+			'content-type': 'application/json',
             Authorization:  locals.esiToken
         },
     });

@@ -7,6 +7,7 @@ export async function POST({ locals, request }) {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
+			'content-type': 'application/json',
 			Authorization: locals.esiToken,
 			body: body && JSON.stringify(body)
 		}
