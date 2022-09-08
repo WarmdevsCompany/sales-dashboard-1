@@ -58,7 +58,7 @@
 		margin-left: 0.25rem;
 	}
 	.btn {
-		width: 182px;
+		width: auto;
 		margin: 2.625rem auto 0 auto;
 		transition: none;
 	}

@@ -7,14 +7,14 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	
+
 	// set general data to store
 	export let data;
 	$globalData = data.general;
-	console.log(data)
-  
+	console.log(data);
+
 	let loading = true;
-	
+
 	onMount(() => {
 		loading = false;
 	});
@@ -67,6 +67,11 @@
 		}
 		.main-content {
 			margin: 0;
+		}
+	}
+	@media only screen and (min-width: 992px) {
+		.main-content {
+			width: calc(100% - 237px - 1.25rem);
 		}
 	}
 </style>

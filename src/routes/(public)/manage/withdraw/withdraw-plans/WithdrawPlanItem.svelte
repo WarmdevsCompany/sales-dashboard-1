@@ -3,7 +3,7 @@
 		<div class="text-3 plan_name">{$$props.planName}</div>
 		<div class="plan_money">${$$props.planPersentage}</div>
 	</div>
-	<div class="d-flex justify-sb">
+	<div class="d-flex justify-sb align-base">
 		<div class="text-xsm contr">{$$props.planAvailable}</div>
 		<div class="text-3 plan_persentage">{$$props.planMoney}%</div>
 	</div>

@@ -85,9 +85,10 @@
 	<div class="plans__wrapper__head">
 		<h3 class="h3-sv desktop">
 			{#if sumOfPlans < 100}
-				{$t('MANAGE_ALLOCATE')} <span class="plan_percentage_val" class:error={$errorMessageState}
-					>{100 - sumOfPlans}%</span
-				> {$t('MANAGE_CONTR_BETW')}
+				{$t('MANAGE_ALLOCATE')}
+				<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - sumOfPlans}%</span
+				>
+				{$t('MANAGE_CONTR_BETW')}
 			{:else if sumOfPlans === 100}
 				{$t('MANAGE_ALLOCATE_ALL')} <span class="green">{$t('MANAGE_CONTRIBUTION_LC')}!</span>
 			{/if}
@@ -98,7 +99,7 @@
 			<div class="subscribe__checkbox">
 				<SubscribeAllIco className={$subscribeAllState ? 'active__cb' : ''} />
 			</div>
-			<MediaQuery query="(min-width: 992px)" let:matches>
+			<MediaQuery query="(min-width: 1200px)" let:matches>
 				{#if matches}
 					<div class="subscribe__text">{$t('MANAGE_SUBS_ALL')}</div>
 				{:else}
@@ -109,9 +110,9 @@
 	</div>
 	<h3 class="h3-sv mob">
 		{#if sumOfPlans < 100}
-			{$t('MANAGE_ALLOCATE')} <span class="plan_percentage_val" class:error={$errorMessageState}
-				>{100 - sumOfPlans}%</span
-			> {$t('MANAGE_OF_CONTRIBUTION')}
+			{$t('MANAGE_ALLOCATE')}
+			<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - sumOfPlans}%</span>
+			{$t('MANAGE_OF_CONTRIBUTION')}
 		{:else if sumOfPlans === 100}
 			{$t('MANAGE_ALLOCATE_ALL')} <span class="green">{$t('MANAGE_CONTRIBUTION_LC')}!</span>
 		{/if}
@@ -233,7 +234,7 @@
 		align-items: stretch;
 	}
 
-	@media only screen and (max-width: 1100px) {
+	@media only screen and (max-width: 1199px) {
 		.plans__items {
 			justify-content: center;
 		}
@@ -342,6 +343,11 @@
 			font-size: var(--text-size-smaller);
 			font-weight: var(--font-weight-normal);
 			line-height: var(--small-text-line-height);
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		.subscribe__all {
+			margin-bottom: auto;
 		}
 	}
 </style>

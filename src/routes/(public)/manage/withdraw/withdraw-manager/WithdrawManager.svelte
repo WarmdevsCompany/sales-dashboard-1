@@ -62,10 +62,15 @@
 		width: 100%;
 	}
 
-	@media only screen and (max-width: 991px) {
+	@media only screen and (min-width: 0px) and (max-width: 1199px) {
 		.withdraw__manager {
 			padding: 2rem 1rem;
 		}
+		.withdraw__input {
+			margin-right: 1rem;
+		}
+	}
+	@media only screen and (max-width: 991px) {
 		.withdraw__input--body {
 			flex-direction: column-reverse;
 			align-items: flex-start;
