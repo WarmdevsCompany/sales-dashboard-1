@@ -35,6 +35,15 @@
 			chackboxErrorStatus = true;
 		}
 	}
+  async function changeContribution() {
+		let rawResponse = await fetch('/api/manage/stopContribution', {
+			method: 'POST'
+		});
+		const response = await rawResponse.json();
+		if (response.status) {
+			getModal('stop').close();
+		}
+	}
 </script>
 
 <div class="b-radius-8 box_shadow-medium take__break text-center text-dark-green mt-2">

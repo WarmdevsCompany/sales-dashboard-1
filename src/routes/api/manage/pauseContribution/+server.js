@@ -1,4 +1,3 @@
-//import { privateApiWithBody } from '$lib/api/privateApi';
 import { variables } from '$lib/variables';
 /** @type {import('./$types').RequestHandler} */
 export async function POST({locals}) {
