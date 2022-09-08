@@ -1,15 +1,13 @@
 import { variables } from '$lib/variables';
 /** @type {import('./$types').RequestHandler} */
-export async function POST({ locals, request }) {
-	const body = await request.json();
-	const resource = 'changeContribution';
+export async function POST({ locals }) {
+	const resource = 'getGeneralInfo';
 	const rawResponse = await fetch(`${variables.privatePath}/${resource}`, {
 		method: 'POST',
 		headers: {
 			accept: 'application/json',
-			Authorization: locals.esiToken
-		},
-		body: body && JSON.stringify(body)
+			Authorization: locals.esiToken,
+		}
 	});
 	const response = await rawResponse.json();
 	if (!response.status) {
@@ -22,3 +20,4 @@ export async function POST({ locals, request }) {
 	}
 	return new Response(JSON.stringify(response));
 }
+
