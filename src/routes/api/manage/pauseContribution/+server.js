@@ -1,22 +1,24 @@
 import { variables } from '$lib/variables';
 /** @type {import('./$types').RequestHandler} */
-export async function POST({locals}) {
-    const resource = 'pauseContribution';
+export async function POST({ locals, request }) {
+	const body = await request.json();
+	const resource = 'pauseContribution';
 	const rawResponse = await fetch(`${variables.privatePath}/${resource}`, {
-        method: 'POST',
-        headers: {
-            accept: 'application/json',
-            Authorization:  locals.esiToken
-        },
-    });
+		method: 'POST',
+		headers: {
+			accept: 'application/json',
+			Authorization: locals.esiToken,
+			body: body && JSON.stringify(body)
+		}
+	});
 	const response = await rawResponse.json();
 	if (!response.status) {
-		return {
-			status: 403,
+		const res = {
 			errors: {
-			  message: response.errorMessage
+				message: response.errorMessage
 			}
-		  };
+		};
+		return new Response(JSON.stringify(res));
 	}
-	return new Response(JSON.stringify({ status: response.status, message: response.data.message}), { status: 200 }) 
+	return new Response(JSON.stringify(response));
 }

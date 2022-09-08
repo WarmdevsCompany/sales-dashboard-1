@@ -5,28 +5,32 @@
 	import { publicApi } from '$lib/api/publicApi';
 	import { onMount } from 'svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
-	import { fade, slide } from "svelte/transition";
+	import { fade, slide } from 'svelte/transition';
+	import {globalData} from '$lib/globalStore'
+	import {getGeneralData} from "$lib/api/functions/getGeneralData"
 	export let disabledState;
 	export let errorState;
 	let requrring;
 	let requrringArray = [];
+	let fullRequrringArray = [];
 	let amountValue = null;
 	let amountErrorState = false;
 	$: requrringArray;
 
-
-
-	function onSubmit() {
-		if(amountValue < 20){
-			amountErrorState = true
-			return false
-		}else{
-			amountErrorState = false
+	async function onSubmit() {
+		if (amountValue < 20) {
+			amountErrorState = true;
+			return false;
+		} else {
+			amountErrorState = false;
 			getRecurringData();
-			getModal('confirm').open()
-		    console.log(requrring);
+			const periodId = getPeriodId(requrring);
+			const result = await changeContribution(amountValue, periodId);
+			if(result.status){
+				$globalData.data.membershipStatus.amount = amountValue;
+				getModal('confirm').open()
+			}
 		}
-		
 	}
 	function checkInputValue() {
 		this.value = this.value.replace(/[^0-9]/g, '');
@@ -47,7 +51,35 @@
 		requrringArray = response.data.map((item) => {
 			return item.periodName;
 		});
+		fullRequrringArray = [...response.data];
+		console.log(fullRequrringArray);
 	}
+
+	function getPeriodId(periodName) {
+		let periodId;
+		fullRequrringArray.forEach((item) => {
+			if (item.periodName === periodName) {
+				periodId = item.periodId;
+			}
+		});
+		return periodId;
+	}
+	async function changeContribution(amount, periodId) {
+		const data = { amount, periodId };
+
+		let rawResponse = await fetch('/api/manage/changeContribution', {
+			method: 'POST',
+			headers: {
+				accept: 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Credentials': true
+			},
+			body: data && JSON.stringify(data)
+		});
+		return await rawResponse.json();
+	}
+
+
 	onMount(getRecurringData);
 </script>
 
@@ -69,7 +101,7 @@
 			on:input={checkInputValue}
 			bind:value={amountValue}
 		/>
-		<small></small>
+		<small />
 	</div>
 	<div class="input__wrapper">
 		<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
@@ -86,20 +118,17 @@
 					</div>
 				</div>
 			{:else}
-			<div in:fade={{  duration: 200, delay : 0 }}>
+				<div in:fade={{ duration: 200, delay: 0 }}>
 					<Dropdown
-					bind:activeItem={requrring}
-					itemsData={requrringArray}
-					disabled={disabledState || errorState}
-				/>
-			</div>
-			
+						bind:activeItem={requrring}
+						itemsData={requrringArray}
+						disabled={disabledState || errorState}
+					/>
+				</div>
 			{/if}
 		</div>
 	</div>
-	<button
-		class="btn confirm"
-		disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
+	<button class="btn confirm" disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
 	>
 </form>
 
