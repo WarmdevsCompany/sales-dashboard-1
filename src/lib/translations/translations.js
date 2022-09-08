@@ -66,6 +66,7 @@ export default {
     "PROFILE": "Profile",
     "SECURITY": "Security",
     "PAYMENT": "Payment",
+    "FILL_FIELDS": "Fill required field",
 
     //OVERVIEW__general__EN
     "OVERVIEW_CONTRIBUTION": "Your contribution",
@@ -146,6 +147,7 @@ export default {
     "SETTINGS.READ": "Read",
     "SETTINGS.UNREAD": "Unread",
     "SETTINGS.MAKE_UNREAD": "Mark as unread",
+    "SETTINGS.MAKE_READ": "Mark as viewed",
     "SETTINGS.LAST_PW_CHANGE": "last date of password change",
     "SETTINGS_VERIFY_CODE": "Enter verification code",
 
@@ -253,6 +255,7 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sicherheit",
     "PAYMENT": "Zahlung",
+    "FILL_FIELDS": "Pflichtfeld ausfüllen",
 
     //OVERVIEW__general__DE
     "OVERVIEW_CONTRIBUTION": "Ihr Beitrag",
@@ -332,6 +335,7 @@ export default {
     "SETTINGS.DATE_ADDED": "Datum hinzugefügt",
     "SETTINGS.READ": "Lesen",
     "SETTINGS.UNREAD": "Ungelesen",
+    "SETTINGS.MAKE_READ": "Als angesehen markieren",
     "SETTINGS.MAKE_UNREAD": "Als ungelesen markieren",
     "SETTINGS.LAST_PW_CHANGE": "letztes Datum der Passwortänderung",
     "SETTINGS_VERIFY_CODE": "Bestätigungscode eingeben",
@@ -440,6 +444,7 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sécurité",
     "PAYMENT": "Paiement",
+    "FILL_FIELDS": "Remplir le champ obligatoire",
 
     //OVERVIEW__general__FR
     "OVERVIEW_CONTRIBUTION": "Votre contribution",
@@ -519,6 +524,7 @@ export default {
     "SETTINGS.DATE_ADDED": "Date ajoutée",
     "SETTINGS.READ": "Lis",
     "SETTINGS.UNREAD": "Non lu",
+    "SETTINGS.MAKE_READ": "Marquer comme vu",
     "SETTINGS.MAKE_UNREAD": "Marquer comme non lu",
     "SETTINGS.LAST_PW_CHANGE": "dernière date de changement de mot de passe",
     "SETTINGS_VERIFY_CODE": "Entrez le code de vérification",

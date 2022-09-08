@@ -28,7 +28,9 @@
 		<div class="modal_main-row d-flex justify-sb align-bottom">
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEW_CONTRIBUTION')}:
-				<span class="text-3 text-blue mobile-block">{$globalData.data.currencySymbol}{$globalData.data.membershipStatus.amount}/mo</span>
+				<span class="text-3 text-blue mobile-block"
+					>{$globalData.data.currencySymbol}{$globalData.data.membershipStatus.amount}/mo</span
+				>
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEXT_CONTRIBUTION')}:
@@ -76,6 +78,9 @@
 		max-width: 507px;
 		margin: 1.5rem auto 0 auto;
 		color: #000;
+		flex-direction: column;
+		align-items: center;
+		gap: 10px;
 	}
 	.modal_main-row span {
 		margin-left: 0.25rem;
@@ -93,21 +98,10 @@
 		.change__body {
 			padding: 2rem 1rem 3rem 1rem;
 		}
-		form {
-			display: block;
-		}
-		.input__wrapper {
-			max-width: 100%;
-		}
-		.confirm {
-			margin-top: 2rem;
-			width: 100%;
-		}
-		.dropdown__label {
-			padding-top: 18px;
-		}
-		.modal_main-row {
-			display: block;
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		.change__body {
+			padding: 2rem 1rem;
 		}
 	}
 </style>

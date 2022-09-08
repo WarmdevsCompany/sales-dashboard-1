@@ -5,58 +5,16 @@
 	import { fade } from 'svelte/transition';
 	import { t } from '$lib/translations/i18n.js';
 
-	//mocks data
-	$notificationList = [
-		{
-			id: 1,
-			name: 'Payment Sussessfull',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'unreaded'
-		},
-		{
-			id: 2,
-			name: 'Referral Program',
-			description:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus aliquet in et quam non morbiaenean. Diam 1 ipsum pellentesque fermentum consequat varius dui, aliquet.',
-			date: 'Jan 12th, 2022',
-			status: 'unreaded'
-		},
-		{
-			id: 3,
-			name: 'Payment Sussessfull',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
-		{
-			id: 4,
-			name: 'Save the Planet!',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
-		{
-			id: 5,
-			name: 'Payment Sussessfull',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
-		{
-			id: 6,
-			name: 'Referral Program',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		}
-	];
+	export let data;
+
+	//data from globalStore
+	$notificationList = data.general.data.notifications.data;
 </script>
+
+<svelte:head>
+	<title>{$t('NOTIFICATIONS')}</title>
+	<meta name="description" content={$t('NOTIFICATIONS')} />
+</svelte:head>
 
 <div class="d-flex justify-sb flex-wrap align-center relative nowrap">
 	<div class="text-3 title">{$t('SETTINGS.NOTIFICATIONS_AND_NEWS')}</div>

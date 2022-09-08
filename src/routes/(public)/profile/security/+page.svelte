@@ -5,6 +5,11 @@
 	import { t } from '$lib/translations/i18n.js';
 </script>
 
+<svelte:head>
+	<title>{$t('SECURITY')}</title>
+	<meta name="description" content={$t('SECURITY')} />
+</svelte:head>
+
 <div class="change__password box_shadow-medium b-radius-8 d-flex justify-cc ">
 	<div class="change__password--main text-center">
 		<img src={lockImg} alt="change password" class="lock_icon" />

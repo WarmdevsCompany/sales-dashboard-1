@@ -5,11 +5,11 @@
 <div
 	class="plan__item b-radius-8 p-1_5 box_shadow-medium text-white {$$props.planClass} {$$props.planFontClass}"
 >
-	<div class="d-flex justify-sb">
+	<div class="d-flex justify-sb align-base">
 		<div class="text-3 plan_name">{$$props.planName}</div>
 		<div class="text-2 plan_money">${$$props.planMoney}</div>
 	</div>
-	<div class="d-flex justify-sb">
+	<div class="d-flex justify-sb align-base">
 		<div class="text-xsm contr">{$t('CONTRIBUTION')}</div>
 		<div class="text-3 plan_persentage">{$$props.planPersentage}%</div>
 	</div>

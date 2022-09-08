@@ -1,67 +1,13 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
+	import { notificationList } from '../../routes/(public)/profile/notifications/notificationsStore';
+	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	//import { notificationList } from "";
-	const notificationList = [
-		{
-			id: 1,
-			name: 'Payment Sussessfull',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'unreaded'
-		},
-		{
-			id: 2,
-			name: 'Referral Program',
-			description:
-				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mus aliquet in et quam non morbiaenean. Diam 1 ipsum pellentesque fermentum consequat varius dui, aliquet.',
-			date: 'Jan 12th, 2022',
-			status: 'unreaded'
-		},
-		{
-			id: 3,
-			name: 'Payment Sussessfull',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
-		{
-			id: 4,
-			name: 'Save the Planet!',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
-		{
-			id: 5,
-			name: 'Payment Sussessfull',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
-		{
-			id: 6,
-			name: 'Referral Program',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		},
+	import { iteratee } from 'lodash';
 
-		{
-			id: 7,
-			name: 'Referral Program',
-			description:
-				'Your December bi-monthly contribution was successfully charged. Go to your Wallet to monitor the amount or money you saved',
-			date: 'Jan 12th, 2022',
-			status: 'readed'
-		}
-	];
+	$notificationList = $globalData.data.notifications.data;
+
 	let active = false;
 
 	function show() {
@@ -73,10 +19,16 @@
 	}
 
 	function handleClickOnTooltip() {}
-	function toggleAction() {
+
+	function detailInfo(id) {
+		alert(`detail info of ${id}`);
+	}
+
+	function toggleAction(id) {
 		active = !active;
 	}
 </script>
+
 <div use:clickOutside on:click_outside={hide}>
 	<div on:click={toggleAction}>
 		<slot />
@@ -91,12 +43,12 @@
 		>
 			<div class="semi-bold mb-1">{$t('NOTIFICATIONS')}</div>
 			<ul class="notification__wrapper">
-				{#each notificationList as item}
-					<li class:active={item.status === 'unreaded'}>
+				{#each $notificationList as item}
+					<li class:active={item.status != 'viewed'} on:click={() => detailInfo(item.idobject)}>
 						<span class="inline-block semi-bold text-sm">{item.name}</span>
 						<div class="notification__content d-flex justify-sb">
-							<span class="cut-text inline-block ">{item.description}</span>
-							<div class="created__time">1h</div>
+							<span class="cut-text inline-block ">{item.text}</span>
+							<div class="created__time" />
 						</div>
 					</li>
 				{/each}

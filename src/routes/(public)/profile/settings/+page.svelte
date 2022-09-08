@@ -4,6 +4,11 @@
 	import { t } from '$lib/translations/i18n.js';
 </script>
 
+<svelte:head>
+	<title>{$t('SETTINGS')}</title>
+	<meta name="description" content={$t('SETTINGS')} />
+</svelte:head>
+
 <div class="settings_main box_shadow-medium b-radius-8 p-2 d-flex flex-col justify-sb">
 	<div>
 		<div class="text-3 mb-1_5">{$t('SETTINGS')}</div>
