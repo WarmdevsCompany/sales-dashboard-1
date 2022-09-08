@@ -35,7 +35,7 @@
 			chackboxErrorStatus = true;
 		}
 	}
-  async function changeContribution() {
+	async function changeContribution() {
 		let rawResponse = await fetch('/api/manage/stopContribution', {
 			method: 'POST'
 		});
@@ -116,7 +116,7 @@
 					>{$t('MANAGE_AGREE')}</Checkbox
 				>
 				{#if chackboxErrorStatus}
-					<small class="error_text mt-0_5">Fill required field</small>
+					<small class="error_text mt-0_5">{$t('FILL_FIELDS')}</small>
 				{/if}
 			</div>
 
@@ -191,12 +191,6 @@
 		max-width: 500px;
 		margin: 1.375rem auto 0 auto;
 	}
-	.restart__modal--grid {
-	}
-	.restart__grid--item {
-	}
-	.restart__value {
-	}
 	@media only screen and (max-width: 991px) {
 		.contribution__btns {
 			display: block;
@@ -211,6 +205,15 @@
 		}
 		.take__break {
 			margin-bottom: 4rem;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		.take__break {
+			padding: 2rem 1rem;
+		}
+		.contribution__btns {
+			gap: 1vw;
+			grid-gap: 1vw;
 		}
 	}
 </style>

@@ -3,7 +3,7 @@
 	import { onMount } from 'svelte';
 	import { numberWithCommas } from '$lib/functions/numberWithCommas';
 	import { getMonthName } from '$lib/functions/getMonthName';
-  import { t } from "$lib/translations/i18n.js";
+	import { t } from '$lib/translations/i18n.js';
 	let myChart;
 
 	// drawHorisontalLines plugin
@@ -165,14 +165,18 @@
 
 <div class="chat-top d-flex justify-sb align-top text-white mb-1_5">
 	<div class="column">
-		<div class="row text-3 chat-top-head">{$t("OVERVIEW_SAVING_PROJECTION")}</div>
+		<div class="row text-3 chat-top-head">{$t('OVERVIEW_SAVING_PROJECTION')}</div>
 		<div class="row d-flex align-top text-sm">
-			<span class="mr-0_5">{$t("OVERVIEW_TOTAL_SAVE_5")}</span><StatusIcon bgColor="white" />
+			<span class="mr-0_5">{$t('OVERVIEW_TOTAL_SAVE_5')}</span><StatusIcon bgColor="white" />
 		</div>
 	</div>
 	<div class="column">
-		<button class="chat-label green" on:click={() => toggleData(1)}>{$t("OVERVIEW_CURRENT_TRAJECTORY")}</button>
-		<button class="chat-label" on:click={() => toggleData(0)}>{$t("OVERVIEW_PREV_TRAJECTORY")}</button>
+		<button class="chat-label green" on:click={() => toggleData(1)}
+			>{$t('OVERVIEW_CURRENT_TRAJECTORY')}</button
+		>
+		<button class="chat-label" on:click={() => toggleData(0)}
+			>{$t('OVERVIEW_PREV_TRAJECTORY')}</button
+		>
 	</div>
 </div>
 <div>
@@ -198,8 +202,10 @@
 	.chat-label:before {
 		content: '';
 		position: absolute;
-		top: 7px;
+		top: 0;
+		bottom: 0;
 		left: 0px;
+		margin: auto;
 		width: 10px;
 		height: 2px;
 		border-radius: 8px;
@@ -209,7 +215,19 @@
 	.chat-label.green:before {
 		background: var(--secondary-color);
 	}
-	.chat-label.green {
+	.chat-label {
 		margin-bottom: 0.25rem;
+	}
+	@media only screen and (max-width: 1199px) {
+		.chat-top {
+			display: block;
+		}
+		.chat-top > div:last-child {
+			display: flex;
+			margin-top: 1rem;
+		}
+		.chat-label:last-child {
+			margin-left: 24px;
+		}
 	}
 </style>

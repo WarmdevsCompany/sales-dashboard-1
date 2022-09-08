@@ -118,4 +118,9 @@
 			margin-top: 1rem;
 		}
 	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		header {
+			padding: 1.375rem 1.5rem;
+		}
+	}
 </style>

@@ -13,7 +13,7 @@
 	import MenuIcon from '$lib/components/icons/menu-icon/MenuIcon.svelte';
 	import CloseMenuIcon from '$lib/components/icons/menu-icon/CloseMenuIcon.svelte';
 	import clickOutside from '$lib/functions/clickOutside';
-	import {logout} from '$lib/api/functions/logout';
+	import { logout } from '$lib/api/functions/logout';
 	import { t } from '$lib/translations/i18n.js';
 
 	let current = null;
@@ -26,7 +26,6 @@
 	} else if ($page.url.pathname.includes('/profile')) {
 		current = 'profile';
 	}
-	
 
 	export let firstName = 'Antonin',
 		lastName = 'John';
@@ -243,6 +242,7 @@
 		position: relative;
 		color: var(--white);
 		transition: all ease 0.2s;
+		white-space: nowrap;
 	}
 	.menu__item--wrapper ul li a:hover,
 	.menu__item--wrapper ul li a.active {
@@ -287,9 +287,16 @@
 		margin-left: 0.5rem;
 	}
 	.sidebar__bottom {
-		padding: 0 2rem 3.5rem 1.5rem;
+		flex-wrap: wrap;
+		padding: 0 1.5rem 3.5rem 1.5rem;
+	}
+	.sidebar__bottom > img {
+		margin-right: 10px;
 	}
 	.logout button {
+		padding: 20px 0;
+		justify-content: flex-start;
+		width: auto;
 		appearance: none;
 		background: transparent;
 		border: none;
@@ -299,11 +306,8 @@
 	}
 	.logout img {
 		margin-right: 0.5rem;
-	}      
+	}
 	@media only screen and (max-width: 1200px) {
-		.sidebar {
-			min-width: 20vw;
-		}
 		.sidebar__bottom {
 			padding: 0 1.5vw 3.5rem 1.3vw;
 		}

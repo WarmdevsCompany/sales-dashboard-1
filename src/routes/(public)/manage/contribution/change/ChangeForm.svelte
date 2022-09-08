@@ -6,8 +6,8 @@
 	import { onMount } from 'svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { fade, slide } from 'svelte/transition';
-	import {globalData} from '$lib/globalStore'
-	import {getGeneralData} from "$lib/api/functions/getGeneralData"
+	import { globalData } from '$lib/globalStore';
+	import { getGeneralData } from '$lib/api/functions/getGeneralData';
 	export let disabledState;
 	export let errorState;
 	let requrring;
@@ -26,9 +26,9 @@
 			getRecurringData();
 			const periodId = getPeriodId(requrring);
 			const result = await changeContribution(amountValue, periodId);
-			if(result.status){
+			if (result.status) {
 				$globalData.data.membershipStatus.amount = amountValue;
-				getModal('confirm').open()
+				getModal('confirm').open();
 			}
 		}
 	}
@@ -78,7 +78,6 @@
 		});
 		return await rawResponse.json();
 	}
-
 
 	onMount(getRecurringData);
 </script>
@@ -160,5 +159,34 @@
 		width: 100%;
 		height: 100%;
 		border-radius: 10px;
+	}
+	@media only screen and (max-width: 991px) {
+		form {
+			display: block;
+		}
+		.input__wrapper {
+			max-width: 100%;
+		}
+		.confirm {
+			margin-top: 2rem;
+			width: 100%;
+		}
+		.dropdown__label {
+			padding-top: 18px;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		form {
+			gap: 1vw;
+			grid-gap: 1vw;
+		}
+		.input__wrapper {
+			width: 100%;
+			max-width: 28%;
+		}
+		input[type='number'],
+		.dropdown__wrapper {
+			min-width: 0;
+		}
 	}
 </style>

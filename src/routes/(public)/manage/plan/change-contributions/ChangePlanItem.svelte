@@ -445,7 +445,7 @@
 	}
 
 	@media only screen and (max-width: 991px) {
-    .item__top {
+		.item__top {
 			padding: 32px 21px 24px 21px;
 		}
 		.plans__item.adventure {
@@ -454,11 +454,11 @@
 		.dropdown__item--current,
 		.dropdown__item {
 			color: var(--black-color);
-      padding: 23px 30px;
+			padding: 23px 30px;
 		}
-    :global(.dropdown svg) {
-      right: 30px;
-    }
+		:global(.dropdown svg) {
+			right: 30px;
+		}
 		.mob__plan__info {
 			display: block;
 			text-align: center;
@@ -518,6 +518,17 @@
 			width: 16px;
 			display: flex;
 			height: 16px;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		.plans__item.adventure {
+			margin: 0 1vw;
+		}
+		.plans__item .item__head {
+			padding: 1rem;
+		}
+		.item__top {
+			padding: 1rem;
 		}
 	}
 </style>
