@@ -1,14 +1,11 @@
 <script>
 	import { t, locale, locales } from '$lib/translations/i18n.js';
 	import { setLanguage } from '$lib/functions/setLanguage.js';
-	import { globalData } from '$lib/globalStore';
-
-	let langId = $globalData.data.lang.idobject;
 </script>
 
 <div class="b-radius-8 settings_card">
 	<div class="text-3 settings_card--head">{$t('SETTINGS.LANG')}</div>
-	<select bind:value={$locale} on:change={setLanguage($locale, langId)}>
+	<select bind:value={$locale} on:change={setLanguage($locale)}>
 		{#each locales as l}
 			<option value={l}>{l}</option>
 		{/each}

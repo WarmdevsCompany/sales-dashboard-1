@@ -1,5 +1,4 @@
 <script>
-	import { fade } from 'svelte/transition';
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
 	import ItemTooltip from './ItemTooltip.svelte';
 	import { notificationList } from '../notificationsStore';
@@ -12,7 +11,6 @@
 </script>
 
 <li
-	out:fade
 	class="notifications__item box_shadow-medium mt-1_25 b-radius-8 relative {objAttributes.status
 		? objAttributes.status
 		: 'unreaded'}"
