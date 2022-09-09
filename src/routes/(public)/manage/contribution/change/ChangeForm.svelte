@@ -27,6 +27,7 @@
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
 				$globalData.data.membershipStatus.amount = amountValue;
+				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
 				getModal('confirm').open();
 			}
 		}

@@ -6,7 +6,8 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"lint": "prettier --check .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"start": "node build/index.js"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "next",
@@ -22,6 +23,8 @@
 	"type": "module",
 	"dependencies": {
 		"@fontsource/fira-mono": "^4.5.0",
+		"@sveltejs/adapter-node": "^1.0.0-next.89",
+		"@sveltejs/adapter-static": "^1.0.0-next.42",
 		"chart.js": "^3.9.1",
 		"cookie": "^0.4.1",
 		"datejs": "^1.0.0-rc3",
