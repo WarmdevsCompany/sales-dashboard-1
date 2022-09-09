@@ -16,7 +16,9 @@
 	let loading = true;
 
 	onMount(() => {
-		loading = false;
+		if($globalData){
+			loading = false;
+		}
 	});
 </script>
 

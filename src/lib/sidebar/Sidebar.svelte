@@ -15,16 +15,15 @@
 	import clickOutside from '$lib/functions/clickOutside';
 	import { logout } from '$lib/api/functions/logout';
 	import { t } from '$lib/translations/i18n.js';
-
-	let current = null;
+	import { currentSideBarStatus } from '$lib/globalStore';
 	let openedMenu = false;
 
 	if ($page.url.pathname.includes('/manage')) {
-		current = 'manage';
+		$currentSideBarStatus = 'manage';
 	} else if ($page.url.pathname.includes('/overview')) {
-		current = 'overview';
+		$currentSideBarStatus = 'overview';
 	} else if ($page.url.pathname.includes('/profile')) {
-		current = 'profile';
+		$currentSideBarStatus = 'profile';
 	}
 
 	export let firstName = 'Antonin',
@@ -83,8 +82,8 @@
 				<div class="menu__items">
 					<ul>
 						<li
-							class="menu__item--wrapper {current === 'overview' ? 'active' : ''}"
-							on:click={() => (current = 'overview')}
+							class="menu__item--wrapper {$currentSideBarStatus === 'overview' ? 'active' : ''}"
+							on:click={() => ($currentSideBarStatus = 'overview')}
 						>
 							<div class="menu__item--main d-flex text-sm mb-1_25">
 								<OverviewIcon class={''} /> <span>{$t('OVERVIEW')}</span>
@@ -102,8 +101,8 @@
 							</ul>
 						</li>
 						<li
-							class="menu__item--wrapper {current === 'manage' ? 'active' : ''}"
-							on:click={() => (current = 'manage')}
+							class="menu__item--wrapper {$currentSideBarStatus === 'manage' ? 'active' : ''}"
+							on:click={() => ($currentSideBarStatus = 'manage')}
 						>
 							<div class="menu__item--main d-flex text-sm mb-1_25">
 								<ManageIcon class={''} /> <span>{$t('MANAGE')}</span>
@@ -139,8 +138,8 @@
 							</ul>
 						</li>
 						<li
-							class="menu__item--wrapper {current === 'profile' ? 'active' : ''}"
-							on:click={() => (current = 'profile')}
+							class="menu__item--wrapper {$currentSideBarStatus === 'profile' ? 'active' : ''}"
+							on:click={() => ($currentSideBarStatus = 'profile')}
 						>
 							<div class="menu__item--main d-flex text-sm mb-1_25">
 								<ProfileIcon class={''} /> <span>{$t('PROFILE')}</span>
