@@ -1,5 +1,5 @@
 export default {
-  en: {
+  EN: {
     //GLOBAL__EN
     "CANCEL": "Cancel",
     "USER_NAME": "User name",
@@ -188,7 +188,7 @@ export default {
     "MANAGE_AV_AM": "available amount",
   },
 
-  de: {
+  DE: {
     //GLOBAL__DE
     "CANCEL": "Absagen",
     "USER_NAME": "Nutzername",
@@ -377,7 +377,7 @@ export default {
     "MANAGE_AV_AM": "verfügbare menge",
   },
   
-  fr: {
+  FR: {
     //GLOBAL__FR
     "CANCEL": "Annuler",
     "USER_NAME": "Nom d'utilisateur",

@@ -1,14 +1,19 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
-	import { notificationList } from '../../routes/(public)/profile/notifications/notificationsStore';
+	import {
+		notificationList,
+		loading
+	} from '../../routes/(public)/profile/notifications/notificationsStore';
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	import { iteratee } from 'lodash';
-
-	$notificationList = $globalData.data.notifications.data;
+	import { getGeneralData } from '$lib/api/functions/getGeneralData';
+	import Preloader from './Preloader.svelte';
 
 	let active = false;
+	let newData = {};
+
+	$notificationList = $globalData.data.notifications.data;
 
 	function show() {
 		active = true;
@@ -18,14 +23,18 @@
 		active = false;
 	}
 
-	function handleClickOnTooltip() {}
+	async function handleClickOnTooltip() {}
 
 	function detailInfo(id) {
 		alert(`detail info of ${id}`);
 	}
 
-	function toggleAction(id) {
+	async function toggleAction(id) {
 		active = !active;
+		// $loading = true;
+		// newData = await getGeneralData();
+		// $notificationList = newData.data.notifications.data;
+		// $loading = false;
 	}
 </script>
 
@@ -43,15 +52,21 @@
 		>
 			<div class="semi-bold mb-1">{$t('NOTIFICATIONS')}</div>
 			<ul class="notification__wrapper">
-				{#each $notificationList as item}
-					<li class:active={item.status != 'viewed'} on:click={() => detailInfo(item.idobject)}>
-						<span class="inline-block semi-bold text-sm">{item.name}</span>
-						<div class="notification__content d-flex justify-sb">
-							<span class="cut-text inline-block ">{item.text}</span>
-							<div class="created__time" />
-						</div>
-					</li>
-				{/each}
+				{#if !$loading}
+					{#each $notificationList as item}
+						<li class:active={item.status != 'viewed'} on:click={() => detailInfo(item.idobject)}>
+							<span class="inline-block semi-bold text-sm">{item.name}</span>
+							<div class="notification__content d-flex justify-sb">
+								<span class="cut-text inline-block ">{item.text}</span>
+								<div class="created__time" />
+							</div>
+						</li>
+					{/each}
+				{:else}
+					<div>
+						<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
+					</div>
+				{/if}
 			</ul>
 		</div>
 	{/if}

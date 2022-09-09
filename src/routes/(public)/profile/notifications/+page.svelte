@@ -1,14 +1,9 @@
 <script>
 	import FilterPanel from './filters/FilterPanel.svelte';
 	import NotificationItem from './notification-item/NotificationItem.svelte';
-	import { notificationList } from './notificationsStore';
-	import { fade } from 'svelte/transition';
+	import { notificationList, loading } from './notificationsStore';
 	import { t } from '$lib/translations/i18n.js';
-
-	export let data;
-
-	//data from globalStore
-	$notificationList = data.general.data.notifications.data;
+	import Preloader from '../../../../lib/components/Preloader.svelte';
 </script>
 
 <svelte:head>
@@ -20,9 +15,12 @@
 	<div class="text-3 title">{$t('SETTINGS.NOTIFICATIONS_AND_NEWS')}</div>
 	<FilterPanel />
 </div>
-
-{#if !$notificationList.length}
-	<div in:fade class="notifications__empty box_shadow-medium mt-1_25 b-radius-8">
+{#if $loading}
+	<div class="notifications__empty box_shadow-medium mt-1_25 b-radius-8">
+		<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
+	</div>
+{:else if !$notificationList.length}
+	<div class="notifications__empty box_shadow-medium mt-1_25 b-radius-8">
 		{$t('SETTINGS.NO_NOTIFICATIONS')}
 	</div>
 {:else}
