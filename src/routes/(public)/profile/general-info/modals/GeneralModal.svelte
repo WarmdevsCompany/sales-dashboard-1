@@ -14,7 +14,7 @@
   import GenderForm from "./update-forms/GenderForm.svelte";
   import DateOfBirthForm from "./update-forms/DateOfBirthForm.svelte";
   import VerifyTabs from "$lib/components/forms/verify/VerifyTabs.svelte";
-  import LoginPassForm from "$lib/components/forms/loginPassForm.svelte";
+  import LoginPassForm from "$lib/components/forms/LoginPassForm.svelte";
   import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   import { t } from "$lib/translations/i18n.js";
 
