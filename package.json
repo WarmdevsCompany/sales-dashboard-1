@@ -25,6 +25,7 @@
 		"@fontsource/fira-mono": "^4.5.0",
 		"@sveltejs/adapter-node": "^1.0.0-next.89",
 		"@sveltejs/adapter-static": "^1.0.0-next.42",
+		"axios": "^0.27.2",
 		"chart.js": "^3.9.1",
 		"cookie": "^0.4.1",
 		"datejs": "^1.0.0-rc3",

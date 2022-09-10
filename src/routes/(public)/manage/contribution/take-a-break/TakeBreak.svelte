@@ -4,6 +4,7 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import {restartContribution,pauseContribution, stopContribution} from '$lib/api/axios'
 	let stopCheckboxValue = false;
 	let chackboxErrorStatus = false;
 	$: {
@@ -13,22 +14,17 @@
 		}
 	}
 
-	async function stopContribution() {
-		let rawResponse = await fetch('/api/manage/stopContribution', {
-			method: 'POST'
-		});
-		const response = await rawResponse.json();
+	async function stop() {
+
+		const response = await stopContribution()
 		if (response.status) {
 			getModal('stop').close();
 		}
 	}
-	async function restartContribution() {
+	async function restart() {
 		if (stopCheckboxValue) {
-			let rawResponse = await fetch('/api/manage/restartContribution', {
-				method: 'POST'
-				
-			});
-			const response = await rawResponse.json();
+
+			const response = await restartContribution()
 			if (response.status) {
 				getModal('restart').close();
 			}
@@ -36,18 +32,8 @@
 			chackboxErrorStatus = true;
 		}
 	}
-  async function pauseContribution() {
-	const data = {};
-		let rawResponse = await fetch('/api/manage/pauseContribution', {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-				'Access-Control-Allow-Origin': '*',
-				'Access-Control-Allow-Credentials': true
-			},
-			body: data && JSON.stringify(data)
-		});
-		const response = await rawResponse.json();
+  async function pause(periodId) {
+		const response = await pauseContribution(periodId)
 		if (response.status) {
 			getModal('pause').close();
 		}
@@ -92,7 +78,7 @@
 			{$t('MANAGE_STOP_TITLE')}
 		</div>
 		<div class="stop__modal--main ">
-			<button class="btn confirm stop__modal--btn" on:click={stopContribution}
+			<button class="btn confirm stop__modal--btn" on:click={stop}
 				>{$t('MANAGE_STOP')}</button
 			>
 		</div>
@@ -128,7 +114,7 @@
 				{/if}
 			</div>
 
-			<button class="btn confirm restart__modal--btn" on:click={restartContribution}
+			<button class="btn confirm restart__modal--btn" on:click={restart}
 				>{$t('MANAGE_STOP')}</button
 			>
 		</div>

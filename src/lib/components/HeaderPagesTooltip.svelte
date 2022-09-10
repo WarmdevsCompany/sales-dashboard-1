@@ -1,7 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
-	import { logout } from '$lib/api/functions/logout';
+	import { logout } from '$lib/api/axios';
 	import { t } from '$lib/translations/i18n.js';
 	import { currentSideBarStatus } from '$lib/globalStore';
 	let active = false;
