@@ -7,7 +7,7 @@
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	import { getGeneralData } from '$lib/api/functions/getGeneralData';
+	import { getGeneralData, changeContribution } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 	let requrring;
@@ -24,9 +24,12 @@
 		} else {
 			amountErrorState = false;
 			const periodId = getPeriodId(requrring);
+			
 			const result = await changeContribution(amountValue, periodId);
+			console.log(result)
 			if (result.status) {
 				$globalData.data.membershipStatus.amount = amountValue;
+				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
 				getModal('confirm').open();
 			}
 		}
@@ -63,21 +66,7 @@
 		});
 		return periodId;
 	}
-	async function changeContribution(amount, periodId) {
-		const data = { amount, periodId };
-
-		let rawResponse = await fetch('/api/manage/changeContribution', {
-			method: 'POST',
-			headers: {
-				accept: 'application/json',
-			'content-type': 'application/json',
-				'Access-Control-Allow-Origin': '*',
-				'Access-Control-Allow-Credentials': true
-			},
-			body: data && JSON.stringify(data)
-		});
-		return await rawResponse.json();
-	}
+	
 
 	onMount(getRecurringData);
 </script>

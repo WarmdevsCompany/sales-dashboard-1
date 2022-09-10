@@ -1,8 +1,9 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
-	import { logout } from '$lib/api/functions/logout';
+	import { logout } from '$lib/api/axios';
 	import { t } from '$lib/translations/i18n.js';
+	import { currentSideBarStatus } from '$lib/globalStore';
 	let active = false;
 
 	function hide() {
@@ -31,13 +32,17 @@
 		>
 			<ul class="notification__wrapper">
 				<li>
-					<a href="/profile/general-info">{$t('PROFILE.GENERAL.TITLE')}</a>
+					<a sveltekit:data-sveltekit-prefetch href="/profile/general-info" on:click={()=> $currentSideBarStatus = 'profile'}
+						>{$t('PROFILE.GENERAL.TITLE')}</a
+					>
 				</li>
 				<li>
-					<a href="/profile/settings">{$t('SETTINGS.LANG')}</a>
+					<a sveltekit:data-sveltekit-prefetch href="/profile/settings" on:click={()=> $currentSideBarStatus = 'profile'}>{$t('SETTINGS.LANG')}</a>
 				</li>
 				<li>
-					<button class="btn text-sm logout" style="min-width: auto;" on:click={logout}> <span>{$t('LOGOUT')}</span></button>
+					<button class="btn text-sm logout" style="min-width: auto;" on:click={logout}>
+						<span>{$t('LOGOUT')}</span></button
+					>
 				</li>
 			</ul>
 		</div>

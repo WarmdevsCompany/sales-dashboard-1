@@ -6,9 +6,6 @@ export const handle = async ({ event, resolve }) => {
 	event.locals.esiToken = cookies['esiToken'] || null;
 	event.locals.isAuthUser = false;
 	// resolve event
-	if (cookies['esiToken'] && cookies['esiToken'].length > 0) {
-        event.locals.isAuthUser = true;
-    }
 	const response = await resolve(event); 
 	return response;
 };

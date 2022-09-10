@@ -30,9 +30,8 @@
 			<div class="contribution__data--item d-flex align-top text-big">
 				<div class="d-flex align-center">
 					<img src={monthlyContributionIcon} alt="all money" />
-					{currencySymbol}{monthlyContribution}
+					{currencySymbol}{monthlyContribution}/mo
 				</div>
-
 				<StatusIcon bgColor="white" />
 			</div>
 			<div class="contribution__data--item d-flex align-top text-big">

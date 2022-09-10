@@ -4,7 +4,7 @@
 	import { modalClassName } from '../../general-info/profileStore';
 	import { notificationList, loading } from '../notificationsStore';
 	import { t } from '$lib/translations/i18n.js';
-	import { getGeneralData } from '$lib/api/functions/getGeneralData';
+	import { getGeneralData } from '$lib/api/axios';
 
 	let active = false;
 
@@ -25,7 +25,7 @@
 	async function filterByDefault() {
 		$loading = true;
 		newData = await getGeneralData();
-		$notificationList = newData.data.notifications.data;
+		$notificationList = newData.notifications.data;
 		$loading = false;
 	}
 

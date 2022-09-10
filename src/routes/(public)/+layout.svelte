@@ -7,7 +7,7 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-
+	import {getGeneralData} from '$lib/api/axios'
 	// set general data to store
 	export let data;
 	$globalData = data.general;
@@ -15,8 +15,10 @@
 
 	let loading = true;
 
-	onMount(() => {
-		loading = false;
+	onMount(async() => {
+		if($globalData){
+			loading = false;
+		}
 	});
 </script>
 

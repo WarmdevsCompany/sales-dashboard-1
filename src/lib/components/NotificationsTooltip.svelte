@@ -7,7 +7,7 @@
 	} from '../../routes/(public)/profile/notifications/notificationsStore';
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	import { getGeneralData } from '$lib/api/functions/getGeneralData';
+	import { getGeneralData } from '$lib/api/axios';
 	import Preloader from './Preloader.svelte';
 
 	let active = false;
@@ -33,7 +33,7 @@
 		active = !active;
 		// $loading = true;
 		// newData = await getGeneralData();
-		// $notificationList = newData.data.notifications.data;
+		// $notificationList = newData.notifications.data;
 		// $loading = false;
 	}
 </script>

@@ -7,6 +7,7 @@
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { goto } from '$app/navigation';
 	import { t } from "$lib/translations/i18n.js";
+	import {login} from '$lib/api/axios'
 
 	let buttonText = $t("LOGIN");
 	let remember = [];
@@ -28,24 +29,25 @@
 			try {
 				buttonText = `${$t("LOADING")}...`;
 
-				const responseRaw = await fetch('/api/login', {
-					method: 'POST',
-					headers: {
-						accept: 'application/json',
-			'content-type': 'application/json',
-						'Access-Control-Allow-Origin': '*',
-						'Access-Control-Allow-Credentials': true
-					},
-					body: JSON.stringify({ login: values.userName, password: values.password })
-				});
-				let response = await responseRaw.json();
+			// 	const responseRaw = await fetch('/api/login', {
+			// 		method: 'POST',
+			// 		headers: {
+			// 			accept: 'application/json',
+			// 'content-type': 'application/json',
+			// 			'Access-Control-Allow-Origin': '*',
+			// 			'Access-Control-Allow-Credentials': true
+			// 		},
+			// 		body: JSON.stringify({ login: values.userName, password: values.password })
+			// 	});
+			// 	let response = await responseRaw.json();
 
-				if (!response.status) {
-					errorMessages = response.errorMessage;
-					buttonText = $t("LOGIN");
-				} else {
-					goto('/overview/general');
-				}
+			// 	if (!response.status) {
+			// 		errorMessages = response.errorMessage;
+			// 		buttonText = $t("LOGIN");
+			// 	} else {
+			// 		goto('/overview/general');
+			// 	}
+			await login({ login: values.userName, password: values.password })
 			} catch (e) {
 				buttonText = $t("LOGIN");
 				errorMessages = e;

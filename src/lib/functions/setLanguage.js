@@ -1,5 +1,6 @@
 import { updateGlobalData } from '$lib/globalStore';
-import { getGeneralData } from '$lib/api/functions/getGeneralData';
+import { getGeneralData } from '$lib/api/axios';
+import { changeLang } from '../api/axios';
 
 export async function setLanguage(lang) {
     localStorage.setItem('lang', lang);
@@ -14,8 +15,7 @@ export async function setLanguage(lang) {
         default:
           langId = 5238793;
       }
-
-    const response = await setLanguagePost(langId);
+    const response = await changeLang(langId);
     // if(response.status) {
     //     const newData = await getGeneralData();
     //     updateGlobalData(newData);
@@ -23,22 +23,3 @@ export async function setLanguage(lang) {
     // }
 }
 
-async function setLanguagePost(langId) {
-    const responseRaw = await fetch('/api/changeLang', {
-        method: 'POST',
-        headers: {
-            accept: 'application/json',
-            'content-type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Credentials': true
-        },
-        body: JSON.stringify({ langId: langId })
-    });
-    let response = await responseRaw.json();
-
-    if (!response.status) {
-        errorMessages = response.errorMessage;
-        console.log(errorMessages)
-    } 
-    return response;
-}

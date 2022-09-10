@@ -5,3 +5,4 @@ export let contributionStatus = writable()
 export let updateGlobalData = (data) => {
     globalData.set(data);
 }
+export let currentSideBarStatus = writable(null)
