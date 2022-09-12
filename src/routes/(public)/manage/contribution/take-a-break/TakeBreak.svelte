@@ -71,15 +71,7 @@
 		</div>
 		<div class="pause__modal--main">
 			<div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
-			{#await pausePeriods}
-				<Dropdown itemsData={[]} />
-			{:then data}
-			{JSON.stringify(data)}
 				<Dropdown itemsData={[$t('MANAGE_PAUSE_1'), $t('MANAGE_PAUSE_2'), $t('MANAGE_PAUSE_3')]} />
-			{:catch error}
-				<small class="error_text">{error.message}</small>
-			{/await}
-
 			<button class="btn confirm pause__modal--btn " on:click={() => getModal('pause').close()}
 				>{$t('MANAGE_PAUSE')}</button
 			>
