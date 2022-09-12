@@ -5,16 +5,18 @@
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
-	
-	import {
-		restartContribution,
-		pauseContribution,
-		stopContribution,
-	} from '$lib/api/axios';
+
+	import { restartContribution, pauseContribution, stopContribution } from '$lib/api/axios';
 	let stopCheckboxValue = false;
-	let chackboxErrorStatus = false;  
-	let timeframeArray = []
-	const periodsMonths = $globalData.period_months
+	let chackboxErrorStatus = false;
+	let timeframeArray = [];
+	let timeframe;
+	const periodsMonths = $globalData.period_months;
+
+	// generateMonthArray
+	timeframeArray = periodsMonths.map((item) => {
+		return item.text;
+	});
 	$: {
 		stopCheckboxValue;
 		if (stopCheckboxValue) {
@@ -38,16 +40,21 @@
 			chackboxErrorStatus = true;
 		}
 	}
-	async function pause(periodId) {
+	async function pause() {
+		const periodId =  getPeriodId() 
 		const response = await pauseContribution(periodId);
+		console.log(response)
 		if (response.status) {
 			getModal('pause').close();
 		}
 	}
-	async function generateMonthArray(){
-		timeframeArray = periodsMonths.map(item=>{
-			return item
-		})
+	function getPeriodId() {
+		const arrayWithCurrentItem =  periodsMonths.filter((item) => {
+			if (item.text === timeframe) {
+				return item.idobject;
+			}
+		});
+		return arrayWithCurrentItem[0].idobject
 	}
 </script>
 
@@ -75,8 +82,8 @@
 		</div>
 		<div class="pause__modal--main">
 			<div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
-				<Dropdown itemsData={[$t('MANAGE_PAUSE_1'), $t('MANAGE_PAUSE_2'), $t('MANAGE_PAUSE_3')]} />
-			<button class="btn confirm pause__modal--btn " on:click={() => getModal('pause').close()}
+			<Dropdown itemsData={timeframeArray} bind:activeItem={timeframe} />
+			<button class="btn confirm pause__modal--btn " on:click={pause}
 				>{$t('MANAGE_PAUSE')}</button
 			>
 		</div>
