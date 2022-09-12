@@ -1,14 +1,8 @@
 import { redirect } from '@sveltejs/kit';
 import { privateApi } from '$lib/api/privateApi';
 import { browser } from '$app/environment';
-import { locale } from '$lib/translations/i18n.js';
-export async function load({ locals }) {
-	// language logic
-	if (browser) {
-		let lang = localStorage.getItem('lang');
-		locale.set(lang || 'EN');
-	}
 
+export async function load({ locals }) {
 	// auth logic
 	if (!locals.esiToken) {
 		throw redirect(307, '/auth/login');
