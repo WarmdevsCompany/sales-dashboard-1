@@ -7,15 +7,21 @@
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	import { getGeneralData, changeContribution , getRecurringPeriods} from '$lib/api/axios';
+	import { getGeneralData, changeContribution, getRecurringPeriods } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
+
 	let requrring;
 	let requrringArray = [];
 	let fullRequrringArray = [];
 	let amountValue = null;
 	let amountErrorState = false;
 	$: requrringArray;
+
+	requrringArray = $globalData.periods.map((item) => {
+		return item.periodName;
+	});
+	fullRequrringArray = [...$globalData.periods];
 
 	async function onSubmit() {
 		if (amountValue < 20) {
@@ -24,9 +30,9 @@
 		} else {
 			amountErrorState = false;
 			const periodId = getPeriodId(requrring);
-			
+
 			const result = await changeContribution(amountValue, periodId);
-			console.log(result)
+			console.log(result);
 			if (result.status) {
 				$globalData.data.membershipStatus.amount = amountValue;
 				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
@@ -47,15 +53,6 @@
 		}
 	}
 
-	async function getRecurringData() {
-		const response = await getRecurringPeriods()
-		requrringArray = response.data.map((item) => {
-			return item.periodName;
-		});
-		fullRequrringArray = [...response.data];
-		console.log(fullRequrringArray);
-	}
-
 	function getPeriodId(periodName) {
 		let periodId;
 		fullRequrringArray.forEach((item) => {
@@ -65,9 +62,6 @@
 		});
 		return periodId;
 	}
-	
-
-	onMount(getRecurringData);
 </script>
 
 <form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
@@ -93,26 +87,13 @@
 	<div class="input__wrapper">
 		<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
 		<div class="dropdown__wrapper ">
-			{#if requrringArray.length === 0}
-				<div class="relative">
-					<Dropdown
-						bind:activeItem={requrring}
-						itemsData={requrringArray}
-						disabled={disabledState || errorState}
-					/>
-					<div class="absolute d-flex align-center justify-cc">
-						<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
-					</div>
-				</div>
-			{:else}
-				<div in:fade={{ duration: 200, delay: 0 }}>
-					<Dropdown
-						bind:activeItem={requrring}
-						itemsData={requrringArray}
-						disabled={disabledState || errorState}
-					/>
-				</div>
-			{/if}
+			<div>
+				<Dropdown
+					bind:activeItem={requrring}
+					itemsData={requrringArray}
+					disabled={disabledState || errorState}
+				/>
+			</div>
 		</div>
 	</div>
 	<button class="btn confirm" disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
