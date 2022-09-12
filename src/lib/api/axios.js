@@ -66,6 +66,18 @@ export const changeLang = async (langId) => {
 		console.error(error);
 	}
 };
+export const changePhoto = async (objSrc) => {
+	try {
+		let response = await privatePath.post('/updateClientPhoto', { photo: objSrc });
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
 export const changeContribution = async (amount,periodId) => {
 	try {
 		let response = await privatePath.post('/changeContribution', { amount, periodId });
