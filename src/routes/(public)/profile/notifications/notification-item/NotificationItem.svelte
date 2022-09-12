@@ -1,7 +1,6 @@
 <script>
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
 	import ItemTooltip from './ItemTooltip.svelte';
-	import { notificationList } from '../notificationsStore';
 
 	export let objAttributes = {};
 

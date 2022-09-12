@@ -1,8 +1,9 @@
-import { updateGlobalData } from '$lib/globalStore';
+import { updateGlobalData, updateNotificationData, updateLoading } from '$lib/globalStore';
 import { getGeneralData } from '$lib/api/axios';
 import { changeLang } from '../api/axios';
 
 export async function setLanguage(lang) {
+    updateLoading(true);
     localStorage.setItem('lang', lang);
     let langId = 0;
     switch (lang) {
@@ -16,10 +17,12 @@ export async function setLanguage(lang) {
           langId = 5238793;
       }
     const response = await changeLang(langId);
-    // if(response.status) {
-    //     const newData = await getGeneralData();
-    //     updateGlobalData(newData);
-    //     // console.log(newData);
-    // }
+    if(response.status) {
+        const newData = await getGeneralData();
+        const notificationList = newData.data.notifications.data;
+        updateGlobalData(newData);
+        updateNotificationData(notificationList);
+        updateLoading(false);
+    }
 }
 

@@ -1,19 +1,11 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
-	import {
-		notificationList,
-		loading
-	} from '../../routes/(public)/profile/notifications/notificationsStore';
-	import { globalData } from '$lib/globalStore';
+	import { notificationList, loading } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	import { getGeneralData } from '$lib/api/axios';
 	import Preloader from './Preloader.svelte';
 
 	let active = false;
-	let newData = {};
-
-	$notificationList = $globalData.data.notifications.data;
 
 	function show() {
 		active = true;
@@ -31,10 +23,6 @@
 
 	async function toggleAction(id) {
 		active = !active;
-		// $loading = true;
-		// newData = await getGeneralData();
-		// $notificationList = newData.notifications.data;
-		// $loading = false;
 	}
 </script>
 

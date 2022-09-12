@@ -2,7 +2,7 @@
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
 	import { modalClassName } from '../../general-info/profileStore';
-	import { notificationList } from '../notificationsStore';
+	import { notificationList } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
 
 	let active = false;
