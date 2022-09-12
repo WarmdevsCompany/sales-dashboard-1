@@ -66,6 +66,7 @@ export const changeLang = async (langId) => {
 		console.error(error);
 	}
 };
+
 export const changePhoto = async (objSrc) => {
 	try {
 		let response = await privatePath.post('/updateClientPhoto', { photo: objSrc });
@@ -78,7 +79,8 @@ export const changePhoto = async (objSrc) => {
 		console.error(error);
 	}
 };
-export const changeContribution = async (amount,periodId) => {
+
+export const changeContribution = async (amount, periodId) => {
 	try {
 		let response = await privatePath.post('/changeContribution', { amount, periodId });
 		if (response.data.status) {
@@ -93,7 +95,7 @@ export const changeContribution = async (amount,periodId) => {
 
 export const pauseContribution = async (periodId) => {
 	try {
-		let response = await privatePath.post('/pauseContribution', { periodId });
+		let response = await privatePath.post('/pauseContribution', { monthPeriodId: periodId });
 		if (response.data.status) {
 			return response.data;
 		} else {
@@ -118,30 +120,6 @@ export const restartContribution = async () => {
 export const stopContribution = async () => {
 	try {
 		let response = await privatePath.post('/stopContribution');
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
-	} catch (error) {
-		console.error(error);
-	}
-};
-export const getPeriodMonths = async () => {
-	try {
-		let response = await publicPath.get('/getPeriodMonths');
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
-	} catch (error) {
-		console.error(error);
-	}
-};
-export const getRecurringPeriods = async () => {
-	try {
-		let response = await publicPath.get('/getPeriods');
 		if (response.data.status) {
 			return response.data;
 		} else {

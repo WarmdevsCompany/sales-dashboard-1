@@ -118,9 +118,6 @@ export default {
     "MANAGE_NEXT_RECURRING": "Next Recurring Contribution",
     "MANAGE_NEXT_DATE": "Next contribution date",
     "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
-    "MANAGE_PAUSE_1": "Pause for 1 month",
-    "MANAGE_PAUSE_2": "Pause for 2 month",
-    "MANAGE_PAUSE_3": "Pause for 3 month",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -307,9 +304,6 @@ export default {
     "MANAGE_NEXT_RECURRING": "Nächster wiederkehrender Beitrag",
     "MANAGE_NEXT_DATE": "Nächster Beitragstermin",
     "MANAGE_AGREE": "Ich stimme allen Allgemeinen Geschäftsbedingungen, Vertragsvereinbarung, Datenschutz und Cookie zu",
-    "MANAGE_PAUSE_1": "1 Monat pausieren",
-    "MANAGE_PAUSE_2": "2 Monate pausieren",
-    "MANAGE_PAUSE_3": "3 Monate pausieren",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -496,9 +490,7 @@ export default {
     "MANAGE_NEXT_RECURRING": "Prochaine contribution récurrente",
     "MANAGE_NEXT_DATE": "Prochaine date de cotisation",
     "MANAGE_AGREE": "J'accepte toutes les conditions générales, l'accord contractuel, la confidentialité et les cookies",
-    "MANAGE_PAUSE_1": "Pause pendant 1 mois",
-    "MANAGE_PAUSE_2": "Pause de 2 mois",
-    "MANAGE_PAUSE_3": "Pause de 3 mois",
+
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",

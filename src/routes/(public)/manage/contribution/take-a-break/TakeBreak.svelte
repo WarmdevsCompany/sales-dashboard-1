@@ -41,20 +41,19 @@
 		}
 	}
 	async function pause() {
-		const periodId =  getPeriodId() 
+		const periodId = getPeriodId();
 		const response = await pauseContribution(periodId);
-		console.log(response)
 		if (response.status) {
 			getModal('pause').close();
 		}
 	}
 	function getPeriodId() {
-		const arrayWithCurrentItem =  periodsMonths.filter((item) => {
+		const arrayWithCurrentItem = periodsMonths.filter((item) => {
 			if (item.text === timeframe) {
 				return item.idobject;
 			}
 		});
-		return arrayWithCurrentItem[0].idobject
+		return arrayWithCurrentItem[0].idobject;
 	}
 </script>
 
@@ -83,9 +82,7 @@
 		<div class="pause__modal--main">
 			<div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
 			<Dropdown itemsData={timeframeArray} bind:activeItem={timeframe} />
-			<button class="btn confirm pause__modal--btn " on:click={pause}
-				>{$t('MANAGE_PAUSE')}</button
-			>
+			<button class="btn confirm pause__modal--btn " on:click={pause}>{$t('MANAGE_PAUSE')}</button>
 		</div>
 	</div>
 </Modal>
