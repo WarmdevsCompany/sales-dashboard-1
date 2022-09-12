@@ -4,9 +4,15 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import {restartContribution,pauseContribution, stopContribution} from '$lib/api/axios'
+	import {
+		restartContribution,
+		pauseContribution,
+		stopContribution,
+		getPeriodMonths
+	} from '$lib/api/axios';
 	let stopCheckboxValue = false;
 	let chackboxErrorStatus = false;
+	let periodsFromDB;   
 	$: {
 		stopCheckboxValue;
 		if (stopCheckboxValue) {
@@ -15,16 +21,14 @@
 	}
 
 	async function stop() {
-
-		const response = await stopContribution()
+		const response = await stopContribution();
 		if (response.status) {
 			getModal('stop').close();
 		}
 	}
 	async function restart() {
 		if (stopCheckboxValue) {
-
-			const response = await restartContribution()
+			const response = await restartContribution();
 			if (response.status) {
 				getModal('restart').close();
 			}
@@ -32,11 +36,14 @@
 			chackboxErrorStatus = true;
 		}
 	}
-  async function pause(periodId) {
-		const response = await pauseContribution(periodId)
+	async function pause(periodId) {
+		const response = await pauseContribution(periodId);
 		if (response.status) {
 			getModal('pause').close();
 		}
+	}
+	async function generateMonthArray(){
+      
 	}
 </script>
 
@@ -64,7 +71,15 @@
 		</div>
 		<div class="pause__modal--main">
 			<div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
-			<Dropdown itemsData={[$t('MANAGE_PAUSE_1'), $t('MANAGE_PAUSE_2'), $t('MANAGE_PAUSE_3')]} />
+			{#await pausePeriods}
+				<Dropdown itemsData={[]} />
+			{:then data}
+			{JSON.stringify(data)}
+				<Dropdown itemsData={[$t('MANAGE_PAUSE_1'), $t('MANAGE_PAUSE_2'), $t('MANAGE_PAUSE_3')]} />
+			{:catch error}
+				<small class="error_text">{error.message}</small>
+			{/await}
+
 			<button class="btn confirm pause__modal--btn " on:click={() => getModal('pause').close()}
 				>{$t('MANAGE_PAUSE')}</button
 			>
@@ -78,9 +93,7 @@
 			{$t('MANAGE_STOP_TITLE')}
 		</div>
 		<div class="stop__modal--main ">
-			<button class="btn confirm stop__modal--btn" on:click={stop}
-				>{$t('MANAGE_STOP')}</button
-			>
+			<button class="btn confirm stop__modal--btn" on:click={stop}>{$t('MANAGE_STOP')}</button>
 		</div>
 	</div>
 </Modal>
@@ -114,8 +127,7 @@
 				{/if}
 			</div>
 
-			<button class="btn confirm restart__modal--btn" on:click={restart}
-				>{$t('MANAGE_STOP')}</button
+			<button class="btn confirm restart__modal--btn" on:click={restart}>{$t('MANAGE_STOP')}</button
 			>
 		</div>
 	</div>

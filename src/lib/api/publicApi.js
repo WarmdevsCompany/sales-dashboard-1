@@ -5,7 +5,7 @@ export function publicApi(method, resource, data) {
 		method,
 		headers: {
 			accept: 'application/json',
-			'content-type': 'application/json'
+			'content-type': 'application/json',
 		},
 		body: data && JSON.stringify(data)
 	});

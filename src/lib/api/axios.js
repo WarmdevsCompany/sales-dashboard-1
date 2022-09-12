@@ -10,7 +10,7 @@ axios.defaults.headers.common['accept'] = 'application/json';
 const publicPath = axios.create({
 	baseURL: variables.publicPath
 });
-deleteCookie;
+
 const privatePath = axios.create({
 	baseURL: variables.privatePath
 });
@@ -106,6 +106,30 @@ export const restartContribution = async () => {
 export const stopContribution = async () => {
 	try {
 		let response = await privatePath.post('/stopContribution');
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const getPeriodMonths = async () => {
+	try {
+		let response = await publicPath.get('/getPeriodMonths');
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const getRecurringPeriods = async () => {
+	try {
+		let response = await publicPath.get('/getPeriods');
 		if (response.data.status) {
 			return response.data;
 		} else {
