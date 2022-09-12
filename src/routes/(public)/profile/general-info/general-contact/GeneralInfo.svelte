@@ -2,6 +2,26 @@
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
 	import Tooltip from './Tooltip.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import { globalData } from '$lib/globalStore';
+	import { onMount } from 'svelte';
+
+	export let firstName = '',
+		lastName = '',
+		gender = '',
+		dob = '',
+		email = '',
+		username = '';
+
+	onMount(async () => {
+		if ($globalData) {
+			firstName = $globalData.data.personalInfo.firstname;
+			lastName = $globalData.data.personalInfo.lastname;
+			username = $globalData.data.personalInfo.username;
+			gender = $globalData.data.personalInfo.gender;
+			dob = $globalData.data.personalInfo.dob;
+			email = $globalData.data.personalInfo.email;
+		}
+	});
 </script>
 
 <div>
@@ -9,7 +29,7 @@
 	<div class="input__wrapper">
 		<label for="name" class="label">{$t('USER_NAME')}</label>
 		<div class="relative">
-			<input class="" type="text" value="Antonin" />
+			<input class="" type="text" value={username} />
 			<div class="abs__input__dots">
 				<Tooltip title={$t('CHANGE_USER_NAME')} width={280} formName={'userName'}
 					><ThreeDotsIcon bgColor="green" /></Tooltip
@@ -21,7 +41,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('FIRST_NAME')}</label>
 			<div class="relative">
-				<input class="" type="text" value="Jonh" />
+				<input class="" type="text" value={firstName} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_FIRST_NAME')} width={208} formName={'firstName'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip
@@ -32,7 +52,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('LAST_NAME')}</label>
 			<div class="relative">
-				<input class="" type="text" value="Antonin" />
+				<input class="" type="text" value={lastName} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_LAST_NAME')} width={265} formName={'lastName'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip
@@ -45,7 +65,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('GENDER')}</label>
 			<div class="relative">
-				<input class="" type="text" value={$t('MALE')} />
+				<input class="" type="text" value={gender} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_GENDER')} width={215} formName={'gender'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip
@@ -56,7 +76,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('DATE_OF_BIRTH')}</label>
 			<div class="relative">
-				<input class="" type="text" value="01 July 1992" />
+				<input class="" type="text" value={dob.replace(/ [\s\S]+/, '')} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_DATE_OF_BIRTH')} width={290} formName={'dob'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip
@@ -72,7 +92,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">Email</label>
 			<div class="relative">
-				<input class="" type="email" value="Contact@esi.com" />
+				<input class="" type="email" value={email} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_EMAIL')} width={225} formName={'email'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip

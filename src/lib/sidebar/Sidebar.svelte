@@ -15,7 +15,8 @@
 	import clickOutside from '$lib/functions/clickOutside';
 	import { logout } from '$lib/api/axios';
 	import { t } from '$lib/translations/i18n.js';
-	import { currentSideBarStatus } from '$lib/globalStore';
+	import { currentSideBarStatus, globalData } from '$lib/globalStore';
+	import { onMount } from 'svelte';
 	let openedMenu = false;
 
 	if ($page.url.pathname.includes('/manage')) {
@@ -26,9 +27,15 @@
 		$currentSideBarStatus = 'profile';
 	}
 
-	export let firstName = 'Antonin',
-		lastName = 'John';
+	export let firstName = '',
+		lastName = '';
 
+	onMount(async () => {
+		if ($globalData) {
+			firstName = $globalData.data.personalInfo.firstname;
+			lastName = $globalData.data.personalInfo.lastname;
+		}
+	});
 	function handleClickOutside() {
 		openedMenu = false;
 	}
