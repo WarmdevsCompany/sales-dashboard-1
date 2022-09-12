@@ -7,7 +7,7 @@
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	import { getGeneralData, changeContribution } from '$lib/api/axios';
+	import { getGeneralData, changeContribution , getRecurringPeriods} from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 	let requrring;
@@ -48,8 +48,7 @@
 	}
 
 	async function getRecurringData() {
-		const rawResponse = await publicApi('GET', 'getPeriods');
-		const response = await rawResponse.json();
+		const response = await getRecurringPeriods()
 		requrringArray = response.data.map((item) => {
 			return item.periodName;
 		});
