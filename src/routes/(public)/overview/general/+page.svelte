@@ -16,7 +16,7 @@
 	<GeneralPlan
 		className="safe"
 		planName={$t('SAFE_PLAN_BIG')}
-		currencySymbol={$globalData.data.currencySymbol}
+		currencySymbol={$globalData?.data?.currencySymbol}
 		contribution={$globalData.data.contributions.safePlan.contribution}
 		revenue={$globalData.data.contributions.safePlan.revenue}
 		totalSafe={$globalData.data.contributions.safePlan.totalSafe}
@@ -24,7 +24,7 @@
 	<GeneralPlan
 		className="adventure"
 		planName={$t('ADVENTURE_BIG')}
-		currencySymbol={$globalData.data.currencySymbol}
+		currencySymbol={$globalData?.data?.currencySymbol}
 		contribution={$globalData.data.contributions.adventurePlan.contribution}
 		revenue={$globalData.data.contributions.adventurePlan.revenue}
 		totalSafe={$globalData.data.contributions.adventurePlan.totalSafe}
@@ -32,7 +32,7 @@
 	<GeneralPlan
 		className="founder"
 		planName={$t('FOUNDER_BIG')}
-		currencySymbol={$globalData.data.currencySymbol}
+		currencySymbol={$globalData?.data?.currencySymbol}
 		contribution={$globalData.data.contributions.founderPlan.contribution}
 		revenue={$globalData.data.contributions.founderPlan.revenue}
 		totalSafe={$globalData.data.contributions.founderPlan.totalSafe}

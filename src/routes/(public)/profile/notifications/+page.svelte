@@ -1,7 +1,7 @@
 <script>
 	import FilterPanel from './filters/FilterPanel.svelte';
 	import NotificationItem from './notification-item/NotificationItem.svelte';
-	import { notificationList, loading } from './notificationsStore';
+	import { notificationList, loading } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
 	import Preloader from '../../../../lib/components/Preloader.svelte';
 </script>

@@ -6,18 +6,19 @@
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { globalData } from '$lib/globalStore';
-	import {getGeneralData} from '$lib/api/axios'
+	import { notificationList, globalData } from '$lib/globalStore';
+
 	// set general data to store
 	export let data;
 	$globalData = data.general;
-	console.log(data);
+	console.log($globalData);
 
 	let loading = true;
 
-	onMount(async() => {
-		if($globalData){
+	onMount(async () => {
+		if ($globalData) {
 			loading = false;
+			$notificationList = data.general.data.notifications.data;
 		}
 	});
 </script>
