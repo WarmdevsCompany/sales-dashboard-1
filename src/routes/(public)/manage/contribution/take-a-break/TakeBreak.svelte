@@ -4,15 +4,17 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import { globalData } from '$lib/globalStore';
+	
 	import {
 		restartContribution,
 		pauseContribution,
 		stopContribution,
-		getPeriodMonths
 	} from '$lib/api/axios';
 	let stopCheckboxValue = false;
-	let chackboxErrorStatus = false;
-	let periodsFromDB;   
+	let chackboxErrorStatus = false;  
+	let timeframeArray = []
+	const periodsMonths = $globalData.period_months
 	$: {
 		stopCheckboxValue;
 		if (stopCheckboxValue) {
@@ -43,7 +45,9 @@
 		}
 	}
 	async function generateMonthArray(){
-      
+		timeframeArray = periodsMonths.map(item=>{
+			return item
+		})
 	}
 </script>
 
