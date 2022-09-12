@@ -7,7 +7,7 @@
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	import { getGeneralData, changeContribution, getRecurringPeriods } from '$lib/api/axios';
+	import { getGeneralData, changeContribution } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 
