@@ -1,4 +1,4 @@
-import { updateGlobalData, updateNotificationData, updateLoading } from '$lib/globalStore';
+import { updateGlobalData, updateNotificationData, updateLoading, updateNotificationSettings } from '$lib/globalStore';
 import { getGeneralData } from '$lib/api/axios';
 import { changeLang } from '../api/axios';
 
@@ -20,8 +20,10 @@ export async function setLanguage(lang) {
     if(response.status) {
         const newData = await getGeneralData();
         const notificationList = newData.data.notifications.data;
+        const notificationSettings = newData.data.notificationSettings;
         updateGlobalData(newData);
         updateNotificationData(notificationList);
+        updateNotificationSettings(notificationSettings);
         updateLoading(false);
     }
 }

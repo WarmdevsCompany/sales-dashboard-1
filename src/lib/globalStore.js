@@ -3,6 +3,7 @@ export let userAuthToken = writable();
 export let globalData = writable();
 export let contributionStatus = writable();
 export let notificationList = writable([]);
+export let notificationSettings = writable([]);
 export let loading = writable(false);
 
 export let updateLoading = (status) => {
@@ -14,5 +15,8 @@ export let updateGlobalData = (data) => {
 }
 export let updateNotificationData = (data) => {
     notificationList.set(data);
+}
+export let updateNotificationSettings = (data) => {
+    notificationSettings.set(data);
 }
 export let currentSideBarStatus = writable(null)
