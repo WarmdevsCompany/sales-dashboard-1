@@ -1,4 +1,5 @@
 <script>
+	import NotificationsTooltip from '$lib/components/NotificationsTooltip.svelte';
 	import { page } from '$app/stores';
 	import OverviewIcon from '$lib/components/icons/menu-icon/OverviewIcon.svelte';
 	import AvatarIcon from '$lib/components/icons/AvatarIcon.svelte';
@@ -17,6 +18,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { currentSideBarStatus, globalData } from '$lib/globalStore';
 	import { onMount } from 'svelte';
+import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 	let openedMenu = false;
 
 	if ($page.url.pathname.includes('/manage')) {
@@ -48,8 +50,19 @@
 				<MenuIcon />
 			</div>
 			<div class="d-flex header__rigth--column">
-				<div class="mr-1 pointer"><Notification bgColor="white" /></div>
-				<div class="pointer"><ThreeDotsIcon bgColor="white" /></div>
+				<div class="relative">
+					<NotificationsTooltip width={300}>
+						<div class="mr-1 pointer">
+							<Notification bgColor="white" />
+						</div>
+					</NotificationsTooltip>
+				</div>
+			
+				<div class="relative">
+					<HeaderPagesTooltip
+						><div class="pointer"><ThreeDotsIcon bgColor="white" /></div></HeaderPagesTooltip
+					>
+				</div>
 			</div>
 		</div>
 	{/if}
@@ -57,6 +70,8 @@
 		<div class="mobile__bg" />
 	{/if}
 </MediaQuery>
+
+
 
 <div
 	in:fade
