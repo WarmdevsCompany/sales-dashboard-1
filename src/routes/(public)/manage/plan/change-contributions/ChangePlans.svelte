@@ -15,7 +15,6 @@
 	import { t } from '$lib/translations/i18n.js';
 
 	let savePercentages;
-
 	let errorMessage;
 	let allowPercentageVal;
 
