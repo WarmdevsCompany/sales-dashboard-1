@@ -7,16 +7,16 @@
 	import Preloader from '$lib/components/Preloader.svelte';
 	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	import { getGeneralData, changeContribution } from '$lib/api/axios';
+	import { changeContribution } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 
-	let requrring;
+	let requrring = $globalData.data.current_contribution.periodName
 	let requrringArray = [];
 	let fullRequrringArray = [];
-	let amountValue = null;
+	let amountValue = $globalData.data.current_contribution.amount || null;
 	let amountErrorState = false;
-	$: requrringArray;
+	$: requrringArray, amountErrorState;
 
 	requrringArray = $globalData.periods.map((item) => {
 		return item.periodName;
@@ -46,9 +46,11 @@
 			this.value = this.value.slice(0, this.maxLength);
 		} else if (parseInt(this.value) < 20) {
 			this.classList.add('error');
+			amountErrorState = true
 		} else if (parseInt(this.value) >= 20) {
 			if (this.classList.contains('error')) {
 				this.classList.remove('error');
+				amountErrorState = false
 			}
 		}
 	}
@@ -63,8 +65,8 @@
 		return periodId;
 	}
 </script>
-
-<form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
+<div class="form_wrapper">
+	<form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
 	<div class="input__wrapper">
 		<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
 		<input
@@ -99,11 +101,18 @@
 	<button class="btn confirm" disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
 	>
 </form>
+<p class="text-left mt-1 text-xsm " class:error_text={amountErrorState}>*Min. $20 and $9,999 Total contribution</p>
+</div>
+
+
 
 <style>
-	form {
+	.form_wrapper{
 		margin: 0.875rem auto 0 auto;
 		max-width: 721px;
+	}
+	form {
+		
 	}
 	.dropdown__wrapper {
 		min-width: 207px;

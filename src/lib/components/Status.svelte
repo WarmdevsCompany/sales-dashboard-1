@@ -3,6 +3,9 @@
 
   export let status;
   export let iconColor = "initial";
+  $: if(status === 'restart'){
+   status = 'suspended';
+  }
 </script>
 
 <div class="d-flex ">
@@ -13,6 +16,7 @@
 <style>
   .status {
     margin-right: 4px;
+    min-width: 81px ;
     padding: 5px;
     border-radius: 8px;
     font-size: var(--text-font-small);
@@ -31,7 +35,7 @@
     width: 81px;
     background-color: var(--pause-btn-color);
   }
-  .status.stop{
+  .status.stoped{
     width: 81px;
     background-color: #5A7186;
   }

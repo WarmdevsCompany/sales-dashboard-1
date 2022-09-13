@@ -10,10 +10,11 @@
 	import { globalData } from '$lib/globalStore';
 	import NotificationsTooltip from '../components/NotificationsTooltip.svelte';
 	import HeaderPagesTooltip from '../components/HeaderPagesTooltip.svelte';
+
 	export let currencySymbol = $globalData.data.currencySymbol,
-		allMoney = '7,437',
-		monthlyContribution = 500,
-		nextContributionDate = '01 Jul 22';
+		allMoney = $globalData.data.currentSubscription.balance,
+		monthlySubscriptionText = $globalData.data.currentSubscription.subscriptionText,
+		nextContributionDate = ($globalData.data.currentSubscription.nextDate).substring(0,10);
 </script>
 
 <header class="d-flex justify-sb b-radius-8 align-center text-white">
@@ -30,7 +31,7 @@
 			<div class="contribution__data--item d-flex align-top text-big">
 				<div class="d-flex align-center">
 					<img src={monthlyContributionIcon} alt="all money" />
-					{currencySymbol}{monthlyContribution}/mo
+					{currencySymbol}{monthlySubscriptionText}
 				</div>
 				<StatusIcon bgColor="white" />
 			</div>
@@ -43,7 +44,7 @@
 				<StatusIcon bgColor="white" />
 			</div>
 			<div class="contribution__data--item">
-				<Status status="active" iconColor="white" />
+				<Status status={$globalData.data.currentSubscription.status.toLowerCase()} iconColor="white" />
 			</div>
 		</div>
 	</div>

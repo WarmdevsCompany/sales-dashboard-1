@@ -3,6 +3,7 @@ import { browser } from '$app/environment';
 import { redirect } from '@sveltejs/kit';
 import { privateApi } from '$lib/api/privateApi';
 import { getCookie } from '$lib/functions/getCookie';
+import { deleteCookie } from '../../lib/functions/deleteCookie';
 /** @type {import('./$types').PageLoad} */
 export async function load(event) {
 	// language logic
@@ -21,6 +22,7 @@ export async function load(event) {
 					general: response
 				};
 			} else if (rawResponse.status == 401) {
+				deleteCookie('esiToken')
 				throw redirect(307, '/auth/login');
 			}
 		}

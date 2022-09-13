@@ -1,11 +1,13 @@
 <script>
+	import { globalData } from '$lib/globalStore.js';
 	import { beforeUpdate, afterUpdate } from 'svelte';
 	import {
 		planData,
-		contributionData,
 		allocatedContributions,
 		errorMessageState,
-		subscribeAllState
+		subscribeAllState,
+		changeBlockStatus,
+		sumOfPlans
 	} from './planStore';
 	import ChangePlanItem from './ChangePlanItem.svelte';
 	import SubscribeAllIco from '$lib/components/icons/plan-icons/SubscribeAllIco.svelte';
@@ -15,7 +17,6 @@
 	let savePercentages;
 
 	let errorMessage;
-	let sumOfPlans;
 	let allowPercentageVal;
 
 	savePercentages = [...planData];
@@ -38,14 +39,16 @@
 		$allocatedContributions.adventure -
 		$allocatedContributions.founder;
 
-	$: savePercentages, errorMessage, sumOfPlans;
+	$: savePercentages, errorMessage;
 
 	let current = savePlan;
 
 	beforeUpdate(() => {
-		safePrice = ($allocatedContributions.safe * $contributionData.monthlyValue) / 100;
-		adventurePrice = ($allocatedContributions.adventure * $contributionData.monthlyValue) / 100;
-		founderPrice = ($allocatedContributions.founder * $contributionData.monthlyValue) / 100;
+		safePrice = ($allocatedContributions.safe * $globalData.data.current_contribution.amount) / 100;
+		adventurePrice =
+			($allocatedContributions.adventure * $globalData.data.current_contribution.amount) / 100;
+		founderPrice =
+			($allocatedContributions.founder * $globalData.data.current_contribution.amount) / 100;
 
 		activeDropdownSave = false;
 		activeDropdownAdv = false;
@@ -70,13 +73,17 @@
 		}
 	}
 	afterUpdate(() => {
-		sumOfPlans =
+		$sumOfPlans =
 			$allocatedContributions.safe +
 			$allocatedContributions.adventure +
 			$allocatedContributions.founder;
-		if (sumOfPlans > 99 && sumOfPlans <= 100) {
+		if ($sumOfPlans > 99 && $sumOfPlans <= 100) {
 			$errorMessageState = false;
-			$subscribeAllState = true;
+		}
+		if ($sumOfPlans > 0) {
+			$changeBlockStatus = true;
+		} else {
+			$changeBlockStatus = false;
 		}
 	});
 </script>
@@ -84,12 +91,12 @@
 <div class="plans__wrapper">
 	<div class="plans__wrapper__head">
 		<h3 class="h3-sv desktop">
-			{#if sumOfPlans < 100}
+			{#if $sumOfPlans < 100}
 				{$t('MANAGE_ALLOCATE')}
-				<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - sumOfPlans}%</span
+				<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - $sumOfPlans}%</span
 				>
 				{$t('MANAGE_CONTR_BETW')}
-			{:else if sumOfPlans === 100}
+			{:else if $sumOfPlans === 100}
 				{$t('MANAGE_ALLOCATE_ALL')} <span class="green">{$t('MANAGE_CONTRIBUTION_LC')}!</span>
 			{/if}
 		</h3>
@@ -109,11 +116,11 @@
 		</div>
 	</div>
 	<h3 class="h3-sv mob">
-		{#if sumOfPlans < 100}
+		{#if $sumOfPlans < 100}
 			{$t('MANAGE_ALLOCATE')}
-			<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - sumOfPlans}%</span>
+			<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - $sumOfPlans}%</span>
 			{$t('MANAGE_OF_CONTRIBUTION')}
-		{:else if sumOfPlans === 100}
+		{:else if $sumOfPlans === 100}
 			{$t('MANAGE_ALLOCATE_ALL')} <span class="green">{$t('MANAGE_CONTRIBUTION_LC')}!</span>
 		{/if}
 	</h3>
