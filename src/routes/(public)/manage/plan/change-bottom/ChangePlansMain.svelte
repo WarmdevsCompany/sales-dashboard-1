@@ -10,22 +10,22 @@
 	<PlanItem
 		planClass={'safe'}
 		planName={$t('SAFE_PLAN_BIG')}
-		planCurrentMoney={$globalData.data.membershipStatus.greenSafeTotal}
-		planNewMoney={($allocatedContributions.safe * $globalData.data.membershipStatus.amount) / 100}
+		planCurrentMoney={$globalData.data.current_contribution.greenSafeTotal}
+		planNewMoney={($allocatedContributions.safe * $globalData.data.current_contribution.amount) / 100}
 		planPersentage={$allocatedContributions.safe}
 	/>
 	<PlanItem
 		planClass={'adventure'}
 		planName={$t('ADVENTURE_BIG')}
-		planCurrentMoney={$globalData.data.membershipStatus.greenAdventureTotal}
-		planNewMoney={($allocatedContributions.adventure * $globalData.data.membershipStatus.amount) / 100}
+		planCurrentMoney={$globalData.data.current_contribution.greenAdventureTotal}
+		planNewMoney={($allocatedContributions.adventure * $globalData.data.current_contribution.amount) / 100}
 		planPersentage={$allocatedContributions.adventure}
 	/>
 	<PlanItem
 		planClass={'founder'}
 		planName={$t('FOUNDER_BIG')}
-		planCurrentMoney={$globalData.data.membershipStatus.greenFounderTotal}
-		planNewMoney={($allocatedContributions.founder * $globalData.data.membershipStatus.amount) / 100}
+		planCurrentMoney={$globalData.data.current_contribution.greenFounderTotal}
+		planNewMoney={($allocatedContributions.founder * $globalData.data.current_contribution.amount) / 100}
 		planPersentage={$allocatedContributions.founder}
 	/>
 </div>

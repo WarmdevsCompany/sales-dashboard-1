@@ -142,3 +142,20 @@ export const stopContribution = async () => {
 		console.error(error);
 	}
 };
+export const changeContributionPlan = async (save, adv, founder) => {
+	const body = {
+		greenSafe: save,
+		greenAdventure: adv,
+		greenFounder: founder
+	};
+	try {
+		let response = await privatePath.post('/changeContributionPlan', body);
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};

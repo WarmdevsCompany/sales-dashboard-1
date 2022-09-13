@@ -1,4 +1,12 @@
 <script>
+	import { globalData } from '$lib/globalStore';
+	import {
+		allocatedContributions,
+		errorMessageState,
+		sumOfPlans,
+		subscribeAllState
+	} from './change-contributions/planStore.js';
+	import { changeContributionPlan } from '$lib/api/axios.js';
 	import { fade } from 'svelte/transition';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import PlansMain from './change-bottom/ChangePlansMain.svelte';
@@ -7,6 +15,48 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { changeBlockStatus } from './change-contributions/planStore';
 	import UpdatedPlanItems from './UpdatedPlanItems.svelte';
+	let confirmButtonText = $t('CONFIRM_CHANGES');
+
+	const updateGlobalContribution = () => {
+		// safe
+		$globalData.data.current_contribution.greenSafeTotal =
+			($allocatedContributions.safe * $globalData.data.current_contribution.amount) / 100;
+		$globalData.data.current_contribution.greenSafe = $allocatedContributions.safe;
+		// adv
+		$globalData.data.current_contribution.greenAdventureTotal =
+			($allocatedContributions.adventure * $globalData.data.current_contribution.amount) / 100;
+		$globalData.data.current_contribution.greenAdventure = $allocatedContributions.safe;
+		// founder
+		$globalData.data.current_contribution.greenFounderTotal =
+			($allocatedContributions.founder * $globalData.data.current_contribution.amount) / 100;
+		$globalData.data.current_contribution.greenFounder = $allocatedContributions.founder;
+	};
+	const resetContributionData = () => {
+		$allocatedContributions.safe = 0;
+		$allocatedContributions.adventure = 0;
+		$allocatedContributions.founder = 0;
+		$sumOfPlans = 0
+		$subscribeAllState = false
+	};
+
+	const changeContributionData = async () => {
+		if ($sumOfPlans < 100) {
+			$errorMessageState = true;
+		} else {
+			confirmButtonText = `${$t('LOADING')}...`;
+			let res = await changeContributionPlan(
+				$allocatedContributions.safe,
+				$allocatedContributions.adventure,
+				$allocatedContributions.founder
+			);
+			if (res.status) {
+				updateGlobalContribution();
+				getModal('confirmPlan').open();
+				confirmButtonText = $t('CONFIRM_CHANGES');
+				resetContributionData();
+			}
+		}
+	};
 </script>
 
 <svelte:head>
@@ -17,8 +67,10 @@
 
 <ChangePlans />
 <div class="d-flex justify-cc">
-	<button class="btn mt-1_5 box_shadow-medium" on:click={() => getModal('confirmPlan').open()}
-		>{$t('CONFIRM_CHANGES')}</button
+	<button
+		class="btn confirm mt-1_5 box_shadow-medium"
+		disabled={!$changeBlockStatus}
+		on:click={changeContributionData}>{confirmButtonText}</button
 	>
 </div>
 
@@ -28,7 +80,7 @@
 		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-cc ">
 			<div class="text-xsm d-flex align-base">
-				{$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue">$1,000/mo</span>
+				{$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.subscriptionText}</span>
 			</div>
 		</div>
 		<div class="updated__items">
@@ -38,10 +90,9 @@
 	</div>
 </Modal>
 {#if $changeBlockStatus}
-<div in:fade>
-	<PlansMain />
-</div>
-	
+	<div in:fade out:fade={{ delay: 0, duration: 100 }}>
+		<PlansMain />
+	</div>
 {/if}
 
 <style>
@@ -65,7 +116,6 @@
 		margin-left: 0.25rem;
 	}
 	.btn {
-		width: auto;
 		margin: 2.625rem auto 0 auto;
 		transition: none;
 	}

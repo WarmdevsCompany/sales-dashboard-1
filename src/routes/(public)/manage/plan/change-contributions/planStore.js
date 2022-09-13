@@ -65,6 +65,7 @@ export const allocatedContributions = writable({
   founder: 0,
   founderName: "0 of Total Contribution",
 });
+export const sumOfPlans = writable(0)
 
 export const changeBlockStatus = writable(false)
 
