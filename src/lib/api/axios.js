@@ -80,6 +80,19 @@ export const changePhoto = async (objSrc) => {
 	}
 };
 
+export const changeNotificationSettings = async (id, value) => {
+	try {
+		let response = await privatePath.post('/changeNotificationSetting', { notificationId: id, notificationValue: value });
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+
 export const changeContribution = async (amount, periodId) => {
 	try {
 		let response = await privatePath.post('/changeContribution', { amount, periodId });

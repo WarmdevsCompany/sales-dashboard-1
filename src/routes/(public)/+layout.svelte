@@ -6,7 +6,7 @@
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { notificationList, globalData } from '$lib/globalStore';
+	import { notificationList, globalData, notificationSettings } from '$lib/globalStore';
 
 	// set general data to store
 	export let data;
@@ -19,6 +19,7 @@
 		if ($globalData) {
 			loading = false;
 			$notificationList = data.general.data.notifications.data;
+			$notificationSettings = data.general.data.notificationSettings;
 		}
 	});
 </script>
