@@ -10,7 +10,7 @@
 	import { globalData } from '$lib/globalStore';
 	import NotificationsTooltip from '../components/NotificationsTooltip.svelte';
 	import HeaderPagesTooltip from '../components/HeaderPagesTooltip.svelte';
-	
+
 	export let currencySymbol = $globalData.data.currencySymbol,
 		allMoney = $globalData.data.currentSubscription.balance,
 		monthlySubscriptionText = $globalData.data.currentSubscription.subscriptionText,
@@ -44,7 +44,7 @@
 				<StatusIcon bgColor="white" />
 			</div>
 			<div class="contribution__data--item">
-				<Status status="active" iconColor="white" />
+				<Status status={$globalData.data.currentSubscription.status.toLowerCase()} iconColor="white" />
 			</div>
 		</div>
 	</div>

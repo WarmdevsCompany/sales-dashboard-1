@@ -28,6 +28,7 @@
 		const response = await stopContribution();
 		if (response.status) {
 			getModal('stop').close();
+			$globalData.data.currentSubscription.status = "Stoped"
 		}
 	}
 	async function restart() {
@@ -35,6 +36,7 @@
 			const response = await restartContribution();
 			if (response.status) {
 				getModal('restart').close();
+				$globalData.data.currentSubscription.status = "Restart"
 			}
 		} else {
 			chackboxErrorStatus = true;
@@ -45,6 +47,7 @@
 		const response = await pauseContribution(periodId);
 		if (response.status) {
 			getModal('pause').close();
+			$globalData.data.currentSubscription.status = "Paused"
 		}
 	}
 	function getPeriodId() {

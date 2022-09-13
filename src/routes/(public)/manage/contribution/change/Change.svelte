@@ -78,7 +78,7 @@
 		max-width: 507px;
 		margin: 1.5rem auto 0 auto;
 		color: #000;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		gap: 10px;
 	}
