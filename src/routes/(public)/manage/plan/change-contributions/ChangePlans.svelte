@@ -1,11 +1,12 @@
 <script>
+	import { globalData } from './../../../../../lib/globalStore.js';
 	import { beforeUpdate, afterUpdate } from 'svelte';
 	import {
 		planData,
-		contributionData,
 		allocatedContributions,
 		errorMessageState,
-		subscribeAllState
+		subscribeAllState,
+		changeBlockStatus
 	} from './planStore';
 	import ChangePlanItem from './ChangePlanItem.svelte';
 	import SubscribeAllIco from '$lib/components/icons/plan-icons/SubscribeAllIco.svelte';
@@ -43,9 +44,11 @@
 	let current = savePlan;
 
 	beforeUpdate(() => {
-		safePrice = ($allocatedContributions.safe * $contributionData.monthlyValue) / 100;
-		adventurePrice = ($allocatedContributions.adventure * $contributionData.monthlyValue) / 100;
-		founderPrice = ($allocatedContributions.founder * $contributionData.monthlyValue) / 100;
+		safePrice = ($allocatedContributions.safe * $globalData.data.membershipStatus.amount) / 100;
+		adventurePrice =
+			($allocatedContributions.adventure * $globalData.data.membershipStatus.amount) / 100;
+		founderPrice =
+			($allocatedContributions.founder * $globalData.data.membershipStatus.amount) / 100;
 
 		activeDropdownSave = false;
 		activeDropdownAdv = false;
@@ -76,7 +79,11 @@
 			$allocatedContributions.founder;
 		if (sumOfPlans > 99 && sumOfPlans <= 100) {
 			$errorMessageState = false;
-			$subscribeAllState = true;
+		}
+		if (sumOfPlans > 0) {
+			$changeBlockStatus = true;
+		} else {
+			$changeBlockStatus = false;
 		}
 	});
 </script>

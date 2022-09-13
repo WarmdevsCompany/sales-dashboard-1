@@ -1,4 +1,6 @@
 <script>
+	import { changeBlockStatus } from './planStore.js';
+	import { globalData } from './../../../../../lib/globalStore.js';
 	import clickOutside from '$lib/functions/clickOutside';
 	import { priceConvertation } from '$lib/functions/priceConvertation';
 	import {
@@ -7,7 +9,6 @@
 		sortPersantageVariable,
 		planModalData,
 		errorMessageState,
-		contributionData,
 		allocatedContributions,
 		subscribeAllState
 	} from './planStore';
@@ -171,7 +172,7 @@
 				</div>
 				<div class="item__current__money text-2 {className}">
 					<div class="money">
-						{$contributionData.country.currency.symbol +
+						{$globalData.data.currencySymbol +
 							priceConvertation(Math.round(currentPrice * 100) / 100)}
 					</div>
 				</div>

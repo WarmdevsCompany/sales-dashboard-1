@@ -1,10 +1,12 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import PlansMain from './change-bottom/ChangePlansMain.svelte';
 	import ChangePlans from './change-contributions/ChangePlans.svelte';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
-	import UpdatedPlanItems from './UpdatedPlanItems.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import { changeBlockStatus } from './change-contributions/planStore';
+	import UpdatedPlanItems from './UpdatedPlanItems.svelte';
 </script>
 
 <svelte:head>
@@ -35,7 +37,12 @@
 		<button class="btn" on:click={() => getModal('confirmPlan').close()}>{$t('CLOSE')}</button>
 	</div>
 </Modal>
-<PlansMain />
+{#if $changeBlockStatus}
+<div in:fade>
+	<PlansMain />
+</div>
+	
+{/if}
 
 <style>
 	.modal_main {
