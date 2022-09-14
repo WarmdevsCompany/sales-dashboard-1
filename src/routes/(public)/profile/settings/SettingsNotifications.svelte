@@ -1,4 +1,5 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import { changeNotificationSettings } from '$lib/api/axios.js';
 	import Preloader from '$lib/components/Preloader.svelte';
 	import ToogleCheckbox from '$lib/components/inputs/ToogleCheckbox.svelte';
@@ -21,11 +22,11 @@
 
 <div class="b-radius-8 settings_card">
 	<div class="text-3 settings_card--head">{$t('NOTIFICATIONS')}</div>
-	<div class="notification__list">
+	<div class="notification__list d-flex flex-col">
 		{#if $loading}
-			<div class="mt-1_25">
-				<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
-			</div>
+		<div class="preloder_wrapper d-flex justify-cc align-center" in:fade>
+			<Preloader loaderWidth={3} loaderHeight={3} borderWidth={0.3} />
+		</div>
 		{:else}
 			{#each $notificationSettings as item}
 				<div class="notification d-flex align-center justify-sb mb-0_625">
@@ -36,3 +37,12 @@
 		{/if}
 	</div>
 </div>
+
+<style>
+	.notification__list {
+		min-height: 126px;
+	}
+	.preloder_wrapper {
+		margin: auto;
+	}
+</style>

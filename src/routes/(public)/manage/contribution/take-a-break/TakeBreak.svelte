@@ -120,15 +120,15 @@
 			<div class="d-flex justify-sb mt-2 mobile-block">
 				<div>
 					<div class="text-sm">{$t('MANAGE_TOTAL_SAVE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">$7,437</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.balance}</div>
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_RECURRING')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">$1,000/mo</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.subscriptionText}</div>
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_DATE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">01 July 2022</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currentSubscription.nextDate.substring(0, 10)}</div>
 				</div>
 			</div>
 			<div class="terms__checkbox">
@@ -136,7 +136,7 @@
 					>{$t('MANAGE_AGREE')}</Checkbox
 				>
 				{#if chackboxErrorStatus}
-					<small in:fade class="error_text text-xsm">Confirm legal agreements</small>
+					<small in:fade class="error_text text-xsm">{$t('MANAGE_AGREE_ERROR')}</small>
 				{/if}
 			</div>
 

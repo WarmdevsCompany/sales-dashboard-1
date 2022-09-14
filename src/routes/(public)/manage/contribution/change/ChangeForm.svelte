@@ -33,6 +33,7 @@
 			if (result.status) {
 				$globalData.data.membershipStatus.amount = amountValue;
 				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
+				$globalData.data.current_contribution.periodName = requrring;
 				getModal('confirm').open();
 				setTimeout(()=>{
 					confirnBtnText = $t('CONFIRM_CHANGES');
