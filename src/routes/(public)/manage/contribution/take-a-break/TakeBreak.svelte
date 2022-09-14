@@ -1,17 +1,20 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
-
 	import { restartContribution, pauseContribution, stopContribution } from '$lib/api/axios';
+	export let subscriptionStatus;
 	let stopCheckboxValue = false;
 	let chackboxErrorStatus = false;
 	let timeframeArray = [];
 	let timeframe;
+	
 	const periodsMonths = $globalData.period_months;
+	let pauseBtnText = $t('MANAGE_PAUSE'),stopBtnText=$t('MANAGE_STOP'), restartBtnText=$t('MANAGE_RES');
 
 	// generateMonthArray
 	timeframeArray = periodsMonths.map((item) => {
@@ -22,20 +25,25 @@
 		if (stopCheckboxValue) {
 			chackboxErrorStatus = false;
 		}
+		subscriptionStatus;
 	}
 
 	async function stop() {
+		stopBtnText =  `${$t('LOADING')}...`;
 		const response = await stopContribution();
 		if (response.status) {
 			getModal('stop').close();
+			stopBtnText =  $t('MANAGE_STOP')
 			$globalData.data.currentSubscription.status = "Stoped"
 		}
 	}
 	async function restart() {
 		if (stopCheckboxValue) {
+			restartBtnText =  `${$t('LOADING')}...`;
 			const response = await restartContribution();
 			if (response.status) {
 				getModal('restart').close();
+				restartBtnText = $t('MANAGE_RES')
 				$globalData.data.currentSubscription.status = "Restart"
 			}
 		} else {
@@ -43,10 +51,12 @@
 		}
 	}
 	async function pause() {
+		pauseBtnText = `${$t('LOADING')}...`;
 		const periodId = getPeriodId();
 		const response = await pauseContribution(periodId);
 		if (response.status) {
 			getModal('pause').close();
+			pauseBtnText = $t('MANAGE_PAUSE')
 			$globalData.data.currentSubscription.status = "Paused"
 		}
 	}
@@ -65,13 +75,13 @@
 	<div class="text-xsm mt-0_5">{$t('MANAGE_PSR')}</div>
 
 	<div class="contribution__btns d-flex justify-sb mt-1_5">
-		<button class="btn pause mb-1" on:click={() => getModal('pause').open()}
+		<button class="btn pause mb-1" on:click={() => getModal('pause').open()} disabled ={subscriptionStatus === "Paused" || subscriptionStatus === "Stoped" || subscriptionStatus === "Suspended"}
 			>{$t('MANAGE_PAUSE')}</button
 		>
-		<button class="btn stop mb-1" on:click={() => getModal('stop').open()}
+		<button class="btn stop mb-1" on:click={() => getModal('stop').open()} disabled={subscriptionStatus === "Stoped" || subscriptionStatus == "Suspended"}
 			>{$t('MANAGE_STOP')}</button
 		>
-		<button class="btn restart mb-1" on:click={() => getModal('restart').open()}
+		<button class="btn restart mb-1" on:click={() => getModal('restart').open()} disabled ={subscriptionStatus ==="Active" || subscriptionStatus === "Restart" }
 			>{$t('MANAGE_RES')}</button
 		>
 	</div>
@@ -85,7 +95,7 @@
 		<div class="pause__modal--main">
 			<div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
 			<Dropdown itemsData={timeframeArray} bind:activeItem={timeframe} />
-			<button class="btn confirm pause__modal--btn " on:click={pause}>{$t('MANAGE_PAUSE')}</button>
+			<button class="btn confirm pause__modal--btn " on:click={pause}>{pauseBtnText}</button>
 		</div>
 	</div>
 </Modal>
@@ -96,7 +106,7 @@
 			{$t('MANAGE_STOP_TITLE')}
 		</div>
 		<div class="stop__modal--main ">
-			<button class="btn confirm stop__modal--btn" on:click={stop}>{$t('MANAGE_STOP')}</button>
+			<button class="btn confirm stop__modal--btn" on:click={stop}>{stopBtnText}</button>
 		</div>
 	</div>
 </Modal>
@@ -110,15 +120,15 @@
 			<div class="d-flex justify-sb mt-2 mobile-block">
 				<div>
 					<div class="text-sm">{$t('MANAGE_TOTAL_SAVE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">$7,437</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.balance}</div>
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_RECURRING')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">$1,000/mo</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.subscriptionText}</div>
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_DATE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">01 July 2022</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currentSubscription.nextDate.substring(0, 10)}</div>
 				</div>
 			</div>
 			<div class="terms__checkbox">
@@ -126,11 +136,11 @@
 					>{$t('MANAGE_AGREE')}</Checkbox
 				>
 				{#if chackboxErrorStatus}
-					<small class="error_text mt-0_5">Fill required field</small>
+					<small in:fade class="error_text text-xsm">{$t('MANAGE_AGREE_ERROR')}</small>
 				{/if}
 			</div>
 
-			<button class="btn confirm restart__modal--btn" on:click={restart}>{$t('MANAGE_STOP')}</button
+			<button class="btn confirm restart__modal--btn" on:click={restart}>{restartBtnText}</button
 			>
 		</div>
 	</div>
@@ -177,7 +187,7 @@
 	}
 	.restart__modal--btn {
 		width: 100%;
-		margin: 2rem auto 0 auto;
+		margin: 2.125rem auto 0 auto;
 		transition: none;
 		max-width: 282px;
 	}
@@ -199,13 +209,15 @@
 	.terms__checkbox {
 		max-width: 500px;
 		margin: 1.375rem auto 0 auto;
+		position:  relative;
 	}
-	.restart__modal--grid {
+	.terms__checkbox .error_text{
+	 position: absolute;
+	 bottom: -32px;
 	}
-	.restart__grid--item {
-	}
-	.restart__value {
-	}
+
+
+
 	@media only screen and (max-width: 991px) {
 		.contribution__btns {
 			display: block;

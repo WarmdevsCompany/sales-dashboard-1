@@ -1,4 +1,5 @@
 <script>
+	import { globalData } from '$lib/globalStore';
 	import Change from './change/Change.svelte';
 	import PlansMain from './plans/PlansMain.svelte';
 	import TakeBreak from './take-a-break/TakeBreak.svelte';
@@ -9,6 +10,6 @@
 	<title>{$t('MANAGE_CONTRIBUTIONS')}</title>
 	<meta name="description" content="Contributions page" />
 </svelte:head>
-<Change />
+<Change subscriptionStatus = {$globalData.data.currentSubscription.status} />
 <PlansMain />
-<TakeBreak />
+<TakeBreak subscriptionStatus = {$globalData.data.currentSubscription.status}/>

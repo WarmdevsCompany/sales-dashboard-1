@@ -100,7 +100,7 @@
 							return '$' + numberWithCommas(tooltipItem[0].raw, 0);
 						},
 						label: function (tooltipItem) {
-							console.log(tooltipItem.dataset.tooltipText);
+							//console.log(tooltipItem.dataset.tooltipText);
 							return 'Saving to ' + tooltipItem.label;
 						}
 					}

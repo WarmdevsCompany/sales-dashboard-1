@@ -42,16 +42,6 @@
 		showImage = false;
 	}
 
-	// function getBase64() {
-	// 	var c = document.createElement('canvas');
-	// 	var img = document.querySelector('.ava-image');
-	// 	c.height = img.naturalHeight;
-	// 	c.width = img.naturalWidth;
-	// 	var ctx = c.getContext('2d');
-	// 	ctx.drawImage(img, 0, 0, c.width, c.height);
-	// 	var base64String = c.toDataURL();
-	// 	return base64String;
-	// }
 </script>
 
 <div class="browse__wrapper d-flex flex-col align-center">

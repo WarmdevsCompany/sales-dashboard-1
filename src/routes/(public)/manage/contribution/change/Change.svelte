@@ -5,8 +5,17 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
 	import ChangeForm from './ChangeForm.svelte';
+	export let subscriptionStatus;
 	let disabledState = false;
 	let errorState = false;
+	$: if (subscriptionStatus === 'Paused' || subscriptionStatus === 'Stoped') {
+		disabledState = true;
+	} else if (subscriptionStatus === 'Suspended') {
+		errorState = true;
+	} else {
+		disabledState = false;
+		errorState = false;
+	}
 </script>
 
 <div
@@ -19,7 +28,7 @@
 		{$t('MANAGE_RECURRING_CONTRIBUTION')}*
 	</div>
 	<div class="text-xsm mt-0_25">{$t('MANAGE_NEXT_RECURRING_CONTRIBUTION')}</div>
-	<ChangeForm {disabledState} {errorState} />
+	<ChangeForm {disabledState} {errorState} {subscriptionStatus} />
 </div>
 <Modal id="confirm">
 	<div class="modal_main confirm text-center">
@@ -34,7 +43,9 @@
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEXT_CONTRIBUTION')}:
-				<span class="text-3 text-blue mobile-block">01 Jul 2022</span>
+				<span class="text-3 text-blue mobile-block"
+					>{$globalData.data.currentSubscription.nextDate.substring(0, 10)}</span
+				>
 			</div>
 		</div>
 		<p class="mt-1 modal-bootom-text">

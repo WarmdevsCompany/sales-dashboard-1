@@ -14,6 +14,7 @@ export async function load(event) {
 		const token = getCookie('esiToken');
 
 		if (!token) {
+			deleteCookie('esiToken')
 			throw redirect(307, '/auth/login');
 		} else {
 			const rawResponse = await privateApi('/getGeneralInfo', token);

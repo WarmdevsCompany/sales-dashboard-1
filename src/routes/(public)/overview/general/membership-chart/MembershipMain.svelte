@@ -12,7 +12,7 @@
 	</div>
 	<div class="column">
 		<div>
-			<button class="eucalyptus__btn text-white text-xsm"> {$t('OVERVIEW_EUCALYPTUS')}</button>
+			<button class="eucalyptus__btn text-white text-xsm"> {$$props.status}</button>
 		</div>
 	</div>
 </div>
@@ -40,17 +40,13 @@
 <style>
 	.eucalyptus__btn {
 		appearance: none;
+		pointer-events: none;
 		padding: 0.375rem 1.5rem;
 		border: none;
 		background: #5f8575;
 		border-radius: 53px;
 	}
-	.eucalyptus__btn:hover {
-		background: #5f8575da;
-	}
-	.eucalyptus__btn:active {
-		background: #5f8575;
-	}
+
 	@media only screen and (max-width: 991px) {
 		.chat__items {
 			flex-wrap: wrap;

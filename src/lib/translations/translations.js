@@ -66,7 +66,10 @@ export default {
     "PROFILE": "Profile",
     "SECURITY": "Security",
     "PAYMENT": "Payment",
-    "FILL_FIELDS": "Fill required field",
+    "HEADER_WALLET_VALUE": "Wallet Value",
+    "HEADER_NEXT_CONTRIBUTION": "Next Contribution",
+    "HEADER_NEXT_CONTRIBUTION_DATE": "Next Contribution Date",
+    "HEADER_ACCOUNT_STATUS": "Account Status",
 
     //OVERVIEW__general__EN
     "OVERVIEW_CONTRIBUTION": "Your contribution",
@@ -118,6 +121,8 @@ export default {
     "MANAGE_NEXT_RECURRING": "Next Recurring Contribution",
     "MANAGE_NEXT_DATE": "Next contribution date",
     "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
+    "MANAGE_AGREE_ERROR": "Confirm legal agreements",
+    "MANAGE_AMOUNT_ERROR": "Cannot be less than the 20",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -147,6 +152,9 @@ export default {
     "SETTINGS.MAKE_READ": "Mark as viewed",
     "SETTINGS.LAST_PW_CHANGE": "last date of password change",
     "SETTINGS_VERIFY_CODE": "Enter verification code",
+    "SETTINGS_NOTIFICATION_ERROR": "Notifications failure",
+    "SETTINGS_NOTIFICATION_SUCCESS": "Notifications success",
+
 
     //MANAGE__PLAN__EN
     "MANAGE_PLAN_CURRENT": "current",
@@ -252,7 +260,10 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sicherheit",
     "PAYMENT": "Zahlung",
-    "FILL_FIELDS": "Pflichtfeld ausfüllen",
+    "HEADER_WALLET_VALUE": "Brieftaschenwert",
+    "HEADER_NEXT_CONTRIBUTION": "Nächster Beitrag",
+    "HEADER_NEXT_CONTRIBUTION_DATE": "Nächstes Beitragsdatum",
+    "HEADER_ACCOUNT_STATUS": "Kontostatus",
 
     //OVERVIEW__general__DE
     "OVERVIEW_CONTRIBUTION": "Ihr Beitrag",
@@ -304,6 +315,8 @@ export default {
     "MANAGE_NEXT_RECURRING": "Nächster wiederkehrender Beitrag",
     "MANAGE_NEXT_DATE": "Nächster Beitragstermin",
     "MANAGE_AGREE": "Ich stimme allen Allgemeinen Geschäftsbedingungen, Vertragsvereinbarung, Datenschutz und Cookie zu",
+    "MANAGE_AGREE_ERROR": "Rechtliche Vereinbarungen bestätigen",
+    "MANAGE_AMOUNT_ERROR": "Darf nicht kleiner als 20 sein",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -333,6 +346,8 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Als ungelesen markieren",
     "SETTINGS.LAST_PW_CHANGE": "letztes Datum der Passwortänderung",
     "SETTINGS_VERIFY_CODE": "Bestätigungscode eingeben",
+    "SETTINGS_NOTIFICATION_ERROR": "Benachrichtigungsfehler",
+    "SETTINGS_NOTIFICATION_SUCCESS": "Benachrichtigungen erfolgreich",
     
     //MANAGE__PLAN__DE
     "MANAGE_PLAN_CURRENT": "aktuell",
@@ -438,7 +453,10 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sécurité",
     "PAYMENT": "Paiement",
-    "FILL_FIELDS": "Remplir le champ obligatoire",
+    "HEADER_WALLET_VALUE": "Valeur du portefeuille",
+    "HEADER_NEXT_CONTRIBUTION": "Prochaine contribution",
+    "HEADER_NEXT_CONTRIBUTION_DATE": "Date de la prochaine cotisation",
+    "HEADER_ACCOUNT_STATUS": "Statut du compte",
 
     //OVERVIEW__general__FR
     "OVERVIEW_CONTRIBUTION": "Votre contribution",
@@ -490,6 +508,8 @@ export default {
     "MANAGE_NEXT_RECURRING": "Prochaine contribution récurrente",
     "MANAGE_NEXT_DATE": "Prochaine date de cotisation",
     "MANAGE_AGREE": "J'accepte toutes les conditions générales, l'accord contractuel, la confidentialité et les cookies",
+    "MANAGE_AGREE_ERROR": "Confirmer les accords juridiques",
+    "MANAGE_AMOUNT_ERROR": "Ne peut être inférieur au 20",
 
 
     //PROFILE__FR
@@ -520,6 +540,8 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Marquer comme non lu",
     "SETTINGS.LAST_PW_CHANGE": "dernière date de changement de mot de passe",
     "SETTINGS_VERIFY_CODE": "Entrez le code de vérification",
+    "SETTINGS_NOTIFICATION_ERROR": "Échec des notifications",
+    "SETTINGS_NOTIFICATION_SUCCESS": "Succès des notifications",
 
     //MANAGE__PLAN__FR
     "MANAGE_PLAN_CURRENT": "courant",

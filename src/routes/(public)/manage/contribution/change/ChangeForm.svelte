@@ -2,20 +2,17 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
-	import { publicApi } from '$lib/api/publicApi';
-	import { onMount } from 'svelte';
-	import Preloader from '$lib/components/Preloader.svelte';
-	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
 	import { changeContribution } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 
-	let requrring = $globalData.data.current_contribution.periodName
+	let requrring = $globalData.data.current_contribution.periodName;
 	let requrringArray = [];
 	let fullRequrringArray = [];
 	let amountValue = $globalData.data.current_contribution.amount || null;
 	let amountErrorState = false;
+	let confirnBtnText = $t('CONFIRM_CHANGES');
 	$: requrringArray, amountErrorState;
 
 	requrringArray = $globalData.periods.map((item) => {
@@ -29,14 +26,19 @@
 			return false;
 		} else {
 			amountErrorState = false;
+			confirnBtnText = `${$t('LOADING')}...`;
 			const periodId = getPeriodId(requrring);
 
 			const result = await changeContribution(amountValue, periodId);
-			console.log(result);
 			if (result.status) {
 				$globalData.data.membershipStatus.amount = amountValue;
 				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
+				$globalData.data.current_contribution.periodName = requrring;
 				getModal('confirm').open();
+				setTimeout(()=>{
+					confirnBtnText = $t('CONFIRM_CHANGES');
+				},200)
+				
 			}
 		}
 	}
@@ -46,11 +48,11 @@
 			this.value = this.value.slice(0, this.maxLength);
 		} else if (parseInt(this.value) < 20) {
 			this.classList.add('error');
-			amountErrorState = true
+			amountErrorState = true;
 		} else if (parseInt(this.value) >= 20) {
 			if (this.classList.contains('error')) {
 				this.classList.remove('error');
-				amountErrorState = false
+				amountErrorState = false;
 			}
 		}
 	}
@@ -65,54 +67,55 @@
 		return periodId;
 	}
 </script>
-<div class="form_wrapper">
+
+<div class="form_wrapper ">
 	<form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
-	<div class="input__wrapper">
-		<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
-		<input
-			type="number"
-			id="amount"
-			class:error={amountErrorState}
-			placeholder="0"
-			min="20"
-			max="9999"
-			maxlength="4"
-			disabled={disabledState || errorState}
-			on:mousewheel={(e) => {
-				e.target.blur();
-			}}
-			on:input={checkInputValue}
-			bind:value={amountValue}
-		/>
-		<small />
-	</div>
-	<div class="input__wrapper">
-		<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
-		<div class="dropdown__wrapper ">
-			<div>
-				<Dropdown
-					bind:activeItem={requrring}
-					itemsData={requrringArray}
-					disabled={disabledState || errorState}
-				/>
+		<div class="input__wrapper ">
+			<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
+			<input
+				type="number"
+				id="amount"
+				class:error={amountErrorState}
+				placeholder="0"
+				min="20"
+				max="9999"
+				maxlength="4"
+				disabled={disabledState || errorState}
+				on:mousewheel={(e) => {
+					e.target.blur();
+				}}
+				on:input={checkInputValue}
+				bind:value={amountValue}
+			/>
+			{#if amountErrorState}
+				<p class="text-left text-xsm error_text amount__error">
+					{$t('MANAGE_AMOUNT_ERROR')}
+					{$globalData.data.currencySymbol}
+				</p>
+			{/if}
+		</div>
+		<div class="input__wrapper">
+			<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
+			<div class="dropdown__wrapper ">
+				<div>
+					<Dropdown
+						bind:activeItem={requrring}
+						itemsData={requrringArray}
+						disabled={disabledState || errorState}
+					/>
+				</div>
 			</div>
 		</div>
-	</div>
-	<button class="btn confirm" disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
-	>
-</form>
-<p class="text-left mt-1 text-xsm " class:error_text={amountErrorState}>*Min. $20 and $9,999 Total contribution</p>
+		<button class="btn confirm" disabled={disabledState || errorState}
+			>{confirnBtnText}</button
+		>
+	</form>
 </div>
 
-
-
 <style>
-	.form_wrapper{
+	.form_wrapper {
 		margin: 0.875rem auto 0 auto;
 		max-width: 721px;
-	}
-	form {
-		
 	}
 	.dropdown__wrapper {
 		min-width: 207px;
@@ -129,15 +132,12 @@
 	::placeholder {
 		color: var(--green-dark-medium);
 	}
-	.absolute {
+	.amount__error {
 		position: absolute;
-		top: 0;
-		z-index: 2;
-		background-color: var(--white);
-		width: 100%;
-		height: 100%;
-		border-radius: 10px;
+		bottom: -35px;
+		left: 5px;
 	}
+
 	@media only screen and (max-width: 991px) {
 		form {
 			display: block;
