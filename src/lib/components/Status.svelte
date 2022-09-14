@@ -4,7 +4,7 @@
   export let status;
   export let iconColor = "initial";
   $: if(status === 'restart'){
-   status = 'suspended';
+   status = 'active';
   }
 </script>
 

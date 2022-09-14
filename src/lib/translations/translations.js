@@ -118,6 +118,7 @@ export default {
     "MANAGE_NEXT_RECURRING": "Next Recurring Contribution",
     "MANAGE_NEXT_DATE": "Next contribution date",
     "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
+    "MANAGE_AMOUNT_ERROR": "Cannot be less than the 20",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -304,6 +305,7 @@ export default {
     "MANAGE_NEXT_RECURRING": "Nächster wiederkehrender Beitrag",
     "MANAGE_NEXT_DATE": "Nächster Beitragstermin",
     "MANAGE_AGREE": "Ich stimme allen Allgemeinen Geschäftsbedingungen, Vertragsvereinbarung, Datenschutz und Cookie zu",
+    "MANAGE_AMOUNT_ERROR": "Darf nicht kleiner als 20 sein",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -490,6 +492,7 @@ export default {
     "MANAGE_NEXT_RECURRING": "Prochaine contribution récurrente",
     "MANAGE_NEXT_DATE": "Prochaine date de cotisation",
     "MANAGE_AGREE": "J'accepte toutes les conditions générales, l'accord contractuel, la confidentialité et les cookies",
+    "MANAGE_AMOUNT_ERROR": "Ne peut être inférieur au 20",
 
 
     //PROFILE__FR
