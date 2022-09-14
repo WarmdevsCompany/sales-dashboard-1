@@ -34,12 +34,12 @@
 				transition:fade={{ duration: 80, offset: 0 }}
 				use:popperContent={extraOpts}
 			>
-				{#if (className = 'seed')}
+				{#if (className == 'seed')}
 					{$t('OVERVIEW_CONTRIBUTION_UNDER')}
 					<span class="text-green">12 {$t('OVERVIEW_MONTH')}</span>
 					{$t('OVERVIEW_STILL')}<span class="text-green">*4.9%</span>
 					{$t('OVERVIEW_WITHDRAW_FEE')}
-				{:else if (className = 'eucalyptus')}
+				{:else if (className == 'eucalyptus')}
 					{$t('OVERVIEW_CONTRIBUTION_BETWEEN')}
 					<span class="text-green">12 {$t('TO')} 36 {$t('OVERVIEW_MONTH')}</span>
 					{$t('OVERVIEW_AGO')} <span class="text-green">*0.5%</span>

@@ -50,12 +50,13 @@
 	</div>
 	<div class="membership-status p-2  b-radius-8 box_shadow-medium">
 		<MembershipMain
-			seedVal={33}
-			seedTotal={400}
-			eucalyptusVal={67}
-			eucalyptusTotal={800}
-			sequoiaVal={0}
-			sequoiaTotal={0}
+			seedVal={$globalData.data.membershipStatus.seed}
+			seedTotal={$globalData.data.membershipStatus.seedTotal}
+			eucalyptusVal={$globalData.data.membershipStatus.eucalyptus}
+			eucalyptusTotal={$globalData.data.membershipStatus.eucalyptusTotal}
+			sequoiaVal={$globalData.data.membershipStatus.sequoia}
+			sequoiaTotal={$globalData.data.membershipStatus.sequoiaTotal}
+			status={$globalData.data.membershipStatus.status}
 		/>
 	</div>
 </div>
