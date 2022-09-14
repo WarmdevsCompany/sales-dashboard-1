@@ -32,10 +32,10 @@
 		updatedItemId = itemId;
 		if (status) {
 			notificationItemStatus = true;
-			updateNotificationResult = 'Notifications success';
+			updateNotificationResult = $t('SETTINGS_NOTIFICATION_SUCCESS');
 		} else {
 			notificationItemStatus = false;
-			updateNotificationResult = 'Notifications failure';
+			updateNotificationResult = $t('SETTINGS_NOTIFICATION_ERROR');
 		}
 	}
 
