@@ -1,5 +1,4 @@
 <script>
-	import { stylesheets } from './../../../../.svelte-kit/output/server/nodes/7.js';
 	import StatusIcon from '$lib/components/icons/StatusIcon.svelte';
 	import { createPopperActions } from 'svelte-popperjs';
 	import nextContributionIcon from '$lib/assets/img/next-contribution.svg';

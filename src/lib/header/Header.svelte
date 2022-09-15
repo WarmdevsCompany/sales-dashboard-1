@@ -1,19 +1,14 @@
 <script>
-	import allSumIcon from '$lib/assets/img/money.svg';
-
-	import StatusIcon from '$lib/components/icons/StatusIcon.svelte';
-	import Status from '$lib/components/Status.svelte';
 	import Notification from '$lib/components/icons/Notification.svelte';
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
 	import MediaQuery from '$lib/components/MediaQuery.svelte';
 	import { globalData } from '$lib/globalStore';
 	import NotificationsTooltip from '../components/NotificationsTooltip.svelte';
 	import HeaderPagesTooltip from '../components/HeaderPagesTooltip.svelte';
-	import { createPopperActions } from 'svelte-popperjs';
 	import WalletValue from './header-items/WalletValue.svelte';
 	import NextContribution from './header-items/NextContribution.svelte';
 	import NextContrDate from './header-items/NextContrDate.svelte';
-import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
+	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
 	let currencySymbol = $globalData.data.currencySymbol,
 		allMoney = $globalData.data.currentSubscription.balance,
@@ -27,7 +22,7 @@ import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 			<WalletValue {allMoney} {currencySymbol} />
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
 			<NextContrDate {nextContributionDate} />
-			<SubscriptionStatus status={$globalData.data.currentSubscription.status.toLowerCase()}/>
+			<SubscriptionStatus status={$globalData.data.currentSubscription.status.toLowerCase()} />
 		</div>
 	</div>
 	<MediaQuery query="(min-width: 992px)" let:matches>
@@ -75,7 +70,7 @@ import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 	:global(.contribution__data--item > :first-child) {
 		margin-right: 0.5rem;
 	}
-	
+
 	:global(.header__tooltip) {
 		padding: 0.625rem 0.625rem 0.625rem 0.625rem;
 		background: var(--white);
