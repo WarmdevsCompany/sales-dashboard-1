@@ -33,6 +33,9 @@
 			uploading = true;
 			response = await changePhoto(reader.result);
 			uploading = false;
+			if(response.status){
+			 $globalData.data.photo = reader.result
+			}
 		};
 
 		if (file) {
@@ -72,11 +75,11 @@
 	</div>
 	{#if response?.status && !uploading}
 		<div class="text-xsm mt-1 text-center success_text" transition:slide|local>
-			Image uploaded successfuly
+			{$t('PROFILE.GENERAL.IMAGE_SUCCESS')}
 		</div>
 	{:else if response?.status === false && !uploading}
 		<div class="text-xsm mt-1 text-center error_text" transition:slide|local>
-			Image upload failed
+			{$t('PROFILE.GENERAL.IMAGE_ERROR')}
 		</div>
 	{/if}
 </div>
@@ -216,6 +219,7 @@
 	@media only screen and (max-width: 991px) {
 		.browse__wrapper {
 			width: 100%;
+			max-width: 303px;
 			min-height: 286px;
 		}
 		.add-placeholder {
