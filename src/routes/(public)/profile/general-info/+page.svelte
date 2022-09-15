@@ -36,7 +36,7 @@
 	}
 	@media only screen and (max-width: 991px) {
 		.profile__wrapper {
-			flex-wrap: wrap;
+			display: block;
 			padding: 2rem 20px;
 			margin-bottom: 4rem;
 		}

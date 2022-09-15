@@ -1,7 +1,6 @@
 <script>
-  export const avatarIsSet = false,
+  export let avatarIsSet = false,
     avatarImg = null;
-
 </script>
 
 <div class="avatar__wrapper b-radius-50" class:green_border={avatarIsSet && avatarImg}>
@@ -28,12 +27,11 @@
 </div>
 
 <style>
-  .avatar__wrapper {
+  .avatar__wrapper img{
     width: 64px;
     height: 64px;
+    border-radius: 50%;
     overflow: hidden;
-  }
-  .avatar_img-wrapper {
     border: 1px solid var(--green-medium-color);
   }
   .avatar__placeholder {

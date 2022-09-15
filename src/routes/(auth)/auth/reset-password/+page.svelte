@@ -1,11 +1,22 @@
 <script>
 	import greenLogo from "$lib/assets/img/logo-green.svg";
+	import { t } from "$lib/translations/i18n.js";
+	import ResetForm from "./ResetForm.svelte";
+
+
   </script>
+  <svelte:head>
+	<title>Reset password</title>
+	<meta name="description" content="Login page" />
+</svelte:head>
   <div class="greenForm">
 	<div class="box_shadow-medium form__content">
 	  <div class="content d-flex flex-col justify-cc align-center">
 		<img src={greenLogo} alt="esi logo img" />
-		<div class="text-1 mb-1">Log In</div>
+		<div class="text-1 mb-1">{$t("RESET_PASSWORD")}</div>
+		<div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>
+	
+		<ResetForm />
 
 	  </div>
 	  <div class="absolute">

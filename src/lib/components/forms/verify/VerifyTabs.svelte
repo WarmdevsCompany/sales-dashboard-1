@@ -7,7 +7,6 @@
   export let activeTabValue = 1;
   let radioValue;
   $: radioValue;
-  console.log(radioValue);
   const options = [
     {
       value: "email",

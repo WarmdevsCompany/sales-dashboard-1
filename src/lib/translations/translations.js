@@ -20,6 +20,7 @@ export default {
     "SETTINGS": "Settings",
     "SEARCH": "Search",
     "REMOVE": "Remove",
+    "RESET_PASSWORD": "Reset password",
     "CHANGE_PASSWORD": "Change password",
     "NEW_PASSWORD": "New password",
     "REPEAT_PASSWORD": "Repeat new password",
@@ -126,6 +127,8 @@ export default {
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
+    "PROFILE.GENERAL.IMAGE_SUCCESS": "Image uploaded successfuly", 
+    "PROFILE.GENERAL.IMAGE_ERROR": "Image upload failed", 
     "PROFILE_PW_CHANDED": "Password successfully changed", 
     "PROFILE.GENERAL.CONTACT": "Contact details", 
     "PROFILE.GENERAL.DROP": "Drop your image here, or", 
@@ -214,6 +217,7 @@ export default {
     "SETTINGS": "Einstellungen",
     "SEARCH": "Suche",
     "REMOVE": "Entfernen",
+    "RESET_PASSWORD": "Passwort zurücksetzen",
     "CHANGE_PASSWORD": "Passwort ändern",
     "NEW_PASSWORD": "Neues Passwort",
     "REPEAT_PASSWORD": "Wiederhole das neue Passwort",
@@ -320,6 +324,8 @@ export default {
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
+    "PROFILE.GENERAL.IMAGE_SUCCESS": "Bild erfolgreich hochgeladen", 
+    "PROFILE.GENERAL.IMAGE_ERROR": "Bild-Upload fehlgeschlagen", 
     "PROFILE_PW_CHANDED": "Passwort erfolgreich geändert", 
     "PROFILE.GENERAL.CONTACT": "Kontaktdetails", 
     "PROFILE.GENERAL.DROP": "Legen Sie Ihr Bild hier ab oder ", 
@@ -407,6 +413,7 @@ export default {
     "SETTINGS": "Réglages",
     "SEARCH": "Chercher",
     "REMOVE": "Retirer",
+    "RESET_PASSWORD": "Réinitialiser le mot de passe",
     "CHANGE_PASSWORD": "Changer le mot de passe",
     "NEW_PASSWORD": "Nouveau mot de passe",
     "REPEAT_PASSWORD": "Répété le nouveau mot de passe",
@@ -514,6 +521,8 @@ export default {
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",
+    "PROFILE.GENERAL.IMAGE_SUCCESS": "Image téléchargée avec succès", 
+    "PROFILE.GENERAL.IMAGE_ERROR": "Le téléchargement de l'image a échoué", 
     "PROFILE_PW_CHANDED": "Mot de passe changé avec succès",
     "PROFILE.GENERAL.CONTACT": "Détails du contact", 
     "PROFILE.GENERAL.DROP": "Déposez votre image ici, ou ", 

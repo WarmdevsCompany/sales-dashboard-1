@@ -8,7 +8,7 @@
 	import { login } from '$lib/api/axios';
 
 	let buttonText = $t('LOGIN');
-	let remember = [];
+	let isLoading = false;
 	let errorMessages = null;
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
 		initialValues: {
@@ -22,8 +22,14 @@
 		onSubmit: async (values) => {
 			try {
 				buttonText = `${$t('LOADING')}...`;
+				isLoading = true
 
-				await login({ login: values.userName, password: values.password });
+				let res = await login({ login: values.userName, password: values.password });
+				if(res?.status === false){
+					isLoading = false
+					errorMessages = res.errorMessage;
+					buttonText = $t('LOGIN');
+				}
 			} catch (e) {
 				buttonText = $t('LOGIN');
 				errorMessages = e;
@@ -46,6 +52,7 @@
 		on:change={handleChange}
 		on:focus={() => onFocus('userName')}
 		bind:value={$form.userName}
+		disabled={isLoading}
 	/>
 	{#if $errors.userName}
 		<small transition:slide|local class="error_text">{$errors.userName}</small>
@@ -62,6 +69,7 @@
 			on:change={handleChange}
 			on:focus={() => onFocus('password')}
 			bind:value={$form.password}
+			disabled={isLoading}
 		/>
 	</div>
 	{#if $errors.password}
@@ -72,7 +80,7 @@
 	{/if}
 	<div class="d-flex justify-sb align-center">
 		<div class="forgot__pass">
-			<a href="#" class="forgot__btn">{$t('FORGOT_PW')}</a>
+			<a href="/auth/reset-password" class="forgot__btn">{$t('FORGOT_PW')}</a>
 		</div>
 	</div>
 	<div class="login__btn__wrapper d-flex justify-sb align-center ">

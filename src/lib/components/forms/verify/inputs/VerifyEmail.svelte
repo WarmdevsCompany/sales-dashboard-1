@@ -3,6 +3,7 @@
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
   import { t } from "$lib/translations/i18n.js";
+  export let submitBtnText = $t("SEND")
 
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
@@ -34,5 +35,5 @@
     <small transition:slide|local class="error_text last">{$errors.email}</small
     >
   {/if}
-  <button class="btn _218">{$t("SEND")}</button>
+  <button class="btn _218">{submitBtnText}</button>
 </form>

@@ -18,7 +18,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { currentSideBarStatus, globalData } from '$lib/globalStore';
 	import { onMount } from 'svelte';
-import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
+	import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 	let openedMenu = false;
 
 	if ($page.url.pathname.includes('/manage')) {
@@ -57,7 +57,7 @@ import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 						</div>
 					</NotificationsTooltip>
 				</div>
-			
+
 				<div class="relative">
 					<HeaderPagesTooltip
 						><div class="pointer"><ThreeDotsIcon bgColor="white" /></div></HeaderPagesTooltip
@@ -70,8 +70,6 @@ import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 		<div class="mobile__bg" />
 	{/if}
 </MediaQuery>
-
-
 
 <div
 	in:fade
@@ -93,7 +91,12 @@ import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 					</div>
 				{/if}
 			</MediaQuery>
-			<AvatarIcon avatarIsSet={false} />
+			{#if $globalData.data.photo}
+			  <AvatarIcon avatarIsSet={true} avatarImg={$globalData.data.photo} />
+			  {:else}
+			  <AvatarIcon avatarIsSet={false} avatarImg={false}/>
+			{/if}
+			
 			<div class="user__name d-flex justify-cc">
 				{firstName}
 				{lastName}

@@ -29,7 +29,7 @@ export const login = async (body) => {
 			privatePath.defaults.headers.common['Authorization'] = response.data.data.token;
 			goto('/overview/general');
 		} else {
-			return response.data.errorMessage;
+			return response.data;
 		}
 	} catch (error) {
 		console.error(error);
@@ -70,11 +70,7 @@ export const changeLang = async (langId) => {
 export const changePhoto = async (objSrc) => {
 	try {
 		let response = await privatePath.post('/updateClientPhoto', { photo: objSrc });
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
 	}
@@ -82,7 +78,10 @@ export const changePhoto = async (objSrc) => {
 
 export const changeNotificationSettings = async (id, value) => {
 	try {
-		let response = await privatePath.post('/changeNotificationSetting', { notificationId: id, notificationValue: value });
+		let response = await privatePath.post('/changeNotificationSetting', {
+			notificationId: id,
+			notificationValue: value
+		});
 		if (response.data.status) {
 			return response.data;
 		} else {
