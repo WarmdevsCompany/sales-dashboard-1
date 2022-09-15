@@ -2,14 +2,12 @@
   import greenLogo from "$lib/assets/img/logo-green.svg";
   import Modal, { getModal } from "$lib/components/Modal.svelte";
   import { modalClassName, confirmModalState } from "../securityStore";
-  import { fade } from "svelte/transition";
-  import closeIcon from "$lib/assets/img/close.svg";
-  import VerifyTabs from "$lib/components/forms/verify/VerifyTabs.svelte";
   import LoginPassForm from "$lib/components/forms/LoginPassForm.svelte";
   import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   import ChangePassForm from "$lib/components/forms/ChangePassForm.svelte";
   import { t } from "$lib/translations/i18n.js";
 	import SuccessModal from "../../../../../lib/components/forms/SuccessModal.svelte";
+	import VerifyEmail from "../../../../../lib/components/forms/verify/inputs/VerifyEmail.svelte";
   let formStep = 1;
   let heading = $t("CHANGE_PASSWORD");
 
@@ -43,7 +41,8 @@
       {:else if formStep === 2}
         <div class="mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <div class="modal_main-row">
-          <VerifyTabs sendVerifyCallback={() => (formStep = 3)} />
+          <VerifyEmail sendVerifyCallback={() => (formStep = 3)}/>
+          
         </div>
       {:else if formStep === 3}
         <div class=" mt-1">{$t("VERIFY_ACCOUNT")}</div>

@@ -27,7 +27,11 @@
 				let res = await login({ login: values.userName, password: values.password });
 				if(res?.status === false){
 					isLoading = false
-					errorMessages = res.errorMessage;
+					if(res.errorMessage === 'INVALID_PASSWORD'){
+						errorMessages = $t('INVALID_PASSWORD')
+					}else if(res.errorMessage === "USER_NOT_FOUND"){
+						errorMessages = $t('USER_NOT_FOUND')
+					}
 					buttonText = $t('LOGIN');
 				}
 			} catch (e) {
@@ -38,7 +42,7 @@
 	});
 	const onFocus = (item) => {
 		$errors[item] = '';
-		errorMessages = false;
+		errorMessages = null;
 	};
 </script>
 

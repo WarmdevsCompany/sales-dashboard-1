@@ -5,9 +5,9 @@
 	import { modalClassName, confirmModalState } from '../withdrawStore';
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
-	import VerifyTabs from '$lib/components/forms/verify/VerifyTabs.svelte';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	let formStep = 1;
 	$: formStep;
 	const submitEmailOrPhone = () => (formStep = 2);
@@ -29,7 +29,7 @@
 		<div class="modal_main-row ">
 			<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
 			{#if formStep === 1}
-				<VerifyTabs sendVerifyCallback={submitEmailOrPhone} />
+				<VerifyEmail sendVerifyCallback={submitEmailOrPhone}/>
 			{:else if formStep === 2}
 				<VerifyCodeForm {submitVerificationCode} />
 			{/if}
