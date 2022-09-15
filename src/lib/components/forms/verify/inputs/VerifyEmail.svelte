@@ -1,4 +1,5 @@
 <script>
+	import { requestValidation } from '$lib/api/axios.js';
   import { slide } from "svelte/transition";
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
@@ -12,8 +13,14 @@
     validationSchema: yup.object().shape({
       email: yup.string().email().required($t("ENTER_EMAIL")),
     }),
-    onSubmit: () => {
-      $$props.sendVerifyCallback();
+    onSubmit: async (value) => {
+      submitBtnText = `${$t('LOADING')}...`;
+      const res = await requestValidation(value.email)
+      console.log(res)
+      if(res.status){
+        $$props.sendVerifyCallback();
+      }
+      submitBtnText = $t("SEND")
     },
   });
   const onFocus = (item) => {

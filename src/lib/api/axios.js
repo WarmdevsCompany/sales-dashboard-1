@@ -35,6 +35,27 @@ export const login = async (body) => {
 		console.error(error);
 	}
 };
+export const verifyAccount = async (body) => {
+	try {
+		let response = await publicPath.post('/login', {
+			login: body.login,
+			password: body.password
+		});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const requestValidation = async (body) => {
+	try {
+		let response = await privatePath.post('/requestValidation', {
+			emailOrPhone: body
+		});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 export const logout = () => {
 	deleteCookie('esiToken');

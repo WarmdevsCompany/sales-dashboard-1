@@ -121,7 +121,7 @@
 		margin-top: 2.125rem;
 		padding-bottom: 4.5rem;
 	}
-	@media only screen and (max-width: 1100px) {
+	@media only screen and (max-width: 1300px) {
 		.contact .input__wrapper {
 			grid-column-start: 1;
 			grid-column-end: 3;
