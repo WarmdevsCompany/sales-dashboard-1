@@ -7,7 +7,8 @@
   import * as yup from "yup";
   import { t } from "$lib/translations/i18n.js";
   let buttonText = $t("LOGIN");
-  
+  let isLoading = false;
+  let errorMessages = null;
   const { form, errors, state, handleChange, handleSubmit } = createForm({
     initialValues: {
       userName: "",
@@ -20,6 +21,7 @@
       password: yup.string().required($t("ENTER_USER_PW")),
     }),
     onSubmit: async (values) => {
+      isLoading = true
       const body ={
        login: values.userName,
        password: values.password
@@ -29,6 +31,7 @@
       if(res.status){
         $$props.authDataCallback();
       }else if(res.status === false){
+          isLoading = false
 					if(res.errorMessage === 'INVALID_PASSWORD'){
 						errorMessages = $t('INVALID_PASSWORD')
 					}else if(res.errorMessage === "USER_NOT_FOUND"){
@@ -40,6 +43,7 @@
   });
   const onFocus = (item) => {
     $errors[item] = "";
+    errorMessages = null
   };
   
 </script>
@@ -54,6 +58,7 @@
     on:change={handleChange}
     on:focus={() => onFocus("userName")}
     bind:value={$form.userName}
+    disabled={isLoading}
   />
   {#if $errors.userName}
     <small transition:slide|local class="error_text">{$errors.userName}</small>
@@ -70,6 +75,7 @@
       on:change={handleChange}
       on:focus={() => onFocus("password")}
       bind:value={$form.password}
+      disabled={isLoading}
     />
   </div>
   {#if $errors.password}
@@ -77,6 +83,9 @@
       >{$errors.password}</small
     >
   {/if}
+  {#if errorMessages}
+		<small transition:slide|local class="error_text last">{errorMessages}</small>
+	{/if}
 
   <div class="form__bottom d-flex justify-sb">
     <div class="forgot__pass">

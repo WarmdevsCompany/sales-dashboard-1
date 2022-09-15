@@ -42,7 +42,7 @@
 	});
 	const onFocus = (item) => {
 		$errors[item] = '';
-		errorMessages = false;
+		errorMessages = null;
 	};
 </script>
 
