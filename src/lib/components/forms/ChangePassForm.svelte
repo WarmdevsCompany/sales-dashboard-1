@@ -2,7 +2,6 @@
   import { slide } from "svelte/transition";
   import { createForm } from "svelte-forms-lib";
   import * as yup from "yup";
-  import { confirmModalState } from "../securityStore";
   import EyePwIco from "$lib/components/icons/EyePW_ico.svelte";
   import { validatePasswordType } from "$lib/functions/validatePasswordType";
   import { t } from "$lib/translations/i18n.js";
@@ -29,7 +28,7 @@
         .oneOf([yup.ref("password")], $t("PW_NOT_MATCH")),
     }),
     onSubmit: () => {
-      $confirmModalState = true;
+      $$props.submitNewPassword()
     },
   });
   const onFocus = (item) => {
