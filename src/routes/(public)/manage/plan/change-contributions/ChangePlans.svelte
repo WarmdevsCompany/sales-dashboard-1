@@ -6,7 +6,7 @@
 		allocatedContributions,
 		errorMessageState,
 		subscribeAllState,
-		changeBlockStatus,
+		
 		sumOfPlans
 	} from './planStore';
 	import ChangePlanItem from './ChangePlanItem.svelte';
@@ -31,6 +31,10 @@
 	let activeDropdownSave = false;
 	let activeDropdownAdv = false;
 	let activeDropdownFound = false;
+
+	$allocatedContributions.safe = $globalData.data.current_contribution.greenSafe
+	$allocatedContributions.adventure = $globalData.data.current_contribution.greenAdventure
+	$allocatedContributions.founder = $globalData.data.current_contribution.greenFounder
 
 	$: allowPercentageVal =
 		100 -
@@ -79,11 +83,7 @@
 		if ($sumOfPlans > 99 && $sumOfPlans <= 100) {
 			$errorMessageState = false;
 		}
-		if ($sumOfPlans > 0) {
-			$changeBlockStatus = true;
-		} else {
-			$changeBlockStatus = false;
-		}
+		
 	});
 </script>
 

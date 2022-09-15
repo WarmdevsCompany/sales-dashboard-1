@@ -25,7 +25,7 @@
 	async function filterByDefault() {
 		$loading = true;
 		newData = await getGeneralData();
-		$notificationList = newData.notifications.data;
+		$notificationList = newData.data.notifications.data;
 		$loading = false;
 	}
 

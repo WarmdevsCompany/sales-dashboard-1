@@ -13,7 +13,6 @@
 	import ChangePlans from './change-contributions/ChangePlans.svelte';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import { t } from '$lib/translations/i18n.js';
-	import { changeBlockStatus } from './change-contributions/planStore';
 	import UpdatedPlanItems from './UpdatedPlanItems.svelte';
 	let confirmButtonText = $t('CONFIRM_CHANGES');
 
@@ -32,10 +31,6 @@
 		$globalData.data.current_contribution.greenFounder = $allocatedContributions.founder;
 	};
 	const resetContributionData = () => {
-		$allocatedContributions.safe = 0;
-		$allocatedContributions.adventure = 0;
-		$allocatedContributions.founder = 0;
-		$sumOfPlans = 0
 		$subscribeAllState = false
 	};
 
@@ -69,7 +64,6 @@
 <div class="d-flex justify-cc">
 	<button
 		class="btn confirm mt-1_5 box_shadow-medium"
-		disabled={!$changeBlockStatus}
 		on:click={changeContributionData}>{confirmButtonText}</button
 	>
 </div>
@@ -89,11 +83,11 @@
 		<button class="btn" on:click={() => getModal('confirmPlan').close()}>{$t('CLOSE')}</button>
 	</div>
 </Modal>
-{#if $changeBlockStatus}
+
 	<div in:fade out:fade={{ delay: 0, duration: 100 }}>
 		<PlansMain />
 	</div>
-{/if}
+
 
 <style>
 	.modal_main {

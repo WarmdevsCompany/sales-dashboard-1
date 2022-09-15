@@ -67,8 +67,6 @@ export const allocatedContributions = writable({
 });
 export const sumOfPlans = writable(0)
 
-export const changeBlockStatus = writable(false)
-
 export let planData = [
   {
     sortName: "all",

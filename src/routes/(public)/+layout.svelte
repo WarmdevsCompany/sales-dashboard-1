@@ -1,17 +1,24 @@
 <script>
+	import greenLogo from '$lib/assets/img/logo-green.svg';
+	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import Header from '$lib/header/Header.svelte';
 	import Sidebar from '$lib/sidebar/Sidebar.svelte';
 	import '../../app.css';
 	import logoForBg from '$lib/assets/img/logo-big.svg';
+	import { t } from '$lib/translations/i18n.js';
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { notificationList, globalData, notificationSettings } from '$lib/globalStore';
+	import {
+		notificationList,
+		globalData,
+		notificationSettings,
+		selectedNotification
+	} from '$lib/globalStore';
 
 	// set general data to store
 	export let data;
 	$globalData = data.general;
-	console.log($globalData);
 
 	let loading = true;
 
@@ -38,6 +45,20 @@
 			</div>
 		</div>
 		<img in:fade class="logo_bg" src={logoForBg} alt="esi logo" />
+		<Modal id="notification">
+			<div class="notification_modal text-center">
+				<img src={greenLogo} alt="esi logo img" />
+				<div class="modal_head_medium mt-2">
+					{$selectedNotification.head}
+				</div>
+				<div class="text-4 mt-1">{$selectedNotification.body}</div>
+				<div class="mt-2 d-flex justify-cc">
+					<button class="btn confirm " on:click={() => getModal('notification').close()}
+						>{$t('CLOSE')}</button
+					>
+				</div>
+			</div>
+		</Modal>
 	{:else}
 		<Loader />
 	{/if}
@@ -61,6 +82,9 @@
 		top: 270px;
 		left: 68px;
 		z-index: -1;
+	}
+	.notification_modal {
+		padding-top: 6rem;
 	}
 	@media only screen and (max-width: 991px) {
 		.logo_bg {
