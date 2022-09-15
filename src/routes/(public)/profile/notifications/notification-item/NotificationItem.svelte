@@ -1,11 +1,15 @@
 <script>
+	import { getModal } from '$lib/components/Modal.svelte';
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
+	import { selectedNotification } from '$lib/globalStore';
 	import ItemTooltip from './ItemTooltip.svelte';
 
 	export let objAttributes = {};
 
-	function detailInfo(id) {
-		alert(`detail info of ${id}`);
+	function showNotificationModal(name, text) {
+		$selectedNotification.head = name
+		$selectedNotification.body = text
+		getModal('notification').open()
 	}
 </script>
 
@@ -17,7 +21,7 @@
 	<div class="d-flex justify-sb">
 		<div
 			class="title d-flex align-center text-3 mb-1"
-			on:click={() => detailInfo(objAttributes.idobject)}
+			on:click={() => showNotificationModal(objAttributes.name, objAttributes.text)}
 		>
 			{objAttributes.name}
 		</div>

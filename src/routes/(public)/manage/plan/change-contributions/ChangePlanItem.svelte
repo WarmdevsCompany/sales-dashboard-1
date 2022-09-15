@@ -1,5 +1,4 @@
 <script>
-	import { changeBlockStatus } from './planStore.js';
 	import { globalData } from './../../../../../lib/globalStore.js';
 	import clickOutside from '$lib/functions/clickOutside';
 	import { priceConvertation } from '$lib/functions/priceConvertation';
