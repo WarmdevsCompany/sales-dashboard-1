@@ -1,4 +1,5 @@
 <script>
+	import { verificationId } from '$lib/globalStore.js';
 	import { verifyCode } from '$lib/api/axios.js';
 	import { createForm } from 'svelte-forms-lib';
 	import { slide } from 'svelte/transition';
@@ -17,8 +18,8 @@
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
 			const res = await verifyCode(value.code);
-			console.log(res);
 			if (res.status) {
+        $verificationId = res.data?.verificationId
 				$$props.submitVerificationCode();
 			}
 			isLoading = false;

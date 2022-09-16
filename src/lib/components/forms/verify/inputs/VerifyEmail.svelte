@@ -17,7 +17,6 @@
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
 			const res = await requestValidation(value.email);
-			console.log(res);
 			if (res.status) {
 				$$props.sendVerifyCallback();
 			}
