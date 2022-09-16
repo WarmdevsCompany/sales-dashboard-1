@@ -1,6 +1,6 @@
 # ESI user Dashboard
 
-Build with[`sveltekit`](https://kit.svelte.dev/).
+Build with [`sveltekit`](https://kit.svelte.dev/).
 
 
 ## Start dev server

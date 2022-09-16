@@ -1,14 +1,27 @@
 <script>
 	import { onMount } from 'svelte';
+	export let withdrawalsList;
+	let datesObj;
+	let dates = [];
+
 	let date1 = new Date('11/08/2021').getTime();
 	let date2 = new Date('10/05/2021').getTime();
 	let date3 = new Date('6/06/2021').getTime();
-	let datesObj = [
-		{ date: date1, sum: 123 },
-		{ date: date2, sum: 223 },
-		{ date: date3, sum: 843 }
-	];
-	let dates = [date1, date2, date3];
+
+	$: if (withdrawalsList === null) {
+		datesObj = [];
+		dates = [];
+	} else {
+		datesObj = [
+			{ date: date1, sum: 123 },
+			{ date: date2, sum: 223 },
+			{ date: date3, sum: 843 }
+		];
+		datesObj.forEach((item) => {
+			dates.push(item.date);
+		});
+	}
+
 	const lang = localStorage.getItem('lang');
 
 	function findObjValueByDate(array, dateItem) {

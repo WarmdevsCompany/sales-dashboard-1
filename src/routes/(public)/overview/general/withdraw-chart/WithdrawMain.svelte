@@ -1,14 +1,18 @@
 <script>
+	import { globalData } from '$lib/globalStore.js';
 	import WithdrawChart from './WithdrawChart.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	export let totalWithdraw;
+	export let withdrawals, currencySymbol;
+	$: if (withdrawals.sum === null) {
+		withdrawals.sum = 0;
+	}
 </script>
 
 <div class="withdraw__body white_box d-flex justify-sb mt-2">
-	<WithdrawChart />
+	<WithdrawChart withdrawalsList={withdrawals.list}/>
 	<div class="withdraw">
 		<div class="text-3 ">{$t('OVERVIEW_WITHDRAWS_DETAILS')}</div>
-		<div class="text-4 mt-1">$1,680</div>
+		<div class="text-4 mt-1">{currencySymbol}{withdrawals.sum}</div>
 		<div class="text-sm">{$t('OVERVIEW_TOTAL')}</div>
 	</div>
 </div>

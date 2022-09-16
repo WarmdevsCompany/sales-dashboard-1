@@ -60,7 +60,7 @@
 		/>
 	</div>
 </div>
-<WithdrawMain />
+<WithdrawMain withdrawals={$globalData.data.withdrawals} currencySymbol={$globalData.data.currencySymbol}/>
 
 <style>
 	.saving-projection {
