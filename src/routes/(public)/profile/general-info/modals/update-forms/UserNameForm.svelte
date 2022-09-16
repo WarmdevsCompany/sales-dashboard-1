@@ -29,7 +29,7 @@
 			let res = await changeUserName(value.userName, verifyId);
 			console.log(res)
 			if (res.status) {
-				setNewAuthHeaders(res.status)
+				setNewAuthHeaders(res.data.token)
 				$confirmModalState = true;
 				$globalData.data.personalInfo.username = value.userName;
 				$$props.submitChanges();
