@@ -19,6 +19,7 @@
 	// set general data to store
 	export let data;
 	$globalData = data.general;
+	console.log($globalData)
 
 	let loading = true;
 

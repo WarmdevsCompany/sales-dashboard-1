@@ -56,6 +56,16 @@ export const requestValidation = async (body) => {
 		console.error(error);
 	}
 };
+export const verifyCode = async (body) => {
+	try {
+		let response = await privatePath.post('/verifyCode', {
+			code : body
+		});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 export const logout = () => {
 	deleteCookie('esiToken');

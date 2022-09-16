@@ -1,49 +1,60 @@
 <script>
-  import { createForm } from "svelte-forms-lib";
-  import { slide } from "svelte/transition";
-  import * as yup from "yup";
-  import { t } from "$lib/translations/i18n.js";
+	import { verifyCode } from '$lib/api/axios.js';
+	import { createForm } from 'svelte-forms-lib';
+	import { slide } from 'svelte/transition';
+	import * as yup from 'yup';
+	import { t } from '$lib/translations/i18n.js';
+	let submitBtnText = $t('CONTINUE');
+	let isLoading = false;
+	const { form, errors, state, handleChange, handleSubmit } = createForm({
+		initialValues: {
+			code: ''
+		},
+		validationSchema: yup.object().shape({
+			code: yup.number().required($t('ENTER_CODE'))
+		}),
+		onSubmit: async (value) => {
+			isLoading = true;
+			submitBtnText = `${$t('LOADING')}...`;
+			const res = await verifyCode(value.code);
+			console.log(res);
+			if (res.status) {
+				$$props.submitVerificationCode();
+			}
+			isLoading = false;
+			submitBtnText = $t('CONTINUE');
+		}
+	});
+	const onFocus = (item) => {
+		$errors[item] = '';
+	};
 
-  const { form, errors, state, handleChange, handleSubmit } = createForm({
-    initialValues: {
-      code: "",
-    },
-    validationSchema: yup.object().shape({
-        code: yup.number().required($t("ENTER_CODE")),
-    }),
-    onSubmit: () => {
-      $$props.submitVerificationCode();
-    },
-  });
-  const onFocus = (item) => {
-    $errors[item] = "";
-  };
-  
-  function check(e) {
-    var keyCode = (e.keyCode ? e.keyCode : e.which);
-    if (keyCode === 38 || keyCode === 40) {
-        e.preventDefault();
-    }
-}
+	function check(e) {
+		var keyCode = e.keyCode ? e.keyCode : e.which;
+		if (keyCode === 38 || keyCode === 40) {
+			e.preventDefault();
+		}
+	}
 </script>
 
 <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
-  <input
-    type="number"
-    placeholder={$t("SETTINGS_VERIFY_CODE")}
-    class:error={$errors.code}
-    autocomplete
-    on:mousewheel={(e) => {
-        e.target.blur();
-      }}
-    on:keydown ={check}
-    on:keyup={check}
-    on:change={handleChange}
-    on:focus={() => onFocus("code")}
-    bind:value={$form.code}
-  />
-  {#if $errors.code}
-    <small transition:slide|local class="error_text last">{$errors.code}</small>
-  {/if}
-  <button class="btn _218">{$t("CONTINUE")}</button>
+	<input
+		type="number"
+		placeholder={$t('SETTINGS_VERIFY_CODE')}
+		class:error={$errors.code}
+		autocomplete
+		on:mousewheel={(e) => {
+			e.target.blur();
+		}}
+		on:keydown={check}
+		on:keyup={check}
+		on:change={handleChange}
+		on:focus={() => onFocus('code')}
+		bind:value={$form.code}
+		disabled={isLoading}
+	/>
+	{#if $errors.code}
+		<small transition:slide|local class="error_text last">{$errors.code}</small>
+	{/if}
+	<button class="btn _218">{submitBtnText}</button>
 </form>
