@@ -41,7 +41,7 @@
 		<Sidebar />
 		<div in:fade class="main-content ml-1_25">
 			<Header />
-			<div class="mt-3">
+			<div class="mt-2_5">
 				<slot />
 			</div>
 		</div>

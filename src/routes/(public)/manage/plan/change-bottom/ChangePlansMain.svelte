@@ -32,7 +32,7 @@
 
 <style>
 	.change__bottom {
-		margin-top: 2.5rem;
+		margin-top: 2rem;
 	}
 	.plan__items {
 		margin-top: 0.57rem;
