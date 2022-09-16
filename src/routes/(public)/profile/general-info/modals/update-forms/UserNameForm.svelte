@@ -1,4 +1,5 @@
 <script>
+	import { globalData } from '$lib/globalStore';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
@@ -16,10 +17,10 @@
 				.max(20, $t('USER_NAME_RANGE'))
 				.required($t('ENTER_USER_NAME'))
 		}),
-		onSubmit: (values) => {
+		onSubmit: (value) => {
 			$confirmModalState = true;
-			$$props.submitChanges;
-			console.log(JSON.stringify(values));
+			$globalData.data.personalInfo.username = value.userName
+			$$props.submitChanges();
 		}
 	});
 	const onFocus = (item) => {

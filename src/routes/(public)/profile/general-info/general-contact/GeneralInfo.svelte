@@ -12,16 +12,14 @@
 		email = '',
 		username = '';
 
-	onMount(async () => {
-		if ($globalData) {
-			firstName = $globalData.data.personalInfo.firstname;
-			lastName = $globalData.data.personalInfo.lastname;
-			username = $globalData.data.personalInfo.username;
-			gender = $globalData.data.personalInfo.gender;
-			dob = $globalData.data.personalInfo.dob;
-			email = $globalData.data.personalInfo.email;
-		}
-	});
+	$: {
+		firstName = $globalData.data.personalInfo.firstname;
+		lastName = $globalData.data.personalInfo.lastname;
+		username = $globalData.data.personalInfo.username;
+		gender = $globalData.data.personalInfo.gender;
+		dob = $globalData.data.personalInfo.dob;
+		email = $globalData.data.personalInfo.email;
+	}
 </script>
 
 <div>
