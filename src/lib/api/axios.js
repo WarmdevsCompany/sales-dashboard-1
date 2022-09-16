@@ -18,6 +18,10 @@ const privatePath = axios.create({
 // set default headers
 privatePath.defaults.headers.common['Authorization'] = esiToken;
 
+export const setNewAuthHeaders = (header) =>{
+	privatePath.defaults.headers.common['Authorization'] = header;
+}
+
 export const login = async (body) => {
 	try {
 		let response = await publicPath.post('/login', {
@@ -59,7 +63,7 @@ export const requestValidation = async (body) => {
 export const verifyCode = async (body) => {
 	try {
 		let response = await privatePath.post('/verifyCode', {
-			code : body
+			code: body
 		});
 		return response.data;
 	} catch (error) {
@@ -101,6 +105,17 @@ export const changeLang = async (langId) => {
 export const changePhoto = async (objSrc) => {
 	try {
 		let response = await privatePath.post('/updateClientPhoto', { photo: objSrc });
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const changeUserName = async (username, verificationId) => {
+	const body = { username, verificationId };
+	console.log(body)
+	try {
+		let response = await privatePath.post('/changeUsername', body);
+		console.log(response)
 		return response.data;
 	} catch (error) {
 		console.error(error);

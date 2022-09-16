@@ -1,4 +1,5 @@
 <script>
+	import { globalData } from '$lib/globalStore.js';
 	import lockImg from '$lib/assets/img/padlock.svg';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import ChangePassModal from './modals/ChangePassModal.svelte';
@@ -15,7 +16,7 @@
 		<img src={lockImg} alt="change password" class="lock_icon" />
 		<div class="text-3">{$t('CHANGE_PASSWORD')}</div>
 		<div class="text-xsm mt-0_5">
-			{$t('SETTINGS.LAST_PW_CHANGE')} - <span class="text-green">27.07.21</span>
+			{$t('SETTINGS.LAST_PW_CHANGE')} - <span class="text-green">{$globalData.data.passwordLastChangeDate.substring(0, 10)}</span>
 		</div>
 		<button class="btn" on on:click={() => getModal('change-password').open()}
 			>{$t('CHANGE_PASSWORD')}</button

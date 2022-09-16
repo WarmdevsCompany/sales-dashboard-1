@@ -8,6 +8,7 @@ export let selectedNotification = writable({
 	head: '',
 	body: ''
 });
+export const verificationId = writable(null)
 export let loading = writable(false);
 
 export let updateLoading = (status) => {
