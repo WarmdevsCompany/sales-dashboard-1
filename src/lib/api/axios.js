@@ -19,6 +19,7 @@ const privatePath = axios.create({
 privatePath.defaults.headers.common['Authorization'] = esiToken;
 
 export const setNewAuthHeaders = (header) =>{
+	setCookie('esiToken', header,  { secure: true, 'max-age': 84600 })
 	privatePath.defaults.headers.common['Authorization'] = header;
 }
 
@@ -112,10 +113,44 @@ export const changePhoto = async (objSrc) => {
 };
 export const changeUserName = async (username, verificationId) => {
 	const body = { username, verificationId };
-	console.log(body)
 	try {
 		let response = await privatePath.post('/changeUsername', body);
-		console.log(response)
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const changeFirstAndLastname = async (firstname, lastname, verificationId) => {
+	const body = { firstname, lastname, verificationId };
+	try {
+		let response = await privatePath.post('/changeFirstAndLastname', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const changeGender = async (gender, verificationId) => {
+	const body = { gender, verificationId };
+	try {
+		let response = await privatePath.post('/changeGender', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const changeDOB = async (dob, verificationId) => {
+	const body = { dob, verificationId };
+	try {
+		let response = await privatePath.post('/changeDOB', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const changeEmail = async (email, verificationId) => {
+	const body = { email, verificationId };
+	try {
+		let response = await privatePath.post('/changeEmail', body);
 		return response.data;
 	} catch (error) {
 		console.error(error);

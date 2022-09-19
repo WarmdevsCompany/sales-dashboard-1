@@ -20,6 +20,7 @@
 
   export let id = "";
   export let className = "";
+  export let resetModalState = ()=>{}
 
   // function keyPress(ev) {
   //   //only respond if the current modal is the top one
@@ -57,6 +58,11 @@
 
   //expose the API
   modals[id] = { open, close };
+
+  const closeAndResetModalState=()=>{
+    close()
+    resetModalState()
+  }
   onDestroy(() => {
     delete modals[id];
   });
@@ -76,16 +82,28 @@
       class="box_shadow-medium {className}"
       on:click|stopPropagation={() => {}}
     >
-      <img
+    {#if !className ===  "greenForm"}
+        <img
         id="close"
         class={className}
         on:click={() => close()}
         src={closeIcon}
         alt="esi close icon"
       />
+    {/if}
+    
 
       <div id="modal-content">
         <slot />
+        {#if className ===  "greenForm"}
+        <img
+        id="close"
+        class='greenClose {className}'
+        on:click={closeAndResetModalState}
+        src={closeIcon}
+        alt="esi close icon"
+      />
+      {/if}
       </div>
       <div class="absolute">
         <div class="circle_bg left" />
@@ -177,9 +195,12 @@
   #close.greenForm {
     display: none;
   }
+  #close.greenClose.greenForm {
+   display: block;
+  }
 
   #close:hover {
-    transform: scale(1.2);
+    transform: scale(1.15);
   }
 
   #modal-content {
