@@ -19,8 +19,10 @@
 			submitBtnText = `${$t('LOADING')}...`;
 			const res = await verifyCode(value.code);
 			if (res.status) {
-        $verificationId = res.data?.verificationId
+				$verificationId = res.data?.verificationId;
 				$$props.submitVerificationCode();
+			} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
+				$errors['code'] = $t('WRONG_CODE');
 			}
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');

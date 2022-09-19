@@ -3,7 +3,7 @@
   import Dropdown_ico from "../components/icons/Dropdown_ico.svelte";
   let active = false;
   let errorMessageState = false;
-  export let disabled;
+  export let disabled = false;
   export let itemsData = [];
   export let activeItem = itemsData[0];
   $: activeItem;

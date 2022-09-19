@@ -4,7 +4,7 @@
 	import { modalClassName, confirmModalState, profileEditForm } from '../profileStore';
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
-	import FirstNameForm from './update-forms/FirstNameForm.svelte';
+	import FirstNameForm from './update-forms/FirstAndLastNamesForm.svelte';
 	import UserNameForm from './update-forms/UserNameForm.svelte';
 	import EmailForm from './update-forms/EmailForm.svelte';
 	import GenderForm from './update-forms/GenderForm.svelte';
@@ -14,6 +14,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
+	import FirstAndLastNamesForm from './update-forms/FirstAndLastNamesForm.svelte';
 
 	let formStep = 1;
 
@@ -30,7 +31,7 @@
 	};
 </script>
 
-<Modal id="general-info" className={$modalClassName}>
+<Modal id="general-info" className={$modalClassName} resetModalState={()=> formStep = 1}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium text-1">{$t('WELCOME')}</div>
@@ -52,8 +53,8 @@
 			{:else if formStep === 4}
 				{#if $profileEditForm === 'userName'}
 					<UserNameForm submitChanges={submitNewName} />
-				{:else if $profileEditForm === 'firstName'}
-					<FirstNameForm submitChanges={submitNewName} />
+				{:else if $profileEditForm === 'firstAndLastName'}
+					<FirstAndLastNamesForm submitChanges={submitNewName} />
 				{:else if $profileEditForm === 'gender'}
 					<GenderForm submitChanges={submitNewName} />
 				{:else if $profileEditForm === 'dob'}

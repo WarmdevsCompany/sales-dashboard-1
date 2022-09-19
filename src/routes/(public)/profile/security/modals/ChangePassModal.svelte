@@ -6,8 +6,8 @@
   import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   import ChangePassForm from "$lib/components/forms/ChangePassForm.svelte";
   import { t } from "$lib/translations/i18n.js";
-	import SuccessModal from "../../../../../lib/components/forms/SuccessModal.svelte";
-	import VerifyEmail from "../../../../../lib/components/forms/verify/inputs/VerifyEmail.svelte";
+	import SuccessModal from "$lib/components/forms/SuccessModal.svelte";
+	import VerifyEmail from "$lib/components/forms/verify/inputs/VerifyEmail.svelte";
   let formStep = 1;
   let heading = $t("CHANGE_PASSWORD");
 
@@ -30,7 +30,7 @@
 
 </script>
 
-<Modal id="change-password" className={$modalClassName}>
+<Modal id="change-password" className={$modalClassName}  resetModalState={()=> formStep = 1}>
   <div class="modal_main text-center">
     <img src={greenLogo} alt="esi logo img" />
     <div class="modal_head_medium text-1">{heading}</div>
