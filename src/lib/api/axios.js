@@ -15,14 +15,8 @@ const privatePath = axios.create({
 	baseURL: variables.privatePath
 });
 
-// set default headers
-privatePath.defaults.headers.common['Authorization'] = esiToken;
 
-export const setNewAuthHeaders = (header) =>{
-	setCookie('esiToken', header,  { secure: true, 'max-age': 84600 })
-	privatePath.defaults.headers.common['Authorization'] = header;
-}
-
+// --------------------    Public API     -----------------------
 export const login = async (body) => {
 	try {
 		let response = await publicPath.post('/login', {
@@ -51,6 +45,42 @@ export const verifyAccount = async (body) => {
 		console.error(error);
 	}
 };
+
+export const forgotPassword = async (emailOrPhone) => {
+	try {
+		let response = await publicPath.post('/forgotPassword', {emailOrPhone});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const verifyCodeForgotPassword = async (code, emailOrPhone) => {
+	try {
+		let response = await publicPath.post('/verifyCodeForgotPassword', {code, emailOrPhone});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const changeForgotPassword = async (emailOrPhone, password, verificationId) => {
+	try {
+		let response = await publicPath.post('/changeForgotPassword', {emailOrPhone, password, verificationId});
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+// --------------------    Private API     -----------------------
+
+// set default headers
+privatePath.defaults.headers.common['Authorization'] = esiToken;
+
+export const setNewAuthHeaders = (header) =>{
+	setCookie('esiToken', header,  { secure: true, 'max-age': 84600 })
+	privatePath.defaults.headers.common['Authorization'] = header;
+}
+
 export const requestValidation = async (body) => {
 	try {
 		let response = await privatePath.post('/requestValidation', {

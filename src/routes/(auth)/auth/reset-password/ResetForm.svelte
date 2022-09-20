@@ -7,6 +7,7 @@
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	let verifyBtnText = $t('RESET_PASSWORD');
 	let formStep = 1;
+	let email;
 	$: formStep;
 	let successFormStatus = false;
 	function returnToLogin() {
@@ -25,11 +26,11 @@
 
 <div class="verify_wrapper">
 	{#if formStep === 1}
-		<VerifyEmail submitBtnText={verifyBtnText} sendVerifyCallback={verifyEmail} />
+		<VerifyEmail submitBtnText={verifyBtnText} sendVerifyCallback={verifyEmail} userIsAuth={false} bind:importedEmail={email}/>
 	{:else if formStep === 2}
-		<VerifyCodeForm submitVerificationCode={verifyCode} />
+		<VerifyCodeForm submitVerificationCode={verifyCode} emailValue={email} userIsAuth={false}/>
 	{:else if formStep === 3}
-		<ChangePassForm {submitNewPassword} />
+		<ChangePassForm {submitNewPassword} emailValue={email} userIsAuth={false}/>
 	{/if}
 	{#if successFormStatus}
 		<SuccessModal

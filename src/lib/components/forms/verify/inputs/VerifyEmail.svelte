@@ -1,10 +1,12 @@
 <script>
-	import { requestValidation } from '$lib/api/axios.js';
+	import { requestValidation, forgotPassword } from '$lib/api/axios.js'; 
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
 	import { t } from '$lib/translations/i18n.js';
 	export let submitBtnText = $t('SEND');
+	export let userIsAuth = true;
+	export let importedEmail = null;
 	let isLoading = false;
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
 		initialValues: {
@@ -16,10 +18,21 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
-			const res = await requestValidation(value.email);
-			if (res.status) {
-				$$props.sendVerifyCallback();
+			if (userIsAuth) {
+				const res = await requestValidation(value.email);
+				if (res.status) {
+					$$props.sendVerifyCallback();
+				}
+			}else {
+				const res = await forgotPassword(value.email);
+				if (res.status) {
+					importedEmail = value.email
+					$$props.sendVerifyCallback();
+				}else if (res.errorMessage === "FAILED_TO_FIND_USER"){
+					$errors['email'] = $t('USER_NOT_FOUND')
+				 }
 			}
+
 			isLoading = false;
 			submitBtnText = $t('SEND');
 		}

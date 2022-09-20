@@ -1,7 +1,6 @@
 import { locale } from '$lib/translations/i18n.js';
 import { browser } from '$app/environment';
 import { redirect } from '@sveltejs/kit';
-import { privateApi } from '$lib/api/privateApi';
 import { getCookie } from '$lib/functions/getCookie';
 
 export function load() {
