@@ -10,7 +10,7 @@
 
 	onMount(() => {
 		if (browser) {
-			$locale = localStorage.getItem('lang');
+			$locale = localStorage.getItem('lang') || "EN";
 			(error_404 = $t('404_ERROR')), (goToDashboard = $t('GO_TO_DASHBOARD'));
 		}
 	});
