@@ -156,6 +156,15 @@ export const changeEmail = async (email, verificationId) => {
 		console.error(error);
 	}
 };
+export const changePassword = async (password, verificationId) => {
+	const body = { password, verificationId };
+	try {
+		let response = await privatePath.post('/changePassword', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 export const changeNotificationSettings = async (id, value) => {
 	try {
