@@ -30,6 +30,8 @@
 				$globalData.data.personalInfo.email = value.email;
 				$confirmModalState = true;
 				$$props.submitChanges();
+			} else if (res.errorMessage === 'EMAIL_ALREADY_EXISTS') {
+				$errors['email'] = $t('EMAIL_ALREADY_EXISTS');
 			}
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');

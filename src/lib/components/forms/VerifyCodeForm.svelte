@@ -1,10 +1,12 @@
 <script>
 	import { verificationId } from '$lib/globalStore.js';
-	import { verifyCode } from '$lib/api/axios.js';
+	import { verifyCode, verifyCodeForgotPassword } from '$lib/api/axios.js';
 	import { createForm } from 'svelte-forms-lib';
 	import { slide } from 'svelte/transition';
 	import * as yup from 'yup';
 	import { t } from '$lib/translations/i18n.js';
+	export let userIsAuth = true;
+	export let emailValue = null;
 	let submitBtnText = $t('CONTINUE');
 	let isLoading = false;
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
@@ -17,13 +19,24 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
-			const res = await verifyCode(value.code);
-			if (res.status) {
-				$verificationId = res.data?.verificationId;
-				$$props.submitVerificationCode();
-			} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
-				$errors['code'] = $t('WRONG_CODE');
+			if (userIsAuth) {
+				const res = await verifyCode(value.code);
+				if (res.status) {
+					$verificationId = res.data?.verificationId;
+					$$props.submitVerificationCode();
+				} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
+					$errors['code'] = $t('WRONG_CODE');
+				}
+			} else {
+				const res = await verifyCodeForgotPassword(value.code, emailValue);
+				if (res.status) {
+					$verificationId = res.data?.verificationId;
+					$$props.submitVerificationCode();
+				} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
+					$errors['code'] = $t('WRONG_CODE');
+				}
 			}
+
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');
 		}

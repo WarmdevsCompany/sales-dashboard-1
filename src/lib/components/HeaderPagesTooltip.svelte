@@ -37,7 +37,7 @@
 					>
 				</li>
 				<li>
-					<a sveltekit:data-sveltekit-prefetch href="/profile/settings" on:click={()=> $currentSideBarStatus = 'profile'}>{$t('SETTINGS.LANG')}</a>
+					<a sveltekit:data-sveltekit-prefetch href="/profile/settings" on:click={()=> $currentSideBarStatus = 'profile'}>{$t('SETTINGS')}</a>
 				</li>
 				<li>
 					<button class="btn text-sm logout" style="min-width: auto;" on:click={logout}>
