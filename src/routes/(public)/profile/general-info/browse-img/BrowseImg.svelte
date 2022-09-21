@@ -33,8 +33,8 @@
 			uploading = true;
 			response = await changePhoto(reader.result);
 			uploading = false;
-			if(response.status){
-			 $globalData.data.photo = reader.result
+			if (response.status) {
+				$globalData.data.photo = reader.result;
 			}
 		};
 
@@ -68,9 +68,8 @@
 				<span class="text-blue"> {$t('PROFILE.GENERAL.BROWSE')}</span>
 			</div>
 			<div class="supported-files">{$t('PROFILE.GENERAL.SUPPORTS')}: JPG, JPEG2000, PNG</div>
-			<img src={border} alt="border" class="browse-border" />
 		</div>
-
+		<img src={border} alt="border" class="browse-border" />
 		<input bind:this={input} on:change={onChange} type="file" />
 	</div>
 	{#if response?.status && !uploading}
@@ -133,7 +132,7 @@
 		z-index: 1;
 	}
 	.browse__wrapper.active .relative_upload,
-	.browse__wrapper.active .relative_upload .browse-border,
+	.browse__wrapper.active .browse-border,
 	.browse__wrapper.active .relative_upload .add-placeholder {
 		opacity: 1;
 	}
@@ -144,6 +143,9 @@
 	.browse__wrapper:hover .text-blue {
 		opacity: 1;
 		color: var(--white);
+	}
+	.browse__wrapper.active:hover .browse-border{
+		opacity: 0;
 	}
 
 	.browse__wrapper {

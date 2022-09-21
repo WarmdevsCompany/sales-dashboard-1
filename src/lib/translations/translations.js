@@ -81,6 +81,8 @@ export default {
     "PROFILE": "Profile",
     "SECURITY": "Security",
     "PAYMENT": "Payment",
+    "NEXT": "Next",
+    "SAVE": "Save",
     "HEADER_WALLET_VALUE": "Wallet Value",
     "HEADER_NEXT_CONTRIBUTION": "Next Contribution",
     "HEADER_NEXT_CONTRIBUTION_DATE": "Next Contribution Date",
@@ -138,6 +140,7 @@ export default {
     "MANAGE_AGREE": "I agree to all Terms & Conditions, Contract Agreement, Privacy & Cookie",
     "MANAGE_AGREE_ERROR": "Confirm legal agreements",
     "MANAGE_AMOUNT_ERROR": "Cannot be less than the 20",
+    "MANAGE_ADD_WITHDRAW":"Add new withdrawal methoud",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -292,6 +295,8 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sicherheit",
     "PAYMENT": "Zahlung",
+    "NEXT": "Nächste",
+    "SAVE": "Speichern",
     "HEADER_WALLET_VALUE": "Brieftaschenwert",
     "HEADER_NEXT_CONTRIBUTION": "Nächster Beitrag",
     "HEADER_NEXT_CONTRIBUTION_DATE": "Nächstes Beitragsdatum",
@@ -349,6 +354,7 @@ export default {
     "MANAGE_AGREE": "Ich stimme allen Allgemeinen Geschäftsbedingungen, Vertragsvereinbarung, Datenschutz und Cookie zu",
     "MANAGE_AGREE_ERROR": "Rechtliche Vereinbarungen bestätigen",
     "MANAGE_AMOUNT_ERROR": "Darf nicht kleiner als 20 sein",
+    "MANAGE_ADD_WITHDRAW":"Neue Auszahlungsmethode hinzufügen",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -502,6 +508,8 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sécurité",
     "PAYMENT": "Paiement",
+    "NEXT": "Prochain",
+    "SAVE": "Sauvegarder",
     "HEADER_WALLET_VALUE": "Valeur du portefeuille",
     "HEADER_NEXT_CONTRIBUTION": "Prochaine contribution",
     "HEADER_NEXT_CONTRIBUTION_DATE": "Date de la prochaine cotisation",
@@ -559,6 +567,7 @@ export default {
     "MANAGE_AGREE": "J'accepte toutes les conditions générales, l'accord contractuel, la confidentialité et les cookies",
     "MANAGE_AGREE_ERROR": "Confirmer les accords juridiques",
     "MANAGE_AMOUNT_ERROR": "Ne peut être inférieur au 20",
+    "MANAGE_ADD_WITHDRAW":"Ajouter une nouvelle méthode de retrait",
 
 
     //PROFILE__FR

@@ -27,6 +27,12 @@
 </div>
 
 <style>
+   .avatar__wrapper{
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
   .avatar__wrapper img{
     width: 64px;
     height: 64px;

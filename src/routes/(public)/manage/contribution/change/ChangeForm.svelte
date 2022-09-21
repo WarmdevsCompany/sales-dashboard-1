@@ -7,10 +7,10 @@
 	export let disabledState;
 	export let errorState;
 
-	let requrring = $globalData.data.current_contribution.periodName;
+	let requrring = $globalData.data.current_contribution?.periodName || "Monthly";
 	let requrringArray = [];
 	let fullRequrringArray = [];
-	let amountValue = $globalData.data.current_contribution.amount || null;
+	let amountValue = $globalData.data.current_contribution?.amount || 0;
 	let amountErrorState = false;
 	let confirnBtnText = $t('CONFIRM_CHANGES');
 	$: requrringArray, amountErrorState;

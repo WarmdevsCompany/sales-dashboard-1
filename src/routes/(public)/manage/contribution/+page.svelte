@@ -10,6 +10,6 @@
 	<title>{$t('MANAGE_CONTRIBUTIONS')}</title>
 	<meta name="description" content="Contributions page" />
 </svelte:head>
-<Change subscriptionStatus = {$globalData.data.currentSubscription.status} />
+<Change subscriptionStatus={$globalData.data.currentSubscription?.status || 'active'} />
 <PlansMain />
-<TakeBreak subscriptionStatus = {$globalData.data.currentSubscription.status}/>
+<TakeBreak subscriptionStatus={$globalData.data.currentSubscription?.status || 'active'} />

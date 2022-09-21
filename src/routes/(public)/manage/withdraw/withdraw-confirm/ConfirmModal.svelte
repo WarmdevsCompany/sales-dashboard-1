@@ -8,7 +8,10 @@
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
-	let formStep = 1;
+	import WithdrawsMethods from './WithdrawsMethods.svelte';
+	import BankAccountForm from './BankAccountForm.svelte';
+	import AddressForm from './AddressForm.svelte';
+	let formStep = 3;
 	$: formStep;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
@@ -24,14 +27,26 @@
 <Modal id="withdraw" className={$modalClassName}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
+
 		<div class="modal_head_medium text-1">{$t('WITHDRAW')}</div>
 
 		<div class="modal_main-row ">
-			<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
-			{#if formStep === 1}
+			{#if formStep < 3}
+				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
+			{/if}
+
+			<!-- {#if formStep === 1}
 				<VerifyEmail sendVerifyCallback={submitEmailOrPhone}/>
 			{:else if formStep === 2}
 				<VerifyCodeForm {submitVerificationCode} />
+			{/if} -->
+		</div>
+		<div class="withdraw__row">
+			{#if formStep === 3}
+				<WithdrawsMethods bind:formStep />
+			{:else if formStep === 4}
+				<BankAccountForm/>
+				<AddressForm />
 			{/if}
 		</div>
 	</div>
@@ -147,6 +162,10 @@
 		width: 100%;
 		height: 1px;
 		background: var(--grey-color);
+	}
+	.withdraw__row {
+		max-width: 100%;
+		padding: 0 1rem;
 	}
 	@media only screen and (max-width: 991px) {
 	}
