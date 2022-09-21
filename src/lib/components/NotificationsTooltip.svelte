@@ -35,7 +35,7 @@
 		<slot />
 	</div>
 
-	{#if active}
+	{#if active && $notificationList}
 		<div
 			on:click={() => handleClickOnTooltip()}
 			in:fade={{ duration: 200 }}

@@ -19,7 +19,7 @@
 	<div class="notifications__empty box_shadow-medium mt-1_25 b-radius-8">
 		<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
 	</div>
-{:else if !$notificationList.length}
+{:else if !$notificationList?.length}
 	<div class="notifications__empty box_shadow-medium mt-1_25 b-radius-8">
 		{$t('SETTINGS.NO_NOTIFICATIONS')}
 	</div>

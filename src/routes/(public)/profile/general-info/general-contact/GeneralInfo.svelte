@@ -17,8 +17,9 @@
 		lastName = $globalData.data.personalInfo.lastname;
 		username = $globalData.data.personalInfo.username;
 		gender = $globalData.data.personalInfo.gender;
-		dob = $globalData.data.personalInfo.dob;
+		dob = $globalData.data.personalInfo?.dob;
 		email = $globalData.data.personalInfo.email;
+		dob ? (dob = dob.replace(/ [\s\S]+/, '')) : (dob = 'Not set');
 	}
 </script>
 
@@ -74,7 +75,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('DATE_OF_BIRTH')}</label>
 			<div class="relative">
-				<input class="" type="text" value={dob.replace(/ [\s\S]+/, '')} />
+				<input class="" type="text" value={dob} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_DATE_OF_BIRTH')} width={290} formName={'dob'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip

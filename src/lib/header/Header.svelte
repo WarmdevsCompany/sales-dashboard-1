@@ -11,9 +11,9 @@
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
 	let currencySymbol = $globalData.data.currencySymbol,
-		allMoney = $globalData.data.currentSubscription.balance,
-		monthlySubscriptionText = $globalData.data.currentSubscription.subscriptionText,
-		nextContributionDate = $globalData.data.currentSubscription.nextDate.substring(0, 10);
+		allMoney = $globalData.data.currentSubscription?.balance || 0,
+		monthlySubscriptionText = $globalData.data.currentSubscription?.subscriptionText || "1245/mo",
+		nextContributionDate = $globalData.data.currentSubscription?.nextDate.substring(0, 10) || 0;
 </script>
 
 <header class="d-flex justify-sb b-radius-8 align-center text-white">
@@ -22,7 +22,7 @@
 			<WalletValue {allMoney} {currencySymbol} />
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
 			<NextContrDate {nextContributionDate} />
-			<SubscriptionStatus status={$globalData.data.currentSubscription.status.toLowerCase()} />
+			<SubscriptionStatus status={$globalData.data.currentSubscription?.status.toLowerCase() || "active"} />
 		</div>
 	</div>
 	<MediaQuery query="(min-width: 992px)" let:matches>
@@ -35,7 +35,6 @@
 						</div>
 					</NotificationsTooltip>
 				</div>
-
 				<div class="relative">
 					<HeaderPagesTooltip
 						><div class="pointer"><ThreeDotsIcon bgColor="white" /></div></HeaderPagesTooltip
