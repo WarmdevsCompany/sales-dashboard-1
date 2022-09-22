@@ -24,7 +24,7 @@
 		// adv
 		$globalData.data.current_contribution.greenAdventureTotal =
 			($allocatedContributions.adventure * $globalData.data.current_contribution.amount) / 100;
-		$globalData.data.current_contribution.greenAdventure = $allocatedContributions.safe;
+		$globalData.data.current_contribution.greenAdventure = $allocatedContributions.adventure;
 		// founder
 		$globalData.data.current_contribution.greenFounderTotal =
 			($allocatedContributions.founder * $globalData.data.current_contribution.amount) / 100;

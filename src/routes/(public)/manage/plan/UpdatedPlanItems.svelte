@@ -2,8 +2,6 @@
 	import PlanItem from '$lib/components/PlanItem.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
-	import { allocatedContributions } from './change-contributions/planStore';
-	allocatedContributions;
 </script>
 
 <div class="plan__items grid-3 mt-2">

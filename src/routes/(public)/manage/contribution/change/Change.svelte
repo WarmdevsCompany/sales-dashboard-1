@@ -28,7 +28,7 @@
 		{$t('MANAGE_RECURRING_CONTRIBUTION')}*
 	</div>
 	<div class="text-xsm mt-0_25">{$t('MANAGE_NEXT_RECURRING_CONTRIBUTION')}</div>
-	<ChangeForm {disabledState} {errorState} {subscriptionStatus} />
+	<ChangeForm {disabledState} {errorState}  />
 </div>
 <Modal id="confirm">
 	<div class="modal_main confirm text-center">

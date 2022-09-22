@@ -52,6 +52,7 @@
 	<div class="column">
 		<div class="littie__wrapper">
 			<lottie-player
+			    id={$plansModalData.name}
 				src={$plansModalData.lottie}
 				background="transparent"
 				speed="1"

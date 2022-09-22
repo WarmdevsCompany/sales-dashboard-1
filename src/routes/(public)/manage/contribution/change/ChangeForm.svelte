@@ -15,10 +15,10 @@
 	let confirnBtnText = $t('CONFIRM_CHANGES');
 	$: requrringArray, amountErrorState;
 
-	requrringArray = $globalData.periods.map((item) => {
+	requrringArray = $globalData.data.periods.map((item) => {
 		return item.periodName;
 	});
-	fullRequrringArray = [...$globalData.periods];
+	fullRequrringArray = [...$globalData.data.periods];
 
 	async function onSubmit() {
 		if (amountValue < 20) {
