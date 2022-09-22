@@ -29,7 +29,17 @@
 	<div class="mt-1">
 		<Dropdown itemsData={accountTypeArray} bind:activeItem={accountType} />
 	</div>
+
+    
 </div>
 
+
+
 <style>
+	p {
+	color: var(--black);
+	}
+	input::placeholder{
+	 color: #B9B9B9;
+	}
 </style>

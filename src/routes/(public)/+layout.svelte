@@ -19,7 +19,7 @@
 	// set general data to store
 	export let data;
 	$globalData = data.general;
-	console.log($globalData)
+	console.log($globalData);
 
 	let loading = true;
 
@@ -38,10 +38,16 @@
 
 <main>
 	{#if !loading}
-		<Sidebar />
-		<div in:fade class="main-content ml-1_25">
-			<Header />
-			<div class="mt-2_5">
+		<div class="sidebar_wrapper">
+			<Sidebar />
+		</div>
+
+		<div in:fade class="main-content">
+			<div class="header_wrapper">
+				<Header />
+			</div>
+			
+			<div class="main-body">
 				<slot />
 			</div>
 		</div>
@@ -69,14 +75,37 @@
 	main {
 		flex: 1;
 		display: flex;
-		padding: 0.5rem 1.25rem;
+		padding: 0.5rem 0rem 0 1.25rem;
 		width: 100%;
 		margin: 0 auto;
 		min-height: 100vh;
 		box-sizing: border-box;
 	}
+	.sidebar_wrapper {
+		padding-bottom: 0.5rem;
+	}
 	.main-content {
 		width: 100%;
+	}
+	.main-body {
+		padding-top: 2rem;
+		max-height: calc(100vh - 75px - 0.5rem);
+		overflow: auto;
+		padding-bottom: 1rem;
+	}
+	.header_wrapper, .main-body{
+		padding-right: 1.25rem;
+		padding-left: 1.25rem;
+	}
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.main-body::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.main-body {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
 	}
 	.logo_bg {
 		position: fixed;
@@ -93,14 +122,26 @@
 		}
 		main {
 			flex-wrap: wrap;
+			padding-right: 1.25rem;
+		}
+		.main-body{
+			max-height: 100%;
+			overflow: visible;
+		 }
+		.sidebar_wrapper {
+			width: 100%;
 		}
 		.main-content {
 			margin: 0;
 		}
+		.header_wrapper, .main-body{
+		padding-right: 0rem;
+		padding-left: 0rem;
+	}
 	}
 	@media only screen and (min-width: 992px) {
 		.main-content {
-			width: calc(100% - 237px - 1.25rem);
+			width: calc(100% - 237px);
 		}
 	}
 </style>

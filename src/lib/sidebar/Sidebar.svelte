@@ -237,6 +237,7 @@
 	.sidebar {
 		background: var(--green-dark-color);
 		min-width: 237px;
+		height: 100%;
 	}
 	.sidebar__top {
 		padding: 2rem 0 5rem 0;

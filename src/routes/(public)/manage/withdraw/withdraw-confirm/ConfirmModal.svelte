@@ -45,8 +45,9 @@
 			{#if formStep === 3}
 				<WithdrawsMethods bind:formStep />
 			{:else if formStep === 4}
-				<BankAccountForm/>
+				<BankAccountForm />
 				<AddressForm />
+				<button class="btn btn_center ">{$t('SAVE')}</button>
 			{/if}
 		</div>
 	</div>
@@ -84,6 +85,9 @@
 <style>
 	.modal_main {
 		margin: 0 auto;
+	}
+	.withdraw__row .btn {
+		margin-top: 4rem;
 	}
 	.form__wrapper {
 		z-index: 999;

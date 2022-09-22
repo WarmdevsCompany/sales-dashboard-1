@@ -212,9 +212,6 @@
 		font-weight: var(--font-weight-bold);
 		color: var(--color-dark-st5);
 	}
-	.plans__wrapper {
-		margin-top: 32px;
-	}
 	.plans__wrapper__head {
 		display: flex;
 		justify-content: space-between;
