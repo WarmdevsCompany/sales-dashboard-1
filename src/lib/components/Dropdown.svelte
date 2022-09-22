@@ -6,6 +6,7 @@
   export let disabled = false;
   export let itemsData = [];
   export let activeItem = itemsData[0];
+  export let handleClickByItem = () => {};
   $: activeItem;
   // click outside dropdown
   function handleClickOutside() {
@@ -14,6 +15,7 @@
   function setActiveItem(item) {
     activeItem = item;
     active = false;
+    handleClickByItem()
   }
 </script>
 

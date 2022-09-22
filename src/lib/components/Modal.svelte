@@ -149,7 +149,6 @@
   .scroll__wrapper{
 		max-height: 100vh;
 		padding-bottom: 60px;
-
 	}
 	/* Hide scrollbar for Chrome, Safari and Opera */
 	.scroll__wrapper::-webkit-scrollbar {
