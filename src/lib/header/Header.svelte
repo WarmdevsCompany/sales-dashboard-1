@@ -10,7 +10,7 @@
 	import NextContrDate from './header-items/NextContrDate.svelte';
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
-	let currencySymbol = $globalData.data.currencySymbol,
+	let currencySymbol = $globalData.data.currency.symbol,
 		allMoney = $globalData.data.currentSubscription?.balance || 0,
 		monthlySubscriptionText = $globalData.data.currentSubscription?.subscriptionText || "1245/mo",
 		nextContributionDate = $globalData.data.currentSubscription?.nextDate.substring(0, 10) || 0;
