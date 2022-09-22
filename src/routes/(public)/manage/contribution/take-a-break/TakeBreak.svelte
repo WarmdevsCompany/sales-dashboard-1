@@ -13,7 +13,7 @@
 	let timeframeArray = [];
 	let timeframe;
 	
-	const periodsMonths = $globalData.period_months;
+	const periodsMonths = $globalData.data.period_months;
 	let pauseBtnText = $t('MANAGE_PAUSE'),stopBtnText=$t('MANAGE_STOP'), restartBtnText=$t('MANAGE_RES');
 
 	// generateMonthArray

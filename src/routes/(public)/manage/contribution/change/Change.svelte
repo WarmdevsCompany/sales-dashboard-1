@@ -28,7 +28,7 @@
 		{$t('MANAGE_RECURRING_CONTRIBUTION')}*
 	</div>
 	<div class="text-xsm mt-0_25">{$t('MANAGE_NEXT_RECURRING_CONTRIBUTION')}</div>
-	<ChangeForm {disabledState} {errorState} {subscriptionStatus} />
+	<ChangeForm {disabledState} {errorState}  />
 </div>
 <Modal id="confirm">
 	<div class="modal_main confirm text-center">
@@ -38,7 +38,7 @@
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEW_CONTRIBUTION')}:
 				<span class="text-3 text-blue mobile-block"
-					>{$globalData?.data?.currencySymbol}{$globalData.data.membershipStatus.amount}/mo</span
+					>{$globalData?.data?.currency.symbol}{$globalData.data.membershipStatus.amount}/mo</span
 				>
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">

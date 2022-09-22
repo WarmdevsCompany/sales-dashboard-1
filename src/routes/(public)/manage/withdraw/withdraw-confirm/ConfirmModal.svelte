@@ -9,8 +9,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
-	import BankAccountForm from './BankAccountForm.svelte';
-	import AddressForm from './AddressForm.svelte';
+	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
 	let formStep = 3;
 	$: formStep;
 	const submitEmailOrPhone = () => (formStep = 2);
@@ -45,9 +44,7 @@
 			{#if formStep === 3}
 				<WithdrawsMethods bind:formStep />
 			{:else if formStep === 4}
-				<BankAccountForm />
-				<AddressForm />
-				<button class="btn btn_center ">{$t('SAVE')}</button>
+				<AddWithdrawMethod />
 			{/if}
 		</div>
 	</div>
@@ -86,9 +83,7 @@
 	.modal_main {
 		margin: 0 auto;
 	}
-	.withdraw__row .btn {
-		margin-top: 4rem;
-	}
+
 	.form__wrapper {
 		z-index: 999;
 		position: fixed;

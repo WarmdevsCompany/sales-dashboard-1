@@ -17,10 +17,9 @@
     submitBtnText = `${$t('LOADING')}...`;
     const index = genderArrayForDropdown.indexOf(activeItem)
     const selectedGender = genderArrayForBackend[index]
-    console.log(selectedGender)
     const res = await changeGender(selectedGender, verifyId)
     if(res.status){
-      $globalData.data.personalInfo.gender = genderArrayForDropdown[index].toLowerCase()
+      $globalData.data.personalInfo.gender = genderArrayForDropdown[index]
       $$props.submitChanges()
     }
   	  isLoading = false;
