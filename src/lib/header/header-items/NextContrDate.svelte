@@ -19,7 +19,7 @@
 <div class="contribution__data--item d-flex align-top text-big">
 	<div class="d-flex align-center">
 		<img src={nextContributionIcon} alt="all money" />
-		{nextContributionDate}
+		{$t('ON')} {nextContributionDate}
 	</div>
 	<div
 		use:popperRef

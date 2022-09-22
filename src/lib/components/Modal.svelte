@@ -22,10 +22,6 @@
   export let className = "";
   export let resetModalState = ()=>{}
 
-  // function keyPress(ev) {
-  //   //only respond if the current modal is the top one
-  //   // if (ev.key == "Escape" && onTop == topDiv) close(); //ESC
-  // }
 
   /**  API **/
   function open(callback) {
@@ -33,7 +29,7 @@
     if (visible) return;
     prevOnTop = onTop;
 
-    // window.addEventListener("keydown", keyPress);
+
 
     //this prevents scrolling of the main window on larger screens
     hideScrollbar();
@@ -93,7 +89,7 @@
     {/if}
     
 
-      <div id="modal-content">
+      <div id="modal-content" class:scroll__wrapper={className ===  "greenForm"}>
         <slot />
         {#if className ===  "greenForm"}
         <img
@@ -150,6 +146,20 @@
     min-height: 584px;
     margin-left: 257px;
   }
+  .scroll__wrapper{
+		max-height: 100vh;
+		padding-bottom: 60px;
+	}
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	.scroll__wrapper::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.scroll__wrapper {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
 
   .visible {
     visibility: visible !important;
@@ -178,7 +188,7 @@
     background: var(--white);
     box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.15),
       inset 0px 0px 35px rgba(255, 255, 255, 0.15);
-    overflow: visible;
+    overflow: auto;
     backdrop-filter: blur(5px);
     z-index: 2;
     position: relative;
