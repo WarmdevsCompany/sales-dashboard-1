@@ -9,7 +9,7 @@
 	let isLoading = false;
 	let verifyId = $verificationId;
 	$: verifyId;
-     allValues = {
+     let allValues = {
         legalType: '',
         fullName: '',
         firstName: '',
@@ -22,13 +22,14 @@
         city: '',
         address: ''
     }
+
     ivBussinessUsUSD = {}
     ivPrivateUsUSD = {}
 
     ivBussinessUsEURO = {}
     ivPrivateUsEURO = {}
 
-    
+
 
 
 
