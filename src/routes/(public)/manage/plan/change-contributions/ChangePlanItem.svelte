@@ -171,7 +171,7 @@
 				</div>
 				<div class="item__current__money text-2 {className}">
 					<div class="money">
-						{$globalData.data.currencySymbol +
+						{$globalData.data.currency.symbol +
 							priceConvertation(Math.round(currentPrice * 100) / 100)}
 					</div>
 				</div>

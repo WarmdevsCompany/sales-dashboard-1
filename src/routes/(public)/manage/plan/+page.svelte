@@ -74,7 +74,7 @@
 		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-cc ">
 			<div class="text-xsm d-flex align-base">
-				{$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.subscriptionText}</span>
+				{$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue">{$globalData.data.currency.symbol}{$globalData.data.currentSubscription.subscriptionText}</span>
 			</div>
 		</div>
 		<div class="updated__items">
