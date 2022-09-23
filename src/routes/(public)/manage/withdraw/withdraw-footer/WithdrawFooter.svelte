@@ -1,12 +1,18 @@
 <script>
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	export let btnAligment = 'justify-end';
-	export let confirmBtn = 'open';
-
-	export let closeModals;
+	import { confirmModalState } from '../withdrawStore';
+	export let btnAligment = 'justify-end', confirmBtn = 'open', closeModals;
+	export let formStep, withdrawMethods;
 	const confirmWithdraw = () => {
-		closeModals('withdraw');
+		$confirmModalState = false
+		console.log(withdrawMethods)
+		if(withdrawMethods && withdrawMethods.length > 0){
+			formStep = 3
+		}else {
+			formStep = 4
+		}
+		console.log('here')
 	};
 </script>
 

@@ -120,11 +120,11 @@
 			<div class="d-flex justify-sb mt-2 mobile-block">
 				<div>
 					<div class="text-sm">{$t('MANAGE_TOTAL_SAVE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.balance}</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currency.symbol}{$globalData.data.currentSubscription.balance}</div>
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_RECURRING')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currencySymbol}{$globalData.data.currentSubscription.subscriptionText}</div>
+					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currency.symbol}{$globalData.data.currentSubscription.subscriptionText}</div>
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_DATE')}</div>

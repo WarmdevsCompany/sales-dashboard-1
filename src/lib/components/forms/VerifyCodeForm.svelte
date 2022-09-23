@@ -5,6 +5,7 @@
 	import { slide } from 'svelte/transition';
 	import * as yup from 'yup';
 	import { t } from '$lib/translations/i18n.js';
+	import {checkInputNumber} from '$lib/functions/checkInputNumber.js'
 	export let userIsAuth = true;
 	export let emailValue = null;
 	let submitBtnText = $t('CONTINUE');
@@ -14,7 +15,7 @@
 			code: ''
 		},
 		validationSchema: yup.object().shape({
-			code: yup.number().required($t('ENTER_CODE'))
+			code: yup.string().required($t('ENTER_CODE'))
 		}),
 		onSubmit: async (value) => {
 			isLoading = true;
@@ -45,12 +46,7 @@
 		$errors[item] = '';
 	};
 
-	function check(e) {
-		var keyCode = e.keyCode ? e.keyCode : e.which;
-		if (keyCode === 38 || keyCode === 40) {
-			e.preventDefault();
-		}
-	}
+
 </script>
 
 <form on:submit|preventDefault={handleSubmit} class="mt-1_5">
@@ -62,8 +58,8 @@
 		on:mousewheel={(e) => {
 			e.target.blur();
 		}}
-		on:keydown={check}
-		on:keyup={check}
+		on:keydown={checkInputNumber}
+		on:keyup={checkInputNumber}
 		on:change={handleChange}
 		on:focus={() => onFocus('code')}
 		bind:value={$form.code}

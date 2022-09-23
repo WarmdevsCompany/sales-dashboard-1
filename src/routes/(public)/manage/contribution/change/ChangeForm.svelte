@@ -90,7 +90,7 @@
 			{#if amountErrorState}
 				<p class="text-left text-xsm error_text amount__error">
 					{$t('MANAGE_AMOUNT_ERROR')}
-					{$globalData.data.currencySymbol}
+					{$globalData.data.currency.symbol}
 				</p>
 			{/if}
 		</div>
