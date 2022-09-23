@@ -1,9 +1,7 @@
 <script>
 	import { t } from '$lib/translations/i18n.js';
-	export let withdrawMethods = [
-		{ withdrawName: 'Bank transfer #132452*USD', recipientName: 'Recipient full name' },
-		{ withdrawName: 'Bank transfer #937752*USD', recipientName: 'Recipient full name' }
-	];
+	import Modal, { getModal } from '$lib/components/Modal.svelte';
+	export let withdrawMethods = [];
 	const addNewItemKey = 'ADD_NEW_ITEM';
 	export let formStep;
 	let radioValue = 0;
@@ -11,6 +9,14 @@
 	withdrawMethods.forEach((item, index) => {
 		options[index] = { value: index };
 	});
+	const confirmSelection = () => {
+		if (radioValue != addNewItemKey) {
+			alert('Success');
+			getModal('withdraw').close();
+		} else {
+			formStep = 4;
+		}
+	};
 </script>
 
 <div class="withdraw__methods grid mt-2" role="radiogroup">
@@ -18,7 +24,7 @@
 		<div
 			class="withdraw__item method b-radius-10 p-2 relative text-left"
 			class:active_item={radioValue === index}
-			on:click={()=>radioValue = index}
+			on:click={() => (radioValue = index)}
 		>
 			<div class="text-3">{element.withdrawName}</div>
 			<div class="text-xsm text-green mt-0_5">{element.recipientName}</div>
@@ -35,13 +41,13 @@
 	<div
 		class="withdraw__item add__method b-radius-10 p-2 d-flex align-center"
 		class:active_item={radioValue === addNewItemKey}
-		on:click={()=>radioValue = addNewItemKey}
+		on:click={() => (radioValue = addNewItemKey)}
 	>
 		<div class="plus__wrapper mr-1"><span /></div>
 		<div class="withdraw__item--text text-3 text-left">{$t('MANAGE_ADD_WITHDRAW')}</div>
 	</div>
 </div>
-<button class="btn mt-2_5 btn_center" on:click={() => (formStep = 4)}>{$t('NEXT')}</button>
+<button class="btn mt-2_5 btn_center" on:click={confirmSelection}>{$t('NEXT')}</button>
 
 <style>
 	.withdraw__methods {

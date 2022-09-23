@@ -2,7 +2,7 @@
   import clickOutside from "$lib/functions/clickOutside";
   import Dropdown_ico from "../components/icons/Dropdown_ico.svelte";
   let active = false;
-  let errorMessageState = false;
+  export let errorMessageState = false;
   export let disabled = false;
   export let itemsData = [];
   export let activeItem = itemsData[0];
@@ -77,6 +77,7 @@
     border: 1px solid var(--border-color);
     border-radius: 10px;
     overflow: hidden;
+    z-index: 2;
   }
   .dropdown.error {
     border-color: var(--red-color);

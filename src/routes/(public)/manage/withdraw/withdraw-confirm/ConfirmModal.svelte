@@ -10,7 +10,8 @@
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
-	let formStep = 3;
+	export let withdrawMethods;
+	let formStep = 1;
 	$: formStep;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
@@ -23,7 +24,7 @@
 	};
 </script>
 
-<Modal id="withdraw" className={$modalClassName}>
+<Modal id="withdraw" className={$modalClassName} resetModalState={()=>formStep = 3}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
 
@@ -34,15 +35,15 @@
 				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
 			{/if}
 
-			<!-- {#if formStep === 1}
+			{#if formStep === 1}
 				<VerifyEmail sendVerifyCallback={submitEmailOrPhone}/>
 			{:else if formStep === 2}
 				<VerifyCodeForm {submitVerificationCode} />
-			{/if} -->
+			{/if}
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep />
+				<WithdrawsMethods bind:formStep {withdrawMethods}/>
 			{:else if formStep === 4}
 				<AddWithdrawMethod />
 			{/if}
@@ -67,7 +68,7 @@
 					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block">$0</span>
 				</div>
 				<div class="line mt-1_5 mb-1_5" />
-				<WithdrawFooter btnAligment={'justify-cc'} confirmBtn={'confirm'} {closeModals} />
+				<WithdrawFooter btnAligment={'justify-cc'} confirmBtn={'confirm'}  bind:formStep closeModals={closeModals} {withdrawMethods}/>
 			</div>
 			<img
 				class="close_icon"
