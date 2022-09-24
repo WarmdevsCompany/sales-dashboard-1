@@ -5,6 +5,27 @@
 	import WithdrawMain from './withdraw-chart/WithdrawMain.svelte';
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
+	let  currentAmount = $globalData.data.current_contribution.amount;
+	const periodId = $globalData.data.current_contribution.periodId;
+	let currentTrajectory = [0]
+	let previousTrajectory = []
+	const currentPercent = 1.2;
+	const yearsArray = [2022, 2023, 2024, 2025, 2026, 2027]
+	if(periodId === 5235208){
+		currentAmount = currentAmount + currentAmount
+	}
+	// generate currentTrajectory
+	let amountCounter = currentAmount;
+	yearsArray.forEach(item=>{
+		console.log(amountCounter)
+		currentTrajectory = [...currentTrajectory, amountCounter]
+		amountCounter = amountCounter + currentAmount;
+	})
+		// generate previousTrajectory
+	currentTrajectory.forEach((item, index)=>{
+		previousTrajectory = [...previousTrajectory, (currentTrajectory[index] * currentPercent)]
+	})
+
 </script>
 
 <svelte:head>
@@ -42,9 +63,9 @@
 	<div class="saving-projection p-2 b-radius-8 box_shadow-medium">
 		<div class="saving-projection-wrapper">
 			<SaveProjectionChart
-				yearsArray={[2022, 2023, 2024, 2025, 2026, 2027]}
-				currentTraject={[0, 1200, 13437, 19437, 23437, 30437]}
-				prevTraject={[0, 282, 502, 635, 24437, 33437]}
+				yearsArray={yearsArray}
+				currentTraject={currentTrajectory}
+				prevTraject={previousTrajectory}
 			/>
 		</div>
 	</div>
