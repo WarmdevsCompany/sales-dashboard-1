@@ -71,7 +71,7 @@
 		type: 'line',
 		data: data,
 		options: {
-			tension: '0.4',
+			// tension: '0.4',
 
 			plugins: {
 				legend: {
