@@ -5,16 +5,26 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
 	import ChangeForm from './ChangeForm.svelte';
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	export let subscriptionStatus;
 	let disabledState = false;
 	let errorState = false;
-	$: if (subscriptionStatus === 'Paused' || subscriptionStatus === 'Stoped') {
-		disabledState = true;
-	} else if (subscriptionStatus === 'Suspended') {
-		errorState = true;
-	} else {
-		disabledState = false;
-		errorState = false;
+
+	// convert date to UTC
+	const date = convertDateToUTC($globalData.data.currentSubscription.nextDate);
+	console.log(date);
+	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+
+	$: {
+		if (subscriptionStatus === 'Paused' || subscriptionStatus === 'Stoped') {
+			disabledState = true;
+		} else if (subscriptionStatus === 'Suspended') {
+			errorState = true;
+		} else {
+			disabledState = false;
+			errorState = false;
+		}
+		nextDate;
 	}
 </script>
 
@@ -28,7 +38,7 @@
 		{$t('MANAGE_RECURRING_CONTRIBUTION')}*
 	</div>
 	<div class="text-xsm mt-0_25">{$t('MANAGE_NEXT_RECURRING_CONTRIBUTION')}</div>
-	<ChangeForm {disabledState} {errorState}  />
+	<ChangeForm {disabledState} {errorState} />
 </div>
 <Modal id="confirm">
 	<div class="modal_main confirm text-center">
@@ -43,9 +53,7 @@
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEXT_CONTRIBUTION')}:
-				<span class="text-3 text-blue mobile-block"
-					>{$globalData.data.currentSubscription.nextDate.substring(0, 10)}</span
-				>
+				<span class="text-3 text-blue mobile-block">{nextDate}</span>
 			</div>
 		</div>
 		<p class="mt-1 modal-bootom-text">

@@ -1,14 +1,18 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import MembershipItem from './MembershipItem.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	let date  = $$props.sinceDate
+	// convert date to UTC
+	const date = convertDateToUTC($$props.sinceDate);
+	const year = date.year
+		
 </script>
 
 <div class="chat-top d-flex justify-sb align-top mb-1_5 text-second">
 	<div class="column">
 		<div class="row text-3 chat-top-head">{$t('OVERVIEW_STATUS')}</div>
 		<div class="row d-flex align-top text-sm">
-			<span class="mt-0_25">{$t('OVERVIEW_SINCE')} {date.substring(6,10)}</span>
+			<span class="mt-0_25">{$t('OVERVIEW_SINCE')} {year}</span>
 		</div>
 	</div>
 	<div class="column">

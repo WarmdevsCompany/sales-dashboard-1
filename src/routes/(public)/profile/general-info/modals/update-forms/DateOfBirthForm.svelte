@@ -33,7 +33,7 @@
 				submitBtnText = `${$t('LOADING')}...`;
 				const res = await changeDOB(selectedDate, verifyId);
 				if (res.status) {
-					$globalData.data.personalInfo.dob = selectedDate.replaceAll('-', '.');
+					$globalData.data.personalInfo.dob = new Date(selectedDate).getTime() / 1000
 					$$props.submitChanges();
 				}
 				isLoading = false;

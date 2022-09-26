@@ -1,7 +1,6 @@
 export function findCreatedNotificationTime(date) {
     const currentDate = new Date();
-    const createdDate = new Date(date);
-    const createdTime = currentDate.getTime() - createdDate.getTime();
+    const createdTime = currentDate.getTime() - (date * 1000);
     return msToTime(createdTime);
 }
 function msToTime(duration) {
