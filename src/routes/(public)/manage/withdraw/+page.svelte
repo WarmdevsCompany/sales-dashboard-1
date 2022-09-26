@@ -8,10 +8,10 @@ import ConfirmModal from "./withdraw-confirm/ConfirmModal.svelte";
 let modalClassName = 'greenForm'
 const submit = ()=> true
 const withdrawMethods = [];
-// [
-// 		{ withdrawName: 'Bank transfer #132452*USD', recipientName: 'Recipient full name' },
-// 		{ withdrawName: 'Bank transfer #937752*USD', recipientName: 'Recipient full name' }
-// 	]
+[
+		{ withdrawName: 'Bank transfer #132452*USD', recipientName: 'Recipient full name' },
+		{ withdrawName: 'Bank transfer #937752*USD', recipientName: 'Recipient full name' }
+	]
 </script>
 <svelte:head>
 	<title>Withdraw</title>

@@ -80,6 +80,7 @@
 		margin: 0 auto;
 		min-height: 100vh;
 		box-sizing: border-box;
+		background: var(--body--bg);
 	}
 	.sidebar_wrapper {
 		padding-bottom: 0.5rem;
