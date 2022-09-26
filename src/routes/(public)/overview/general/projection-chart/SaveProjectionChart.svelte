@@ -2,9 +2,13 @@
 	import StatusIcon from '$lib/components/icons/StatusIcon.svelte';
 	import { onMount } from 'svelte';
 	import { numberWithCommas } from '$lib/functions/numberWithCommas';
-	import { getMonthName } from '$lib/functions/getMonthName';
 	import { t } from '$lib/translations/i18n.js';
 	let myChart;
+	let month = new Date().getMonth() + 1
+	if(month<10){
+		month = '0'+month
+	}
+	const currentMonth = $t('MONTH_SHORT_' + month)
 
 	// drawHorisontalLines plugin
 	const drawHorisontalLines = {
@@ -131,7 +135,7 @@
 						color: 'white',
 						padding: 10,
 						callback: function (value, index) {
-							return getMonthName() + ' ' + this.getLabelForValue(value);
+							return currentMonth + ' ' + this.getLabelForValue(value);
 						}
 					}
 				}

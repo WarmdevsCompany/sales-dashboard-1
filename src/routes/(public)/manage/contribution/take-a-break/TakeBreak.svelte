@@ -7,6 +7,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
 	import { restartContribution, pauseContribution, stopContribution } from '$lib/api/axios';
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	export let subscriptionStatus;
 	let stopCheckboxValue = false;
 	let chackboxErrorStatus = false;
@@ -16,6 +17,10 @@
 	const periodsMonths = $globalData.data.period_months;
 	let pauseBtnText = $t('MANAGE_PAUSE'),stopBtnText=$t('MANAGE_STOP'), restartBtnText=$t('MANAGE_RES');
 
+
+	// convert date to UTC
+	const date = convertDateToUTC($globalData.data.currentSubscription.nextDate);
+	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 	// generateMonthArray
 	timeframeArray = periodsMonths.map((item) => {
 		return item.text;
@@ -26,6 +31,7 @@
 			chackboxErrorStatus = false;
 		}
 		subscriptionStatus;
+		nextDate;
 	}
 
 	async function stop() {
@@ -128,7 +134,7 @@
 				</div>
 				<div>
 					<div class="text-sm">{$t('MANAGE_NEXT_DATE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">{$globalData.data.currentSubscription.nextDate.substring(0, 10)}</div>
+					<div class="restart__value text-green text-2 mt-1_5">{nextDate}</div>
 				</div>
 			</div>
 			<div class="terms__checkbox">

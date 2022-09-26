@@ -3,7 +3,7 @@
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	export let withdrawMethods = [];
 	const addNewItemKey = 'ADD_NEW_ITEM';
-	export let formStep;
+	export let formStep, successFormStatus;
 	let radioValue = 0;
 	let options = [];
 	withdrawMethods.forEach((item, index) => {
@@ -11,8 +11,7 @@
 	});
 	const confirmSelection = () => {
 		if (radioValue != addNewItemKey) {
-			alert('Success');
-			getModal('withdraw').close();
+			successFormStatus = true
 		} else {
 			formStep = 4;
 		}

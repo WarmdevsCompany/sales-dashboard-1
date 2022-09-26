@@ -16,8 +16,7 @@
 	}
 	// generate currentTrajectory
 	let amountCounter = currentAmount;
-	yearsArray.forEach(item=>{
-		console.log(amountCounter)
+	yearsArray.forEach(()=>{
 		currentTrajectory = [...currentTrajectory, amountCounter]
 		amountCounter = amountCounter + currentAmount;
 	})
@@ -25,7 +24,6 @@
 	currentTrajectory.forEach((item, index)=>{
 		previousTrajectory = [...previousTrajectory, (currentTrajectory[index] * currentPercent)]
 	})
-
 </script>
 
 <svelte:head>
@@ -78,6 +76,7 @@
 			sequoiaVal={$globalData.data.membershipStatus.sequoia}
 			sequoiaTotal={$globalData.data.membershipStatus.sequoiaTotal}
 			status={$globalData.data.membershipStatus.status}
+			sinceDate={$globalData.data.membershipStatus.createDate}
 		/>
 	</div>
 </div>

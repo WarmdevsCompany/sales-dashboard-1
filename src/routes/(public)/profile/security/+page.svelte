@@ -1,9 +1,12 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import { globalData } from '$lib/globalStore.js';
 	import lockImg from '$lib/assets/img/padlock.svg';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import ChangePassModal from './modals/ChangePassModal.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	const date = convertDateToUTC($globalData.data.passwordLastChangeDate);
+	let passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 </script>
 
 <svelte:head>
@@ -16,7 +19,7 @@
 		<img src={lockImg} alt="change password" class="lock_icon" />
 		<div class="text-3">{$t('CHANGE_PASSWORD')}</div>
 		<div class="text-xsm mt-0_5">
-			{$t('SETTINGS.LAST_PW_CHANGE')} - <span class="text-green">{$globalData.data.passwordLastChangeDate.substring(0, 10)}</span>
+			{$t('SETTINGS.LAST_PW_CHANGE')} - <span class="text-green">{passwordLastChangeDate}</span>
 		</div>
 		<button class="btn" on on:click={() => getModal('change-password').open()}
 			>{$t('CHANGE_PASSWORD')}</button

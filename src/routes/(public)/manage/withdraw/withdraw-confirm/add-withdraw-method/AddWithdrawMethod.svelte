@@ -7,7 +7,8 @@
 	import { createForm } from 'svelte-forms-lib';
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import * as yup from 'yup';
-	export let submitBtnText = $t('SAVE');
+	export let submitBtnText = $t('SAVE'),
+		successFormStatus;
 	let isLoading = false,
 		formStep = 1,
 		verifyId = $verificationId,
@@ -113,6 +114,7 @@
 		validationSchema: yup.object().shape(validationFormData.validationSchema),
 		onSubmit: async (value) => {
 			console.log(value);
+			successFormStatus = true;
 			// isLoading = true;
 			// submitBtnText = `${$t('LOADING')}...`;
 			// POST in Backend
@@ -148,7 +150,6 @@
 		}
 	};
 </script>
-
 
 {#if formStep === 1}
 	<div class="legal_type">

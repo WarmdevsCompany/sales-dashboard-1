@@ -1,25 +1,31 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
 	import Tooltip from './Tooltip.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
-	import { onMount } from 'svelte';
 
-	export let firstName = '',
+	let firstName = '',
 		lastName = '',
 		gender = '',
-		dob = '',
+		dobUNIX = '',
 		email = '',
-		username = '';
-
+		username = '',
+		dobDate = '',
+		month,
+		day,
+		year;
 	$: {
 		firstName = $globalData.data.personalInfo.firstname;
 		lastName = $globalData.data.personalInfo.lastname;
 		username = $globalData.data.personalInfo.username;
 		gender = $globalData.data.personalInfo.gender;
-		dob = $globalData.data.personalInfo?.dob;
+		dobUNIX = $globalData.data.personalInfo?.dob;
 		email = $globalData.data.personalInfo.email;
-		dob ? (dob = dob.replace(/ [\s\S]+/, '')) : (dob = 'Not set');
+		// convert date to UTC
+		const date = convertDateToUTC(dobUNIX);
+		dobDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+		firstName, lastName, username, gender, dobDate, dobUNIX, email, month, day, year;
 	}
 </script>
 
@@ -75,7 +81,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('DATE_OF_BIRTH')}</label>
 			<div class="relative">
-				<input class="" type="text" value={dob} />
+				<input class="" type="text" value={dobDate} />
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_DATE_OF_BIRTH')} width={290} formName={'dob'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip

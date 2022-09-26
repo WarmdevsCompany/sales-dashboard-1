@@ -10,9 +10,11 @@
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
+	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
 	export let withdrawMethods;
-	let formStep = 1;
-	$: formStep;
+	let formStep = 1,
+		successFormStatus = false;
+	$: formStep, successFormStatus;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
 		$confirmModalState = true;
@@ -22,9 +24,12 @@
 		formStep = 1;
 		getModal(modalId).close();
 	};
+	const closeAllModals = ()=>{
+		successFormStatus = false
+		closeModals('withdraw')
+	}
 </script>
-
-<Modal id="withdraw" className={$modalClassName} resetModalState={()=>formStep = 3}>
+<Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
 
@@ -43,9 +48,9 @@
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep {withdrawMethods}/>
+				<WithdrawsMethods bind:formStep {withdrawMethods} bind:successFormStatus/>
 			{:else if formStep === 4}
-				<AddWithdrawMethod />
+				<AddWithdrawMethod bind:successFormStatus/>
 			{/if}
 		</div>
 	</div>
@@ -68,7 +73,13 @@
 					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block">$0</span>
 				</div>
 				<div class="line mt-1_5 mb-1_5" />
-				<WithdrawFooter btnAligment={'justify-cc'} confirmBtn={'confirm'}  bind:formStep closeModals={closeModals} {withdrawMethods}/>
+				<WithdrawFooter
+					btnAligment={'justify-cc'}
+					confirmBtn={'confirm'}
+					bind:formStep
+					{closeModals}
+					{withdrawMethods}
+				/>
 			</div>
 			<img
 				class="close_icon"
@@ -78,6 +89,13 @@
 			/>
 		</div>
 	</div>
+{/if}
+{#if successFormStatus}
+	<SuccessModal
+		closeModals={closeAllModals}
+		mainText={$t('PROFILE_PW_CHANDED')}
+		btnText={$t('BACK')}
+	/>
 {/if}
 
 <style>

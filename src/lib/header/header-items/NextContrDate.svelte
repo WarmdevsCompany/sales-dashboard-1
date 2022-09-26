@@ -1,10 +1,14 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import StatusIcon from '$lib/components/icons/StatusIcon.svelte';
 	import { createPopperActions } from 'svelte-popperjs';
 	import nextContributionIcon from '$lib/assets/img/next-contribution.svg';
 	import { fade } from 'svelte/transition';
 	import { t } from '$lib/translations/i18n.js';
 	export let nextContributionDate;
+	// convert date to UTC
+	const date = convertDateToUTC(nextContributionDate);
+	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'bottom',
@@ -19,7 +23,8 @@
 <div class="contribution__data--item d-flex align-top text-big">
 	<div class="d-flex align-center">
 		<img src={nextContributionIcon} alt="all money" />
-		{$t('ON')} {nextContributionDate}
+		{$t('ON')}
+		{nextDate}
 	</div>
 	<div
 		use:popperRef

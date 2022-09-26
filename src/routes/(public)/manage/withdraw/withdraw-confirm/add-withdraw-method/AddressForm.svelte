@@ -42,7 +42,6 @@
 			{#if $errors.state}
 				<small transition:slide|local class="error_text mt-0_5">{$errors.state}</small>
 			{/if}
-		
 		</div>
 	</div>
 
