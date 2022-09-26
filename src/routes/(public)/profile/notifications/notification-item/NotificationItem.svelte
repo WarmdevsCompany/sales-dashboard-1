@@ -1,9 +1,10 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
 	import { selectedNotification } from '$lib/globalStore';
 	import ItemTooltip from './ItemTooltip.svelte';
-
+	import { t } from '$lib/translations/i18n.js';
 	export let objAttributes = {};
 
 	function showNotificationModal(name, text) {
@@ -11,6 +12,9 @@
 		$selectedNotification.body = text
 		getModal('notification').open()
 	}
+	// convert date to UTC
+	const date = convertDateToUTC(objAttributes.date);
+	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 </script>
 
 <li
@@ -35,7 +39,7 @@
 		<div class="description">
 			{objAttributes.text}
 		</div>
-		<div class="date">{objAttributes.date.replace(/ [\s\S]+/, '')}</div>
+		<div class="date">{nextDate}</div>
 	</div>
 </li>
 
