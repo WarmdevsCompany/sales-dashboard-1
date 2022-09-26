@@ -131,7 +131,7 @@
 			// isLoading = false;
 			// submitBtnText = $t('SAVE');
 		}
-	});
+	})
 	$: {
 		checkFormStatus();
 		if (globalLegalType === 'Private') {

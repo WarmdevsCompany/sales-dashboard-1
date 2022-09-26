@@ -5,6 +5,10 @@
 	import { fade } from 'svelte/transition';
 	import { t } from '$lib/translations/i18n.js';
 	export let nextContributionDate;
+		const month = nextContributionDate?.substring(3, 5);
+		const day = nextContributionDate?.substring(0, 2);
+		const year = nextContributionDate?.substring(6, 10);
+
 
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'bottom',
@@ -19,7 +23,8 @@
 <div class="contribution__data--item d-flex align-top text-big">
 	<div class="d-flex align-center">
 		<img src={nextContributionIcon} alt="all money" />
-		{$t('ON')} {nextContributionDate}
+		{$t('ON')}
+		{`${day} ${$t('MONTH_SHORT_' + month)} ${year}`}
 	</div>
 	<div
 		use:popperRef

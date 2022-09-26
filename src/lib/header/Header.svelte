@@ -13,7 +13,7 @@
 	let currencySymbol = $globalData.data.currency.symbol,
 		allMoney = $globalData.data.currentSubscription?.balance || 0,
 		monthlySubscriptionText = $globalData.data.currentSubscription?.subscriptionText || "1245/mo",
-		nextContributionDate = $globalData.data.currentSubscription?.nextDate.substring(0, 10) || 0;
+		nextContributionDate = $globalData.data.currentSubscription?.nextDate || 0;
 </script>
 
 <header class="d-flex justify-sb b-radius-8 align-center text-white">
