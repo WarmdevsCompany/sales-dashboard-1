@@ -18,40 +18,54 @@
 
 	function roundDown(number, decimals) {
 		decimals = decimals || 0;
-		return Math.floor(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
+		return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
+	}
+	function setDataAsCurrentContr() {
+		contribution.safePercentage = current_contribution.greenSafe;
+		contribution.adventurePercentage = current_contribution.greenAdventure;
+		contribution.founderPercentage = current_contribution.greenFounder;
+
+		contribution.safeValue = Math.round((contribution.safePercentage * $withdrawBalance) / 100);
+		contribution.adventureValue = Math.round(
+			(contribution.adventurePercentage * $withdrawBalance) / 100
+		);
+		contribution.founderValue = Math.round(
+			(contribution.founderPercentage * $withdrawBalance) / 100
+		);
+	}
+	function setDataEqually() {
+		contribution.safePercentage = 33.3;
+		contribution.adventurePercentage = 33.4;
+		contribution.founderPercentage = 33.3;
+
+		contribution.safeValue = roundDown((contribution.safePercentage * $withdrawBalance) / 100, 2);
+		contribution.adventureValue = roundDown(
+			(contribution.adventurePercentage * $withdrawBalance) / 100,
+			2
+		);
+		contribution.founderValue = roundDown(
+			(contribution.founderPercentage * $withdrawBalance) / 100,
+			2
+		);
 	}
 
 	$: {
 		if ($withdrawMethod === '0') {
-			contribution.safePercentage = current_contribution.greenSafe;
-			contribution.adventurePercentage = current_contribution.greenAdventure;
-			contribution.founderPercentage = current_contribution.greenFounder;
-
-			contribution.safeValue = Math.round((contribution.safePercentage * $withdrawBalance) / 100);
-			contribution.adventureValue = Math.round(
-				(contribution.adventurePercentage * $withdrawBalance) / 100
-			);
-			contribution.founderValue = Math.round(
-				(contribution.founderPercentage * $withdrawBalance) / 100
-			);
+			setDataAsCurrentContr();
 		} else if ($withdrawMethod === '1') {
-			contribution.safePercentage = 33.3;
-			contribution.adventurePercentage = 33.4;
-			contribution.founderPercentage = 33.3;
-
-			contribution.safeValue = roundDown((contribution.safePercentage * $withdrawBalance) / 100, 1);
-			contribution.adventureValue = roundDown(
-				(contribution.adventurePercentage * $withdrawBalance) / 100, 1
-			);
-			contribution.founderValue = roundDown(
-				(contribution.founderPercentage * $withdrawBalance) / 100, 1
-			);
+			setDataEqually();
 		} else if ($withdrawMethod === '2') {
 			withdrawMaxSum = Math.round($globalData.data.currentSubscription.balance);
 			$withdrawBalance = Math.round(
 				contribution.safeValue + contribution.adventureValue + contribution.founderValue
 			);
-
+			if (
+				contribution.safePercentage === 33.3 &&
+				contribution.adventurePercentage === 33.4 &&
+				contribution.founderPercentage === 33.3
+			) {
+				setDataAsCurrentContr();
+			}
 
 			if ($withdrawBalance > withdrawMaxSum) {
 				$withdrawFormState = true;
