@@ -3,7 +3,7 @@
 	import NotificationItem from './notification-item/NotificationItem.svelte';
 	import { notificationList, loading } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	import Preloader from '../../../../lib/components/Preloader.svelte';
+	import Preloader from '$lib/components/Preloader.svelte';
 </script>
 
 <svelte:head>

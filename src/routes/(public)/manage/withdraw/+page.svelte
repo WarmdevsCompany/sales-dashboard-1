@@ -5,6 +5,7 @@ import WithdrawManager from "./withdraw-manager/WithdrawManager.svelte";
 import WithdrawPlans from "./withdraw-plans/WithdrawPlans.svelte";
 import greenLogo from "$lib/assets/img/logo-green.svg";
 import ConfirmModal from "./withdraw-confirm/ConfirmModal.svelte";
+	import { globalData } from "$lib/globalStore";
 let modalClassName = 'greenForm'
 const submit = ()=> true
 const withdrawMethods = [];
@@ -18,7 +19,7 @@ const withdrawMethods = [];
 	<meta name="description" content="Withdraw page" />
 </svelte:head>
 <WithdrawManager />
-<WithdrawPlans />
+<WithdrawPlans current_contribution={$globalData.data.current_contribution} currentSymbol={$globalData.data.currency.symbol}/>
 <WithdrawFooter />
 
 <!-- Verify account -->
