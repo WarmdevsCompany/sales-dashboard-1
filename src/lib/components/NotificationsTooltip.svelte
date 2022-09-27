@@ -4,12 +4,10 @@
 	import { notificationList, loading, selectedNotification } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
 	import Preloader from './Preloader.svelte';
-	import {findCreatedNotificationTime} from '$lib/functions/findCreatedNotificationTime'
+	import { findCreatedNotificationTime } from '$lib/functions/findCreatedNotificationTime';
 	import { getModal } from './Modal.svelte';
-	
 
 	let active = false;
-
 
 	function hide() {
 		active = false;
@@ -18,16 +16,15 @@
 	async function handleClickOnTooltip() {}
 
 	function showNotificationModal(name, text) {
-		$selectedNotification.head = name
-		$selectedNotification.body = text
-		hide()
-		getModal('notification').open()
+		$selectedNotification.head = name;
+		$selectedNotification.body = text;
+		hide();
+		getModal('notification').open();
 	}
 
 	async function toggleAction(id) {
 		active = !active;
 	}
-
 </script>
 
 <div use:clickOutside on:click_outside={hide}>
@@ -46,7 +43,10 @@
 			<ul class="notification__wrapper">
 				{#if !$loading}
 					{#each $notificationList as item}
-						<li class:active={item.status != 'viewed'} on:click={() => showNotificationModal(item.name, item.text)}>
+						<li
+							class:active={!item.viewed}
+							on:click={() => showNotificationModal(item.name, item.text)}
+						>
 							<span class="inline-block semi-bold text-sm">{item.name}</span>
 							<div class="notification__content d-flex justify-sb">
 								<span class="cut-text inline-block ">{item.text}</span>

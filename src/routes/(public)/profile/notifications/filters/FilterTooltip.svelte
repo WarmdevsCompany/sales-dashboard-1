@@ -7,6 +7,8 @@
 	import { getGeneralData } from '$lib/api/axios';
 
 	let active = false;
+	let sortByRead = false;
+	let sortByUnread = false;
 
 	function show() {
 		active = true;
@@ -22,11 +24,28 @@
 		hide();
 	}
 
+	const refreshSort = (status) => {
+		switch (status) {
+			case 'by_read':
+				sortByRead = true;
+				sortByUnread = false;
+				break;
+			case 'by_unread':
+				sortByRead = false;
+				sortByUnread = true;
+				break;
+			default:
+				sortByRead = false;
+				sortByUnread = false;
+		}
+	};
+
 	async function filterByDefault() {
 		$loading = true;
 		newData = await getGeneralData();
 		$notificationList = newData.data.notifications.data;
 		$loading = false;
+		refreshSort();
 	}
 
 	function sortByDate() {
@@ -34,18 +53,27 @@
 			return new Date(b.date) - new Date(a.date);
 		});
 		$notificationList = $notificationList;
+		refreshSort();
 	}
 
 	function sortByReadItems() {
+		refreshSort('by_read');
 		$notificationList.sort(function (a, b) {
-			return a.viewed === b.viewed ? 0 : a ? -1 : 1;
+			if (a.viewed > b.viewed) {
+				return -1;
+			}
+			return 0;
 		});
 		$notificationList = $notificationList;
 	}
 
 	function sortByUnreadItems() {
+		refreshSort('by_unread');
 		$notificationList.sort(function (a, b) {
-			return a.viewed === b.viewed ? 0 : a ? 1 : -1;
+			if (a.viewed < b.viewed) {
+				return -1;
+			}
+			return 0;
 		});
 		$notificationList = $notificationList;
 	}
@@ -67,8 +95,12 @@
 		<ul>
 			<li on:click={() => filterByDefault()}>{$t('SETTINGS.ALL_NOTIFICATIONS')}</li>
 			<li on:click={() => sortByDate()}>{$t('SETTINGS.DATE_ADDED')}</li>
-			<li on:click={() => sortByReadItems()}>{$t('SETTINGS.READ')}</li>
-			<li on:click={() => sortByUnreadItems()}>{$t('SETTINGS.UNREAD')}</li>
+			{#if !sortByRead}
+				<li on:click={() => sortByReadItems()}>{$t('SETTINGS.READ')}</li>
+			{/if}
+			{#if !sortByUnread}
+				<li on:click={() => sortByUnreadItems()}>{$t('SETTINGS.UNREAD')}</li>
+			{/if}
 		</ul>
 	</div>
 {/if}
