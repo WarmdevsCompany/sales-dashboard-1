@@ -12,7 +12,6 @@
 
 	// convert date to UTC
 	const date = convertDateToUTC($globalData.data.currentSubscription.nextDate);
-	console.log(date);
 	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 
 	$: {

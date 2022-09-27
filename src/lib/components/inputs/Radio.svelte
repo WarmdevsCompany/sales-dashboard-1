@@ -8,6 +8,7 @@
 	export let flexDirection = 'column';
 	export let verify = false;
 	export let tabId = 1;
+	export let disabledState = false;
 
 	const uniqueID = Math.floor(Math.random() * 100);
 
@@ -33,6 +34,7 @@
 					tabId = id;
 				}}
 				{value}
+				
 			/>
 			<label for={slugify(label)} class="verify_tab">
 				
@@ -54,7 +56,7 @@
 	>
 		<div class="legend" id={`label-${uniqueID}`} />
 		{#each options as { value, label }}
-			<input class="sr-only" type="radio" id={slugify(label)} bind:group={userSelected} {value} />
+			<input class="sr-only" type="radio" id={slugify(label)} bind:group={userSelected} {value} disabled = {disabledState}/>
 
 			<label for={slugify(label)} >
 				<span><div class="dot" /></span>
@@ -130,6 +132,10 @@
 		border: 2px solid #0085ff;
 		border-radius: 50%;
 	}
+	input[type='radio']:checked:disabled + label span {
+		border: 2px solid #0084ff8d;
+		border-radius: 50%;
+	}
 
 	input[type='radio'] + label span .dot {
 		position: absolute;
@@ -143,6 +149,12 @@
 	input[type='radio']:checked + label span .dot {
 		opacity: 1;
 		transform: scale(1);
+	}
+
+	input[type='radio']:checked:disabled + label span .dot {
+		opacity: 1;
+		transform: scale(1);
+		background: #0084ff8d;
 	}
 
 	input[type='radio']:focus + label span {

@@ -1,18 +1,16 @@
 <script>
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { confirmModalState } from '../withdrawStore';
+	import { confirmModalState, withdrawFormState } from '../withdrawStore';
 	export let btnAligment = 'justify-end', confirmBtn = 'open', closeModals;
 	export let formStep, withdrawMethods;
 	const confirmWithdraw = () => {
 		$confirmModalState = false
-		console.log(withdrawMethods)
 		if(withdrawMethods && withdrawMethods.length > 0){
 			formStep = 3
 		}else {
 			formStep = 4
 		}
-		console.log('here')
 	};
 </script>
 
@@ -31,7 +29,7 @@
 		<div class="d-flex {btnAligment} buttons">
 			<button class="btn cancel mr-1_5">{$t('CANCEL')}</button>
 
-			<div class="btn" on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</div>
+			<button disabled={$withdrawFormState} class="btn confirm" on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button>
 		</div>
 	{:else if confirmBtn === 'confirm'}
 		<div class="d-flex {btnAligment} buttons-confirm">
