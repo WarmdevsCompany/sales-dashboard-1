@@ -4,6 +4,7 @@
 	import { modalClassName } from '../../general-info/profileStore';
 	import { notificationList } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
+	import { setNotificationViewed, setNotificationRemoved } from '$lib/api/axios';
 
 	let active = false;
 
@@ -25,19 +26,14 @@
 			if (value.idobject == id) return (value.status = 'viewed');
 		});
 		$notificationList = $notificationList;
-	}
-
-	function unreadItem(id) {
-		$notificationList.map(function (value, index, arr) {
-			if (value.idobject == id) return (value.status = 'unreaded');
-		});
-		$notificationList = $notificationList;
+		setNotificationViewed(id);
 	}
 
 	function removeItem(id) {
 		$notificationList = $notificationList.filter(function (value, index, arr) {
 			if (value.idobject != id) return value;
 		});
+		setNotificationRemoved(id);
 	}
 </script>
 
@@ -55,9 +51,7 @@
 		style="width: {$$props.width}px; left: -{$$props.width}px"
 	>
 		<ul>
-			{#if $$props.status === 'viewed'}
-				<li on:click={() => unreadItem($$props.id)}>{$t('SETTINGS.MAKE_UNREAD')}</li>
-			{:else}
+			{#if !$$props.status}
 				<li on:click={() => toReadItem($$props.id)}>{$t('SETTINGS.MAKE_READ')}</li>
 			{/if}
 			<li on:click={() => removeItem($$props.id)}>{$t('REMOVE')}</li>

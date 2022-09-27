@@ -8,9 +8,9 @@
 	export let objAttributes = {};
 
 	function showNotificationModal(name, text) {
-		$selectedNotification.head = name
-		$selectedNotification.body = text
-		getModal('notification').open()
+		$selectedNotification.head = name;
+		$selectedNotification.body = text;
+		getModal('notification').open();
 	}
 	// convert date to UTC
 	const date = convertDateToUTC(objAttributes.date);
@@ -18,8 +18,8 @@
 </script>
 
 <li
-	class="notifications__item box_shadow-medium mt-1_25 b-radius-8 relative {objAttributes.status
-		? objAttributes.status
+	class="notifications__item box_shadow-medium mt-1_25 b-radius-8 relative {objAttributes.viewed
+		? ''
 		: 'unreaded'}"
 >
 	<div class="d-flex justify-sb">
@@ -30,7 +30,7 @@
 			{objAttributes.name}
 		</div>
 		<div class="relative dots">
-			<ItemTooltip id={objAttributes.idobject} status={objAttributes.status} width={240}
+			<ItemTooltip id={objAttributes.idobject} status={objAttributes.viewed} width={240}
 				><ThreeDotsIcon bgColor="green" /></ItemTooltip
 			>
 		</div>
@@ -44,7 +44,7 @@
 </li>
 
 <style>
-	.notifications__item.unreaded .title {
+	.notifications__item .title {
 		cursor: pointer;
 	}
 	.notifications__item .title,

@@ -132,7 +132,32 @@ export const changeLang = async (langId) => {
 		console.error(error);
 	}
 };
-
+export const setNotificationViewed = async (id) => {
+	let integerID = +id;
+	try {
+		let response = await privatePath.post('/setNotificationViewed', { notificationId: integerID });
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
+export const setNotificationRemoved = async (id) => {
+	let integerID = +id;
+	try {
+		let response = await privatePath.post('/hideNotification', { notificationId: integerID });
+		if (response.data.status) {
+			return response.data;
+		} else {
+			return response.data.errorMessage;
+		}
+	} catch (error) {
+		console.error(error);
+	}
+};
 export const changePhoto = async (objSrc) => {
 	try {
 		let response = await privatePath.post('/updateClientPhoto', { photo: objSrc });
