@@ -49,10 +49,12 @@
 	.slider:before {
 		position: absolute;
 		content: '';
-		height: 7px;
+		height: calc(100% - 2px);
 		width: 7px;
 		left: 2px;
-		bottom: 1.5px;
+		bottom: 0;
+		top: 0;
+		margin: auto;
 		background-color: white;
 		-webkit-transition: 0.4s;
 		transition: 0.4s;

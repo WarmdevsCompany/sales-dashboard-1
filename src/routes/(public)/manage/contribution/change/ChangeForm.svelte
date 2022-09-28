@@ -7,7 +7,7 @@
 	export let disabledState;
 	export let errorState;
 
-	let requrring = $globalData.data.current_contribution?.periodName || "Monthly";
+	let requrring = $globalData.data.current_contribution?.periodName || 'Monthly';
 	let requrringArray = [];
 	let fullRequrringArray = [];
 	let amountValue = $globalData.data.current_contribution?.amount || 0;
@@ -35,10 +35,9 @@
 				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
 				$globalData.data.current_contribution.periodName = requrring;
 				getModal('confirm').open();
-				setTimeout(()=>{
+				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');
-				},200)
-				
+				}, 200);
 			}
 		}
 	}
@@ -76,7 +75,7 @@
 				type="number"
 				id="amount"
 				class:error={amountErrorState}
-				placeholder="0"
+				placeholder=""
 				min="20"
 				max="9999"
 				maxlength="4"
@@ -106,9 +105,7 @@
 				</div>
 			</div>
 		</div>
-		<button class="btn confirm" disabled={disabledState || errorState}
-			>{confirnBtnText}</button
-		>
+		<button class="btn confirm" disabled={disabledState || errorState}>{confirnBtnText}</button>
 	</form>
 </div>
 

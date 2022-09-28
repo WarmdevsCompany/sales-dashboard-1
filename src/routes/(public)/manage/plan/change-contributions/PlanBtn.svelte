@@ -75,13 +75,16 @@
 			display: none;
 		}
 	}
-	@media only screen and (max-width: 1080px) {
+	@media only screen and (max-width: 1439px) {
 		button,
 		.btn-sv {
-			font-size: var(--text-font-xsmall);
+			font-size: 1vw;
+			padding: 12px 8px;
+			justify-content: center;
+			width: 100%;
 		}
 	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	@media only screen and (min-width: 992px) and (max-width: 1439px) {
 		.wrapper {
 			padding: 0 1rem 2rem 1rem;
 		}
