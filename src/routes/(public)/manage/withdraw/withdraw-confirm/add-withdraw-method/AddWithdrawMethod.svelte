@@ -8,7 +8,7 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import * as yup from 'yup';
 	export let submitBtnText = $t('SAVE'),
-		successFormStatus;
+	withdrawRequestProcessed;
 	let isLoading = false,
 		formStep = 1,
 		verifyId = $verificationId,
@@ -113,7 +113,7 @@
 		initialValues: validationFormData.initialValues,
 		validationSchema: yup.object().shape(validationFormData.validationSchema),
 		onSubmit: async (value) => {
-			successFormStatus = true;
+			withdrawRequestProcessed = true;
 			// isLoading = true;
 			// submitBtnText = `${$t('LOADING')}...`;
 			// POST in Backend
@@ -125,7 +125,7 @@
 		initialValues: validationFormData.initialPrivateValues,
 		validationSchema: yup.object().shape(validationFormData.validationPrivateSchema),
 		onSubmit: async (value) => {
-			successFormStatus = true;
+			withdrawRequestProcessed = true;
 			// isLoading = true;
 			// submitBtnText = `${$t('LOADING')}...`;
 			// POST in Backend
@@ -152,6 +152,7 @@
 
 {#if formStep === 1}
 	<div class="legal_type">
+		<div class="text-center mb-1">General data and bank account data</div>
 		<Dropdown
 			itemsData={legalTypeArray}
 			bind:activeItem={globalLegalType}
@@ -161,7 +162,7 @@
 		{#if globalLegalTypeError}
 			<small transition:slide|local class="error_text mt-0_5">{globalLegalTypeError}</small>
 		{/if}
-		<button class="btn btn_center" on:click={checkLegalType}>{submitBtnText}</button>
+		<button class="btn btn_center" on:click={checkLegalType}>{$t('NEXT')}</button>
 	</div>
 {:else if formStep === 2}
 	<form on:submit|preventDefault={mainForm.handleSubmit}>
@@ -191,7 +192,7 @@
 		margin-top: 4rem;
 	}
 	.legal_type {
-		max-width: 360px;
+		max-width: 639px;
 		margin: 2rem auto 0 auto;
 	}
 	.legal_type .btn {

@@ -2,21 +2,24 @@
 	import { fade } from 'svelte/transition';
 	import { t } from '$lib/translations/i18n.js';
 	import closeIcon from '$lib/assets/img/close.svg';
+	import logo from '$lib/assets/img/logo-green.svg';
+	export let mainText = $t('PROFILE_UPDATED'), btnText = $t('BACK'), closeModals = ()=>{};
 </script>
 
 <div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
-	<div class="confirm__form text-center">
+	<div class="confirm__form text-center d-flex flex-col justify-cc">
 		<div class="finish__content">
+			<img src={logo} class="mb-1_5" alt="logo" />
 			<div class="modal_head_medium text-1">
-				{($$props.mainText = $t('PROFILE_UPDATED'))}
+				{mainText}
 			</div>
-			<button class="btn success" on:click={() => $$props.closeModals()}
-				>{($$props.btnText = $t('BACK'))}</button
+			<button class="btn success" on:click={closeModals}
+				>{btnText}</button
 			>
 		</div>
 		<img
 			class="close_icon"
-			on:click={() => $$props.closeModals()}
+			on:click={closeModals}
 			src={closeIcon}
 			alt="esi close icon"
 		/>
@@ -64,9 +67,8 @@
 		margin: 2.125rem auto 0 auto;
 	}
 	.finish__content {
-		padding-top: 141px;
 		margin: 0 auto;
-		max-width: 374px;
+		max-width: 490px;
 	}
 	.finish__content .modal_head_medium {
 		margin: 0;

@@ -3,23 +3,15 @@
 	import { withdrawMethod, withdrawBalance, withdrawFormState, withdrawContribution } from './../withdrawStore.js';
 	import WithdrawPlanItem from './WithdrawPlanItem.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import { roundNumber } from '$lib/functions/roundNumber.js';
+
+	
 	export let current_contribution;
 	export let currentSymbol;
-	// let contribution = {
-	// 	safePercentage: '',
-	// 	safeValue: '',
-	// 	adventurePercentage: '',
-	// 	adventureValue: '',
-	// 	founderPercentage: '',
-	// 	founderValue: ''
-	// };
 
 	let planInputsErrorState = false, withdrawMaxSum;
 
-	function roundDown(number, decimals) {
-		decimals = decimals || 0;
-		return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
-	}
+
 	function setDataAsCurrentContr() {
 		$withdrawContribution.safePercentage = current_contribution.greenSafe;
 		$withdrawContribution.adventurePercentage = current_contribution.greenAdventure;
@@ -37,13 +29,13 @@
 		$withdrawContribution.safePercentage = 33.3;
 		$withdrawContribution.adventurePercentage = 33.4;
 		$withdrawContribution.founderPercentage = 33.3;
-
-		$withdrawContribution.safeValue = roundDown(($withdrawContribution.safePercentage * $withdrawBalance) / 100, 2);
-		$withdrawContribution.adventureValue = roundDown(
+console.log($withdrawBalance)
+		$withdrawContribution.safeValue = roundNumber(($withdrawContribution.safePercentage * $withdrawBalance) / 100, 2);
+		$withdrawContribution.adventureValue = roundNumber(
 			($withdrawContribution.adventurePercentage * $withdrawBalance) / 100,
 			2
 		);
-		$withdrawContribution.founderValue = roundDown(
+		$withdrawContribution.founderValue = roundNumber(
 			($withdrawContribution.founderPercentage * $withdrawBalance) / 100,
 			2
 		);
@@ -73,9 +65,9 @@
 			} else {
 				$withdrawFormState = false;
 				planInputsErrorState = false
-				$withdrawContribution.safePercentage = roundDown(($withdrawContribution.safeValue * 100)/ $withdrawBalance, 2)
-				$withdrawContribution.adventurePercentage = roundDown(($withdrawContribution.adventureValue * 100)/ $withdrawBalance, 2)
-				$withdrawContribution.founderPercentage = roundDown(($withdrawContribution.founderValue * 100)/ $withdrawBalance, 2)
+				$withdrawContribution.safePercentage = Math.round(($withdrawContribution.safeValue * 100)/ $withdrawBalance)
+				$withdrawContribution.adventurePercentage = Math.round(($withdrawContribution.adventureValue * 100)/ $withdrawBalance)
+				$withdrawContribution.founderPercentage = Math.round(($withdrawContribution.founderValue * 100)/ $withdrawBalance)
 			}
 		}
 	}
