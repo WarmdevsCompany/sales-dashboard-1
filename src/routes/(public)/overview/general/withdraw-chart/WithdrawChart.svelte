@@ -193,4 +193,12 @@
 			max-width: 100%;
 		}
 	}
+	@media only screen and (max-width: 540px) {
+		.chart__wrapper::before {
+			width: 80vw;
+		}
+		.chart__wrapper{
+		padding: 0;
+	max-width: 100%;}
+	}
 </style>

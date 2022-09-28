@@ -76,7 +76,7 @@ console.log($withdrawBalance)
 <div class="plan__items grid-3 mt-2">
 	<WithdrawPlanItem
 		planClass={'safe'}
-		planName={$t('MANAGE_SAFE')}
+		planName={$t('SAFE_PLAN_BIG')}
 		planAvailable={$t('MANAGE_AV_AM')}
 		planMoney={$withdrawContribution.safeValue || 0}
 		planPersentage={$withdrawContribution.safePercentage}
@@ -87,7 +87,7 @@ console.log($withdrawBalance)
 	/>
 	<WithdrawPlanItem
 		planClass={'adventure'}
-		planName={$t('MANAGE_ADVENTURE')}
+		planName={$t('ADVENTURE_BIG')}
 		planAvailable={$t('MANAGE_AV_AM')}
 		planMoney={$withdrawContribution.adventureValue || 0}
 		planPersentage={$withdrawContribution.adventurePercentage}
@@ -98,7 +98,7 @@ console.log($withdrawBalance)
 	/>
 	<WithdrawPlanItem
 		planClass={'founder'}
-		planName={$t('MANAGE_FOUNDER')}
+		planName={$t('FOUNDER_BIG')}
 		planAvailable={$t('MANAGE_AV_AM')}
 		planMoney={$withdrawContribution.founderValue || 0}
 		planPersentage={$withdrawContribution.founderPercentage}

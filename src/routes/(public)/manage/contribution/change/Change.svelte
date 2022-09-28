@@ -47,7 +47,7 @@
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEW_CONTRIBUTION')}:
 				<span class="text-3 text-blue mobile-block"
-					>{$globalData?.data?.currency.symbol}{$globalData.data.membershipStatus.amount}/mo</span
+					>{$globalData?.data?.currency.symbol}{$globalData.data.current_contribution.amount }/mo</span
 				>
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">

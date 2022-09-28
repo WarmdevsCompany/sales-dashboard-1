@@ -207,6 +207,15 @@
 		max-width: 100%;
 		padding: 0 1rem;
 	}
-	@media only screen and (max-width: 991px) {
+	@media only screen and (max-width: 480px) {
+		.form__wrapper {
+			padding: 0;
+		}
+		.confirm__form{
+			max-height: 100vh;
+			border-radius: 0;
+			height: 100%;
+			margin: 0;
+		}
 	}
 </style>

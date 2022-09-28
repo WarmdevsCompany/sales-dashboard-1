@@ -92,11 +92,11 @@
 				{/if}
 			</MediaQuery>
 			{#if $globalData.data.photo}
-			  <AvatarIcon avatarIsSet={true} avatarImg={$globalData.data.photo} />
-			  {:else}
-			  <AvatarIcon avatarIsSet={false} avatarImg={false}/>
+				<AvatarIcon avatarIsSet={true} avatarImg={$globalData.data.photo} />
+			{:else}
+				<AvatarIcon avatarIsSet={false} avatarImg={false} />
 			{/if}
-			
+
 			<div class="user__name d-flex justify-cc">
 				{firstName}
 				{lastName}
@@ -354,6 +354,17 @@
 		}
 		.sidebar.open {
 			transform: translateX(0);
+			overflow: auto;
+		}
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		.sidebar.open::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* Hide scrollbar for IE, Edge and Firefox */
+		.sidebar.open {
+			-ms-overflow-style: none; /* IE and Edge */
+			scrollbar-width: none; /* Firefox */
 		}
 		.sidebar__close {
 			margin-right: auto;

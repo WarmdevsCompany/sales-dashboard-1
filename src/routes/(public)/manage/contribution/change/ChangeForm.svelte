@@ -31,9 +31,9 @@
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-				$globalData.data.membershipStatus.amount = amountValue;
-				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
+				$globalData.data.current_contribution.amount = amountValue;
 				$globalData.data.current_contribution.periodName = requrring;
+				updateCurrentContributionStoreValues(amountValue)
 				getModal('confirm').open();
 				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');
@@ -65,9 +65,23 @@
 		});
 		return periodId;
 	}
+	function updateCurrentContributionStoreValues(amount){
+		let safe, adv, found;
+		const savePers = $globalData.data.current_contribution.greenSafe
+		const advPers = $globalData.data.current_contribution.greenAdventure
+		const foundPers = $globalData.data.current_contribution.greenFounder
+
+		safe = (amount * savePers)/ 100
+		adv = (amount * advPers) / 100
+		found = (amount * foundPers) / 100
+
+		$globalData.data.current_contribution.greenSafeTotal = safe
+		$globalData.data.current_contribution.greenAdventureTotal = adv
+		$globalData.data.current_contribution.greenFounderTotal = found
+	}
 </script>
 
-<div class="form_wrapper ">
+<div class="form_wrapper">
 	<form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
 		<div class="input__wrapper ">
 			<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
@@ -135,6 +149,21 @@
 		left: 5px;
 	}
 
+
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		form {
+			gap: 1vw;
+			grid-gap: 1vw;
+		}
+		.input__wrapper {
+			width: 100%;
+			max-width: 28%;
+		}
+		input[type='number'],
+		.dropdown__wrapper {
+			min-width: 0;
+		}
+	}
 	@media only screen and (max-width: 991px) {
 		form {
 			display: block;
@@ -150,18 +179,15 @@
 			padding-top: 18px;
 		}
 	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
-		form {
-			gap: 1vw;
-			grid-gap: 1vw;
+	@media only screen and (max-width: 480px) {
+		.form_wrapper {
+			padding: 0;
 		}
-		.input__wrapper {
-			width: 100%;
-			max-width: 28%;
-		}
-		input[type='number'],
-		.dropdown__wrapper {
-			min-width: 0;
+		.confirm__form{
+			max-height: 100vh;
+			border-radius: 0;
+			height: 100%;
+			margin: 0;
 		}
 	}
 </style>

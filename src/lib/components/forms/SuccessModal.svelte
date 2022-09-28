@@ -3,7 +3,9 @@
 	import { t } from '$lib/translations/i18n.js';
 	import closeIcon from '$lib/assets/img/close.svg';
 	import logo from '$lib/assets/img/logo-green.svg';
-	export let mainText = $t('PROFILE_UPDATED'), btnText = $t('BACK'), closeModals = ()=>{};
+	export let mainText = $t('PROFILE_UPDATED'),
+		btnText = $t('BACK'),
+		closeModals = () => {};
 </script>
 
 <div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
@@ -13,16 +15,9 @@
 			<div class="modal_head_medium text-1">
 				{mainText}
 			</div>
-			<button class="btn success" on:click={closeModals}
-				>{btnText}</button
-			>
+			<button class="btn success" on:click={closeModals}>{btnText}</button>
 		</div>
-		<img
-			class="close_icon"
-			on:click={closeModals}
-			src={closeIcon}
-			alt="esi close icon"
-		/>
+		<img class="close_icon" on:click={closeModals} src={closeIcon} alt="esi close icon" />
 	</div>
 </div>
 
@@ -72,5 +67,16 @@
 	}
 	.finish__content .modal_head_medium {
 		margin: 0;
+	}
+	@media only screen and (max-width: 480px) {
+		.form__wrapper {
+			padding: 0;
+		}
+		.confirm__form {
+			max-height: 100vh;
+			border-radius: 0;
+			height: 100%;
+			margin: 0;
+		}
 	}
 </style>

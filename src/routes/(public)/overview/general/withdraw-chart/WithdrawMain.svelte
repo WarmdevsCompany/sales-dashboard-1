@@ -28,10 +28,15 @@
 		color: var(--text-secondary-color);
 		text-align: right;
 	}
+	@media only screen and (max-width: 680px) {
+		.withdraw__body {
+			flex-direction: column;
+			align-items: flex-end;
+		}
+	}
 
 	@media only screen and (max-width: 991px) {
 		.withdraw__body {
-			display: block;
 			margin-bottom: 4rem;
 			padding-left: 1rem;
 			padding-right: 1rem;
