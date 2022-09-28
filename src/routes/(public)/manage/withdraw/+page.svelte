@@ -6,9 +6,9 @@ import WithdrawPlans from "./withdraw-plans/WithdrawPlans.svelte";
 import greenLogo from "$lib/assets/img/logo-green.svg";
 import ConfirmModal from "./withdraw-confirm/ConfirmModal.svelte";
 	import { globalData } from "$lib/globalStore";
-let modalClassName = 'greenForm'
+let modalClassName = 'greenForm', fee = 0.004, timeToTransfer = 3
 const submit = ()=> true
-const withdrawMethods = [];
+const withdrawMethods = 
 [
 		{ withdrawName: 'Bank transfer #132452*USD', recipientName: 'Recipient full name' },
 		{ withdrawName: 'Bank transfer #937752*USD', recipientName: 'Recipient full name' }
@@ -20,7 +20,7 @@ const withdrawMethods = [];
 </svelte:head>
 <WithdrawManager />
 <WithdrawPlans current_contribution={$globalData.data.current_contribution} currentSymbol={$globalData.data.currency.symbol}/>
-<WithdrawFooter />
+<WithdrawFooter {fee} {timeToTransfer}/>
 
 <!-- Verify account -->
-<ConfirmModal withdrawMethods={withdrawMethods}/>
+<ConfirmModal withdrawMethods={withdrawMethods} {fee} {timeToTransfer}/>

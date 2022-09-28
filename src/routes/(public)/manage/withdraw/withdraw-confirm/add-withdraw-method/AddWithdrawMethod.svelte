@@ -113,7 +113,6 @@
 		initialValues: validationFormData.initialValues,
 		validationSchema: yup.object().shape(validationFormData.validationSchema),
 		onSubmit: async (value) => {
-			console.log(value);
 			successFormStatus = true;
 			// isLoading = true;
 			// submitBtnText = `${$t('LOADING')}...`;
@@ -126,7 +125,7 @@
 		initialValues: validationFormData.initialPrivateValues,
 		validationSchema: yup.object().shape(validationFormData.validationPrivateSchema),
 		onSubmit: async (value) => {
-			console.log(value);
+			successFormStatus = true;
 			// isLoading = true;
 			// submitBtnText = `${$t('LOADING')}...`;
 			// POST in Backend
