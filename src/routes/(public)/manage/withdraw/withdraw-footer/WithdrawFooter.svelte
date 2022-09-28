@@ -6,8 +6,8 @@
 	import { confirmModalState, withdrawFormState, withdrawBalance } from '../withdrawStore';
 	export let btnAligment = 'justify-end',
 		confirmBtn = 'open',
-		closeModals, formStep, withdrawMethods, fee, timeToTransfer, withdrawOfTotal, feeSum
-	const balance = $globalData.data.currentSubscription.balance;
+		closeModals, formStep, withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
+
 	const confirmWithdraw = () => {
 		$confirmModalState = false;
 		if (withdrawMethods && withdrawMethods.length > 0) {
@@ -17,13 +17,7 @@
 		}
 	};
 
-	$: {
-		withdrawOfTotal = ($withdrawBalance * 100) / balance;
-		feeSum = roundNumber(fee * $withdrawBalance, 2);
-		if (withdrawOfTotal > 100) {
-			withdrawOfTotal = 100;
-		}
-	}
+
 </script>
 
 <div class="mt-1_5">

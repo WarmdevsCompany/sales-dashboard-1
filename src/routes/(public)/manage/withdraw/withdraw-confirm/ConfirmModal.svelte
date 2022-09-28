@@ -12,10 +12,10 @@
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
 	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
-	
-	export let withdrawMethods, fee, timeToTransfer;
+
+	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
 	let formStep = 1,
-		successFormStatus = false;
+		successFormStatus = false, withdrawRequestProcessed = false;
 	$: formStep, successFormStatus;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
@@ -26,11 +26,13 @@
 		formStep = 1;
 		getModal(modalId).close();
 	};
-	const closeAllModals = ()=>{
-		successFormStatus = false
-		closeModals('withdraw')
-	}
+	const closeAllModals = () => {
+		successFormStatus = false;
+		withdrawRequestProcessed = false;
+		closeModals('withdraw');
+	};
 </script>
+
 <Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
@@ -43,16 +45,16 @@
 			{/if}
 
 			{#if formStep === 1}
-				<VerifyEmail sendVerifyCallback={submitEmailOrPhone}/>
+				<VerifyEmail sendVerifyCallback={submitEmailOrPhone} />
 			{:else if formStep === 2}
 				<VerifyCodeForm {submitVerificationCode} />
 			{/if}
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep {withdrawMethods} bind:successFormStatus/>
+				<WithdrawsMethods bind:formStep {withdrawMethods} bind:successFormStatus />
 			{:else if formStep === 4}
-				<AddWithdrawMethod bind:successFormStatus/>
+				<AddWithdrawMethod bind:withdrawRequestProcessed/>
 			{/if}
 		</div>
 	</div>
@@ -67,12 +69,20 @@
 			</div>
 			<div class="last__step--body">
 				<div>
-					{$t('SAFE_PLAN_BIG')}: <span class="text-green mobile-block">{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span>
+					{$t('SAFE_PLAN_BIG')}:
+					<span class="text-green mobile-block"
+						>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
+					>
 					<div class="inline">
-						{$t('ADVENTURE_BIG')}: <span class="text-green mobile-block">{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span>
+						{$t('ADVENTURE_BIG')}:
+						<span class="text-green mobile-block"
+							>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
+						>
 					</div>
 
-					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block">{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span>
+					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block"
+						>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
+					>
 				</div>
 				<div class="line mt-1_5 mb-1_5" />
 				<WithdrawFooter
@@ -81,7 +91,9 @@
 					bind:formStep
 					{closeModals}
 					{withdrawMethods}
-					{fee} {timeToTransfer}
+					{feeSum}
+					{timeToTransfer}
+					{withdrawOfTotal}
 				/>
 			</div>
 			<img
@@ -96,7 +108,14 @@
 {#if successFormStatus}
 	<SuccessModal
 		closeModals={closeAllModals}
-		mainText='Thank You! Your withdrawal was confirmed'
+		mainText="Thank You! Your withdrawal was confirmed"
+		btnText={$t('BACK')}
+	/>
+{/if}
+{#if withdrawRequestProcessed}
+	<SuccessModal
+		closeModals={closeAllModals}
+		mainText="Withdrawal request successfully processed"
 		btnText={$t('BACK')}
 	/>
 {/if}

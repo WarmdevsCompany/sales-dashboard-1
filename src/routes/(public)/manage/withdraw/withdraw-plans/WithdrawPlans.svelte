@@ -29,7 +29,7 @@
 		$withdrawContribution.safePercentage = 33.3;
 		$withdrawContribution.adventurePercentage = 33.4;
 		$withdrawContribution.founderPercentage = 33.3;
-
+console.log($withdrawBalance)
 		$withdrawContribution.safeValue = roundNumber(($withdrawContribution.safePercentage * $withdrawBalance) / 100, 2);
 		$withdrawContribution.adventureValue = roundNumber(
 			($withdrawContribution.adventurePercentage * $withdrawBalance) / 100,
