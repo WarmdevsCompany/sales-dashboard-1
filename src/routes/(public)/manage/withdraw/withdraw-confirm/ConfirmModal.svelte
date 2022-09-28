@@ -1,8 +1,9 @@
 <script>
+	import { globalData } from '$lib/globalStore';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import WithdrawFooter from '../withdraw-footer/WithdrawFooter.svelte';
-	import { modalClassName, confirmModalState } from '../withdrawStore';
+	import { modalClassName, confirmModalState, withdrawContribution } from '../withdrawStore';
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
@@ -11,7 +12,8 @@
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
 	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
-	export let withdrawMethods;
+	
+	export let withdrawMethods, fee, timeToTransfer;
 	let formStep = 1,
 		successFormStatus = false;
 	$: formStep, successFormStatus;
@@ -65,12 +67,12 @@
 			</div>
 			<div class="last__step--body">
 				<div>
-					{$t('SAFE_PLAN_BIG')}: <span class="text-green mobile-block">$600</span>
+					{$t('SAFE_PLAN_BIG')}: <span class="text-green mobile-block">{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span>
 					<div class="inline">
-						{$t('ADVENTURE_BIG')}: <span class="text-green mobile-block">$400</span>
+						{$t('ADVENTURE_BIG')}: <span class="text-green mobile-block">{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span>
 					</div>
 
-					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block">$0</span>
+					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block">{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span>
 				</div>
 				<div class="line mt-1_5 mb-1_5" />
 				<WithdrawFooter
@@ -79,6 +81,7 @@
 					bind:formStep
 					{closeModals}
 					{withdrawMethods}
+					{fee} {timeToTransfer}
 				/>
 			</div>
 			<img
@@ -93,7 +96,7 @@
 {#if successFormStatus}
 	<SuccessModal
 		closeModals={closeAllModals}
-		mainText={$t('PROFILE_PW_CHANDED')}
+		mainText='Thank You! Your withdrawal was confirmed'
 		btnText={$t('BACK')}
 	/>
 {/if}

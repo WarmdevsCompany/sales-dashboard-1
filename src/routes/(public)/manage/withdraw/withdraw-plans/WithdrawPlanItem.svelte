@@ -2,8 +2,8 @@
 	export let planInputValue;
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 	import { checkInputMaxLenght } from '$lib/functions/checkInputMaxLenght.js';
+	
 </script>
-
 <div class="plan__item b-radius-8 box_shadow-medium text-white {$$props.planClass}">
 	<div class="d-flex justify-sb">
 		<div class="text-3 plan_name">{$$props.planName}</div>
@@ -20,13 +20,14 @@
 		placeholder="0"
 		maxlength="4"
 		disabled={$$props.planInputState}
+		on:keydown={checkInputNumber}
+		on:keyup={checkInputNumber}
+		on:input={checkInputMaxLenght}
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {
 			e.target.blur();
 		}}
-		on:keydown={checkInputNumber}
-		on:keyup={checkInputNumber}
-		on:input={checkInputMaxLenght}
+		class:error={$$props.planInputsErrorState}
 	/>
 </div>
 

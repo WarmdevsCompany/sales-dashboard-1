@@ -1,50 +1,50 @@
 <script>
 	import { globalData } from '$lib/globalStore';
-	import { withdrawMethod, withdrawBalance, withdrawFormState } from './../withdrawStore.js';
+	import { withdrawMethod, withdrawBalance, withdrawFormState, withdrawContribution } from './../withdrawStore.js';
 	import WithdrawPlanItem from './WithdrawPlanItem.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	export let current_contribution;
 	export let currentSymbol;
-	let contribution = {
-		safePercentage: '',
-		safeValue: '',
-		adventurePercentage: '',
-		adventureValue: '',
-		founderPercentage: '',
-		founderValue: ''
-	};
+	// let contribution = {
+	// 	safePercentage: '',
+	// 	safeValue: '',
+	// 	adventurePercentage: '',
+	// 	adventureValue: '',
+	// 	founderPercentage: '',
+	// 	founderValue: ''
+	// };
 
-	let sumOfAllContributions, withdrawMaxSum;
+	let planInputsErrorState = false, withdrawMaxSum;
 
 	function roundDown(number, decimals) {
 		decimals = decimals || 0;
 		return Math.round(number * Math.pow(10, decimals)) / Math.pow(10, decimals);
 	}
 	function setDataAsCurrentContr() {
-		contribution.safePercentage = current_contribution.greenSafe;
-		contribution.adventurePercentage = current_contribution.greenAdventure;
-		contribution.founderPercentage = current_contribution.greenFounder;
+		$withdrawContribution.safePercentage = current_contribution.greenSafe;
+		$withdrawContribution.adventurePercentage = current_contribution.greenAdventure;
+		$withdrawContribution.founderPercentage = current_contribution.greenFounder;
 
-		contribution.safeValue = Math.round((contribution.safePercentage * $withdrawBalance) / 100);
-		contribution.adventureValue = Math.round(
-			(contribution.adventurePercentage * $withdrawBalance) / 100
+		$withdrawContribution.safeValue = Math.round(($withdrawContribution.safePercentage * $withdrawBalance) / 100);
+		$withdrawContribution.adventureValue = Math.round(
+			($withdrawContribution.adventurePercentage * $withdrawBalance) / 100
 		);
-		contribution.founderValue = Math.round(
-			(contribution.founderPercentage * $withdrawBalance) / 100
+		$withdrawContribution.founderValue = Math.round(
+			($withdrawContribution.founderPercentage * $withdrawBalance) / 100
 		);
 	}
 	function setDataEqually() {
-		contribution.safePercentage = 33.3;
-		contribution.adventurePercentage = 33.4;
-		contribution.founderPercentage = 33.3;
+		$withdrawContribution.safePercentage = 33.3;
+		$withdrawContribution.adventurePercentage = 33.4;
+		$withdrawContribution.founderPercentage = 33.3;
 
-		contribution.safeValue = roundDown((contribution.safePercentage * $withdrawBalance) / 100, 2);
-		contribution.adventureValue = roundDown(
-			(contribution.adventurePercentage * $withdrawBalance) / 100,
+		$withdrawContribution.safeValue = roundDown(($withdrawContribution.safePercentage * $withdrawBalance) / 100, 2);
+		$withdrawContribution.adventureValue = roundDown(
+			($withdrawContribution.adventurePercentage * $withdrawBalance) / 100,
 			2
 		);
-		contribution.founderValue = roundDown(
-			(contribution.founderPercentage * $withdrawBalance) / 100,
+		$withdrawContribution.founderValue = roundDown(
+			($withdrawContribution.founderPercentage * $withdrawBalance) / 100,
 			2
 		);
 	}
@@ -57,20 +57,25 @@
 		} else if ($withdrawMethod === '2') {
 			withdrawMaxSum = Math.round($globalData.data.currentSubscription.balance);
 			$withdrawBalance = Math.round(
-				contribution.safeValue + contribution.adventureValue + contribution.founderValue
+				$withdrawContribution.safeValue + $withdrawContribution.adventureValue + $withdrawContribution.founderValue
 			);
 			if (
-				contribution.safePercentage === 33.3 &&
-				contribution.adventurePercentage === 33.4 &&
-				contribution.founderPercentage === 33.3
+				$withdrawContribution.safePercentage === 33.3 &&
+				$withdrawContribution.adventurePercentage === 33.4 &&
+				$withdrawContribution.founderPercentage === 33.3
 			) {
 				setDataAsCurrentContr();
 			}
-
 			if ($withdrawBalance > withdrawMaxSum) {
 				$withdrawFormState = true;
+				planInputsErrorState = true
+
 			} else {
 				$withdrawFormState = false;
+				planInputsErrorState = false
+				$withdrawContribution.safePercentage = roundDown(($withdrawContribution.safeValue * 100)/ $withdrawBalance, 2)
+				$withdrawContribution.adventurePercentage = roundDown(($withdrawContribution.adventureValue * 100)/ $withdrawBalance, 2)
+				$withdrawContribution.founderPercentage = roundDown(($withdrawContribution.founderValue * 100)/ $withdrawBalance, 2)
 			}
 		}
 	}
@@ -81,30 +86,33 @@
 		planClass={'safe'}
 		planName={$t('MANAGE_SAFE')}
 		planAvailable={$t('MANAGE_AV_AM')}
-		planMoney={contribution.safeValue || 0}
-		planPersentage={contribution.safePercentage}
+		planMoney={$withdrawContribution.safeValue || 0}
+		planPersentage={$withdrawContribution.safePercentage}
 		planInputState={$withdrawMethod != '2'}
-		bind:planInputValue={contribution.safeValue}
+		bind:planInputValue={$withdrawContribution.safeValue}
 		planCurrencySymbol={currentSymbol}
+		{planInputsErrorState}
 	/>
 	<WithdrawPlanItem
 		planClass={'adventure'}
 		planName={$t('MANAGE_ADVENTURE')}
 		planAvailable={$t('MANAGE_AV_AM')}
-		planMoney={contribution.adventureValue || 0}
-		planPersentage={contribution.adventurePercentage}
+		planMoney={$withdrawContribution.adventureValue || 0}
+		planPersentage={$withdrawContribution.adventurePercentage}
 		planInputState={$withdrawMethod != '2'}
-		bind:planInputValue={contribution.adventureValue}
+		bind:planInputValue={$withdrawContribution.adventureValue}
 		planCurrencySymbol={currentSymbol}
+		{planInputsErrorState}
 	/>
 	<WithdrawPlanItem
 		planClass={'founder'}
 		planName={$t('MANAGE_FOUNDER')}
 		planAvailable={$t('MANAGE_AV_AM')}
-		planMoney={contribution.founderValue || 0}
-		planPersentage={contribution.founderPercentage}
+		planMoney={$withdrawContribution.founderValue || 0}
+		planPersentage={$withdrawContribution.founderPercentage}
 		planInputState={$withdrawMethod != '2'}
-		bind:planInputValue={contribution.founderValue}
+		bind:planInputValue={$withdrawContribution.founderValue}
 		planCurrencySymbol={currentSymbol}
+		{planInputsErrorState}
 	/>
 </div>

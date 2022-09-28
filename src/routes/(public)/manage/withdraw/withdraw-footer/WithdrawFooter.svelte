@@ -1,35 +1,51 @@
 <script>
+	import { globalData } from '$lib/globalStore';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { confirmModalState, withdrawFormState } from '../withdrawStore';
-	export let btnAligment = 'justify-end', confirmBtn = 'open', closeModals;
-	export let formStep, withdrawMethods;
+	import { confirmModalState, withdrawFormState, withdrawBalance } from '../withdrawStore';
+	export let btnAligment = 'justify-end',
+		confirmBtn = 'open',
+		closeModals;
+	export let formStep, withdrawMethods, fee, timeToTransfer;
 	const confirmWithdraw = () => {
-		$confirmModalState = false
-		if(withdrawMethods && withdrawMethods.length > 0){
-			formStep = 3
-		}else {
-			formStep = 4
+		$confirmModalState = false;
+		if (withdrawMethods && withdrawMethods.length > 0) {
+			formStep = 3;
+		} else {
+			formStep = 4;
 		}
 	};
+	const balance = $globalData.data.currentSubscription.balance;
+	const feeSum = fee * $withdrawBalance;
+	let withdrawOfTotal;
+	$: {
+		withdrawOfTotal = ($withdrawBalance * 100) / balance;
+		if (withdrawOfTotal > 100) {
+			withdrawOfTotal = 100;
+		}
+	}
 </script>
 
 <div class="mt-1_5">
 	<div class="grid mobile-block">
 		<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
-		<div class="grid-item-value text-sm">$1,000</div>
+		<div class="grid-item-value text-sm">${$withdrawBalance}</div>
 		<div class="text-sm">{$t('MANAGE_WD_FEE')}:</div>
-		<div class="grid-item-value text-sm">$4</div>
+		<div class="grid-item-value text-sm">${feeSum}</div>
 		<div class="text-sm">{$t('MANAGE_TIME_TO_TR')}:</div>
-		<div class="grid-item-value text-sm">{$t('MANAGE_3_DAYS')}</div>
+		<div class="grid-item-value text-sm">{timeToTransfer} {$t('MANAGE_DAYS')}</div>
 		<div class="text-sm">{$t('MANAGE_WD_OF_T')}:</div>
-		<div class="grid-item-value text-sm">14%</div>
+		<div class="grid-item-value text-sm">{withdrawOfTotal}%</div>
 	</div>
 	{#if confirmBtn === 'open'}
 		<div class="d-flex {btnAligment} buttons">
 			<button class="btn cancel mr-1_5">{$t('CANCEL')}</button>
 
-			<button disabled={$withdrawFormState} class="btn confirm" on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button>
+			<button
+				disabled={$withdrawFormState}
+				class="btn confirm"
+				on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
+			>
 		</div>
 	{:else if confirmBtn === 'confirm'}
 		<div class="d-flex {btnAligment} buttons-confirm">
