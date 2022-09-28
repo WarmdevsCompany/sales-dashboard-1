@@ -4,7 +4,7 @@
 	import { checkInputMaxLenght } from '$lib/functions/checkInputMaxLenght.js';
 	
 </script>
-<div class="plan__item b-radius-8 box_shadow-medium text-white {$$props.planClass}">
+<div class="plan__item b-radius-8 box_shadow-medium text-white d-flex flex-col justify-sb {$$props.planClass}">
 	<div class="d-flex justify-sb">
 		<div class="text-3 plan_name">{$$props.planName}</div>
 		<div class="plan_money">{$$props.planPersentage}%</div>
@@ -34,6 +34,9 @@
 <style>
 	.plan__item {
 		padding: 1rem 1rem 2.125rem 1rem;
+	}
+	.plan_name{
+	 padding-right: 5px;
 	}
 
 	.plan_money {

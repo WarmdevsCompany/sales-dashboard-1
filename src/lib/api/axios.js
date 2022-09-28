@@ -111,11 +111,7 @@ export const logout = () => {
 export const getGeneralData = async () => {
 	try {
 		let response = await privatePath.post('/getGeneralInfo');
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
 	}

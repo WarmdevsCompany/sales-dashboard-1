@@ -155,8 +155,8 @@
 			</div>
 			<div class="terms__checkbox">
 				<Checkbox group={'terms'} bind:checkboxStatus={stopCheckboxValue} value={1}
-					>{$t('MANAGE_AGREE')}</Checkbox
-				>
+					><div class="text-xsm">{$t('MANAGE_AGREE')}</div>
+				</Checkbox>
 				{#if chackboxErrorStatus}
 					<small in:fade class="error_text text-xsm">{$t('MANAGE_AGREE_ERROR')}</small>
 				{/if}
@@ -256,6 +256,12 @@
 		}
 		.take__break {
 			margin-bottom: 4rem;
+		}
+		.restart__modal--btn {
+			margin: 2.5rem auto 0 auto;
+		}
+		.terms__checkbox{
+			max-width: 400px;
 		}
 	}
 </style>

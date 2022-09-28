@@ -18,7 +18,7 @@
 </script>
 
 <div class="contribution__data--item d-flex align-top text-big">
-	<div class="d-flex align-center">
+	<div class="d-flex align-center header_text">
 		<img src={allSumIcon} alt="all money" />
 		{currencySymbol}{allMoney}
 	</div>

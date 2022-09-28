@@ -6,7 +6,12 @@
 	import { confirmModalState, withdrawFormState, withdrawBalance } from '../withdrawStore';
 	export let btnAligment = 'justify-end',
 		confirmBtn = 'open',
-		closeModals, formStep, withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
+		closeModals,
+		formStep,
+		withdrawMethods,
+		timeToTransfer,
+		withdrawOfTotal,
+		feeSum;
 
 	const confirmWithdraw = () => {
 		$confirmModalState = false;
@@ -16,12 +21,10 @@
 			formStep = 4;
 		}
 	};
-
-
 </script>
 
-<div class="mt-1_5">
-	<div class="grid mobile-block">
+<div class="withdraw__footer">
+	<div class="grid">
 		<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
 		<div class="grid-item-value text-sm">${$withdrawBalance}</div>
 		<div class="text-sm">{$t('MANAGE_WD_FEE')}:</div>
@@ -53,6 +56,9 @@
 </div>
 
 <style>
+	.withdraw__footer{
+	 margin-top: 1.5rem;
+	}
 	.grid {
 		grid-column-gap: 20px;
 		grid-row-gap: 10px;
@@ -95,13 +101,34 @@
 		.buttons-confirm {
 			flex-direction: column-reverse;
 			align-items: center;
+			max-height: 66px;
 		}
 		button.cancel {
-			margin: 1rem auto 0 auto;
+		
+			max-height: 66px;
+		}
+		.btn.confirm {
+			max-height: 66px;
 		}
 		.buttons-confirm button.cancel,
 		.btn.confirm-wd {
+			max-height: 66px;
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		.buttons {
+			flex-wrap: wrap;
+			flex-direction: column-reverse;
+		}
+		.buttons-confirm button.cancel,
+		.buttons button.cancel,
+		.btn.confirm-wd,
+		.btn.confirm {
 			width: 100%;
+			max-height: 66px;
+		}
+		button.cancel {
+			margin-top: 1rem;
 		}
 	}
 </style>

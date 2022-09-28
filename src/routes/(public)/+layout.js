@@ -12,8 +12,8 @@ export async function load({ fetch }) {
 		let lang = localStorage.getItem('lang');
 		locale.set(lang || 'EN');
 		const token = getCookie('esiToken');
-
-		if (!token) {
+		if (!token || token == 'undefined') {
+			
 			deleteCookie('esiToken');
 			throw redirect(307, '/auth/login');
 		} else {

@@ -12,7 +12,7 @@
 
 	let currencySymbol = $globalData.data.currency.symbol,
 		allMoney = $globalData.data.currentSubscription?.balance || 0,
-		monthlySubscriptionText = $globalData.data.currentSubscription?.subscriptionText || "1245/mo",
+		monthlySubscriptionText = $globalData.data.currentSubscription?.subscriptionText || '1245/mo',
 		nextContributionDate = $globalData.data.currentSubscription?.nextDate || 0;
 </script>
 
@@ -22,7 +22,9 @@
 			<WalletValue {allMoney} {currencySymbol} />
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
 			<NextContrDate {nextContributionDate} />
-			<SubscriptionStatus status={$globalData.data.currentSubscription?.status.toLowerCase() || "active"} />
+			<SubscriptionStatus
+				status={$globalData.data.currentSubscription?.status.toLowerCase() || 'active'}
+			/>
 		</div>
 	</div>
 	<MediaQuery query="(min-width: 992px)" let:matches>
@@ -98,6 +100,14 @@
 		header {
 			padding: 1.375rem 1.5rem 1.437rem 4.8125rem;
 		}
+		:global(.header_text) {
+			font-size: 1.6vw;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		header {
+			padding: 1.375rem 1.5rem;
+		}
 	}
 	@media only screen and (max-width: 991px) {
 		header {
@@ -111,17 +121,15 @@
 			width: 100%;
 			margin-bottom: 1rem;
 		}
+		:global(.header_text) {
+			font-size: 20px;
+		}
 		:global(.contribution__data--item:last-child) {
 			position: absolute;
 			right: 0;
 			left: auto;
 			width: auto;
 			margin-top: 1rem;
-		}
-	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
-		header {
-			padding: 1.375rem 1.5rem;
 		}
 	}
 </style>

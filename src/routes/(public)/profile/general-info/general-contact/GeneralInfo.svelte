@@ -128,9 +128,11 @@
 	}
 
 	@media only screen and (max-width: 1300px) {
-		.contact .input__wrapper {
-			grid-column-start: 1;
-			grid-column-end: 3;
+		.grid-2{
+		 grid-template-columns: 1fr;
+		}
+		.mt-3{
+		 margin-top: 1.5rem;
 		}
 	}
 	@media only screen and (max-width: 991px) {

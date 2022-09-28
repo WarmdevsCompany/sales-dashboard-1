@@ -137,6 +137,7 @@
 		max-width: 950px;
 		min-height: 584px;
 		margin-left: 257px;
+		max-height: 97vh;
 	}
 	.scroll__wrapper {
 		max-height: 100vh;
@@ -242,6 +243,19 @@
 		bottom: -152px;
 		right: -545px;
 	}
+
+	
+	@media only screen and (max-width: 1439px) {
+		#modal {
+			min-height: 0;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1439px) {
+		#close {
+			top: 16px;
+			right: 16px;
+		}
+	}
 	@media only screen and (max-width: 991px) {
 		#modal {
 			max-width: 100%;
@@ -260,15 +274,15 @@
 			padding-right: 20px;
 		}
 	}
-	@media only screen and (max-width: 1439px) {
-		#modal {
-			min-height: 0;
+	@media only screen and (max-width: 480px) {
+		#topModal {
+			padding: 0;
 		}
-	}
-	@media only screen and (min-width: 992px) and (max-width: 1439px) {
-		#close {
-			top: 16px;
-			right: 16px;
+		#modal{
+			max-height: 100vh;
+			border-radius: 0;
+			height: 100%;
+			margin: 0;
 		}
 	}
 </style>

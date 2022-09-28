@@ -215,4 +215,13 @@
 		box-shadow: 0 0px 8px var(--accent-color, #282828);
 		border-radius: 50%;
 	}
+	@media only screen and (max-width: 767px) {
+		.withdraw__methods.grid {
+			grid-template-columns: 1fr;
+		}
+		.withdraw__item {
+		 max-width: 100%;
+		}
+
+	}
 </style>

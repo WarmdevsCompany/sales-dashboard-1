@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
 	import { fade } from 'svelte/transition';
 	import { browser } from '$app/environment';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
@@ -96,4 +96,4 @@
 		line-height: 6.5rem;
 		margin: 3rem 0 2rem 0;
 	}
-</style>
+</style> -->

@@ -33,7 +33,6 @@
 			submitBtnText = `${$t('LOADING')}...`;
 			let res = await changeFirstAndLastname(value.firstName, value.lastName, verifyId);
 			if (res.status) {
-				setNewAuthHeaders(res.data.token);
 				$confirmModalState = true;
 				$globalData.data.personalInfo.firstname = value.firstName;
 				$globalData.data.personalInfo.lastname = value.lastName;
