@@ -2,11 +2,12 @@
 	import { globalData } from '$lib/globalStore';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import { roundNumber } from '$lib/functions/roundNumber.js';
 	import { confirmModalState, withdrawFormState, withdrawBalance } from '../withdrawStore';
 	export let btnAligment = 'justify-end',
 		confirmBtn = 'open',
-		closeModals;
-	export let formStep, withdrawMethods, fee, timeToTransfer;
+		closeModals, formStep, withdrawMethods, fee, timeToTransfer, withdrawOfTotal, feeSum
+	const balance = $globalData.data.currentSubscription.balance;
 	const confirmWithdraw = () => {
 		$confirmModalState = false;
 		if (withdrawMethods && withdrawMethods.length > 0) {
@@ -15,11 +16,10 @@
 			formStep = 4;
 		}
 	};
-	const balance = $globalData.data.currentSubscription.balance;
-	const feeSum = fee * $withdrawBalance;
-	let withdrawOfTotal;
+
 	$: {
 		withdrawOfTotal = ($withdrawBalance * 100) / balance;
+		feeSum = roundNumber(fee * $withdrawBalance, 2);
 		if (withdrawOfTotal > 100) {
 			withdrawOfTotal = 100;
 		}

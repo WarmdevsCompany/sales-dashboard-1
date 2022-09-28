@@ -6,8 +6,9 @@ import WithdrawPlans from "./withdraw-plans/WithdrawPlans.svelte";
 import greenLogo from "$lib/assets/img/logo-green.svg";
 import ConfirmModal from "./withdraw-confirm/ConfirmModal.svelte";
 	import { globalData } from "$lib/globalStore";
-let modalClassName = 'greenForm', fee = 0.004, timeToTransfer = 3
+let modalClassName = 'greenForm', timeToTransfer = 3
 const submit = ()=> true
+const fee = $globalData.data.withdrawalFee / 100
 const withdrawMethods = 
 [
 		{ withdrawName: 'Bank transfer #132452*USD', recipientName: 'Recipient full name' },
