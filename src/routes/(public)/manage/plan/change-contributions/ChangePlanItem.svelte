@@ -520,15 +520,21 @@
 			height: 16px;
 		}
 	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	@media only screen and (min-width: 992px) and (max-width: 1439px) {
 		.plans__item.adventure {
 			margin: 0 1vw;
 		}
 		.plans__item .item__head {
-			padding: 1rem;
+			padding: 1rem 0.5rem;
 		}
 		.item__top {
 			padding: 1rem;
+		}
+		.item__top__head {
+			font-size: 1.2vw;
+		}
+		.item__head__name {
+			font-size: 0.9vw;
 		}
 	}
 </style>

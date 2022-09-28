@@ -9,15 +9,18 @@
 </script>
 
 <div class="withdraw__body white_box d-flex justify-sb mt-2">
-	<WithdrawChart withdrawalsList={withdrawals.list}/>
+	<WithdrawChart withdrawalsList={withdrawals.list} />
 	<div class="withdraw">
 		<div class="text-3 ">{$t('OVERVIEW_WITHDRAWS_DETAILS')}</div>
-		<div class="text-4 mt-1">{currencySymbol}{withdrawals.sum}</div>
+		<div class="text-2 mt-1 sum">{currencySymbol}{withdrawals.sum}</div>
 		<div class="text-sm">{$t('OVERVIEW_TOTAL')}</div>
 	</div>
 </div>
 
 <style>
+	.sum {
+		font-weight: var(--font-weight-bold);
+	}
 	.withdraw__body {
 		padding: 1.5rem 2rem 2rem 2rem;
 	}

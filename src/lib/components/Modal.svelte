@@ -260,4 +260,15 @@
 			padding-right: 20px;
 		}
 	}
+	@media only screen and (max-width: 1439px) {
+		#modal {
+			min-height: 0;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1439px) {
+		#close {
+			top: 16px;
+			right: 16px;
+		}
+	}
 </style>

@@ -43,4 +43,10 @@
 	.plan__item.founder {
 		background: var(--third-color);
 	}
+	@media only screen and (min-width: 992px) and (max-width: 1200px) {
+		.plan__item > * {
+			width: 100%;
+			flex-wrap: wrap;
+		}
+	}
 </style>
