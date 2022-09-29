@@ -12,6 +12,11 @@
 
 	export let current_contribution;
 	export let currentSymbol;
+	const availableAmounts = {
+	 safe: $globalData.data.contributions.safePlan.totalSafe,
+	 adv: $globalData.data.contributions.adventurePlan.totalSafe,
+	 found: $globalData.data.contributions.founderPlan.totalSafe
+	}
 
 	let planInputsErrorState = false,
 		withdrawMaxSum;
@@ -88,7 +93,7 @@
 		planClass={'safe'}
 		planName={$t('SAFE_PLAN_BIG')}
 		planAvailable={$t('MANAGE_AV_AM')}
-		planMoney={$withdrawContribution.safeValue || 0}
+		planAvailableMoney={availableAmounts.safe}
 		planPersentage={$withdrawContribution.safePercentage}
 		planInputState={$withdrawMethod != '2'}
 		bind:planInputValue={$withdrawContribution.safeValue}
@@ -99,7 +104,7 @@
 		planClass={'adventure'}
 		planName={$t('ADVENTURE_BIG')}
 		planAvailable={$t('MANAGE_AV_AM')}
-		planMoney={$withdrawContribution.adventureValue || 0}
+		planAvailableMoney={availableAmounts.adv}
 		planPersentage={$withdrawContribution.adventurePercentage}
 		planInputState={$withdrawMethod != '2'}
 		bind:planInputValue={$withdrawContribution.adventureValue}
@@ -110,7 +115,7 @@
 		planClass={'founder'}
 		planName={$t('FOUNDER_BIG')}
 		planAvailable={$t('MANAGE_AV_AM')}
-		planMoney={$withdrawContribution.founderValue || 0}
+		planAvailableMoney={availableAmounts.found}
 		planPersentage={$withdrawContribution.founderPercentage}
 		planInputState={$withdrawMethod != '2'}
 		bind:planInputValue={$withdrawContribution.founderValue}

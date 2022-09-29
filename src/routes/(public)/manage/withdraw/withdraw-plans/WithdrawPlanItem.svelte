@@ -1,20 +1,20 @@
 <script>
 	export let planInputValue;
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
-	import { checkInputMaxLenght } from '$lib/functions/checkInputMaxLenght.js';
-	import { toNumber } from 'lodash';
-	let valueNum = 0
-	$:valueNum
-	
 </script>
-<div class="plan__item b-radius-8 box_shadow-medium text-white d-flex flex-col justify-sb {$$props.planClass}">
+
+<div
+	class="plan__item b-radius-8 box_shadow-medium text-white d-flex flex-col justify-sb {$$props.planClass}"
+>
 	<div class="d-flex justify-sb">
 		<div class="text-3 plan_name">{$$props.planName}</div>
-		<div class="plan_money">{$$props.planPersentage}%</div>
+		<div class=" plan_persentage">{$$props.planPersentage}%</div>
 	</div>
 	<div class="d-flex justify-sb align-base">
 		<div class="text-xsm contr">{$$props.planAvailable}</div>
-		<div class="text-3 plan_persentage">{$$props.planCurrencySymbol}{Math.round($$props.planMoney)}</div>
+		<div class="text-3 plan_money" class:error={planInputValue > $$props.planAvailableMoney}>
+			{$$props.planCurrencySymbol}{$$props.planAvailableMoney}
+		</div>
 	</div>
 
 	<input
@@ -25,12 +25,12 @@
 		disabled={$$props.planInputState}
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}
-		step="any" 
+		step="any"
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {
 			e.target.blur();
 		}}
-		class:error={$$props.planInputsErrorState}
+		class:error={$$props.planInputsErrorState || planInputValue > $$props.planAvailableMoney}
 	/>
 </div>
 
@@ -38,15 +38,21 @@
 	.plan__item {
 		padding: 1rem 1rem 2.125rem 1rem;
 	}
-	.plan_name{
-	 padding-right: 5px;
+	.plan_name {
+		padding-right: 5px;
 	}
 
 	.plan_money {
-		font-weight: var(--font-weight-bold);
+		
+
+		font-weight: var(--font-weight-bolder);
+	}
+	.plan_money.error {
+		opacity: .9;
+		color: var(--red-color);
 	}
 	.plan_persentage {
-		font-weight: var(--font-weight-bolder);
+		font-weight: var(--font-weight-bold);
 	}
 	.plan__item.safe {
 		background: var(--primary-color);

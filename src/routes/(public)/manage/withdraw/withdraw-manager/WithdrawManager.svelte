@@ -23,7 +23,7 @@
 			label: $t('MANAGE_PUT_AM')
 		}
 	];
-	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance) 
+	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5) 
 	$: {
 		$withdrawMethod = radioValue;
 		withdrawMaxSum = $globalData.data.currentSubscription.balance
