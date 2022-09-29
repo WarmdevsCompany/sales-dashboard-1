@@ -3,6 +3,7 @@
 	import clickOutside from '$lib/functions/clickOutside';
 	import { modalClassName } from '../../general-info/profileStore';
 	import { notificationList, loading } from '$lib/globalStore';
+	import { listAfterSearch, searching } from '../notificationsStore';
 	import { t } from '$lib/translations/i18n.js';
 	import { getGeneralData } from '$lib/api/axios';
 
@@ -49,33 +50,60 @@
 	}
 
 	function sortByDate() {
-		$notificationList.sort(function (a, b) {
-			return new Date(b.date) - new Date(a.date);
-		});
-		$notificationList = $notificationList;
+		if ($searching) {
+			$listAfterSearch.sort(function (a, b) {
+				return new Date(b.date) - new Date(a.date);
+			});
+			$listAfterSearch = $listAfterSearch;
+		} else {
+			$notificationList.sort(function (a, b) {
+				return new Date(b.date) - new Date(a.date);
+			});
+			$notificationList = $notificationList;
+		}
 		refreshSort();
 	}
 
 	function sortByReadItems() {
 		refreshSort('by_read');
-		$notificationList.sort(function (a, b) {
-			if (a.viewed > b.viewed) {
-				return -1;
-			}
-			return 0;
-		});
-		$notificationList = $notificationList;
+		if ($searching) {
+			$listAfterSearch.sort(function (a, b) {
+				if (a.viewed > b.viewed) {
+					return -1;
+				}
+				return 0;
+			});
+			$listAfterSearch = $listAfterSearch;
+		} else {
+			$notificationList.sort(function (a, b) {
+				if (a.viewed > b.viewed) {
+					return -1;
+				}
+				return 0;
+			});
+			$notificationList = $notificationList;
+		}
 	}
 
 	function sortByUnreadItems() {
 		refreshSort('by_unread');
-		$notificationList.sort(function (a, b) {
-			if (a.viewed < b.viewed) {
-				return -1;
-			}
-			return 0;
-		});
-		$notificationList = $notificationList;
+		if ($searching) {
+			$listAfterSearch.sort(function (a, b) {
+				if (a.viewed < b.viewed) {
+					return -1;
+				}
+				return 0;
+			});
+			$listAfterSearch = $listAfterSearch;
+		} else {
+			$notificationList.sort(function (a, b) {
+				if (a.viewed < b.viewed) {
+					return -1;
+				}
+				return 0;
+			});
+			$notificationList = $notificationList;
+		}
 	}
 </script>
 

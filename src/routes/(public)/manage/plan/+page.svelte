@@ -1,4 +1,5 @@
 <script>
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import { globalData } from '$lib/globalStore';
 	import {
 		allocatedContributions,
@@ -31,7 +32,7 @@
 		$globalData.data.current_contribution.greenFounder = $allocatedContributions.founder;
 	};
 	const resetContributionData = () => {
-		$subscribeAllState = false
+		$subscribeAllState = false;
 	};
 
 	const changeContributionData = async () => {
@@ -52,6 +53,7 @@
 			}
 		}
 	};
+	scrollToTop();
 </script>
 
 <svelte:head>
@@ -62,9 +64,8 @@
 
 <ChangePlans />
 <div class="d-flex justify-cc">
-	<button
-		class="btn confirm mt-1_5 box_shadow-medium"
-		on:click={changeContributionData}>{confirmButtonText}</button
+	<button class="btn confirm mt-1_5 box_shadow-medium" on:click={changeContributionData}
+		>{confirmButtonText}</button
 	>
 </div>
 
@@ -74,7 +75,11 @@
 		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-cc ">
 			<div class="text-xsm d-flex align-base">
-				{$t('MANAGE_NEW_CONTRIBUTION')}: <span class="text-3 text-blue">{$globalData.data.currency.symbol}{$globalData.data.currentSubscription.subscriptionText}</span>
+				{$t('MANAGE_NEW_CONTRIBUTION')}:
+				<span class="text-3 text-blue"
+					>{$globalData.data.currency.symbol}{$globalData.data.currentSubscription
+						.subscriptionText}</span
+				>
 			</div>
 		</div>
 		<div class="updated__items">
@@ -84,10 +89,9 @@
 	</div>
 </Modal>
 
-	<div in:fade out:fade={{ delay: 0, duration: 100 }}>
-		<PlansMain />
-	</div>
-
+<div in:fade out:fade={{ delay: 0, duration: 100 }}>
+	<PlansMain />
+</div>
 
 <style>
 	.modal_main {

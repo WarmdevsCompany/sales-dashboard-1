@@ -1,29 +1,32 @@
 <script>
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import GeneralPlan from './GeneralPlan.svelte';
 	import MembershipMain from './membership-chart/MembershipMain.svelte';
 	import SaveProjectionChart from './projection-chart/SaveProjectionChart.svelte';
 	import WithdrawMain from './withdraw-chart/WithdrawMain.svelte';
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	let  currentAmount = $globalData.data.current_contribution.amount;
+	let currentAmount = $globalData.data.current_contribution.amount;
 	const periodId = $globalData.data.current_contribution.periodId;
-	let currentTrajectory = [0]
-	let previousTrajectory = []
+	let currentTrajectory = [0];
+	let previousTrajectory = [];
 	const currentPercent = 1.2;
-	const yearsArray = [2022, 2023, 2024, 2025, 2026, 2027]
-	if(periodId === 5235208){
-		currentAmount = currentAmount + currentAmount
+	const yearsArray = [2022, 2023, 2024, 2025, 2026, 2027];
+	if (periodId === 5235208) {
+		currentAmount = currentAmount + currentAmount;
 	}
 	// generate currentTrajectory
 	let amountCounter = currentAmount;
-	yearsArray.forEach(()=>{
-		currentTrajectory = [...currentTrajectory, amountCounter]
+	yearsArray.forEach(() => {
+		currentTrajectory = [...currentTrajectory, amountCounter];
 		amountCounter = amountCounter + currentAmount;
-	})
-		// generate previousTrajectory
-	currentTrajectory.forEach((item, index)=>{
-		previousTrajectory = [...previousTrajectory, (currentTrajectory[index] * currentPercent)]
-	})
+	});
+	// generate previousTrajectory
+	currentTrajectory.forEach((item, index) => {
+		previousTrajectory = [...previousTrajectory, currentTrajectory[index] * currentPercent];
+	});
+
+	scrollToTop();
 </script>
 
 <svelte:head>
@@ -61,7 +64,7 @@
 	<div class="saving-projection p-2 b-radius-8 box_shadow-medium">
 		<div class="saving-projection-wrapper">
 			<SaveProjectionChart
-				yearsArray={yearsArray}
+				{yearsArray}
 				currentTraject={currentTrajectory}
 				prevTraject={previousTrajectory}
 			/>
@@ -80,7 +83,10 @@
 		/>
 	</div>
 </div>
-<WithdrawMain withdrawals={$globalData.data.withdrawals} currencySymbol={$globalData.data.currency.symbol}/>
+<WithdrawMain
+	withdrawals={$globalData.data.withdrawals}
+	currencySymbol={$globalData.data.currency.symbol}
+/>
 
 <style>
 	.saving-projection {

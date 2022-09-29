@@ -313,7 +313,7 @@
 	}
 	.sidebar__bottom {
 		flex-wrap: wrap;
-		padding: 0 1.5rem 3.5rem 1.5rem;
+		padding: 1.5rem 1.5rem 2rem 1.5rem;
 	}
 	.sidebar__bottom > img {
 		margin-right: 10px;
@@ -334,7 +334,7 @@
 	}
 	@media only screen and (max-width: 1200px) {
 		.sidebar__bottom {
-			padding: 0 1.5vw 3.5rem 1.3vw;
+			padding: 1.5rem 1.5vw 2rem 1.3vw;
 		}
 	}
 	@media only screen and (max-width: 991px) {

@@ -2,7 +2,7 @@
 	import StatusIcon from './icons/StatusIcon.svelte';
 	import { createPopperActions } from 'svelte-popperjs';
 	import { fade } from 'svelte/transition';
-  import { t } from '$lib/translations/i18n.js';
+	import { t } from '$lib/translations/i18n.js';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'bottom',
 		strategy: 'fixed'
@@ -25,6 +25,7 @@
 		use:popperRef
 		on:mouseenter={() => (showTooltip = true)}
 		on:mouseleave={() => (showTooltip = false)}
+		class="status__btn-icon"
 	>
 		<StatusIcon bgColor={iconColor} />
 	</div>
@@ -68,5 +69,20 @@
 	.status.suspended {
 		width: 93px;
 		background-color: var(--red-color);
+	}
+	@media only screen and (max-width: 991px) {
+		.status__btn-icon {
+			position: absolute;
+			left: auto;
+			right: -16px;
+			width: 32px;
+			text-align: center;
+			top: -4px;
+		}
+	}
+	@media only screen and (max-width: 877px) {
+		.header__tooltip::after {
+			right: 39px;
+		}
 	}
 </style>

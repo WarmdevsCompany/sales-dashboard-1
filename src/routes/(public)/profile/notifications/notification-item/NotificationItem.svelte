@@ -6,6 +6,7 @@
 	import ItemTooltip from './ItemTooltip.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	export let objAttributes = {};
+	export let readonly = {};
 
 	function showNotificationModal(name, text) {
 		$selectedNotification.head = name;
@@ -29,11 +30,13 @@
 		>
 			{objAttributes.name}
 		</div>
-		<div class="relative dots">
-			<ItemTooltip id={objAttributes.idobject} status={objAttributes.viewed} width={240}
-				><ThreeDotsIcon bgColor="green" /></ItemTooltip
-			>
-		</div>
+		{#if !readonly}
+			<div class="relative dots">
+				<ItemTooltip id={objAttributes.idobject} status={objAttributes.viewed} width={240}
+					><ThreeDotsIcon bgColor="green" /></ItemTooltip
+				>
+			</div>
+		{/if}
 	</div>
 	<div class="d-flex justify-sb text-5">
 		<div class="description">

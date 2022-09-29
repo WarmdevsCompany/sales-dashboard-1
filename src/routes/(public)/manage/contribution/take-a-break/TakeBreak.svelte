@@ -260,8 +260,13 @@
 		.restart__modal--btn {
 			margin: 2.5rem auto 0 auto;
 		}
-		.terms__checkbox{
+		.terms__checkbox {
 			max-width: 400px;
+		}
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1279px) {
+		.take__break {
+			padding: 2.31rem 1rem;
 		}
 	}
 </style>

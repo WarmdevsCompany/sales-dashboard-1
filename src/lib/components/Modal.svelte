@@ -244,7 +244,6 @@
 		right: -545px;
 	}
 
-	
 	@media only screen and (max-width: 1439px) {
 		#modal {
 			min-height: 0;
@@ -263,9 +262,6 @@
 			overflow: auto;
 			margin: auto;
 		}
-		#modal-content {
-			overflow: hidden;
-		}
 		#modal.greenForm {
 			max-height: 100vh;
 		}
@@ -278,7 +274,7 @@
 		#topModal {
 			padding: 0;
 		}
-		#modal{
+		#modal {
 			max-height: 100vh;
 			border-radius: 0;
 			height: 100%;

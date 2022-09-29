@@ -22,15 +22,15 @@
 		onSubmit: async (values) => {
 			try {
 				buttonText = `${$t('LOADING')}...`;
-				isLoading = true
+				isLoading = true;
 
 				let res = await login({ login: values.userName, password: values.password });
-				if(res?.status === false){
-					isLoading = false
-					if(res.errorMessage === 'INVALID_PASSWORD'){
-						errorMessages = $t('INVALID_PASSWORD')
-					}else if(res.errorMessage === "USER_NOT_FOUND"){
-						errorMessages = $t('USER_NOT_FOUND')
+				if (res?.status === false) {
+					isLoading = false;
+					if (res.errorMessage === 'INVALID_PASSWORD') {
+						errorMessages = $t('INVALID_PASSWORD');
+					} else if (res.errorMessage === 'USER_NOT_FOUND') {
+						errorMessages = $t('USER_NOT_FOUND');
 					}
 					buttonText = $t('LOGIN');
 				}
@@ -132,6 +132,15 @@
 	@media only screen and (max-width: 991px) {
 		.btn.login {
 			width: 100%;
+			max-width: 49%;
+		}
+		.register__head {
+			font-size: 80%;
+		}
+		.register {
+			width: 100%;
+			max-width: 49%;
+			margin-right: 2rem;
 		}
 	}
 </style>

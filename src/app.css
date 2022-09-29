@@ -2,7 +2,7 @@
 	/* colors */
 	--white: #ffffff;
 	--black: #000;
-	--body--bg: #F1F5F9;
+	--body--bg: #f1f5f9;
 	--white-secondary: #f3f7f0;
 	--white-third: #f6f6f6;
 	--primary-color: #0085ff;
@@ -660,9 +660,15 @@ body::-webkit-scrollbar {
 		min-width: 100%;
 	}
 }
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
+@media only screen and (min-width: 992px) and (max-width: 1279px) {
 	.grid-2,
 	.grid-3 {
 		grid-gap: 1vw;
+	}
+	.btn.pause,
+	.btn.stop,
+	.btn.restart {
+		padding-left: 1vw;
+		padding-right: 1vw;
 	}
 }

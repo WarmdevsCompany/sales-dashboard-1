@@ -1,4 +1,5 @@
 <script>
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import { roundNumber } from '$lib/functions/roundNumber.js';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import WithdrawFooter from './withdraw-footer/WithdrawFooter.svelte';
@@ -32,6 +33,7 @@
 			timeToTransfer = timeToTransferMoreThan20;
 		}
 	}
+	scrollToTop();
 </script>
 
 <svelte:head>
@@ -43,7 +45,7 @@
 	current_contribution={$globalData.data.current_contribution}
 	currentSymbol={$globalData.data.currency.symbol}
 />
-<WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal} {feeSum}/>
+<WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
 
 <!-- Verify account -->
 <ConfirmModal {withdrawMethods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
