@@ -121,7 +121,7 @@
 		align-items: center;
 		justify-content: center;
 		margin-right: 16px;
-		width: 20px;
+		min-width: 20px;
 		height: 20px;
 		background: transparent;
 		border: 2px solid #5a7186;
