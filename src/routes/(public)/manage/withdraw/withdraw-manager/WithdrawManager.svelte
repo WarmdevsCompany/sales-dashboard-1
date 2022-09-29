@@ -6,6 +6,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 
+
 	let radioValue, amountErrorMessage, withdrawMaxSum;
 
 	const options = [
@@ -22,7 +23,7 @@
 			label: $t('MANAGE_PUT_AM')
 		}
 	];
-	$withdrawBalance = Math.floor($globalData.data.currentSubscription.balance)
+	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance) 
 	$: {
 		$withdrawMethod = radioValue;
 		withdrawMaxSum = $globalData.data.currentSubscription.balance

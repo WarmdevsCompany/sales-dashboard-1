@@ -2,6 +2,9 @@
 	export let planInputValue;
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 	import { checkInputMaxLenght } from '$lib/functions/checkInputMaxLenght.js';
+	import { toNumber } from 'lodash';
+	let valueNum = 0
+	$:valueNum
 	
 </script>
 <div class="plan__item b-radius-8 box_shadow-medium text-white d-flex flex-col justify-sb {$$props.planClass}">
@@ -22,7 +25,7 @@
 		disabled={$$props.planInputState}
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}
-		on:input={checkInputMaxLenght}
+		step="any" 
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {
 			e.target.blur();
