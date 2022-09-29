@@ -162,6 +162,12 @@
 		);
 		z-index: -1;
 	}
+	@media only screen and (min-width: 768px) and (max-width: 1279px) {
+		.chart__wrapper {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+	}
 	@media screen and (max-width: 1280px) {
 		.chart__wrapper {
 			max-width: 480px;
@@ -197,8 +203,9 @@
 		.chart__wrapper::before {
 			width: 80vw;
 		}
-		.chart__wrapper{
-		padding: 0;
-	max-width: 100%;}
+		.chart__wrapper {
+			padding: 0;
+			max-width: 100%;
+		}
 	}
 </style>

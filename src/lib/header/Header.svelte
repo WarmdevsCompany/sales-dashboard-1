@@ -130,6 +130,7 @@
 			left: auto;
 			width: auto;
 			margin-top: 1rem;
+			margin-right: 10px;
 		}
 	}
 </style>

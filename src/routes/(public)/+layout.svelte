@@ -46,7 +46,7 @@
 			<div class="header_wrapper">
 				<Header />
 			</div>
-			
+
 			<div class="main-body">
 				<slot />
 			</div>
@@ -94,7 +94,8 @@
 		overflow: auto;
 		padding-bottom: 1rem;
 	}
-	.header_wrapper, .main-body{
+	.header_wrapper,
+	.main-body {
 		padding-right: 1.25rem;
 		padding-left: 1.25rem;
 	}
@@ -122,23 +123,24 @@
 			display: none;
 		}
 		main {
-			flex-wrap: wrap;
+			display: block;
 			padding-right: 1.25rem;
 		}
-		.main-body{
+		.main-body {
 			max-height: 100%;
 			overflow: visible;
-		 }
+		}
 		.sidebar_wrapper {
 			width: 100%;
 		}
 		.main-content {
 			margin: 0;
 		}
-		.header_wrapper, .main-body{
-		padding-right: 0rem;
-		padding-left: 0rem;
-	}
+		.header_wrapper,
+		.main-body {
+			padding-right: 0rem;
+			padding-left: 0rem;
+		}
 	}
 	@media only screen and (min-width: 992px) {
 		.main-content {

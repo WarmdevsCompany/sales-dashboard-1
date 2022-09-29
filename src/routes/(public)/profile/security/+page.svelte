@@ -1,4 +1,5 @@
 <script>
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import { globalData } from '$lib/globalStore.js';
 	import lockImg from '$lib/assets/img/padlock.svg';
@@ -7,6 +8,8 @@
 	import { t } from '$lib/translations/i18n.js';
 	const date = convertDateToUTC($globalData.data.passwordLastChangeDate);
 	let passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+
+	scrollToTop();
 </script>
 
 <svelte:head>
@@ -14,7 +17,7 @@
 	<meta name="description" content={$t('SECURITY')} />
 </svelte:head>
 
-<div class="change__password box_shadow-medium b-radius-8 d-flex justify-cc ">
+<div class="change__password box_shadow-medium b-radius-8 d-flex justify-cc align-center">
 	<div class="change__password--main text-center">
 		<img src={lockImg} alt="change password" class="lock_icon" />
 		<div class="text-3">{$t('CHANGE_PASSWORD')}</div>
@@ -34,7 +37,6 @@
 		height: 76px;
 	}
 	.change__password {
-		padding-top: 152px;
 		color: var(--green-dark-color);
 		height: 100%;
 		background: var(--white);
@@ -49,8 +51,7 @@
 	}
 	@media only screen and (max-width: 991px) {
 		.change__password {
-			padding-top: 4rem;
-			padding-bottom: 80px;
+			padding: 4rem 1rem;
 			min-height: 0;
 			margin-bottom: 7rem;
 		}

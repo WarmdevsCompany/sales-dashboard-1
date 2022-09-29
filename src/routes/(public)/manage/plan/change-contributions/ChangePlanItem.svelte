@@ -210,7 +210,6 @@
 	.plans__item {
 		width: 100%;
 		border-radius: 6px;
-		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		filter: drop-shadow(0px 6px 14px rgba(3, 22, 2, 0.14));
