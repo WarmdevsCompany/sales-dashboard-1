@@ -179,7 +179,7 @@
 			padding-top: 18px;
 		}
 	}
-	@media only screen and (max-width: 480px) {
+	/* @media only screen and (max-width: 480px) {
 		.form_wrapper {
 			padding: 0;
 		}
@@ -189,5 +189,5 @@
 			height: 100%;
 			margin: 0;
 		}
-	}
+	} */
 </style>

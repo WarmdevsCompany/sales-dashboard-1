@@ -49,7 +49,6 @@
 			<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
 				>{$t('CANCEL')}</button
 			>
-
 			<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>
 		</div>
 	{/if}
