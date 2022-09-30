@@ -6,7 +6,6 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 
-
 	let radioValue, amountErrorMessage, withdrawMaxSum;
 
 	const options = [
@@ -23,19 +22,19 @@
 			label: $t('MANAGE_PUT_AM')
 		}
 	];
-	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5) 
+	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5);
 	$: {
 		$withdrawMethod = radioValue;
-		withdrawMaxSum = $globalData.data.currentSubscription.balance
-		if($withdrawBalance< 10){
+		withdrawMaxSum = $globalData.data.currentSubscription.balance;
+		if ($withdrawBalance < 10) {
 			amountErrorMessage = 'Cannot be less than the 10';
-			$withdrawFormState = true
-		 }else if($withdrawBalance>withdrawMaxSum){
+			$withdrawFormState = true;
+		} else if ($withdrawBalance > withdrawMaxSum) {
 			amountErrorMessage = `Cannot be more than the ${withdrawMaxSum}`;
-			$withdrawFormState = true
-		}else{
+			$withdrawFormState = true;
+		} else {
 			amountErrorMessage = false;
-				$withdrawFormState = false;
+			$withdrawFormState = false;
 		}
 	}
 </script>
@@ -66,19 +65,25 @@
 					disabled={radioValue === '2'}
 				/>
 				{#if amountErrorMessage}
-				<p class="text-left text-xsm error_text amount__error">
-					{amountErrorMessage}
-					{$globalData.data.currency.symbol}
-				</p>
-			{/if}
+					<p class="text-left text-xsm error_text amount__error">
+						{amountErrorMessage}
+						{$globalData.data.currency.symbol}
+					</p>
+				{/if}
 			</div>
 			<div class="withdraw__label">{$t('OVERVIEW_TOTAL')}</div>
 		</div>
 		<div class="radio__wrapper">
-			<Radio {options} fontSize={16} bind:userSelected={radioValue} disabledState={$withdrawFormState}/>
+			<Radio
+				{options}
+				fontSize={16}
+				bind:userSelected={radioValue}
+				disabledState={$withdrawFormState}
+			/>
 		</div>
 	</div>
 </div>
+
 <style>
 	.withdraw__manager {
 		color: var(--label--color-secondary);
