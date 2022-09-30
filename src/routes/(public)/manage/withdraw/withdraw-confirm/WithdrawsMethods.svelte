@@ -1,9 +1,10 @@
 <script>
 	import { t } from '$lib/translations/i18n.js';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
+	import { confirmModalState } from '../withdrawStore';
 	export let withdrawMethods = [];
 	const addNewItemKey = 'ADD_NEW_ITEM';
-	export let formStep, successFormStatus;
+	export let formStep;
 	let radioValue = 0;
 	let options = [];
 	withdrawMethods.forEach((item, index) => {
@@ -11,7 +12,7 @@
 	});
 	const confirmSelection = () => {
 		if (radioValue != addNewItemKey) {
-			successFormStatus = true
+			$confirmModalState = true;
 		} else {
 			formStep = 4;
 		}
