@@ -7,6 +7,7 @@
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 
 	let radioValue, amountErrorMessage, withdrawMaxSum;
+	const minWithdrawSum = 10;
 
 	const options = [
 		{
@@ -26,11 +27,11 @@
 	$: {
 		$withdrawMethod = radioValue;
 		withdrawMaxSum = $globalData.data.currentSubscription.balance;
-		if ($withdrawBalance < 10) {
-			amountErrorMessage = 'Cannot be less than the 10';
+		if ($withdrawBalance < minWithdrawSum) {
+			amountErrorMessage = `${$t('MANAGE_WITHDRAW_LESS_ERR')} ${minWithdrawSum}`;
 			$withdrawFormState = true;
 		} else if ($withdrawBalance > withdrawMaxSum) {
-			amountErrorMessage = `Cannot be more than the ${withdrawMaxSum}`;
+			amountErrorMessage = `${$t('MANAGE_WITHDRAW_MORE_ERR')} ${withdrawMaxSum}`;
 			$withdrawFormState = true;
 		} else {
 			amountErrorMessage = false;

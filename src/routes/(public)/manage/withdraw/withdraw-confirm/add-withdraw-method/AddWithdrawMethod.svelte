@@ -22,8 +22,8 @@
 			validationPrivateSchema: null
 		},
 		mainForm;
-	const activeCurrency = 'USD'; //$globalData.data.currency.code;
-	const userCountry = 'United Kingdom'; //$globalData.data.country.countryName;
+	const activeCurrency =  $globalData.data.currency.code;
+	const userCountry = $globalData.data.country.countryName;
 	$: verifyId, globalLegalType, globalLegalTypeError, validationFormData, mainForm;
 
 	// Bussiness or Private
@@ -37,30 +37,30 @@
 	};
 	const ivBussiness = { fullName: '' };
 	const yupBussiness = {
-		fullName: yup.string().required('Enter full name')
+		fullName: yup.string().required($t('ENTER_FULL_NAME'))
 	};
 	// Euro or UK or US
 	const ivBankEuro = { iban: '' };
-	const yupBankEuro = { iban: yup.string().required('Enter IBAN') };
+	const yupBankEuro = { iban: yup.string().required($t('ENTER_IBAN')) };
 	const ivBankUK = { shortCode: '', ibanOrAccountNumber: '' };
 	const yupBankUK = {
-		shortCode: yup.string().required('Enter short code'),
-		ibanOrAccountNumber: yup.string().required('Enter IBAN or Account Number')
+		shortCode: yup.string().required($t('ENTER_SHORT_CODE')),
+		ibanOrAccountNumber: yup.string().required($t('ENTER_IBAN_OR_AN'))
 	};
 
 	const ivBankUS = { routingNumber: '', accountNumber: '', accountType: '' };
 	const yupBankUS = {
-		routingNumber: yup.string().required('Enter routing number'),
-		accountNumber: yup.string().required('Enter account number'),
-		accountType: yup.string().required('Chouse account type')
+		routingNumber: yup.string().required($t('ENTER_ROUTING_NUMB')),
+		accountNumber: yup.string().required($t('ENTER_ACCOUNT_NUMB')),
+		accountType: yup.string().required($t('CHOOSE_ACCOUNT_TYPE'))
 	};
 
 	const ivAddressData = { state: '', zipCode: '', city: '', address: '' };
 	let yupAddressDataRequired = {
-		state: yup.string().required('Enter state'),
-		zipCode: yup.string().required('Enter Zip code'),
-		city: yup.string().required('Enter city'),
-		address: yup.string().required('Enter address')
+		state: yup.string().required($t('ENTER_STATE')),
+		zipCode: yup.string().required($t('ENTER_ZIP')),
+		city: yup.string().required($t('ENTER_CITY')),
+		address: yup.string().required($t('ENTER_ADDRESS'))
 	};
 
 	let yupAddressData = {

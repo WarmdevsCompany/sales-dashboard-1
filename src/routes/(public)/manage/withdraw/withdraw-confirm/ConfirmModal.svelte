@@ -19,7 +19,7 @@
 	$: formStep, successFormStatus;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
-		$confirmModalState = true;
+		formStep = 3
 	};
 	const closeModals = (modalId) => {
 		$confirmModalState = false;
@@ -31,6 +31,10 @@
 		withdrawRequestProcessed = false;
 		closeModals('withdraw');
 	};
+	const confirmWithdraw = ()=>{
+		$confirmModalState = false;
+		successFormStatus = true;
+	}
 </script>
 
 <Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
@@ -52,7 +56,7 @@
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep {withdrawMethods} bind:successFormStatus />
+				<WithdrawsMethods bind:formStep {withdrawMethods} />
 			{:else if formStep === 4}
 				<AddWithdrawMethod bind:withdrawRequestProcessed/>
 			{/if}
@@ -94,6 +98,7 @@
 					{feeSum}
 					{timeToTransfer}
 					{withdrawOfTotal}
+					{confirmWithdraw}
 				/>
 			</div>
 			<img
@@ -108,14 +113,14 @@
 {#if successFormStatus}
 	<SuccessModal
 		closeModals={closeAllModals}
-		mainText="Thank You! Your withdrawal was confirmed"
+		mainText={$t('MANAGE_WITHDRAW_CONFIRMED')}
 		btnText={$t('BACK')}
 	/>
 {/if}
 {#if withdrawRequestProcessed}
 	<SuccessModal
 		closeModals={closeAllModals}
-		mainText="Withdrawal request successfully processed"
+		mainText={$t('MANAGE_WITHDRAW_PROCESSED')}
 		btnText={$t('BACK')}
 	/>
 {/if}

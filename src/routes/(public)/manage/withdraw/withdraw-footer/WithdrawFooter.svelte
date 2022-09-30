@@ -7,19 +7,17 @@
 	export let btnAligment = 'justify-end',
 		confirmBtn = 'open',
 		closeModals,
-		formStep,
-		withdrawMethods,
 		timeToTransfer,
 		withdrawOfTotal,
 		feeSum;
 
-	const confirmWithdraw = () => {
-		$confirmModalState = false;
-		if (withdrawMethods && withdrawMethods.length > 0) {
-			formStep = 3;
-		} else {
-			formStep = 4;
-		}
+	export let confirmWithdraw = () => {
+		// $confirmModalState = false;
+		// if (withdrawMethods && withdrawMethods.length > 0) {
+		// 	formStep = 3;
+		// } else {
+		// 	formStep = 4;
+		// }
 	};
 </script>
 

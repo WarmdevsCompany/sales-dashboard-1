@@ -12,13 +12,13 @@
 	export let legalType,
 		accountType = 'Account type*';
 	$: {
-		if ($form?.accountType) $form.accountType = accountType;
+		accountType;
+		if ($form?.accountType || $form?.accountType  === "") $form.accountType = accountType;
 	}
 	const onFocus = (item) => {
 		$errors[item] = '';
 	};
 </script>
-
 <div class="mt-2">
 	<p class="text-left ">General data and bank account data</p>
 	<div class="mt-1">
