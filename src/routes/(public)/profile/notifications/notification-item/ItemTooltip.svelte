@@ -21,12 +21,14 @@
 		hide();
 	}
 
-	function toReadItem(id) {
-		$notificationList.map(function (value, index, arr) {
-			if (value.idobject == id) return (value.status = 'viewed');
-		});
-		$notificationList = $notificationList;
-		setNotificationViewed(id);
+	async function toReadItem(id) {
+		let res = await setNotificationViewed(id);
+		if (res.status) {
+			const list = $notificationList.map(function (value, index, arr) {
+				if (value.idobject == id) return (value.status = 'viewed');
+			});
+			$notificationList = list;
+		}
 	}
 
 	function removeItem(id) {

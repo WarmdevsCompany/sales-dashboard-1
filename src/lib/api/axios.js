@@ -15,7 +15,6 @@ const privatePath = axios.create({
 	baseURL: variables.privatePath
 });
 
-
 // --------------------    Public API     -----------------------
 export const login = async (body) => {
 	try {
@@ -48,7 +47,7 @@ export const verifyAccount = async (body) => {
 
 export const forgotPassword = async (emailOrPhone) => {
 	try {
-		let response = await publicPath.post('/forgotPassword', {emailOrPhone});
+		let response = await publicPath.post('/forgotPassword', { emailOrPhone });
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -56,7 +55,7 @@ export const forgotPassword = async (emailOrPhone) => {
 };
 export const verifyCodeForgotPassword = async (code, emailOrPhone) => {
 	try {
-		let response = await publicPath.post('/verifyCodeForgotPassword', {code, emailOrPhone});
+		let response = await publicPath.post('/verifyCodeForgotPassword', { code, emailOrPhone });
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -64,7 +63,11 @@ export const verifyCodeForgotPassword = async (code, emailOrPhone) => {
 };
 export const changeForgotPassword = async (emailOrPhone, password, verificationId) => {
 	try {
-		let response = await publicPath.post('/changeForgotPassword', {emailOrPhone, password, verificationId});
+		let response = await publicPath.post('/changeForgotPassword', {
+			emailOrPhone,
+			password,
+			verificationId
+		});
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -76,10 +79,10 @@ export const changeForgotPassword = async (emailOrPhone, password, verificationI
 // set default headers
 privatePath.defaults.headers.common['Authorization'] = esiToken;
 
-export const setNewAuthHeaders = (header) =>{
-	setCookie('esiToken', header,  { secure: true, 'max-age': 84600 })
+export const setNewAuthHeaders = (header) => {
+	setCookie('esiToken', header, { secure: true, 'max-age': 84600 });
 	privatePath.defaults.headers.common['Authorization'] = header;
-}
+};
 
 export const requestValidation = async (body) => {
 	try {
@@ -132,11 +135,7 @@ export const setNotificationViewed = async (id) => {
 	let integerID = +id;
 	try {
 		let response = await privatePath.post('/setNotificationViewed', { notificationId: integerID });
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
 	}
