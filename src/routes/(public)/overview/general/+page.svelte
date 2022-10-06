@@ -1,4 +1,5 @@
 <script>
+	import { generateYearsArray } from '$lib/functions/generateYearsArray.js';
 	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import GeneralPlan from './GeneralPlan.svelte';
 	import MembershipMain from './membership-chart/MembershipMain.svelte';
@@ -6,25 +7,38 @@
 	import WithdrawMain from './withdraw-chart/WithdrawMain.svelte';
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	let currentAmount = $globalData.data.current_contribution.amount;
-	const periodId = $globalData.data.current_contribution.periodId;
-	let currentTrajectory = [0];
-	let previousTrajectory = [];
-	const currentPercent = 1.2;
-	const yearsArray = [2022, 2023, 2024, 2025, 2026, 2027];
-	if (periodId === 5235208) {
-		currentAmount = currentAmount + currentAmount;
-	}
+
+	let currentAmount, previousAmount, currentTrajectory = [0],  previousTrajectory = [0];
+	const saving_projection = $globalData.data.saving_projection;
+	const yearsArray = generateYearsArray(6);
+
+	saving_projection.forEach((item) => {
+		if (item.active) {
+			currentAmount = item.amount;
+		} else {
+			previousAmount = item.amount;
+		}
+	});
+
 	// generate currentTrajectory
-	let amountCounter = currentAmount;
-	yearsArray.forEach(() => {
-		currentTrajectory = [...currentTrajectory, amountCounter];
-		amountCounter = amountCounter + currentAmount;
-	});
-	// generate previousTrajectory
-	currentTrajectory.forEach((item, index) => {
-		previousTrajectory = [...previousTrajectory, currentTrajectory[index] * currentPercent];
-	});
+	let currentAmountCounter = currentAmount * 12;
+	let previousAmountCounter = previousAmount * 12;
+
+	if (previousAmount || previousAmount != null) {
+		yearsArray.forEach(() => {
+			currentTrajectory = [...currentTrajectory, currentAmountCounter];
+			currentAmountCounter = currentAmountCounter + currentAmountCounter;
+
+			previousTrajectory = [...previousTrajectory, previousAmountCounter];
+			previousAmountCounter = previousAmountCounter + previousAmountCounter;
+		});
+	} else {
+		yearsArray.forEach(() => {
+			currentTrajectory = [...currentTrajectory, currentAmountCounter];
+			currentAmountCounter = currentAmountCounter + currentAmountCounter;
+		});
+		previousTrajectory = false;
+	}
 
 	scrollToTop();
 </script>

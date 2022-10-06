@@ -9,6 +9,47 @@
 		month = '0'+month
 	}
 	const currentMonth = $t('MONTH_SHORT_' + month)
+	
+	let dataSets = [
+			{
+				data: $$props.prevTraject ,
+				backgroundColor: '#6cc800',
+				borderColor: 'white',
+				pointRadius: 0,
+				pointHoverRadius: 0,
+				color: 'white',
+				pointHitRadius: 0,
+				tooltipText: 'some text'
+			},
+			{
+				data: $$props.currentTraject,
+				pointBackgroundColor: '#6cc800',
+				borderColor: '#6cc800',
+				pointBorderColor: 'white',
+				backgroundColor: '#6cc800',
+				color: '#6cc800',
+				pointRadius: 4,
+				pointHoverRadius: 5,
+				pointStyle: 'circle',
+				tooltipText: 'some text 2'
+			}
+		]
+		if(!$$props.prevTraject || $$props.prevTraject === null){
+			dataSets = [
+			{
+				data: $$props.currentTraject,
+				pointBackgroundColor: '#6cc800',
+				borderColor: '#6cc800',
+				pointBorderColor: 'white',
+				backgroundColor: '#6cc800',
+				color: '#6cc800',
+				pointRadius: 4,
+				pointHoverRadius: 5,
+				pointStyle: 'circle',
+				tooltipText: 'some text 2'
+			}
+		]
+		}
 
 	// drawHorisontalLines plugin
 	const drawHorisontalLines = {
@@ -45,30 +86,7 @@
 	};
 	const data = {
 		labels: $$props.yearsArray,
-		datasets: [
-			{
-				data: $$props.currentTraject,
-				backgroundColor: '#6cc800',
-				borderColor: 'white',
-				pointStyle: 'circle',
-				pointRadius: 4,
-				pointHoverRadius: 5,
-				color: 'white',
-				tooltipText: 'some text'
-			},
-			{
-				data: $$props.prevTraject,
-				pointBackgroundColor: '#6cc800',
-				borderColor: '#6cc800',
-				pointBorderColor: 'white',
-				backgroundColor: '#6cc800',
-				color: '#6cc800',
-				pointRadius: 4,
-				pointHoverRadius: 5,
-				pointStyle: 'circle',
-				tooltipText: 'some text 2'
-			}
-		]
+		datasets: dataSets
 	};
 
 	const config = {
