@@ -15,11 +15,12 @@
 
 	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
 	let formStep = 1,
-		successFormStatus = false, withdrawRequestProcessed = false;
+		successFormStatus = false,
+		withdrawRequestProcessed = false;
 	$: formStep, successFormStatus;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
-		formStep = 3
+		$confirmModalState = true;
 	};
 	const closeModals = (modalId) => {
 		$confirmModalState = false;
@@ -31,10 +32,10 @@
 		withdrawRequestProcessed = false;
 		closeModals('withdraw');
 	};
-	const confirmWithdraw = ()=>{
+	const confirmWithdraw = () => {
 		$confirmModalState = false;
-		successFormStatus = true;
-	}
+		withdrawMethods ? (formStep = 3) : (formStep = 4);
+	};
 </script>
 
 <Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
@@ -58,7 +59,7 @@
 			{#if formStep === 3}
 				<WithdrawsMethods bind:formStep {withdrawMethods} />
 			{:else if formStep === 4}
-				<AddWithdrawMethod bind:withdrawRequestProcessed/>
+				<AddWithdrawMethod bind:withdrawRequestProcessed />
 			{/if}
 		</div>
 	</div>
@@ -216,7 +217,7 @@
 		.form__wrapper {
 			padding: 0;
 		}
-		.confirm__form{
+		.confirm__form {
 			max-height: 100vh;
 			border-radius: 0;
 			height: 100%;

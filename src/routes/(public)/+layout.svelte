@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import Header from '$lib/header/Header.svelte';
@@ -9,6 +10,10 @@
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
+	import { locale } from '$lib/translations/i18n.js';
+	import { getCookie } from '$lib/functions/getCookie';
+	import { deleteCookie } from '$lib/functions/deleteCookie';
+	import { variables } from '$lib/variables';
 	import {
 		notificationList,
 		globalData,
@@ -16,18 +21,45 @@
 		selectedNotification
 	} from '$lib/globalStore';
 
-	// set general data to store
-	export let data;
-	$globalData = data.general;
-	console.log($globalData);
-
 	let loading = true;
 
 	onMount(async () => {
+		let lang = localStorage.getItem('lang');
+		locale.set(lang || 'EN');
+		const token = getCookie('esiToken');
+		if (!token || token == 'undefined') {
+			deleteCookie('esiToken');
+			goto('/auth/login');
+		} else {
+			const url = `${variables.privatePath}/getGeneralInfo`;
+			const rawResponse = await fetch(url, {
+				method: 'POST',
+				headers: {
+					accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: token
+				}
+			});
+			const response = await rawResponse.json();
+
+			if (response.errorMessage === 'FAILED_TO_FIND_USER') {
+				deleteCookie('esiToken');
+				goto('/auth/login');
+			}
+
+			if (rawResponse.status == 200) {
+				$globalData = response;
+				console.log($globalData);
+			} else if (rawResponse.status == 401) {
+				deleteCookie('esiToken');
+				goto('/auth/login');
+			}
+		}
+
 		if ($globalData) {
 			loading = false;
-			$notificationList = data.general.data.notifications.data;
-			$notificationSettings = data.general.data.notificationSettings;
+			$notificationList = $globalData.data.notifications.data;
+			$notificationSettings = $globalData.data.notificationSettings;
 		}
 	});
 </script>

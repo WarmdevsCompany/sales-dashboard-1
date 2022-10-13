@@ -107,9 +107,7 @@
 		margin: 0 0 0 auto;
 		transition: none;
 	}
-	.forgot__pass {
-		padding: 0.875rem;
-	}
+
 	.forgot__btn {
 		appearance: none;
 		border: none;
@@ -121,7 +119,7 @@
 		font-weight: var(--font-weight-normal);
 	}
 	.login__btn__wrapper {
-		margin-top: 22px;
+		margin-top: 1rem;
 	}
 	.register__head {
 		font-weight: var(--font-weight-medium);
@@ -142,5 +140,25 @@
 			max-width: 49%;
 			margin-right: 2rem;
 		}
+	}
+	@media only screen and (max-width: 480px) {
+		.btn.login {
+			width: 100%;
+			max-width: 100%;
+		}
+		.register__head {
+			font-size: 80%;
+		}
+		.register {
+			width: 100%;
+			max-width: 100%;
+			margin-right: 0rem;
+			display: flex;
+			justify-content: space-between;
+			padding-bottom: 1rem;
+		}
+		.login__btn__wrapper {
+		flex-direction: column;
+	}
 	}
 </style>

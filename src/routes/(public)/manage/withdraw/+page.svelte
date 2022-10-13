@@ -18,10 +18,8 @@
 	const timeToTransferLessThan20 = $globalData.data.feeInfo.lessThen20;
 	const timeToTransferMoreThan20 = $globalData.data.feeInfo.moreThen20;
 	const balance = $globalData.data.currentSubscription.balance;
-	const withdrawMethods = [
-		{ withdrawName: 'Bank transfer #132452*USD', recipientName: 'Recipient full name' },
-		{ withdrawName: 'Bank transfer #937752*USD', recipientName: 'Recipient full name' }
-	];
+	const withdrawMethods = $globalData.data.withdrawal_payment_methods;
+
 	$: {
 		withdrawOfTotal = roundNumber(($withdrawBalance * 100) / balance, 2);
 		feeSum = roundNumber(fee * $withdrawBalance, 2);
@@ -48,4 +46,4 @@
 <WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
 
 <!-- Verify account -->
-<ConfirmModal {withdrawMethods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
+<ConfirmModal {withdrawMethods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum}/>

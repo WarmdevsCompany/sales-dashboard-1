@@ -8,9 +8,8 @@
 		errors,
 		isLoading,
 		handleChange;
-	export let accountTypeArray = ['Checking', 'Savings'];
-	export let legalType,
-		accountType = 'Account type*';
+	export let accountTypeArray = [],
+	legalType, accountType = 'Account type*';
 	$: {
 		accountType;
 		if ($form?.accountType || $form?.accountType  === "") $form.accountType = accountType;
@@ -143,16 +142,16 @@
 			<div class="input__wrapper">
 				<input
 					type="text"
-					placeholder="Short code*"
-					class:error={$errors.shortCode}
+					placeholder="Sort code*"
+					class:error={$errors.sortCode}
 					autocomplete
 					on:change={handleChange}
-					on:focus={() => onFocus('shortCode')}
-					bind:value={$form.shortCode}
+					on:focus={() => onFocus('sortCode')}
+					bind:value={$form.sortCode}
 					disabled={isLoading}
 				/>
-				{#if $errors.shortCode}
-					<small transition:slide|local class="error_text mt-0_5">{$errors.shortCode}</small>
+				{#if $errors.sortCode}
+					<small transition:slide|local class="error_text mt-0_5">{$errors.sortCode}</small>
 				{/if}
 			</div>
 		</div>

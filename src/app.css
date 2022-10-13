@@ -622,6 +622,11 @@ body::-webkit-scrollbar {
 }
 
 
+.forgot__pass {
+	padding-top: 0.875rem;
+}
+
+
 @media only screen and (min-width: 992px) and (max-width: 1279px) {
 	.grid-2,
 	.grid-3 {
@@ -660,7 +665,7 @@ body::-webkit-scrollbar {
 		margin-top: 1rem !important;
 	}
 	.forgot__pass {
-		padding-top: 0 !important;
+		padding-top: 0.5rem;
 		margin-bottom: 0.75rem;
 	}
 	#modal-content .btn.login,
