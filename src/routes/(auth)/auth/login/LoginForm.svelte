@@ -119,7 +119,7 @@
 		font-weight: var(--font-weight-normal);
 	}
 	.login__btn__wrapper {
-		margin-top: 22px;
+		margin-top: 1rem;
 	}
 	.register__head {
 		font-weight: var(--font-weight-medium);

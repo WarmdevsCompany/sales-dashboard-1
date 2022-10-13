@@ -622,6 +622,11 @@ body::-webkit-scrollbar {
 }
 
 
+.forgot__pass {
+	padding-top: 0.875rem;
+}
+
+
 @media only screen and (min-width: 992px) and (max-width: 1279px) {
 	.grid-2,
 	.grid-3 {

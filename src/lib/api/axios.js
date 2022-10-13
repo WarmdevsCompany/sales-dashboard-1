@@ -73,6 +73,14 @@ export const changeForgotPassword = async (emailOrPhone, password, verificationI
 		console.error(error);
 	}
 };
+export const getTypesForWithdrawal = async () => {
+	try {
+		let response = await publicPath.get('/getTypesForWithdrawal');
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 // --------------------    Private API     -----------------------
 
@@ -82,6 +90,14 @@ privatePath.defaults.headers.common['Authorization'] = esiToken;
 export const setNewAuthHeaders = (header) => {
 	setCookie('esiToken', header, { secure: true, 'max-age': 84600 });
 	privatePath.defaults.headers.common['Authorization'] = header;
+};
+export const addWithdrawalPaymentMethod = async (body) => {
+	try {
+		let response = await privatePath.post('/addWithdrawalPaymentMethod', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
 };
 
 export const requestValidation = async (body) => {
@@ -118,7 +134,9 @@ export const getGeneralData = async () => {
 	} catch (error) {
 		console.error(error);
 	}
-};
+}
+
+
 export const changeLang = async (langId) => {
 	try {
 		let response = await privatePath.post('/changeLang', { langId: langId });

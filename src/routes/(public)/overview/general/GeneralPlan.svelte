@@ -15,7 +15,7 @@
 		</div>
 		<div class="row d-flex justify-sb total mt-1_25 align-center">
 			<div class="text-3">{$t('OVERVIEW_TOTAL_SAFE')}</div>
-			<span class="text-2">+{$$props.currencySymbol}{$$props.totalSafe}</span>
+			<span class="text-2">{$$props.currencySymbol}{$$props.totalSafe}</span>
 		</div>
 	</div>
 </div>
