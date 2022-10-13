@@ -2,7 +2,7 @@ import { locale } from '$lib/translations/i18n.js';
 import { browser } from '$app/environment';
 import { redirect } from '@sveltejs/kit';
 import { getCookie } from '$lib/functions/getCookie';
-import { deleteCookie } from '../../lib/functions/deleteCookie';
+import { deleteCookie } from '$lib/functions/deleteCookie';
 import { variables } from '$lib/variables';
 
 /** @type {import('./$types').PageLoad} */
@@ -13,7 +13,7 @@ export async function load({ fetch }) {
 		locale.set(lang || 'EN');
 		const token = getCookie('esiToken');
 		if (!token || token == 'undefined') {
-			
+
 			deleteCookie('esiToken');
 			throw redirect(307, '/auth/login');
 		} else {
