@@ -57,7 +57,7 @@
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep {withdrawMethods} />
+				<WithdrawsMethods bind:formStep bind:successFormStatus {withdrawMethods} />
 			{:else if formStep === 4}
 				<AddWithdrawMethod bind:withdrawRequestProcessed />
 			{/if}

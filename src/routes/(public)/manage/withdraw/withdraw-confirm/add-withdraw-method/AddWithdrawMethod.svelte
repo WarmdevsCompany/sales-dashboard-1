@@ -1,5 +1,5 @@
 <script>
-	import { getTypesForWithdrawal } from '$lib/api/axios.js';
+	import { withdrawBalance, withdrawContribution } from '../../withdrawStore';
 	import AddressForm from './AddressForm.svelte';
 	import BankAccountForm from './BankAccountForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
@@ -10,6 +10,11 @@
 	import * as yup from 'yup';
 	import { onMount } from 'svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
+	import {
+		addWithdrawalPaymentMethod,
+		getTypesForWithdrawal,
+		getGeneralData
+	} from '$lib/api/axios';
 
 	export let submitBtnText = $t('SAVE'),
 		withdrawRequestProcessed;
@@ -117,12 +122,9 @@
 		}
 	};
 	checkFormStatus();
-	const createRequestWithdrawalObj =  (countryId, currency, legalType, formData) => {
+	const createRequestWithdrawalObj = (countryId, currency, currencyId, legalType, formData) => {
 		let body = {};
-		console.log(legalType)
 		const legalTypeId = getIdByName(legalType, paymentMethodTypes);
-console.log(legalTypeId)
-console.log(formData)
 		if (legalTypeId === 5240596) {
 			body.paymentMethodTypeId = 5240596;
 			body.fullName = formData.fullName;
@@ -143,11 +145,12 @@ console.log(formData)
 			body.sortCode = formData.sortCode;
 			body.accountNumber = formData.ibanOrAccountNumber;
 		}
-
-		body.state = formData.state
-		body.zipcode = formData.zipCode
-		body.city = formData.city
-		body.address = formData.address
+		body.countryId = countryId;
+		body.currencyId = currencyId;
+		body.state = formData.state;
+		body.zipcode = formData.zipCode;
+		body.city = formData.city;
+		body.address = formData.address;
 
 		return body;
 	};
@@ -160,29 +163,42 @@ console.log(formData)
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
 
-		console.log(values)
-			console.log(createRequestWithdrawalObj(userCountryId, activeCurrency, globalLegalType, values));
-			let body = {
-				paymentMethodTypeId: '',
-				currencyId: '',
-				countryId: '',
-				fullName: '',
-				firstName: '',
-				lastName: '',
-				routingNumber: '',
-				sortCode: '',
-				accountNumber: '',
-				accountTypeId: '',
-				state: '',
-				zipcode: '',
-				city: '',
-				address: ''
-			};
-			// const res = await addWithdrawalPaymentMethod(body);
-			// if (res.status) {
-			// }
-			// isLoading = false;
-			// submitBtnText = $t('SAVE');
+			const body = createRequestWithdrawalObj(
+				userCountryId,
+				activeCurrency,
+				userCurrencyId,
+				globalLegalType,
+				values
+			);
+			// let body = {
+			// 	paymentMethodTypeId: '',
+			// 	currencyId: '',
+			// 	countryId: '',
+			// 	fullName: '',
+			// 	firstName: '',
+			// 	lastName: '',
+			// 	routingNumber: '',
+			// 	sortCode: '',
+			// 	accountNumber: '',
+			// 	accountTypeId: '',
+			// 	state: '',
+			// 	zipcode: '',
+			// 	city: '',
+			// 	address: ''
+			// };
+			const res = await addWithdrawalPaymentMethod(body);
+			if (res.status) {
+				const body = createMakeWithdrawalObj(res.data.withdrawalMethodId)
+				const res = await makeWithdrawal(body);
+				if (res.status) {
+					const globalData = await getGeneralData();
+					updateGlobalData(globalData);
+					withdrawRequestProcessed = true;
+				}
+				
+			}
+			isLoading = false;
+			submitBtnText = $t('SAVE');
 		}
 	});
 	const privateForm = createForm({
@@ -190,13 +206,27 @@ console.log(formData)
 		validationSchema: yup.object().shape(validationFormData.validationPrivateSchema),
 		onSubmit: async (values) => {
 			// withdrawRequestProcessed = true;
-			console.log(values)
-			console.log(createRequestWithdrawalObj(userCountryId, activeCurrency, globalLegalType, values));
-			// isLoading = true;
-			// submitBtnText = `${$t('LOADING')}...`;
-			// POST in Backend
-			// isLoading = false;
-			// submitBtnText = $t('SAVE');
+			isLoading = true;
+			submitBtnText = `${$t('LOADING')}...`;
+			const body = createRequestWithdrawalObj(
+				userCountryId,
+				activeCurrency,
+				userCurrencyId,
+				globalLegalType,
+				values
+			);
+			const res = await addWithdrawalPaymentMethod(body);
+			if (res.status) {
+				const body = createMakeWithdrawalObj(res.data.withdrawalMethodId)
+				const res = await makeWithdrawal(body);
+				if (res.status) {
+					const globalData = await getGeneralData();
+					updateGlobalData(globalData);
+					withdrawRequestProcessed = true;
+				}
+			}
+			isLoading = false;
+			submitBtnText = $t('SAVE');
 		}
 	});
 	$: {
@@ -218,6 +248,16 @@ console.log(formData)
 		const currentObj = arrayOfObj.filter((item) => item.name === name);
 		return currentObj[0].idobject;
 	};
+	const createMakeWithdrawalObj = (withdrawalMethodId) => {
+		return {
+			verificationId: $verificationId,
+			withdrawalMethodId: withdrawalMethodId,
+			amount: $withdrawBalance,
+			greenSafe: $withdrawContribution.safeValue,
+			greenAdventure: $withdrawContribution.adventureValue,
+			greenFounder: $withdrawContribution.founderValue
+		};
+	};
 
 	onMount(async () => {
 		const { data } = await getTypesForWithdrawal();
@@ -225,8 +265,6 @@ console.log(formData)
 		accountMethodTypes = data.account_types;
 		accountTypeArray = accountMethodTypes.map((item) => item.name);
 		legalTypeArray = paymentMethodTypes.map((item) => item.name);
-
-		// console.log(getIdByName('Checking', accountMethodTypes))
 	});
 </script>
 
