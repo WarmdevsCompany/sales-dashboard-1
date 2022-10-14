@@ -45,7 +45,7 @@ export default {
     "ENTER_LAST_NAME": "Enter last name",
     "ENTER_FULL_NAME": "Enter full name",
     "ENTER_IBAN": "Enter IBAN",
-    "ENTER_SHORT_CODE": "Enter short code",
+    "ENTER_SHORT_CODE": "Enter sort code",
     "ENTER_IBAN_OR_AN": "Enter IBAN or Account Number",
     "ENTER_ROUTING_NUMB": "Enter routing number",
     "ENTER_ACCOUNT_NUMB": "Enter account number",
@@ -173,6 +173,12 @@ export default {
     "MANAGE_CHOUSE_LEGAL_TYPE":  "Chouse legal type",
     "MANAGE_ENTER_ADDRESS":  "Please enter address data",
     "MANAGE_WITHDRAW_HEAD":  "General data and bank account data",
+    "MANAGE_WITHDRAW_ACC_TYPE":  "Account type",
+    "MANAGE_WITHDRAW_RECIPIENT_NAME":  "Recipient full name",
+    "MANAGE_WITHDRAW_ROUTING_NUMBER":  "Routing number",
+    "MANAGE_WITHDRAW_ACCOUNT_NUMBER":  "Account Number",
+    "MANAGE_WITHDRAW_SORT_CODE":  "Sort code",
+    "MANAGE_WITHDRAW_IBAN_OR_AN":  "IBAN or Account Number",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -419,6 +425,12 @@ export default {
     "MANAGE_CHOUSE_LEGAL_TYPE":  "Chouse Rechtstyp",
     "MANAGE_ENTER_ADDRESS": "Bitte geben Sie Adressdaten ein",    
     "MANAGE_WITHDRAW_HEAD": "Allgemeine Daten und Bankkontodaten",
+    "MANAGE_WITHDRAW_ACC_TYPE": "Konto Typ",
+    "MANAGE_WITHDRAW_RECIPIENT_NAME":    "Empfänger Voller Name",
+    "MANAGE_WITHDRAW_ROUTING_NUMBER":    "Routing Nummer",
+    "MANAGE_WITHDRAW_ACCOUNT_NUMBER":    "Kontonummer",
+    "MANAGE_WITHDRAW_SORT_CODE":    "Code sortieren",
+    "MANAGE_WITHDRAW_IBAN_OR_AN":    "Iban oder Kontonummer",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -664,6 +676,12 @@ export default {
     "MANAGE_CHOUSE_LEGAL_TYPE": "Type juridique de chouse",
     "MANAGE_ENTER_ADDRESS": "Veuillez saisir les données d'adresse",
     "MANAGE_WITHDRAW_HEAD": "Données générales et données du compte bancaire",
+    "MANAGE_WITHDRAW_ACC_TYPE": "Type de compte",
+    "MANAGE_WITHDRAW_RECIPIENT_NAME": "Nom complet du destinataire",
+    "MANAGE_WITHDRAW_ROUTING_NUMBER": "Numéro de routage",
+    "MANAGE_WITHDRAW_ACCOUNT_NUMBER": "Numéro de compte",
+    "MANAGE_WITHDRAW_SORT_CODE": "Trier le code",
+    "MANAGE_WITHDRAW_IBAN_OR_AN": "Iban ou numéro de compte",
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",

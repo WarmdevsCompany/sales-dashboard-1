@@ -8,7 +8,7 @@
 	import logoForBg from '$lib/assets/img/logo-big.svg';
 	import { t } from '$lib/translations/i18n.js';
 	import Loader from '$lib/components/Loader.svelte';
-	import { onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { locale } from '$lib/translations/i18n.js';
 	import { getCookie } from '$lib/functions/getCookie';
@@ -67,6 +67,7 @@
 			$notificationSettings = $globalData.data.notificationSettings;
 		}
 	});
+
 </script>
 
 <svelte:head>
@@ -82,7 +83,11 @@
 
 		<div in:fade class="main-content">
 			<div class="header_wrapper">
-				<Header />
+				<Header currencySymbol = {$globalData.data.currency.symbol}
+				allMoney = {$globalData.data.currentSubscription?.balance || 0}
+				monthlySubscriptionText = {$globalData.data.currentSubscription?.subscriptionText || 0}
+				nextContributionDate = {$globalData.data.currentSubscription?.nextDate || 0}
+				status= {$globalData.data.currentSubscription?.status}/>
 			</div>
 
 			<div class="main-body">

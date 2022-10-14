@@ -14,7 +14,7 @@
 	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
 
 	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
-	let formStep = 4,
+	let formStep = 1,
 		successFormStatus = false,
 		withdrawRequestProcessed = false;
 	$: formStep, successFormStatus;
