@@ -27,15 +27,15 @@
 	if (previousAmount || previousAmount != null) {
 		yearsArray.forEach(() => {
 			currentTrajectory = [...currentTrajectory, currentAmountCounter];
-			currentAmountCounter = currentAmountCounter + currentAmount;
+			currentAmountCounter = currentAmountCounter + currentAmount * 12;
 
 			previousTrajectory = [...previousTrajectory, previousAmountCounter];
-			previousAmountCounter = previousAmountCounter + previousAmount;
+			previousAmountCounter = previousAmountCounter +  previousAmount * 12;;
 		});
 	} else {
 		yearsArray.forEach(() => {
 			currentTrajectory = [...currentTrajectory, currentAmountCounter];
-			currentAmountCounter = currentAmountCounter + currentAmount;
+			currentAmountCounter = currentAmountCounter + currentAmount * 12;
 		});
 		previousTrajectory = false;
 	}
