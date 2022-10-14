@@ -2,8 +2,8 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
-	import { globalData } from '$lib/globalStore';
-	import { changeContribution } from '$lib/api/axios';
+	import { globalData, updateGlobalData } from '$lib/globalStore';
+	import { changeContribution, getGeneralData } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 
@@ -31,9 +31,8 @@
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-				$globalData.data.current_contribution.amount = amountValue;
-				$globalData.data.current_contribution.periodName = requrring;
-				updateCurrentContributionStoreValues(amountValue)
+				const globalData = await getGeneralData();
+				updateGlobalData(globalData);
 				getModal('confirm').open();
 				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');
@@ -65,20 +64,7 @@
 		});
 		return periodId;
 	}
-	function updateCurrentContributionStoreValues(amount){
-		let safe, adv, found;
-		const savePers = $globalData.data.current_contribution.greenSafe
-		const advPers = $globalData.data.current_contribution.greenAdventure
-		const foundPers = $globalData.data.current_contribution.greenFounder
 
-		safe = (amount * savePers)/ 100
-		adv = (amount * advPers) / 100
-		found = (amount * foundPers) / 100
-
-		$globalData.data.current_contribution.greenSafeTotal = safe
-		$globalData.data.current_contribution.greenAdventureTotal = adv
-		$globalData.data.current_contribution.greenFounderTotal = found
-	}
 </script>
 
 <div class="form_wrapper">

@@ -1,18 +1,40 @@
 <script>
+	import { makeWithdrawal, getGeneralData } from '$lib/api/axios.js';
+	import { withdrawBalance, withdrawContribution } from './../withdrawStore.js';
+	import { verificationId, updateGlobalData } from '$lib/globalStore.js';
 	import { t } from '$lib/translations/i18n.js';
-	import Modal, { getModal } from '$lib/components/Modal.svelte';
-	import { confirmModalState } from '../withdrawStore';
-	export let withdrawMethods = [];
+	export let withdrawMethods = [],
+		successFormStatus,
+		formStep;
 	const addNewItemKey = 'ADD_NEW_ITEM';
-	export let formStep;
-	let radioValue = 0;
-	let options = [];
+	let radioValue = 0,
+		options = [],
+		isLoading = false,
+		submitBtnText = $t('NEXT');
+	console.log(withdrawMethods);
 	withdrawMethods.forEach((item, index) => {
 		options[index] = { value: index };
 	});
-	const confirmSelection = () => {
+	const confirmSelection = async () => {
 		if (radioValue != addNewItemKey) {
-			$confirmModalState = true;
+			isLoading = true;
+			submitBtnText = `${$t('LOADING')}...`;
+			const body = {
+				verificationId: $verificationId,
+				withdrawalMethodId: withdrawMethods[radioValue].idobject,
+				amount: $withdrawBalance,
+				greenSafe: $withdrawContribution.safeValue,
+				greenAdventure: $withdrawContribution.adventureValue,
+				greenFounder: $withdrawContribution.founderValue
+			};
+			const res = await makeWithdrawal(body);
+			if (res.status) {
+				const globalData = await getGeneralData();
+				updateGlobalData(globalData);
+				successFormStatus = true;
+			}
+			isLoading = false;
+			submitBtnText = $t('SAVE');
 		} else {
 			formStep = 4;
 		}
@@ -26,8 +48,8 @@
 			class:active_item={radioValue === index}
 			on:click={() => (radioValue = index)}
 		>
-			<div class="text-3">{element.withdrawName}</div>
-			<div class="text-xsm text-green mt-0_5">{element.recipientName}</div>
+			<div class="text-3">Bank transfer #{element.accountNumber}*{element.currencyName}</div>
+			<div class="text-xsm text-green mt-0_5">{element.fullName || ''}</div>
 			<div class="absloute__radio">
 				<div class="group-container single_item">
 					<input class="sr-only" type="radio" bind:group={radioValue} value={index} />
@@ -47,7 +69,7 @@
 		<div class="withdraw__item--text text-3 text-left">{$t('MANAGE_ADD_WITHDRAW')}</div>
 	</div>
 </div>
-<button class="btn mt-2_5 btn_center" on:click={confirmSelection}>{$t('NEXT')}</button>
+<button class="btn mt-2_5 btn_center" on:click={confirmSelection}>{submitBtnText}</button>
 
 <style>
 	.withdraw__methods {
@@ -221,8 +243,7 @@
 			grid-template-columns: 1fr;
 		}
 		.withdraw__item {
-		 max-width: 100%;
+			max-width: 100%;
 		}
-
 	}
 </style>

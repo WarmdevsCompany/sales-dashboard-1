@@ -99,6 +99,14 @@ export const addWithdrawalPaymentMethod = async (body) => {
 		console.error(error);
 	}
 };
+export const makeWithdrawal = async (body) => {
+	try {
+		let response = await privatePath.post('/makeWithdrawal', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 export const requestValidation = async (body) => {
 	try {

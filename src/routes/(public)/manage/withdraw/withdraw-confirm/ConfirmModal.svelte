@@ -14,7 +14,7 @@
 	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
 
 	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
-	let formStep = 1,
+	let formStep = 4,
 		successFormStatus = false,
 		withdrawRequestProcessed = false;
 	$: formStep, successFormStatus;
@@ -57,7 +57,7 @@
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep {withdrawMethods} />
+				<WithdrawsMethods bind:formStep bind:successFormStatus {withdrawMethods} />
 			{:else if formStep === 4}
 				<AddWithdrawMethod bind:withdrawRequestProcessed />
 			{/if}
