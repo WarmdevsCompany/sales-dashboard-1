@@ -2,8 +2,8 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
-	import { globalData } from '$lib/globalStore';
-	import { changeContribution } from '$lib/api/axios';
+	import { globalData, updateGlobalData } from '$lib/globalStore';
+	import { changeContribution, getGeneralData } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 
@@ -31,9 +31,11 @@
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-				$globalData.data.current_contribution.amount = amountValue;
-				$globalData.data.current_contribution.periodName = requrring;
-				updateCurrentContributionStoreValues(amountValue)
+				// $globalData.data.current_contribution.amount = amountValue;
+				// $globalData.data.current_contribution.periodName = requrring;
+				// updateCurrentContributionStoreValues(amountValue)
+				const globalData = await getGeneralData();
+				updateGlobalData(globalData);
 				getModal('confirm').open();
 				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');
