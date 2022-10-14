@@ -2,6 +2,7 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import DisabledDropdown from '$lib/components/DisabledDropdown.svelte';
 	import { slide } from 'svelte/transition';
+	import { t } from '$lib/translations/i18n.js';
 	export let userCountry = 'United States',
 		activeCurrency = 'USD',
 		form,
@@ -9,7 +10,7 @@
 		isLoading,
 		handleChange;
 	export let accountTypeArray = [],
-	legalType, accountType = 'Account type*';
+	legalTypeId, accountType = $t('MANAGE_WITHDRAW_ACC_TYPE')+'*';
 	$: {
 		accountType;
 		if ($form?.accountType || $form?.accountType  === "") $form.accountType = accountType;
@@ -19,14 +20,14 @@
 	};
 </script>
 <div class="mt-2">
-	<p class="text-left ">General data and bank account data</p>
+	<p class="text-left ">{$t('MANAGE_WITHDRAW_HEAD')}</p>
 	<div class="mt-1">
-		{#if legalType === 'Private'}
+		{#if legalTypeId === 5240597}
 			<div class="grid-2">
 				<div class="input__wrapper">
 					<input
 						type="text"
-						placeholder="First name*"
+						placeholder={$t('FIRST_NAME')+"*"}
 						class:error={$errors.firstName}
 						autocomplete
 						on:change={handleChange}
@@ -41,7 +42,7 @@
 				<div class="input__wrapper">
 					<input
 						type="text"
-						placeholder="Last name*"
+						placeholder={$t('LAST_NAME')+"*"}
 						class:error={$errors.lastName}
 						autocomplete
 						on:change={handleChange}
@@ -58,7 +59,7 @@
 			<div class="input__wrapper">
 				<input
 					type="text"
-					placeholder="Recipient full name*"
+					placeholder={$t('MANAGE_WITHDRAW_RECIPIENT_NAME')+"*"}
 					class:error={$errors.fullName}
 					autocomplete
 					on:change={handleChange}
@@ -98,7 +99,7 @@
 			<div class="input__wrapper">
 				<input
 					type="text"
-					placeholder="Routing number*"
+					placeholder={$t('MANAGE_WITHDRAW_ROUTING_NUMBER')+"*"}
 					class:error={$errors.routingNumber}
 					autocomplete
 					on:change={handleChange}
@@ -113,7 +114,7 @@
 			<div class="input__wrapper">
 				<input
 					type="text"
-					placeholder="Account Number*"
+					placeholder={$t('MANAGE_WITHDRAW_ACCOUNT_NUMBER')+"*"}
 					class:error={$errors.accountNumber}
 					autocomplete
 					on:change={handleChange}
@@ -142,7 +143,7 @@
 			<div class="input__wrapper">
 				<input
 					type="text"
-					placeholder="Sort code*"
+					placeholder={$t('MANAGE_WITHDRAW_SORT_CODE')+"*"}
 					class:error={$errors.sortCode}
 					autocomplete
 					on:change={handleChange}
@@ -159,7 +160,7 @@
 			<div class="input__wrapper">
 				<input
 					type="text"
-					placeholder="IBAN* or Account Number*"
+					placeholder={$t('MANAGE_WITHDRAW_IBAN_OR_AN')+"*"}
 					class:error={$errors.ibanOrAccountNumber}
 					autocomplete
 					on:change={handleChange}

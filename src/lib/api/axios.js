@@ -143,6 +143,14 @@ export const getGeneralData = async () => {
 		console.error(error);
 	}
 }
+export const getAvatar = async () => {
+	try {
+		let response = await privatePath.post('/getAvatar');
+		return response.data;
+	} catch (error) {
+		console.error(error);
+	}
+}
 
 
 export const changeLang = async (langId) => {

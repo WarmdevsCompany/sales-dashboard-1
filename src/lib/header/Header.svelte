@@ -10,10 +10,8 @@
 	import NextContrDate from './header-items/NextContrDate.svelte';
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
-	let currencySymbol = $globalData.data.currency.symbol,
-		allMoney = $globalData.data.currentSubscription?.balance || 0,
-		monthlySubscriptionText = $globalData.data.currentSubscription?.subscriptionText || '1245/mo',
-		nextContributionDate = $globalData.data.currentSubscription?.nextDate || 0;
+	export let currencySymbol, allMoney, monthlySubscriptionText, nextContributionDate, status
+	
 </script>
 
 <header class="d-flex justify-sb b-radius-8 align-center text-white">
@@ -23,7 +21,7 @@
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
 			<NextContrDate {nextContributionDate} />
 			<SubscriptionStatus
-				status={$globalData.data.currentSubscription?.status.toLowerCase() || 'active'}
+				status={status.toLowerCase() || 'active'}
 			/>
 		</div>
 	</div>

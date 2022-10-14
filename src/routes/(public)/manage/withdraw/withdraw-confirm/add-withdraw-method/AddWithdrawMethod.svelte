@@ -1,4 +1,5 @@
 <script>
+	import { getIdByName } from '$lib/functions/getIdByName.js';
 	import { withdrawBalance, withdrawContribution } from '../../withdrawStore';
 	import AddressForm from './AddressForm.svelte';
 	import BankAccountForm from './BankAccountForm.svelte';
@@ -8,7 +9,7 @@
 	import { createForm } from 'svelte-forms-lib';
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import * as yup from 'yup';
-	import { onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import Preloader from '$lib/components/Preloader.svelte';
 	import {
 		addWithdrawalPaymentMethod,
@@ -16,7 +17,6 @@
 		getGeneralData,
 		makeWithdrawal
 	} from '$lib/api/axios';
-
 	export let submitBtnText = $t('SAVE'),
 		withdrawRequestProcessed;
 	let isLoading = false,
@@ -28,6 +28,7 @@
 		paymentMethodTypes = [],
 		accountTypeArray = [],
 		accountMethodTypes = [],
+		legalTypeId = false,
 		validationFormData = {
 			initialValues: null,
 			validationSchema: null,
@@ -39,7 +40,18 @@
 	const userCountry = $globalData.data.country.countryName;
 	const userCountryId = $globalData.data.country.countryId;
 	const userCurrencyId = $globalData.data.currency.currencyId;
-	$: verifyId, globalLegalType, globalLegalTypeError, withdrawRequestProcessed, validationFormData, mainForm;
+	$: {
+		verifyId,
+			globalLegalType,
+			globalLegalTypeError,
+			withdrawRequestProcessed,
+			validationFormData,
+			mainForm;
+	}
+
+	afterUpdate(()=>{
+		legalTypeId = getIdByName(globalLegalType, paymentMethodTypes)
+	})
 
 	// Bussiness or Private
 	const ivPrivate = {
@@ -127,24 +139,24 @@
 		}
 	};
 	checkFormStatus();
-	const createRequestWithdrawalObj = (countryId, currency, currencyId, legalType, formData) => {
+	const createRequestWithdrawalObj = (countryId, currency, currencyId, formData) => {
 		let body = {
-				paymentMethodTypeId: null,
-				currencyId: null,
-				countryId: null,
-				fullName: null,
-				firstName: null,
-				lastName: null,
-				routingNumber: null,
-				sortCode: null,
-				accountNumber: null,
-				accountTypeId: null,
-				state: null,
-				zipcode: null,
-				city: null,
-				address: null
-			};
-		const legalTypeId = getIdByName(legalType, paymentMethodTypes);
+			paymentMethodTypeId: null,
+			currencyId: null,
+			countryId: null,
+			fullName: null,
+			firstName: null,
+			lastName: null,
+			routingNumber: null,
+			sortCode: null,
+			accountNumber: null,
+			accountTypeId: null,
+			state: null,
+			zipcode: null,
+			city: null,
+			address: null
+		};
+
 		if (legalTypeId === 5240596) {
 			body.paymentMethodTypeId = 5240596;
 			body.fullName = formData.fullName;
@@ -179,20 +191,17 @@
 		initialValues: validationFormData.initialValues,
 		validationSchema: yup.object().shape(validationFormData.validationSchema),
 		onSubmit: async (values) => {
-
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
-
 			const body = createRequestWithdrawalObj(
 				userCountryId,
 				activeCurrency,
 				userCurrencyId,
-				globalLegalType,
 				values
 			);
 			const addWithdrawalResponse = await addWithdrawalPaymentMethod(body);
 			if (addWithdrawalResponse.status) {
-				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId)
+				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId);
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
 					const globalData = await getGeneralData();
@@ -215,12 +224,11 @@
 				userCountryId,
 				activeCurrency,
 				userCurrencyId,
-				globalLegalType,
 				values
 			);
 			const addWithdrawalResponse = await addWithdrawalPaymentMethod(body);
 			if (addWithdrawalResponse.status) {
-				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId)
+				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId);
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
 					const globalData = await getGeneralData();
@@ -234,7 +242,6 @@
 	});
 	$: {
 		checkFormStatus();
-		const legalTypeId = getIdByName(globalLegalType, paymentMethodTypes)
 		if (legalTypeId === 5240597) {
 			mainForm = privateForm;
 		} else {
@@ -242,17 +249,13 @@
 		}
 	}
 	const checkLegalType = () => {
-		const legalTypeId = getIdByName(globalLegalType, paymentMethodTypes)
 		if (legalTypeId) {
 			formStep = 2;
 		} else {
 			globalLegalTypeError = $t('MANAGE_CHOUSE_LEGAL_TYPE');
 		}
 	};
-	const getIdByName = (name, arrayOfObj) => {
-		const currentObj = arrayOfObj.filter((item) => item.name === name);
-		return currentObj[0]?.idobject;
-	};
+
 	const createMakeWithdrawalObj = (withdrawalMethodId) => {
 		return {
 			verificationId: $verificationId,
@@ -272,6 +275,7 @@
 		legalTypeArray = paymentMethodTypes.map((item) => item.name);
 	});
 </script>
+
 {#if formStep === 1}
 	<div class="legal_type">
 		<div class="text-center mb-1">{$t('MANAGE_WITHDRAW_HEAD')}</div>
@@ -296,10 +300,10 @@
 		<button class="btn btn_center" on:click={checkLegalType}>{$t('NEXT')}</button>
 	</div>
 {:else if formStep === 2}
-{withdrawRequestProcessed}
+	{withdrawRequestProcessed}
 	<form on:submit|preventDefault={mainForm.handleSubmit}>
 		<BankAccountForm
-			legalType={globalLegalType}
+			{legalTypeId}
 			{activeCurrency}
 			{userCountry}
 			{accountTypeArray}

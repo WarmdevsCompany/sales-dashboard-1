@@ -10,10 +10,10 @@
 		isLoading;
 	let isRequiredAddressDate = true;
 	let placeholders = {
-		state: 'State',
-		zipCode: 'Zip code',
-		city: 'City',
-		address: 'Address'
+		state: $t('ENTER_STATE'),
+		zipCode: $t('ENTER_ZIP'),
+		city: $t('ENTER_CITY'),
+		address: $t('ENTER_ADDRESS')
 	};
 	$: {
 		if (activeCurrency === 'EURO') {
