@@ -42,14 +42,18 @@
 			});
 			const response = await rawResponse.json();
 
-			if (response.errorMessage === 'FAILED_TO_FIND_USER') {
+			if(!response.status || response.data === null){
+				goto('/404');
+			}
+
+			if (response.errorMessage === 'FAILED_TO_FIND_USER' ) {
 				deleteCookie('esiToken');
 				goto('/auth/login');
 			}
 
+
 			if (rawResponse.status == 200) {
 				$globalData = response;
-				console.log($globalData);
 			} else if (rawResponse.status == 401) {
 				deleteCookie('esiToken');
 				goto('/auth/login');
@@ -57,6 +61,7 @@
 		}
 
 		if ($globalData) {
+			console.log($globalData)
 			loading = false;
 			$notificationList = $globalData.data.notifications.data;
 			$notificationSettings = $globalData.data.notificationSettings;

@@ -31,9 +31,6 @@
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-				// $globalData.data.current_contribution.amount = amountValue;
-				// $globalData.data.current_contribution.periodName = requrring;
-				// updateCurrentContributionStoreValues(amountValue)
 				const globalData = await getGeneralData();
 				updateGlobalData(globalData);
 				getModal('confirm').open();
@@ -67,20 +64,7 @@
 		});
 		return periodId;
 	}
-	function updateCurrentContributionStoreValues(amount){
-		let safe, adv, found;
-		const savePers = $globalData.data.current_contribution.greenSafe
-		const advPers = $globalData.data.current_contribution.greenAdventure
-		const foundPers = $globalData.data.current_contribution.greenFounder
 
-		safe = (amount * savePers)/ 100
-		adv = (amount * advPers) / 100
-		found = (amount * foundPers) / 100
-
-		$globalData.data.current_contribution.greenSafeTotal = safe
-		$globalData.data.current_contribution.greenAdventureTotal = adv
-		$globalData.data.current_contribution.greenFounderTotal = found
-	}
 </script>
 
 <div class="form_wrapper">

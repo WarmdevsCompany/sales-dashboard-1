@@ -3,10 +3,15 @@
 	import { withdrawBalance, withdrawContribution } from './../withdrawStore.js';
 	import { verificationId, updateGlobalData } from '$lib/globalStore.js';
 	import { t } from '$lib/translations/i18n.js';
-	export let withdrawMethods = [], successFormStatus, formStep;
+	export let withdrawMethods = [],
+		successFormStatus,
+		formStep;
 	const addNewItemKey = 'ADD_NEW_ITEM';
-	let radioValue = 0, options=[], isLoading = false, submitBtnText = $t('NEXT');
-
+	let radioValue = 0,
+		options = [],
+		isLoading = false,
+		submitBtnText = $t('NEXT');
+	console.log(withdrawMethods);
 	withdrawMethods.forEach((item, index) => {
 		options[index] = { value: index };
 	});
@@ -19,13 +24,13 @@
 				withdrawalMethodId: withdrawMethods[radioValue].idobject,
 				amount: $withdrawBalance,
 				greenSafe: $withdrawContribution.safeValue,
-				greenAdventure:$withdrawContribution.adventureValue,
+				greenAdventure: $withdrawContribution.adventureValue,
 				greenFounder: $withdrawContribution.founderValue
-			}
-			const res = await makeWithdrawal(body)
-			if(res.status) {
-				const globalData = await getGeneralData()
-				updateGlobalData(globalData)
+			};
+			const res = await makeWithdrawal(body);
+			if (res.status) {
+				const globalData = await getGeneralData();
+				updateGlobalData(globalData);
 				successFormStatus = true;
 			}
 			isLoading = false;
@@ -44,7 +49,7 @@
 			on:click={() => (radioValue = index)}
 		>
 			<div class="text-3">Bank transfer #{element.accountNumber}*{element.currencyName}</div>
-			<div class="text-xsm text-green mt-0_5">{element.fullName}</div>
+			<div class="text-xsm text-green mt-0_5">{element.fullName || ''}</div>
 			<div class="absloute__radio">
 				<div class="group-container single_item">
 					<input class="sr-only" type="radio" bind:group={radioValue} value={index} />
@@ -238,8 +243,7 @@
 			grid-template-columns: 1fr;
 		}
 		.withdraw__item {
-		 max-width: 100%;
+			max-width: 100%;
 		}
-
 	}
 </style>

@@ -169,6 +169,10 @@ export default {
     "MANAGE_WITHDRAW_MORE_ERR": "Cannot be more than the",
     "MANAGE_WITHDRAW_CONFIRMED":  "Thank You! Your withdrawal was confirmed",
     "MANAGE_WITHDRAW_PROCESSED":  "Withdrawal request successfully processed",
+    "MANAGE_LEGAL_TYPE":  "Legal type",
+    "MANAGE_CHOUSE_LEGAL_TYPE":  "Chouse legal type",
+    "MANAGE_ENTER_ADDRESS":  "Please enter address data",
+    "MANAGE_WITHDRAW_HEAD":  "General data and bank account data",
 
     //PROFILE__general__EN
     "PROFILE.GENERAL.TITLE": "General info", 
@@ -411,6 +415,10 @@ export default {
     "MANAGE_WITHDRAW_MORE_ERR": "Kann nicht mehr sein als das",
     "MANAGE_WITHDRAW_CONFIRMED":    "Danke! Ihr Rückzug wurde bestätigt",
     "MANAGE_WITHDRAW_PROCESSED":    "Rückzugsantrag erfolgreich bearbeitet",
+    "MANAGE_LEGAL_TYPE": "Rechtstyp",
+    "MANAGE_CHOUSE_LEGAL_TYPE":  "Chouse Rechtstyp",
+    "MANAGE_ENTER_ADDRESS": "Bitte geben Sie Adressdaten ein",    
+    "MANAGE_WITHDRAW_HEAD": "Allgemeine Daten und Bankkontodaten",
 
     //PROFILE__DE
     "PROFILE.GENERAL.TITLE": "Allgemeine Information",
@@ -652,7 +660,10 @@ export default {
     "MANAGE_WITHDRAW_MORE_ERR":  "Ne peut pas être plus que le",
     "MANAGE_WITHDRAW_CONFIRMED":    "Merci! Votre retrait a été confirmé",
     "MANAGE_WITHDRAW_PROCESSED":    "Demande de retrait avec succès traité",
-
+    "MANAGE_LEGAL_TYPE": "Type légal",
+    "MANAGE_CHOUSE_LEGAL_TYPE": "Type juridique de chouse",
+    "MANAGE_ENTER_ADDRESS": "Veuillez saisir les données d'adresse",
+    "MANAGE_WITHDRAW_HEAD": "Données générales et données du compte bancaire",
 
     //PROFILE__FR
     "PROFILE.GENERAL.TITLE": "Informations générales",

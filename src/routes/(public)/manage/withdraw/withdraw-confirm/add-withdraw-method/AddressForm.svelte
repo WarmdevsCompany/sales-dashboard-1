@@ -1,5 +1,6 @@
 <script>
 	import DisabledDropdown from '$lib/components/DisabledDropdown.svelte';
+	import { t } from '$lib/translations/i18n.js';
 	import { slide } from 'svelte/transition';
 	export let userCountry = 'United States',
 		activeCurrency = 'USD',
@@ -25,7 +26,7 @@
 </script>
 
 <div class="mt-2_5">
-	<p class="text-left ">Please enter address data</p>
+	<p class="text-left ">{$t('MANAGE_ENTER_ADDRESS')}</p>
 	<div class="grid-2 mt-0_5">
 		<DisabledDropdown text={userCountry} />
 		<div class="input__wrapper">
