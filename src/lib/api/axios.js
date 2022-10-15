@@ -152,7 +152,6 @@ export const getAvatar = async () => {
 	}
 }
 
-
 export const changeLang = async (langId) => {
 	try {
 		let response = await privatePath.post('/changeLang', { langId: langId });
