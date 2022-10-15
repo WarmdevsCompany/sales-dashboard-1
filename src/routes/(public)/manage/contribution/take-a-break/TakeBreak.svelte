@@ -5,7 +5,7 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { globalData } from '$lib/globalStore';
+	import { globalData, isFetching } from '$lib/globalStore';
 	import { restartContribution, pauseContribution, stopContribution } from '$lib/api/axios';
 	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	export let subscriptionStatus;
@@ -37,28 +37,33 @@
 
 	async function stop() {
 		stopBtnText = `${$t('LOADING')}...`;
+		$isFetching = true;
 		const response = await stopContribution();
 		if (response.status) {
 			getModal('stop').close();
 			stopBtnText = $t('MANAGE_STOP');
-			$globalData.data.currentSubscription.status = 'Stoped';
+			$globalData.data.currentSubscription.status = 'Stopped';
 		}
+		$isFetching = false;
 	}
 	async function restart() {
 		if (stopCheckboxValue) {
 			restartBtnText = `${$t('LOADING')}...`;
+			$isFetching = true;
 			const response = await restartContribution();
 			if (response.status) {
 				getModal('restart').close();
 				restartBtnText = $t('MANAGE_RES');
 				$globalData.data.currentSubscription.status = 'Restart';
 			}
+			$isFetching = false;
 		} else {
 			chackboxErrorStatus = true;
 		}
 	}
 	async function pause() {
 		pauseBtnText = `${$t('LOADING')}...`;
+		$isFetching = true;
 		const periodId = getPeriodId();
 		const response = await pauseContribution(periodId);
 		if (response.status) {
@@ -66,6 +71,7 @@
 			pauseBtnText = $t('MANAGE_PAUSE');
 			$globalData.data.currentSubscription.status = 'Paused';
 		}
+		$isFetching = false;
 	}
 	function getPeriodId() {
 		const arrayWithCurrentItem = periodsMonths.filter((item) => {
@@ -86,13 +92,13 @@
 			class="btn pause mb-1"
 			on:click={() => getModal('pause').open()}
 			disabled={subscriptionStatus === 'Paused' ||
-				subscriptionStatus === 'Stoped' ||
+				subscriptionStatus === 'Stopped' ||
 				subscriptionStatus === 'Suspended'}>{$t('MANAGE_PAUSE')}</button
 		>
 		<button
 			class="btn stop mb-1"
 			on:click={() => getModal('stop').open()}
-			disabled={subscriptionStatus === 'Stoped' || subscriptionStatus == 'Suspended'}
+			disabled={subscriptionStatus === 'Stopped' || subscriptionStatus == 'Suspended'}
 			>{$t('MANAGE_STOP')}</button
 		>
 		<button
@@ -112,7 +118,11 @@
 		<div class="pause__modal--main">
 			<div class="dropdown__head">{$t('MANAGE_CHOOSE_TIMEFRAME')}</div>
 			<Dropdown itemsData={timeframeArray} bind:activeItem={timeframe} />
-			<button class="btn confirm pause__modal--btn " on:click={pause}>{pauseBtnText}</button>
+			<button
+				class:is_fetching={$isFetching}
+				class="btn confirm pause__modal--btn "
+				on:click={pause}>{pauseBtnText}</button
+			>
 		</div>
 	</div>
 </Modal>
@@ -123,7 +133,9 @@
 			{$t('MANAGE_STOP_TITLE')}
 		</div>
 		<div class="stop__modal--main ">
-			<button class="btn confirm stop__modal--btn" on:click={stop}>{stopBtnText}</button>
+			<button class:is_fetching={$isFetching} class="btn confirm stop__modal--btn" on:click={stop}
+				>{stopBtnText}</button
+			>
 		</div>
 	</div>
 </Modal>
@@ -155,14 +167,18 @@
 			</div>
 			<div class="terms__checkbox">
 				<Checkbox group={'terms'} bind:checkboxStatus={stopCheckboxValue} value={1}
-					><div class="text-xsm">{$t('MANAGE_AGREE')}</div>
+					><div class="text-xsm agree_text">{$t('MANAGE_AGREE')}</div>
 				</Checkbox>
 				{#if chackboxErrorStatus}
 					<small in:fade class="error_text text-xsm">{$t('MANAGE_AGREE_ERROR')}</small>
 				{/if}
 			</div>
 
-			<button class="btn confirm restart__modal--btn" on:click={restart}>{restartBtnText}</button>
+			<button
+				class:is_fetching={$isFetching}
+				class="btn confirm restart__modal--btn"
+				on:click={restart}>{restartBtnText}</button
+			>
 		</div>
 	</div>
 </Modal>
@@ -240,6 +256,10 @@
 	}
 	.subtitle {
 		color: var(--text-color);
+	}
+	.agree_text {
+		position: relative;
+		top: 2px;
 	}
 
 	@media only screen and (max-width: 991px) {

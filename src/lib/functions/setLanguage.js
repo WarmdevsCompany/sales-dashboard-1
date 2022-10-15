@@ -1,9 +1,10 @@
-import { updateGlobalData, updateNotificationData, updateLoading, updateNotificationSettings } from '$lib/globalStore';
+import { updateGlobalData, updateNotificationData, updateLoading, updateNotificationSettings,updateFetching } from '$lib/globalStore';
 import { getGeneralData } from '$lib/api/axios';
 import { changeLang } from '../api/axios';
 
 export async function setLanguage(lang) {
     updateLoading(true);
+    updateFetching(true)
     localStorage.setItem('lang', lang);
     let langId = 0;
     switch (lang) {
@@ -26,5 +27,6 @@ export async function setLanguage(lang) {
         updateNotificationSettings(notificationSettings);
         updateLoading(false);
     }
+    updateFetching(false)
 }
 

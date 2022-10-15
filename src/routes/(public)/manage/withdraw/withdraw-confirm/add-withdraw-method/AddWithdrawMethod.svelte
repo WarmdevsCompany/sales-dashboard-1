@@ -4,7 +4,7 @@
 	import AddressForm from './AddressForm.svelte';
 	import BankAccountForm from './BankAccountForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { globalData, verificationId, updateGlobalData } from '$lib/globalStore';
+	import { globalData, verificationId, updateGlobalData, isFetching } from '$lib/globalStore';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import Dropdown from '$lib/components/Dropdown.svelte';
@@ -193,6 +193,7 @@
 		onSubmit: async (values) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true 
 			const body = createRequestWithdrawalObj(
 				userCountryId,
 				activeCurrency,
@@ -209,6 +210,7 @@
 					withdrawRequestProcessed = true;
 				}
 			}
+			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('SAVE');
 		}
@@ -220,6 +222,7 @@
 			// withdrawRequestProcessed = true;
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true 
 			const body = createRequestWithdrawalObj(
 				userCountryId,
 				activeCurrency,
@@ -236,6 +239,7 @@
 					withdrawRequestProcessed = true;
 				}
 			}
+			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('SAVE');
 		}
@@ -320,7 +324,7 @@
 			{isLoading}
 			handleChange={mainForm.handleChange}
 		/>
-		<button class="btn btn_center ">{submitBtnText}</button>
+		<button class="btn btn_center" class:is_fetching={$isFetching}>{submitBtnText}</button>
 	</form>
 {/if}
 

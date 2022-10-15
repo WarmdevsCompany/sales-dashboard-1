@@ -1,7 +1,7 @@
 <script>
 	import { makeWithdrawal, getGeneralData } from '$lib/api/axios.js';
 	import { withdrawBalance, withdrawContribution } from './../withdrawStore.js';
-	import { verificationId, updateGlobalData } from '$lib/globalStore.js';
+	import { verificationId, updateGlobalData, isFetching } from '$lib/globalStore.js';
 	import { t } from '$lib/translations/i18n.js';
 	export let withdrawMethods = [],
 		successFormStatus,
@@ -19,6 +19,7 @@
 		if (radioValue != addNewItemKey) {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true;
 			const body = {
 				verificationId: $verificationId,
 				withdrawalMethodId: withdrawMethods[radioValue].idobject,
@@ -33,6 +34,7 @@
 				updateGlobalData(globalData);
 				successFormStatus = true;
 			}
+			$isFetching = false;
 			isLoading = false;
 			submitBtnText = $t('SAVE');
 		} else {
@@ -69,7 +71,9 @@
 		<div class="withdraw__item--text text-3 text-left">{$t('MANAGE_ADD_WITHDRAW')}</div>
 	</div>
 </div>
-<button class="btn mt-2_5 btn_center" on:click={confirmSelection}>{submitBtnText}</button>
+<button class="btn mt-2_5 btn_center" on:click={confirmSelection} class:is_fetching={$isFetching}
+	>{submitBtnText}
+</button>
 
 <style>
 	.withdraw__methods {

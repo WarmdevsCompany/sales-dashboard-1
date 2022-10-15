@@ -3,7 +3,7 @@
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
 	import { confirmModalState } from '../../profileStore';
-	import { globalData, verificationId } from '$lib/globalStore';
+	import { globalData, verificationId, isFetching } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
 	import { changeEmail, setNewAuthHeaders } from '$lib/api/axios.js';
 	export let submitBtnText = $t('CONTINUE');
@@ -24,6 +24,7 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true 
 			let res = await changeEmail(value.email, verifyId);
 			if (res.status) {
 				setNewAuthHeaders(res.data.token);
@@ -33,6 +34,7 @@
 			} else if (res.errorMessage === 'EMAIL_ALREADY_EXISTS') {
 				$errors['email'] = $t('EMAIL_ALREADY_EXISTS');
 			}
+			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');
 		}
@@ -58,6 +60,6 @@
 		{#if $errors.email}
 			<small transition:slide|local class="error_text last">{$errors.email}</small>
 		{/if}
-		<button class="btn _218">{submitBtnText}</button>
+		<button class="btn _218" class:is_fetching={$isFetching}>{submitBtnText}</button>
 	</form>
 </div>
