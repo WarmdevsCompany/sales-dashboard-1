@@ -1,5 +1,5 @@
 <script>
-	import { globalData, verificationId } from '$lib/globalStore.js';
+	import { globalData, verificationId, isFetching } from '$lib/globalStore.js';
 	import flatpickr from 'flatpickr';
 	import { onMount } from 'svelte';
 	import { t } from '$lib/translations/i18n.js';
@@ -31,11 +31,13 @@
 			} else {
 				isLoading = true;
 				submitBtnText = `${$t('LOADING')}...`;
+				$isFetching = true 
 				const res = await changeDOB(selectedDate, verifyId);
 				if (res.status) {
 					$globalData.data.personalInfo.dob = new Date(selectedDate).getTime() / 1000
 					$$props.submitChanges();
 				}
+				$isFetching = false 
 				isLoading = false;
 				submitBtnText = $t('CONTINUE');
 			}
@@ -60,7 +62,7 @@
 		{#if dobError}
 			<small transition:slide|local class="error_text last">{dobError}</small>
 		{/if}
-		<button class="btn _218">{$t('CONTINUE')}</button>
+		<button class="btn _218" class:is_fetching={$isFetching}>{$t('CONTINUE')}</button>
 	</form>
 </div>
 

@@ -1,6 +1,6 @@
 <script>
 	import { scrollToTop } from '$lib/functions/scrollToTop.js';
-	import { globalData } from '$lib/globalStore';
+	import { globalData, isFetching } from '$lib/globalStore';
 	import {
 		allocatedContributions,
 		errorMessageState,
@@ -40,6 +40,7 @@
 			$errorMessageState = true;
 		} else {
 			confirmButtonText = `${$t('LOADING')}...`;
+			$isFetching = true;
 			let res = await changeContributionPlan(
 				$allocatedContributions.safe,
 				$allocatedContributions.adventure,
@@ -51,6 +52,7 @@
 				confirmButtonText = $t('CONFIRM_CHANGES');
 				resetContributionData();
 			}
+			$isFetching = false;
 		}
 	};
 	scrollToTop();
@@ -64,9 +66,12 @@
 
 <ChangePlans />
 <div class="d-flex justify-cc">
-	<button class="btn confirm mt-1_5 box_shadow-medium" on:click={changeContributionData}
-		>{confirmButtonText}</button
-	>
+	<button
+		class="btn confirm mt-1_5 box_shadow-medium"
+		on:click={changeContributionData}
+		class:is_fetching={$isFetching}
+		>{confirmButtonText}
+	</button>
 </div>
 
 <Modal id="confirmPlan">
@@ -76,10 +81,10 @@
 		<div class="modal_main-row d-flex justify-cc ">
 			<div class="text-xsm d-flex align-base">
 				{$t('MANAGE_NEW_CONTRIBUTION')}:
-				<span class="text-3 text-blue"
-					>{$globalData.data.currency.symbol}{$globalData.data.currentSubscription
-						.subscriptionText}</span
-				>
+				<span class="text-3 text-blue">
+					{$globalData.data.currency.symbol}
+					{$globalData.data.currentSubscription.subscriptionText}
+				</span>
 			</div>
 		</div>
 		<div class="updated__items">

@@ -1,6 +1,6 @@
 <script>
 	import { setNewAuthHeaders, changeUserName } from '$lib/api/axios';
-	import { globalData, verificationId } from '$lib/globalStore';
+	import { globalData, verificationId, isFetching } from '$lib/globalStore';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
@@ -26,6 +26,7 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true 
 			let res = await changeUserName(value.userName, verifyId);
 			console.log(res)
 			if (res.status) {
@@ -34,6 +35,7 @@
 				$globalData.data.personalInfo.username = value.userName;
 				$$props.submitChanges();
 			}
+			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');
 		}
@@ -59,6 +61,6 @@
 		{#if $errors.userName}
 			<small transition:slide|local class="error_text last">{$errors.userName}</small>
 		{/if}
-		<button class="btn _218">{submitBtnText}</button>
+		<button class="btn _218" class:is_fetching={$isFetching}>{submitBtnText}</button>
 	</form>
 </div>

@@ -5,7 +5,7 @@
 	import Preloader from '$lib/components/Preloader.svelte';
 	import ToogleCheckbox from '$lib/components/inputs/ToogleCheckbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { globalData, loading, notificationSettings } from '$lib/globalStore';
+	import { globalData, loading, notificationSettings, isFetching } from '$lib/globalStore';
 	let updateNotificationResult;
 	let notificationItemStatus;
 	let notificationUpdateItemStatus;
@@ -16,6 +16,7 @@
 		let value = false;
 		const currentItem = e.currentTarget
 		currentItem.disabled = true;
+		$isFetching = true
 		if (e.currentTarget.checked) {
 			value = true;
 			const res = await changeNotificationSettings(id, value);
@@ -31,6 +32,7 @@
 			}
 			currentItem.disabled = false;
 		}
+		$isFetching = false
 	}
 	function setStatusToUpdatedItem(status, itemId, value) {
 		const notificationSettingsArray = [...$notificationSettings];
@@ -75,6 +77,7 @@
 							status={item.active}
 							{setStatus}
 							id={item.idobject}
+							disabled={$isFetching}
 						/>
 					</div>
 

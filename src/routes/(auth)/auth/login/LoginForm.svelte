@@ -1,4 +1,5 @@
 <script>
+	import { isFetching } from '$lib/globalStore.js';
 	import { validatePasswordType } from '$lib/functions/validatePasswordType';
 	import { slide } from 'svelte/transition';
 	import EyePwIco from '$lib/components/icons/EyePW_ico.svelte';
@@ -23,6 +24,7 @@
 			try {
 				buttonText = `${$t('LOADING')}...`;
 				isLoading = true;
+				$isFetching = true
 
 				let res = await login({ login: values.userName, password: values.password });
 				if (res?.status === false) {
@@ -33,9 +35,11 @@
 						errorMessages = $t('USER_NOT_FOUND');
 					}
 					buttonText = $t('LOGIN');
+					$isFetching = false
 				}
 			} catch (e) {
 				buttonText = $t('LOGIN');
+				$isFetching = false
 				errorMessages = e;
 			}
 		}
@@ -92,7 +96,7 @@
 			<div class="register__head">{$t('NOT_GREENSAVER')}</div>
 			<a href="https://esi.webflow.io/subscribe-test" class="text-green">{$t('START_NOW')}</a>
 		</div>
-		<button class="btn login">{buttonText}</button>
+		<button class="btn login" class:is_fetching={$isFetching}>{buttonText}</button>
 	</div>
 </form>
 

@@ -6,6 +6,7 @@
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
 	import { t } from '$lib/translations/i18n.js';
+	import { isFetching } from '$lib/globalStore.js';
 	let buttonText = $t('LOGIN');
 	let isLoading = false;
 	let errorMessages = null;
@@ -20,11 +21,13 @@
 		}),
 		onSubmit: async (values) => {
 			isLoading = true;
+			buttonText = `${$t('LOADING')}...`;
+			$isFetching = true 
 			const body = {
 				login: values.userName,
 				password: values.password
 			};
-			buttonText = `${$t('LOADING')}...`;
+			
 			let res = await verifyAccount(body);
 			if (res.status) {
 				$$props.authDataCallback();
@@ -36,6 +39,7 @@
 					errorMessages = $t('USER_NOT_FOUND');
 				}
 			}
+			$isFetching = false 
 			buttonText = $t('LOGIN');
 		}
 	});
@@ -83,7 +87,7 @@
 	{/if}
 
 	<div class="form__bottom d-flex justify-sb">
-		<button class="btn login">{buttonText}</button>
+		<button class="btn login" class:is_fetching={$isFetching}>{buttonText}</button>
 	</div>
 </form>
 

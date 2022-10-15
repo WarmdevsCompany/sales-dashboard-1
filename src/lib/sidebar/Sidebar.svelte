@@ -14,7 +14,7 @@
 	import MenuIcon from '$lib/components/icons/menu-icon/MenuIcon.svelte';
 	import CloseMenuIcon from '$lib/components/icons/menu-icon/CloseMenuIcon.svelte';
 	import clickOutside from '$lib/functions/clickOutside';
-	import { logout } from '$lib/api/axios';
+	import { logout, getAvatar } from '$lib/api/axios';
 	import { t } from '$lib/translations/i18n.js';
 	import { currentSideBarStatus, globalData } from '$lib/globalStore';
 	import { onMount } from 'svelte';
@@ -31,8 +31,10 @@
 
 	export let firstName = '',
 		lastName = '';
-
+	
 	onMount(async () => {
+		const avaResponse = await getAvatar()
+		$globalData.data.photo = avaResponse.data.photo;
 		if ($globalData) {
 			firstName = $globalData.data.personalInfo.firstname;
 			lastName = $globalData.data.personalInfo.lastname;

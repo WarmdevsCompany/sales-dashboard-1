@@ -1,4 +1,5 @@
 <script>
+	import { isFetching } from '$lib/globalStore.js';
 	import { verificationId } from '$lib/globalStore.js';
 	import { verifyCode, verifyCodeForgotPassword } from '$lib/api/axios.js';
 	import { createForm } from 'svelte-forms-lib';
@@ -20,6 +21,7 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true
 			if (userIsAuth) {
 				const res = await verifyCode(value.code);
 				if (res.status) {
@@ -37,7 +39,7 @@
 					$errors['code'] = $t('WRONG_CODE');
 				}
 			}
-
+			$isFetching = false
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');
 		}
@@ -68,5 +70,5 @@
 	{#if $errors.code}
 		<small transition:slide|local class="error_text last">{$errors.code}</small>
 	{/if}
-	<button class="btn _218">{submitBtnText}</button>
+	<button class="btn _218" class:is_fetching={$isFetching}>{submitBtnText}</button>
 </form>

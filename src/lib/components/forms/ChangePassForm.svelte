@@ -1,5 +1,6 @@
 <script>
 	import { changePassword, setNewAuthHeaders, changeForgotPassword } from '$lib/api/axios.js';
+	import { isFetching } from '$lib/globalStore.js';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import { globalData, verificationId } from '$lib/globalStore';
@@ -39,6 +40,7 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true
 			if (userIsAuth) {
 				const res = await changePassword(value.password, verifyId);
 				if (res.status) {
@@ -58,7 +60,7 @@
 					$errors.confirmPassword = res.errorMessage;
 				}
 			}
-
+			$isFetching = false
 			isLoading = false;
 			submitBtnText = $t('CONTINUE');
 		}
@@ -106,5 +108,5 @@
 	{#if $errors.confirmPassword}
 		<small transition:slide|local class="error_text last">{$errors.confirmPassword}</small>
 	{/if}
-	<button class="btn _218">{submitBtnText}</button>
+	<button class="btn _218" class:is_fetching={$isFetching}>{submitBtnText}</button>
 </form>

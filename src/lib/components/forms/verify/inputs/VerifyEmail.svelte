@@ -4,6 +4,7 @@
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
 	import { t } from '$lib/translations/i18n.js';
+	import { isFetching } from '$lib/globalStore.js';
 	export let submitBtnText = $t('SEND');
 	export let userIsAuth = true;
 	export let importedEmail = null;
@@ -18,6 +19,7 @@
 		onSubmit: async (value) => {
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
+			$isFetching = true
 			if (userIsAuth) {
 				const res = await requestValidation(value.email);
 				if (res.status) {
@@ -32,7 +34,7 @@
 					$errors['email'] = $t('USER_NOT_FOUND')
 				 }
 			}
-
+			$isFetching = 
 			isLoading = false;
 			submitBtnText = $t('SEND');
 		}
@@ -56,5 +58,5 @@
 	{#if $errors.email}
 		<small transition:slide|local class="error_text last">{$errors.email}</small>
 	{/if}
-	<button class="btn _218">{submitBtnText}</button>
+	<button class="btn _218" class:is_fetching={$isFetching}>{submitBtnText}</button>
 </form>

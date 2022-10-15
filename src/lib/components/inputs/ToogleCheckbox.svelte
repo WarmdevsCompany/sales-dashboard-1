@@ -6,6 +6,7 @@
 			on:change={(e) => $$props?.setStatus(e)}
 			checked={$$props.status != false ? true : false}
 			status={$$props.status}
+			disabled ={$$props.disabled}
 		/>
 		<span class="slider" />
 	</label>
@@ -63,6 +64,12 @@
 
 	input:checked + .slider {
 		background-color: var(--primary-color);
+	}
+	input:checked:disabled + .slider {
+		background-color: var(--grey-color);
+	}
+	input:disabled + .slider {
+		background-color: var(--grey-color);
 	}
 
 	input:focus + .slider {

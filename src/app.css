@@ -473,6 +473,9 @@ button {
 button:focus:not(:focus-visible) {
 	outline: none;
 }
+button.is_fetching {
+	pointer-events: none;
+}
 .btn_center {
 	margin-right: auto;
 	margin-left: auto;

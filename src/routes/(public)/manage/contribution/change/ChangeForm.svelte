@@ -1,5 +1,6 @@
 <script>
 	import { t } from '$lib/translations/i18n.js';
+	import { isFetching } from '$lib/globalStore.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import { globalData, updateGlobalData } from '$lib/globalStore';
@@ -27,6 +28,7 @@
 		} else {
 			amountErrorState = false;
 			confirnBtnText = `${$t('LOADING')}...`;
+			$isFetching = true
 			const periodId = getPeriodId(requrring);
 
 			const result = await changeContribution(amountValue, periodId);
@@ -38,6 +40,7 @@
 					confirnBtnText = $t('CONFIRM_CHANGES');
 				}, 200);
 			}
+			$isFetching = false
 		}
 	}
 	function checkInputValue() {
@@ -105,7 +108,7 @@
 				</div>
 			</div>
 		</div>
-		<button class="btn confirm" disabled={disabledState || errorState}>{confirnBtnText}</button>
+		<button class="btn confirm" disabled={disabledState || errorState} class:is_fetching={$isFetching}>{confirnBtnText}</button>
 	</form>
 </div>
 

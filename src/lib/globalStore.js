@@ -25,3 +25,8 @@ export let updateNotificationSettings = (data) => {
 	notificationSettings.set(data);
 };
 export let currentSideBarStatus = writable(null);
+export let isFetching = writable(false)
+
+export let updateFetching = (status)=>{
+	isFetching.set(status)
+}
