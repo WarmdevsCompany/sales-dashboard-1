@@ -87,7 +87,8 @@
 				allMoney = {$globalData.data.currentSubscription?.balance || 0}
 				monthlySubscriptionText = {$globalData.data.currentSubscription?.subscriptionText || 0}
 				nextContributionDate = {$globalData.data.currentSubscription?.nextDate || 0}
-				status= {$globalData.data.currentSubscription?.status}/>
+				status= {$globalData.data.currentSubscription?.status}
+				statusId ={$globalData.data.currentSubscription?.statusId} />
 			</div>
 
 			<div class="main-body">

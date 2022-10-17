@@ -11,16 +11,21 @@
 		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
 	};
 	let showTooltip = false;
-
-	export let status;
-	export let iconColor = 'initial';
-	$: if (status === 'restart') {
-		status = 'active';
+	const statusesObj = {
+		5236998: 'active',
+		5236999: 'paused',
+		5237000: 'stopped',
+		5237001: 'active',
+		5237002: 'suspended'
 	}
+
+	export let statusName, statusId;
+	export let iconColor = 'initial';
+
 </script>
 
 <div class="d-flex ">
-	<button class="status d-flex justify-cc {status}"> {status}</button>
+	<button class="status d-flex justify-cc {statusesObj[statusId]}"> {statusName}</button>
 	<div
 		use:popperRef
 		on:mouseenter={() => (showTooltip = true)}
@@ -62,7 +67,7 @@
 		width: 81px;
 		background-color: var(--pause-btn-color);
 	}
-	.status.stoped {
+	.status.stopped {
 		width: 81px;
 		background-color: #5a7186;
 	}

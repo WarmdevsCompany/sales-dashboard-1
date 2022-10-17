@@ -10,7 +10,7 @@
 	import NextContrDate from './header-items/NextContrDate.svelte';
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
-	export let currencySymbol, allMoney, monthlySubscriptionText, nextContributionDate, status
+	export let currencySymbol, allMoney, monthlySubscriptionText, nextContributionDate, status, statusId
 	
 </script>
 
@@ -21,7 +21,7 @@
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
 			<NextContrDate {nextContributionDate} />
 			<SubscriptionStatus
-				status={status.toLowerCase() || 'active'}
+				status={status.toLowerCase() || 'active'} {statusId}
 			/>
 		</div>
 	</div>
