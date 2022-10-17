@@ -4,7 +4,7 @@ export function convertDateToUTC(date) {
 	const dateUTC = new Date(
 		Date.UTC(
 			date_0.getFullYear(),
-			date_0.getMonth() + 1,
+			date_0.getMonth(),
 			date_0.getDate(),
 			date_0.getHours(),
 			date_0.getMinutes(),
@@ -20,7 +20,7 @@ export function convertDateToUTC(date) {
 	year = dateUTC.getFullYear();
 	hours = dateUTC.getHours();
 	minutes = dateUTC.getMinutes();
-	
+
 	return {
 		year,
 		month,
