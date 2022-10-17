@@ -10,7 +10,7 @@
 	import NextContrDate from './header-items/NextContrDate.svelte';
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
-	export let currencySymbol, allMoney, monthlySubscriptionText, nextContributionDate, status
+	export let currencySymbol, allMoney, monthlySubscriptionText, nextContributionDate, status, statusId
 	
 </script>
 
@@ -19,9 +19,9 @@
 		<div class="contribution__data d-flex justify-sb relative">
 			<WalletValue {allMoney} {currencySymbol} />
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
-			<NextContrDate {nextContributionDate} />
+			<NextContrDate {nextContributionDate} status={status || 'active'} {statusId}/>
 			<SubscriptionStatus
-				status={status.toLowerCase() || 'active'}
+				status={status.toLowerCase() || 'active'} {statusId}
 			/>
 		</div>
 	</div>

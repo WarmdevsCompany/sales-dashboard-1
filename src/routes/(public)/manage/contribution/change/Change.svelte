@@ -6,7 +6,7 @@
 	import { globalData } from '$lib/globalStore';
 	import ChangeForm from './ChangeForm.svelte';
 	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
-	export let subscriptionStatus;
+	export let statusId;
 	let disabledState = false;
 	let errorState = false;
 
@@ -15,9 +15,9 @@
 	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 
 	$: {
-		if (subscriptionStatus === 'Paused' || subscriptionStatus === 'Stoped') {
+		if (statusId === 5236999 || statusId === 5237000) {
 			disabledState = true;
-		} else if (subscriptionStatus === 'Suspended') {
+		} else if (statusId === 5237002) {
 			errorState = true;
 		} else {
 			disabledState = false;

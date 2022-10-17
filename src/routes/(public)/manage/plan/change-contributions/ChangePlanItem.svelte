@@ -32,6 +32,7 @@
 		label,
 		allowPercentageVal,
 		savePercentages,
+		isDisebled,
 		currentPrice,
 		activeClass,
 		activeState = false,
@@ -122,6 +123,7 @@
 						class="dropdown  {activeState ? activeClass : ''} plan__dropdown"
 						use:clickOutside
 						class:error={$errorMessageState}
+						class:disabled={isDisebled}
 						on:click_outside={handleClickOutside}
 					>
 						<Dropdown_ico />
@@ -372,6 +374,10 @@
 		position: absolute;
 		right: 30px;
 		top: 25px;
+	}
+	.dropdown.disabled{
+	 pointer-events: none;
+	 background: var(--grey-color);
 	}
 	.dropdown.error {
 		border-color: var(--red-color);

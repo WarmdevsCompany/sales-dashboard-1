@@ -13,6 +13,7 @@
 	import SubscribeAllIco from '$lib/components/icons/plan-icons/SubscribeAllIco.svelte';
 	import MediaQuery from '$lib/components/MediaQuery.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	export let isDisebled;
 
 	let savePercentages;
 	let errorMessage;
@@ -137,6 +138,7 @@
 			activeState={activeDropdownSave}
 			btnText={$t('MANAGE_SAFE_INFO')}
 			btnClass={'blue'}
+			{isDisebled}
 		/>
 		<ChangePlanItem
 			{current}
@@ -150,6 +152,7 @@
 			activeState={activeDropdownAdv}
 			btnText={$t('MANAGE_ADV_INFO')}
 			btnClass={'green'}
+			{isDisebled}
 		/>
 		<ChangePlanItem
 			{current}
@@ -163,6 +166,7 @@
 			activeState={activeDropdownFound}
 			btnText={$t('MANAGE_FOUNDER_INFO')}
 			btnClass={'violet'}
+			{isDisebled}
 		/>
 	</div>
 </div>

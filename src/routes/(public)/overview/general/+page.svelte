@@ -8,7 +8,10 @@
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
 
-	let currentAmount, previousAmount, currentTrajectory = [0],  previousTrajectory = [0];
+	let currentAmount,
+		previousAmount,
+		currentTrajectory = [0],
+		previousTrajectory = [0];
 	const saving_projection = $globalData.data.saving_projection;
 	const yearsArray = generateYearsArray(6);
 
@@ -30,7 +33,7 @@
 			currentAmountCounter = currentAmountCounter + currentAmount * 12;
 
 			previousTrajectory = [...previousTrajectory, previousAmountCounter];
-			previousAmountCounter = previousAmountCounter +  previousAmount * 12;;
+			previousAmountCounter = previousAmountCounter + previousAmount * 12;
 		});
 	} else {
 		yearsArray.forEach(() => {

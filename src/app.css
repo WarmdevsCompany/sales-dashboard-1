@@ -401,10 +401,12 @@ button.btn.secondary:disabled {
 	opacity: 0.3;
 	pointer-events: none;
 }
+
 .btn.secondary:hover {
 	background: var(--primary-color);
 	color: var(--white);
 }
+
 .btn.secondary:active {
 	background: #006effa4;
 	color: var(--white);
@@ -414,6 +416,7 @@ button.btn.secondary:disabled {
 	border: 1px solid var(--pause-btn-color);
 	color: var(--pause-btn-color);
 }
+
 button.btn.pause:disabled {
 	opacity: 0.3;
 	pointer-events: none;

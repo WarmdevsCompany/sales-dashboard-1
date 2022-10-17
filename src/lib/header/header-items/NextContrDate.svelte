@@ -5,7 +5,7 @@
 	import nextContributionIcon from '$lib/assets/img/next-contribution.svg';
 	import { fade } from 'svelte/transition';
 	import { t } from '$lib/translations/i18n.js';
-	export let nextContributionDate;
+	export let nextContributionDate, status, statusId;
 	// convert date to UTC
 	const date = convertDateToUTC(nextContributionDate);
 	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
@@ -23,8 +23,12 @@
 <div class="contribution__data--item d-flex align-top text-big">
 	<div class="d-flex align-center header_text">
 		<img src={nextContributionIcon} alt="all money" />
-		{$t('ON')}
-		{nextDate}
+		{#if statusId === 5237000}
+			{status}
+		{:else}
+			{$t('ON')}
+			{nextDate}
+		{/if}
 	</div>
 	<div
 		use:popperRef
