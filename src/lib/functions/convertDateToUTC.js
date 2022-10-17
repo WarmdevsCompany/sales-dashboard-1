@@ -11,7 +11,8 @@ export function convertDateToUTC(date) {
 			0
 		)
 	);
-	month = dateUTC.getMonth();
+	month = dateUTC.getMonth() +1;
+
 	if (month < 10) {
 		month = '0' + month;
 	}
@@ -19,6 +20,7 @@ export function convertDateToUTC(date) {
 	year = dateUTC.getFullYear();
 	hours = dateUTC.getHours();
 	minutes = dateUTC.getMinutes();
+	
 	return {
 		year,
 		month,
