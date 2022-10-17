@@ -1,4 +1,8 @@
 import { writable } from "svelte/store";
 
-export let notificationList = writable([]);
-export let loading = writable(false);
+export const listAfterSearch = writable([])
+export const searching = writable(false)
+
+export let updateListAfterSearch = (data) => {
+	listAfterSearch.set(data);
+};

@@ -2,6 +2,7 @@
 	/* colors */
 	--white: #ffffff;
 	--black: #000;
+	--body--bg: #f1f5f9;
 	--white-secondary: #f3f7f0;
 	--white-third: #f6f6f6;
 	--primary-color: #0085ff;
@@ -199,6 +200,9 @@ a:hover {
 }
 .mt-2 {
 	margin-top: 2rem;
+}
+.mt-2_5 {
+	margin-top: 2.5rem;
 }
 .mt-3 {
 	margin-top: 3rem;
@@ -469,6 +473,13 @@ button {
 button:focus:not(:focus-visible) {
 	outline: none;
 }
+button.is_fetching {
+	pointer-events: none;
+}
+.btn_center {
+	margin-right: auto;
+	margin-left: auto;
+}
 button.btn._218 {
 	min-width: 218px;
 	margin: 2.125rem auto 0 auto;
@@ -612,9 +623,23 @@ body::-webkit-scrollbar {
 	width: 0px;
 	background: transparent;
 }
-@media only screen and (max-width: 767px) {
-	.btn {
-		width: 100%;
+
+
+.forgot__pass {
+	padding-top: 0.875rem;
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1279px) {
+	.grid-2,
+	.grid-3 {
+		grid-gap: 1vw;
+	}
+	.btn.pause,
+	.btn.stop,
+	.btn.restart {
+		padding-left: 1vw;
+		padding-right: 1vw;
 	}
 }
 @media only screen and (max-width: 991px) {
@@ -643,7 +668,7 @@ body::-webkit-scrollbar {
 		margin-top: 1rem !important;
 	}
 	.forgot__pass {
-		padding-top: 0 !important;
+		padding-top: 0.5rem;
 		margin-bottom: 0.75rem;
 	}
 	#modal-content .btn.login,
@@ -652,9 +677,13 @@ body::-webkit-scrollbar {
 		min-width: 100%;
 	}
 }
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
-	.grid-2,
-	.grid-3 {
-		grid-gap: 1vw;
+@media only screen and (max-width: 767px) {
+	.btn {
+		width: 100%;
 	}
 }
+@media screen and (max-device-width: 480px){
+	body{
+	  -webkit-text-size-adjust: none;
+	}
+  }

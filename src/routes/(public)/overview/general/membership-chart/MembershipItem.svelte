@@ -5,6 +5,7 @@
 	export let chartName, className, chartValue, totalSafe;
 
 	import { createPopperActions } from 'svelte-popperjs';
+	import { fade } from 'svelte/transition';
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'bottom',
 		strategy: 'fixed'
@@ -27,13 +28,18 @@
 			<StatusIcon bgColor={className} />
 		</div>
 		{#if showTooltip}
-			<div id="tooltip" class="b-radius-8 text-xsm " use:popperContent={extraOpts}>
-				{#if (className = 'seed')}
+			<div
+				id="tooltip"
+				class="b-radius-8 text-xsm "
+				transition:fade={{ duration: 80, offset: 0 }}
+				use:popperContent={extraOpts}
+			>
+				{#if (className == 'seed')}
 					{$t('OVERVIEW_CONTRIBUTION_UNDER')}
 					<span class="text-green">12 {$t('OVERVIEW_MONTH')}</span>
 					{$t('OVERVIEW_STILL')}<span class="text-green">*4.9%</span>
 					{$t('OVERVIEW_WITHDRAW_FEE')}
-				{:else if (className = 'eucalyptus')}
+				{:else if (className == 'eucalyptus')}
 					{$t('OVERVIEW_CONTRIBUTION_BETWEEN')}
 					<span class="text-green">12 {$t('TO')} 36 {$t('OVERVIEW_MONTH')}</span>
 					{$t('OVERVIEW_AGO')} <span class="text-green">*0.5%</span>
@@ -81,6 +87,7 @@
 		color: #5f5f5f;
 		max-width: 215px;
 		font-weight: var(--font-weight-normal);
+		box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.15);
 	}
 
 	#tooltip::after {

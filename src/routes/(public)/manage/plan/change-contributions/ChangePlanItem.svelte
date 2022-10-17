@@ -1,4 +1,5 @@
 <script>
+	import { globalData } from './../../../../../lib/globalStore.js';
 	import clickOutside from '$lib/functions/clickOutside';
 	import { priceConvertation } from '$lib/functions/priceConvertation';
 	import {
@@ -7,7 +8,6 @@
 		sortPersantageVariable,
 		planModalData,
 		errorMessageState,
-		contributionData,
 		allocatedContributions,
 		subscribeAllState
 	} from './planStore';
@@ -171,7 +171,7 @@
 				</div>
 				<div class="item__current__money text-2 {className}">
 					<div class="money">
-						{$contributionData.country.currency.symbol +
+						{$globalData.data.currency.symbol +
 							priceConvertation(Math.round(currentPrice * 100) / 100)}
 					</div>
 				</div>
@@ -210,7 +210,6 @@
 	.plans__item {
 		width: 100%;
 		border-radius: 6px;
-		overflow: hidden;
 		display: flex;
 		flex-direction: column;
 		filter: drop-shadow(0px 6px 14px rgba(3, 22, 2, 0.14));
@@ -520,15 +519,21 @@
 			height: 16px;
 		}
 	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+	@media only screen and (min-width: 992px) and (max-width: 1439px) {
 		.plans__item.adventure {
 			margin: 0 1vw;
 		}
 		.plans__item .item__head {
-			padding: 1rem;
+			padding: 1rem 0.5rem;
 		}
 		.item__top {
 			padding: 1rem;
+		}
+		.item__top__head {
+			font-size: 1.2vw;
+		}
+		.item__head__name {
+			font-size: 0.9vw;
 		}
 	}
 </style>

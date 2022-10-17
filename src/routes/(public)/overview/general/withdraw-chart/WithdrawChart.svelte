@@ -1,14 +1,23 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import { onMount } from 'svelte';
-	let date1 = new Date('11/08/2021').getTime();
-	let date2 = new Date('10/05/2021').getTime();
-	let date3 = new Date('6/06/2021').getTime();
-	let datesObj = [
-		{ date: date1, sum: 123 },
-		{ date: date2, sum: 223 },
-		{ date: date3, sum: 843 }
-	];
-	let dates = [date1, date2, date3];
+	import { t } from '$lib/translations/i18n.js';
+	export let withdrawalsList, currencySymbol;
+	let datesObj;
+	let dates = [];
+	
+
+
+	$: if (withdrawalsList === null) {
+		datesObj = [];
+		dates = [];
+	} else {
+		datesObj = withdrawalsList
+		datesObj.forEach((item) => {
+			dates.push(item.date);
+		});
+	}
+
 	const lang = localStorage.getItem('lang');
 
 	function findObjValueByDate(array, dateItem) {
@@ -63,6 +72,7 @@
 						right: 10
 					}
 				},
+			
 				plugins: {
 					legend: {
 						display: false
@@ -72,20 +82,12 @@
 							title: function (tooltipItem) {
 								let intDate = parseInt(tooltipItem[0].label);
 								const sum = findObjValueByDate(datesObj, intDate);
-								return '$' + sum;
+								return currencySymbol + sum;
 							},
 							label: function (tooltipItem) {
-								let date = new Date(parseInt(tooltipItem.label));
-								let ye = new Intl.DateTimeFormat(lang, {
-									year: 'numeric'
-								}).format(date);
-								let mo = new Intl.DateTimeFormat(lang, {
-									month: 'short'
-								}).format(date);
-								let da = new Intl.DateTimeFormat(lang, {
-									day: '2-digit'
-								}).format(date);
-								return `${mo} ${da},${ye}`;
+								let date = convertDateToUTC(tooltipItem.label);
+
+								return `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 							}
 						},
 						padding: 10,
@@ -121,12 +123,13 @@
 </script>
 
 <div class="chart__wrapper d-flex align-center">
-	<canvas id="line-chart" height="80" width="500" />
+	<canvas id="line-chart" height="80" />
 </div>
 
 <style>
 	.chart__wrapper {
 		max-width: 580px;
+		width: 100%;
 		position: relative;
 		padding-left: 150px;
 		margin-top: 20px;
@@ -149,6 +152,12 @@
 		);
 		z-index: -1;
 	}
+	@media only screen and (min-width: 768px) and (max-width: 1279px) {
+		.chart__wrapper {
+			margin-top: auto;
+			margin-bottom: auto;
+		}
+	}
 	@media screen and (max-width: 1280px) {
 		.chart__wrapper {
 			max-width: 480px;
@@ -157,11 +166,20 @@
 		.chart__wrapper::before {
 			width: 580px;
 		}
-		canvas {
-			width: 400px;
-		}
+
 	}
 
+
+	@media only screen and (min-width: 992px) and (max-width: 1200px) {
+		.chart__wrapper {
+			max-width: 50%;
+			padding-left: 50px;
+			padding-right: 50px;
+		}
+		.chart__wrapper::before {
+			max-width: 100%;
+		}
+	}
 	@media only screen and (max-width: 991px) {
 		.chart__wrapper {
 			padding: 0 2rem;
@@ -171,13 +189,15 @@
 			max-width: 100%;
 		}
 	}
-	@media only screen and (min-width: 992px) and (max-width: 1200px) {
-		.chart__wrapper {
-			max-width: 50%;
-			padding-left: 0;
-		}
+	@media only screen and (max-width: 540px) {
 		.chart__wrapper::before {
+			width: 85vw;
+		}
+		.chart__wrapper {
+			padding-left: 30px;
+			padding-right: 30px;
 			max-width: 100%;
+			margin: 0;
 		}
 	}
 </style>

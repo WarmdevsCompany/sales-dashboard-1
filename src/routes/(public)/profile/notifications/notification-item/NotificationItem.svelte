@@ -1,43 +1,53 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
+	import { getModal } from '$lib/components/Modal.svelte';
 	import ThreeDotsIcon from '$lib/components/icons/ThreeDotsIcon.svelte';
+	import { selectedNotification } from '$lib/globalStore';
 	import ItemTooltip from './ItemTooltip.svelte';
-	import { notificationList } from '../notificationsStore';
-
+	import { t } from '$lib/translations/i18n.js';
 	export let objAttributes = {};
+	export let readonly = {};
 
-	function detailInfo(id) {
-		alert(`detail info of ${id}`);
+	function showNotificationModal(name, text) {
+		$selectedNotification.head = name;
+		$selectedNotification.body = text;
+		getModal('notification').open();
 	}
+	// convert date to UTC
+	const date = convertDateToUTC(objAttributes.date);
+	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 </script>
 
 <li
-	class="notifications__item box_shadow-medium mt-1_25 b-radius-8 relative {objAttributes.status
-		? objAttributes.status
+	class="notifications__item box_shadow-medium mt-1_25 b-radius-8 relative {objAttributes.viewed
+		? ''
 		: 'unreaded'}"
 >
 	<div class="d-flex justify-sb">
 		<div
 			class="title d-flex align-center text-3 mb-1"
-			on:click={() => detailInfo(objAttributes.idobject)}
+			on:click={() => showNotificationModal(objAttributes.name, objAttributes.text)}
 		>
 			{objAttributes.name}
 		</div>
-		<div class="relative dots">
-			<ItemTooltip id={objAttributes.idobject} status={objAttributes.status} width={240}
-				><ThreeDotsIcon bgColor="green" /></ItemTooltip
-			>
-		</div>
+		{#if !readonly}
+			<div class="relative dots">
+				<ItemTooltip id={objAttributes.idobject} status={objAttributes.viewed} width={240}
+					><ThreeDotsIcon bgColor="green" /></ItemTooltip
+				>
+			</div>
+		{/if}
 	</div>
 	<div class="d-flex justify-sb text-5">
 		<div class="description">
 			{objAttributes.text}
 		</div>
-		<div class="date">{objAttributes.date.replace(/ [\s\S]+/, '')}</div>
+		<div class="date">{nextDate}</div>
 	</div>
 </li>
 
 <style>
-	.notifications__item.unreaded .title {
+	.notifications__item .title {
 		cursor: pointer;
 	}
 	.notifications__item .title,

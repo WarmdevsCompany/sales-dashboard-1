@@ -1,8 +1,14 @@
 <script>
+	import { checkInputMaxLenght } from '$lib/functions/checkInputMaxLenght.js';
+	import { globalData } from '$lib/globalStore.js';
+	import { withdrawMethod, withdrawBalance, withdrawFormState } from './../withdrawStore.js';
 	import Radio from '$lib/components/inputs/Radio.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 
-	let radioValue;
+	let radioValue, amountErrorMessage, withdrawMaxSum;
+	const minWithdrawSum = 10;
+
 	const options = [
 		{
 			value: '0',
@@ -17,6 +23,21 @@
 			label: $t('MANAGE_PUT_AM')
 		}
 	];
+	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5);
+	$: {
+		$withdrawMethod = radioValue;
+		withdrawMaxSum = $globalData.data.currentSubscription.balance;
+		if ($withdrawBalance < minWithdrawSum) {
+			amountErrorMessage = `${$t('MANAGE_WITHDRAW_LESS_ERR')} ${minWithdrawSum}`;
+			$withdrawFormState = true;
+		} else if ($withdrawBalance > withdrawMaxSum) {
+			amountErrorMessage = `${$t('MANAGE_WITHDRAW_MORE_ERR')} ${withdrawMaxSum}`;
+			$withdrawFormState = true;
+		} else {
+			amountErrorMessage = false;
+			$withdrawFormState = false;
+		}
+	}
 </script>
 
 <div class="withdraw__manager b-radius-8 box_shadow-medium">
@@ -28,13 +49,38 @@
 	</div>
 	<div class="withdraw__main d-flex justify-sb align-top mobile-block">
 		<div class="d-flex align-center withdraw__input--body mr-2">
-			<div class="withdraw__input">
-				<input class="" type="text" placeholder="1000" id="name" name="name" />
+			<div class="withdraw__input relative">
+				<input
+					class:error={amountErrorMessage}
+					type="number"
+					id="name"
+					name="name"
+					maxlength="4"
+					on:mousewheel={(e) => {
+						e.target.blur();
+					}}
+					on:keydown={checkInputNumber}
+					on:keyup={checkInputNumber}
+					on:input={checkInputMaxLenght}
+					bind:value={$withdrawBalance}
+					disabled={radioValue === '2'}
+				/>
+				{#if amountErrorMessage}
+					<p class="text-left text-xsm error_text amount__error">
+						{amountErrorMessage}
+						{$globalData.data.currency.symbol}
+					</p>
+				{/if}
 			</div>
 			<div class="withdraw__label">{$t('OVERVIEW_TOTAL')}</div>
 		</div>
 		<div class="radio__wrapper">
-			<Radio {options} fontSize={16} bind:userSelected={radioValue} />
+			<Radio
+				{options}
+				fontSize={16}
+				bind:userSelected={radioValue}
+				disabledState={$withdrawFormState}
+			/>
 		</div>
 	</div>
 </div>
@@ -60,6 +106,11 @@
 	}
 	.withdraw__input--body {
 		width: 100%;
+	}
+	.amount__error {
+		position: absolute;
+		bottom: -35px;
+		left: 5px;
 	}
 
 	@media only screen and (min-width: 0px) and (max-width: 1199px) {

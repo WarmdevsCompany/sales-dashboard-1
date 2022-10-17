@@ -1,4 +1,5 @@
 <script>
+	import NotificationsTooltip from '$lib/components/NotificationsTooltip.svelte';
 	import { page } from '$app/stores';
 	import OverviewIcon from '$lib/components/icons/menu-icon/OverviewIcon.svelte';
 	import AvatarIcon from '$lib/components/icons/AvatarIcon.svelte';
@@ -13,9 +14,11 @@
 	import MenuIcon from '$lib/components/icons/menu-icon/MenuIcon.svelte';
 	import CloseMenuIcon from '$lib/components/icons/menu-icon/CloseMenuIcon.svelte';
 	import clickOutside from '$lib/functions/clickOutside';
-	import { logout } from '$lib/api/axios';
+	import { logout, getAvatar } from '$lib/api/axios';
 	import { t } from '$lib/translations/i18n.js';
-	import { currentSideBarStatus } from '$lib/globalStore';
+	import { currentSideBarStatus, globalData } from '$lib/globalStore';
+	import { onMount } from 'svelte';
+	import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 	let openedMenu = false;
 
 	if ($page.url.pathname.includes('/manage')) {
@@ -26,9 +29,17 @@
 		$currentSideBarStatus = 'profile';
 	}
 
-	export let firstName = 'Antonin',
-		lastName = 'John';
-
+	export let firstName = '',
+		lastName = '';
+	
+	onMount(async () => {
+		const avaResponse = await getAvatar()
+		$globalData.data.photo = avaResponse.data.photo;
+		if ($globalData) {
+			firstName = $globalData.data.personalInfo.firstname;
+			lastName = $globalData.data.personalInfo.lastname;
+		}
+	});
 	function handleClickOutside() {
 		openedMenu = false;
 	}
@@ -41,8 +52,19 @@
 				<MenuIcon />
 			</div>
 			<div class="d-flex header__rigth--column">
-				<div class="mr-1 pointer"><Notification bgColor="white" /></div>
-				<div class="pointer"><ThreeDotsIcon bgColor="white" /></div>
+				<div class="relative">
+					<NotificationsTooltip width={300}>
+						<div class="mr-1 pointer">
+							<Notification bgColor="white" />
+						</div>
+					</NotificationsTooltip>
+				</div>
+
+				<div class="relative">
+					<HeaderPagesTooltip
+						><div class="pointer"><ThreeDotsIcon bgColor="white" /></div></HeaderPagesTooltip
+					>
+				</div>
 			</div>
 		</div>
 	{/if}
@@ -71,7 +93,12 @@
 					</div>
 				{/if}
 			</MediaQuery>
-			<AvatarIcon avatarIsSet={false} />
+			{#if $globalData.data.photo}
+				<AvatarIcon avatarIsSet={true} avatarImg={$globalData.data.photo} />
+			{:else}
+				<AvatarIcon avatarIsSet={false} avatarImg={false} />
+			{/if}
+
 			<div class="user__name d-flex justify-cc">
 				{firstName}
 				{lastName}
@@ -212,6 +239,7 @@
 	.sidebar {
 		background: var(--green-dark-color);
 		min-width: 237px;
+		height: 100%;
 	}
 	.sidebar__top {
 		padding: 2rem 0 5rem 0;
@@ -287,7 +315,7 @@
 	}
 	.sidebar__bottom {
 		flex-wrap: wrap;
-		padding: 0 1.5rem 3.5rem 1.5rem;
+		padding: 1.5rem 1.5rem 2rem 1.5rem;
 	}
 	.sidebar__bottom > img {
 		margin-right: 10px;
@@ -308,7 +336,7 @@
 	}
 	@media only screen and (max-width: 1200px) {
 		.sidebar__bottom {
-			padding: 0 1.5vw 3.5rem 1.3vw;
+			padding: 1.5rem 1.5vw 2rem 1.3vw;
 		}
 	}
 	@media only screen and (max-width: 991px) {
@@ -328,6 +356,17 @@
 		}
 		.sidebar.open {
 			transform: translateX(0);
+			overflow: auto;
+		}
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		.sidebar.open::-webkit-scrollbar {
+			display: none;
+		}
+
+		/* Hide scrollbar for IE, Edge and Firefox */
+		.sidebar.open {
+			-ms-overflow-style: none; /* IE and Edge */
+			scrollbar-width: none; /* Firefox */
 		}
 		.sidebar__close {
 			margin-right: auto;

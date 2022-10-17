@@ -1,10 +1,46 @@
 <script>
+	import { generateYearsArray } from '$lib/functions/generateYearsArray.js';
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import GeneralPlan from './GeneralPlan.svelte';
 	import MembershipMain from './membership-chart/MembershipMain.svelte';
 	import SaveProjectionChart from './projection-chart/SaveProjectionChart.svelte';
 	import WithdrawMain from './withdraw-chart/WithdrawMain.svelte';
 	import { globalData } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
+
+	let currentAmount, previousAmount, currentTrajectory = [0],  previousTrajectory = [0];
+	const saving_projection = $globalData.data.saving_projection;
+	const yearsArray = generateYearsArray(6);
+
+	saving_projection.forEach((item) => {
+		if (item.active) {
+			currentAmount = item.amount;
+		} else {
+			previousAmount = item.amount;
+		}
+	});
+
+	// generate currentTrajectory
+	let currentAmountCounter = currentAmount * 12;
+	let previousAmountCounter = previousAmount * 12;
+
+	if (previousAmount || previousAmount != null) {
+		yearsArray.forEach(() => {
+			currentTrajectory = [...currentTrajectory, currentAmountCounter];
+			currentAmountCounter = currentAmountCounter + currentAmount * 12;
+
+			previousTrajectory = [...previousTrajectory, previousAmountCounter];
+			previousAmountCounter = previousAmountCounter +  previousAmount * 12;;
+		});
+	} else {
+		yearsArray.forEach(() => {
+			currentTrajectory = [...currentTrajectory, currentAmountCounter];
+			currentAmountCounter = currentAmountCounter + currentAmount * 12;
+		});
+		previousTrajectory = false;
+	}
+
+	scrollToTop();
 </script>
 
 <svelte:head>
@@ -16,7 +52,7 @@
 	<GeneralPlan
 		className="safe"
 		planName={$t('SAFE_PLAN_BIG')}
-		currencySymbol={$globalData.data.currencySymbol}
+		currencySymbol={$globalData?.data?.currency.symbol}
 		contribution={$globalData.data.contributions.safePlan.contribution}
 		revenue={$globalData.data.contributions.safePlan.revenue}
 		totalSafe={$globalData.data.contributions.safePlan.totalSafe}
@@ -24,7 +60,7 @@
 	<GeneralPlan
 		className="adventure"
 		planName={$t('ADVENTURE_BIG')}
-		currencySymbol={$globalData.data.currencySymbol}
+		currencySymbol={$globalData?.data?.currency.symbol}
 		contribution={$globalData.data.contributions.adventurePlan.contribution}
 		revenue={$globalData.data.contributions.adventurePlan.revenue}
 		totalSafe={$globalData.data.contributions.adventurePlan.totalSafe}
@@ -32,7 +68,7 @@
 	<GeneralPlan
 		className="founder"
 		planName={$t('FOUNDER_BIG')}
-		currencySymbol={$globalData.data.currencySymbol}
+		currencySymbol={$globalData?.data?.currency.symbol}
 		contribution={$globalData.data.contributions.founderPlan.contribution}
 		revenue={$globalData.data.contributions.founderPlan.revenue}
 		totalSafe={$globalData.data.contributions.founderPlan.totalSafe}
@@ -42,24 +78,29 @@
 	<div class="saving-projection p-2 b-radius-8 box_shadow-medium">
 		<div class="saving-projection-wrapper">
 			<SaveProjectionChart
-				yearsArray={[2022, 2023, 2024, 2025, 2026, 2027]}
-				currentTraject={[0, 1200, 13437, 19437, 23437, 30437]}
-				prevTraject={[0, 282, 502, 635, 24437, 33437]}
+				{yearsArray}
+				currentTraject={currentTrajectory}
+				prevTraject={previousTrajectory}
 			/>
 		</div>
 	</div>
 	<div class="membership-status p-2  b-radius-8 box_shadow-medium">
 		<MembershipMain
-			seedVal={33}
-			seedTotal={400}
-			eucalyptusVal={67}
-			eucalyptusTotal={800}
-			sequoiaVal={0}
-			sequoiaTotal={0}
+			seedVal={$globalData.data.membershipStatus.seed}
+			seedTotal={$globalData.data.membershipStatus.seedTotal}
+			eucalyptusVal={$globalData.data.membershipStatus.eucalyptus}
+			eucalyptusTotal={$globalData.data.membershipStatus.eucalyptusTotal}
+			sequoiaVal={$globalData.data.membershipStatus.sequoia}
+			sequoiaTotal={$globalData.data.membershipStatus.sequoiaTotal}
+			status={$globalData.data.membershipStatus.status}
+			sinceDate={$globalData.data.membershipStatus.createDate}
 		/>
 	</div>
 </div>
-<WithdrawMain />
+<WithdrawMain
+	withdrawals={$globalData.data.withdrawals}
+	currencySymbol={$globalData.data.currency.symbol}
+/>
 
 <style>
 	.saving-projection {

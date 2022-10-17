@@ -1,7 +1,10 @@
 <script>
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import SettingsLanguage from './SettingsLanguage.svelte';
 	import SettingsNotifications from './SettingsNotifications.svelte';
 	import { t } from '$lib/translations/i18n.js';
+
+	scrollToTop();
 </script>
 
 <svelte:head>

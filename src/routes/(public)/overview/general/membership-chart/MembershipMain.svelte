@@ -1,18 +1,23 @@
 <script>
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	import MembershipItem from './MembershipItem.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	// convert date to UTC
+	const date = convertDateToUTC($$props.sinceDate);
+	const year = date.year
+		
 </script>
 
 <div class="chat-top d-flex justify-sb align-top mb-1_5 text-second">
 	<div class="column">
 		<div class="row text-3 chat-top-head">{$t('OVERVIEW_STATUS')}</div>
 		<div class="row d-flex align-top text-sm">
-			<span class="mt-0_25">{$t('OVERVIEW_SINCE')} 2021</span>
+			<span class="mt-0_25">{$t('OVERVIEW_SINCE')} {year}</span>
 		</div>
 	</div>
 	<div class="column">
 		<div>
-			<button class="eucalyptus__btn text-white text-xsm"> {$t('OVERVIEW_EUCALYPTUS')}</button>
+			<button class="eucalyptus__btn text-white text-xsm"> {$$props.status}</button>
 		</div>
 	</div>
 </div>
@@ -40,17 +45,13 @@
 <style>
 	.eucalyptus__btn {
 		appearance: none;
+		pointer-events: none;
 		padding: 0.375rem 1.5rem;
 		border: none;
 		background: #5f8575;
 		border-radius: 53px;
 	}
-	.eucalyptus__btn:hover {
-		background: #5f8575da;
-	}
-	.eucalyptus__btn:active {
-		background: #5f8575;
-	}
+
 	@media only screen and (max-width: 991px) {
 		.chat__items {
 			flex-wrap: wrap;

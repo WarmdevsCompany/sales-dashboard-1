@@ -1,44 +1,61 @@
 <script>
+	import { globalData } from '$lib/globalStore';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	export let btnAligment = 'justify-end';
-	export let confirmBtn = 'open';
+	import { roundNumber } from '$lib/functions/roundNumber.js';
+	import { confirmModalState, withdrawFormState, withdrawBalance } from '../withdrawStore';
+	export let btnAligment = 'justify-end',
+		confirmBtn = 'open',
+		closeModals,
+		timeToTransfer,
+		withdrawOfTotal,
+		feeSum;
 
-	export let closeModals;
-	const confirmWithdraw = () => {
-		closeModals('withdraw');
+	export let confirmWithdraw = () => {
+		// $confirmModalState = false;
+		// if (withdrawMethods && withdrawMethods.length > 0) {
+		// 	formStep = 3;
+		// } else {
+		// 	formStep = 4;
+		// }
 	};
 </script>
 
-<div class="mt-1_5">
-	<div class="grid mobile-block">
+<div class="withdraw__footer">
+	<div class="grid">
 		<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
-		<div class="grid-item-value text-sm">$1,000</div>
+		<div class="grid-item-value text-sm">${$withdrawBalance}</div>
 		<div class="text-sm">{$t('MANAGE_WD_FEE')}:</div>
-		<div class="grid-item-value text-sm">$4</div>
+		<div class="grid-item-value text-sm">${feeSum}</div>
 		<div class="text-sm">{$t('MANAGE_TIME_TO_TR')}:</div>
-		<div class="grid-item-value text-sm">{$t('MANAGE_3_DAYS')}</div>
+		<div class="grid-item-value text-sm">{timeToTransfer} {$t('MANAGE_DAYS')}</div>
 		<div class="text-sm">{$t('MANAGE_WD_OF_T')}:</div>
-		<div class="grid-item-value text-sm">14%</div>
+		<div class="grid-item-value text-sm">{withdrawOfTotal}%</div>
 	</div>
 	{#if confirmBtn === 'open'}
 		<div class="d-flex {btnAligment} buttons">
 			<button class="btn cancel mr-1_5">{$t('CANCEL')}</button>
 
-			<div class="btn" on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</div>
+			<button
+				disabled={$withdrawFormState}
+				class="btn confirm"
+				on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
+			>
 		</div>
 	{:else if confirmBtn === 'confirm'}
 		<div class="d-flex {btnAligment} buttons-confirm">
 			<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
 				>{$t('CANCEL')}</button
 			>
-
 			<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>
 		</div>
 	{/if}
 </div>
 
 <style>
+	.withdraw__footer{
+	 margin-top: 1.5rem;
+	}
 	.grid {
 		grid-column-gap: 20px;
 		grid-row-gap: 10px;
@@ -81,13 +98,34 @@
 		.buttons-confirm {
 			flex-direction: column-reverse;
 			align-items: center;
+			max-height: 66px;
 		}
 		button.cancel {
-			margin: 1rem auto 0 auto;
+		
+			max-height: 66px;
+		}
+		.btn.confirm {
+			max-height: 66px;
 		}
 		.buttons-confirm button.cancel,
 		.btn.confirm-wd {
+			max-height: 66px;
+		}
+	}
+	@media only screen and (max-width: 480px) {
+		.buttons {
+			flex-wrap: wrap;
+			flex-direction: column-reverse;
+		}
+		.buttons-confirm button.cancel,
+		.buttons button.cancel,
+		.btn.confirm-wd,
+		.btn.confirm {
 			width: 100%;
+			max-height: 66px;
+		}
+		button.cancel {
+			margin-top: 1rem;
 		}
 	}
 </style>

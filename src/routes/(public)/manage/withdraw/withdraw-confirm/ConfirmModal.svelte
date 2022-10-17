@@ -1,15 +1,23 @@
 <script>
+	import { globalData } from '$lib/globalStore';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import WithdrawFooter from '../withdraw-footer/WithdrawFooter.svelte';
-	import { modalClassName, confirmModalState } from '../withdrawStore';
+	import { modalClassName, confirmModalState, withdrawContribution } from '../withdrawStore';
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
-	import VerifyTabs from '$lib/components/forms/verify/VerifyTabs.svelte';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	let formStep = 1;
-	$: formStep;
+	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
+	import WithdrawsMethods from './WithdrawsMethods.svelte';
+	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
+	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
+
+	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
+	let formStep = 1,
+		successFormStatus = false,
+		withdrawRequestProcessed = false;
+	$: formStep, successFormStatus;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
 		$confirmModalState = true;
@@ -19,19 +27,39 @@
 		formStep = 1;
 		getModal(modalId).close();
 	};
+	const closeAllModals = () => {
+		successFormStatus = false;
+		withdrawRequestProcessed = false;
+		closeModals('withdraw');
+	};
+	const confirmWithdraw = () => {
+		$confirmModalState = false;
+		withdrawMethods ? (formStep = 3) : (formStep = 4);
+	};
 </script>
 
-<Modal id="withdraw" className={$modalClassName}>
+<Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
+
 		<div class="modal_head_medium text-1">{$t('WITHDRAW')}</div>
 
 		<div class="modal_main-row ">
-			<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
+			{#if formStep < 3}
+				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
+			{/if}
+
 			{#if formStep === 1}
-				<VerifyTabs sendVerifyCallback={submitEmailOrPhone} />
+				<VerifyEmail sendVerifyCallback={submitEmailOrPhone} />
 			{:else if formStep === 2}
 				<VerifyCodeForm {submitVerificationCode} />
+			{/if}
+		</div>
+		<div class="withdraw__row">
+			{#if formStep === 3}
+				<WithdrawsMethods bind:formStep bind:successFormStatus {withdrawMethods} />
+			{:else if formStep === 4}
+				<AddWithdrawMethod bind:withdrawRequestProcessed />
 			{/if}
 		</div>
 	</div>
@@ -46,15 +74,33 @@
 			</div>
 			<div class="last__step--body">
 				<div>
-					{$t('SAFE_PLAN_BIG')}: <span class="text-green mobile-block">$600</span>
+					{$t('SAFE_PLAN_BIG')}:
+					<span class="text-green mobile-block"
+						>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
+					>
 					<div class="inline">
-						{$t('ADVENTURE_BIG')}: <span class="text-green mobile-block">$400</span>
+						{$t('ADVENTURE_BIG')}:
+						<span class="text-green mobile-block"
+							>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
+						>
 					</div>
 
-					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block">$0</span>
+					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block"
+						>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
+					>
 				</div>
 				<div class="line mt-1_5 mb-1_5" />
-				<WithdrawFooter btnAligment={'justify-cc'} confirmBtn={'confirm'} {closeModals} />
+				<WithdrawFooter
+					btnAligment={'justify-cc'}
+					confirmBtn={'confirm'}
+					bind:formStep
+					{closeModals}
+					{withdrawMethods}
+					{feeSum}
+					{timeToTransfer}
+					{withdrawOfTotal}
+					{confirmWithdraw}
+				/>
 			</div>
 			<img
 				class="close_icon"
@@ -65,11 +111,26 @@
 		</div>
 	</div>
 {/if}
+{#if successFormStatus}
+	<SuccessModal
+		closeModals={closeAllModals}
+		mainText={$t('MANAGE_WITHDRAW_CONFIRMED')}
+		btnText={$t('BACK')}
+	/>
+{/if}
+{#if withdrawRequestProcessed}
+	<SuccessModal
+		closeModals={closeAllModals}
+		mainText={$t('MANAGE_WITHDRAW_PROCESSED')}
+		btnText={$t('BACK')}
+	/>
+{/if}
 
 <style>
 	.modal_main {
 		margin: 0 auto;
 	}
+
 	.form__wrapper {
 		z-index: 999;
 		position: fixed;
@@ -148,6 +209,19 @@
 		height: 1px;
 		background: var(--grey-color);
 	}
-	@media only screen and (max-width: 991px) {
+	.withdraw__row {
+		max-width: 100%;
+		padding: 0 1rem;
+	}
+	@media only screen and (max-width: 480px) {
+		.form__wrapper {
+			padding: 0;
+		}
+		.confirm__form {
+			max-height: 100vh;
+			border-radius: 0;
+			height: 100%;
+			margin: 0;
+		}
 	}
 </style>

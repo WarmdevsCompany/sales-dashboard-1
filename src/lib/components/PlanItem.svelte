@@ -3,7 +3,7 @@
 </script>
 
 <div
-	class="plan__item b-radius-8 p-1_5 box_shadow-medium text-white {$$props.planClass} {$$props.planFontClass}"
+	class="plan__item b-radius-8 p-1_5 box_shadow-medium text-white d-flex flex-col justify-sb {$$props.planClass} {$$props.planFontClass}"
 >
 	<div class="d-flex justify-sb align-base">
 		<div class="text-3 plan_name">{$$props.planName}</div>
@@ -42,5 +42,11 @@
 	}
 	.plan__item.founder {
 		background: var(--third-color);
+	}
+	@media only screen and (min-width: 992px) and (max-width: 1200px) {
+		.plan__item > * {
+			width: 100%;
+			flex-wrap: wrap;
+		}
 	}
 </style>

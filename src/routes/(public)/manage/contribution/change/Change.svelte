@@ -5,8 +5,26 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
 	import ChangeForm from './ChangeForm.svelte';
+	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
+	export let subscriptionStatus;
 	let disabledState = false;
 	let errorState = false;
+
+	// convert date to UTC
+	const date = convertDateToUTC($globalData.data.currentSubscription.nextDate);
+	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+
+	$: {
+		if (subscriptionStatus === 'Paused' || subscriptionStatus === 'Stoped') {
+			disabledState = true;
+		} else if (subscriptionStatus === 'Suspended') {
+			errorState = true;
+		} else {
+			disabledState = false;
+			errorState = false;
+		}
+		nextDate;
+	}
 </script>
 
 <div
@@ -29,12 +47,12 @@
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEW_CONTRIBUTION')}:
 				<span class="text-3 text-blue mobile-block"
-					>{$globalData.data.currencySymbol}{$globalData.data.membershipStatus.amount}/mo</span
+					>{$globalData?.data?.currency.symbol}{$globalData.data.current_contribution.amount }/mo</span
 				>
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEXT_CONTRIBUTION')}:
-				<span class="text-3 text-blue mobile-block">01 Jul 2022</span>
+				<span class="text-3 text-blue mobile-block">{nextDate}</span>
 			</div>
 		</div>
 		<p class="mt-1 modal-bootom-text">
@@ -78,7 +96,7 @@
 		max-width: 507px;
 		margin: 1.5rem auto 0 auto;
 		color: #000;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		gap: 10px;
 	}

@@ -1,23 +1,13 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import clickOutside from '$lib/functions/clickOutside';
-	import {
-		notificationList,
-		loading
-	} from '../../routes/(public)/profile/notifications/notificationsStore';
-	import { globalData } from '$lib/globalStore';
+	import { notificationList, loading, selectedNotification } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	import { getGeneralData } from '$lib/api/axios';
 	import Preloader from './Preloader.svelte';
+	import { findCreatedNotificationTime } from '$lib/functions/findCreatedNotificationTime';
+	import { getModal } from './Modal.svelte';
 
 	let active = false;
-	let newData = {};
-
-	$notificationList = $globalData.data.notifications.data;
-
-	function show() {
-		active = true;
-	}
 
 	function hide() {
 		active = false;
@@ -25,16 +15,15 @@
 
 	async function handleClickOnTooltip() {}
 
-	function detailInfo(id) {
-		alert(`detail info of ${id}`);
+	function showNotificationModal(name, text) {
+		$selectedNotification.head = name;
+		$selectedNotification.body = text;
+		hide();
+		getModal('notification').open();
 	}
 
 	async function toggleAction(id) {
 		active = !active;
-		// $loading = true;
-		// newData = await getGeneralData();
-		// $notificationList = newData.notifications.data;
-		// $loading = false;
 	}
 </script>
 
@@ -43,7 +32,7 @@
 		<slot />
 	</div>
 
-	{#if active}
+	{#if active && $notificationList}
 		<div
 			on:click={() => handleClickOnTooltip()}
 			in:fade={{ duration: 200 }}
@@ -54,11 +43,14 @@
 			<ul class="notification__wrapper">
 				{#if !$loading}
 					{#each $notificationList as item}
-						<li class:active={item.status != 'viewed'} on:click={() => detailInfo(item.idobject)}>
+						<li
+							class:active={!item.viewed}
+							on:click={() => showNotificationModal(item.name, item.text)}
+						>
 							<span class="inline-block semi-bold text-sm">{item.name}</span>
 							<div class="notification__content d-flex justify-sb">
 								<span class="cut-text inline-block ">{item.text}</span>
-								<div class="created__time" />
+								<div class="created__time">{findCreatedNotificationTime(item.date)}</div>
 							</div>
 						</li>
 					{/each}

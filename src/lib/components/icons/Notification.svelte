@@ -1,7 +1,7 @@
 <script>
 	import { globalData } from '$lib/globalStore';
 	export let hasMessageStatus = true,
-		messageCount = $globalData.data.notifications.badgeCount,
+		messageCount = $globalData.data.notifications.badgeCount || 0,
 		bgColor = '';
 </script>
 

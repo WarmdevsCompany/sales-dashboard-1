@@ -2,9 +2,54 @@
 	import StatusIcon from '$lib/components/icons/StatusIcon.svelte';
 	import { onMount } from 'svelte';
 	import { numberWithCommas } from '$lib/functions/numberWithCommas';
-	import { getMonthName } from '$lib/functions/getMonthName';
 	import { t } from '$lib/translations/i18n.js';
 	let myChart;
+	let month = new Date().getMonth() + 1
+	if(month<10){
+		month = '0'+month
+	}
+	const currentMonth = $t('MONTH_SHORT_' + month)
+	
+	let dataSets = [
+			{
+				data: $$props.prevTraject ,
+				backgroundColor: '#6cc800',
+				borderColor: 'white',
+				pointRadius: 0,
+				pointHoverRadius: 0,
+				color: 'white',
+				pointHitRadius: 0,
+				tooltipText: 'some text'
+			},
+			{
+				data: $$props.currentTraject,
+				pointBackgroundColor: '#6cc800',
+				borderColor: '#6cc800',
+				pointBorderColor: 'white',
+				backgroundColor: '#6cc800',
+				color: '#6cc800',
+				pointRadius: 4,
+				pointHoverRadius: 5,
+				pointStyle: 'circle',
+				tooltipText: 'some text 2'
+			}
+		]
+		if(!$$props.prevTraject || $$props.prevTraject === null){
+			dataSets = [
+			{
+				data: $$props.currentTraject,
+				pointBackgroundColor: '#6cc800',
+				borderColor: '#6cc800',
+				pointBorderColor: 'white',
+				backgroundColor: '#6cc800',
+				color: '#6cc800',
+				pointRadius: 4,
+				pointHoverRadius: 5,
+				pointStyle: 'circle',
+				tooltipText: 'some text 2'
+			}
+		]
+		}
 
 	// drawHorisontalLines plugin
 	const drawHorisontalLines = {
@@ -41,37 +86,14 @@
 	};
 	const data = {
 		labels: $$props.yearsArray,
-		datasets: [
-			{
-				data: $$props.currentTraject,
-				backgroundColor: '#6cc800',
-				borderColor: 'white',
-				pointStyle: 'circle',
-				pointRadius: 4,
-				pointHoverRadius: 5,
-				color: 'white',
-				tooltipText: 'some text'
-			},
-			{
-				data: $$props.prevTraject,
-				pointBackgroundColor: '#6cc800',
-				borderColor: '#6cc800',
-				pointBorderColor: 'white',
-				backgroundColor: '#6cc800',
-				color: '#6cc800',
-				pointRadius: 4,
-				pointHoverRadius: 5,
-				pointStyle: 'circle',
-				tooltipText: 'some text 2'
-			}
-		]
+		datasets: dataSets
 	};
 
 	const config = {
 		type: 'line',
 		data: data,
 		options: {
-			tension: '0.4',
+			// tension: '0.4',
 
 			plugins: {
 				legend: {
@@ -100,7 +122,7 @@
 							return '$' + numberWithCommas(tooltipItem[0].raw, 0);
 						},
 						label: function (tooltipItem) {
-							console.log(tooltipItem.dataset.tooltipText);
+							//console.log(tooltipItem.dataset.tooltipText);
 							return 'Saving to ' + tooltipItem.label;
 						}
 					}
@@ -131,7 +153,7 @@
 						color: 'white',
 						padding: 10,
 						callback: function (value, index) {
-							return getMonthName() + ' ' + this.getLabelForValue(value);
+							return currentMonth + ' ' + this.getLabelForValue(value);
 						}
 					}
 				}

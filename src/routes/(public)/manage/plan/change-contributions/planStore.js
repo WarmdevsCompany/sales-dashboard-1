@@ -57,31 +57,6 @@ export const planModalData = [
   },
 ];
 
-export const contributionData = writable({
-  period: {},
-  country: {
-    countryId: 5234974,
-    countryName: "France",
-    "2DigitCode": "FR",
-    phoneCode: "+33",
-    currency: {
-      currencyId: 5235201,
-      currencyName: "Euro",
-      symbol: "€",
-      code: "EUR",
-    },
-    icon: {
-      image: {
-        mime: "image/png",
-        data: "iVBORw0KGgoAAAANSUhEUgAAAfQAAAFOBAMAAACCqfKqAAAABGdBTUEAALGPC/xhBQAAAAFzUkdCAK7OHOkAAAAwUExURf///wBmtO4VHwBms+Lj5O/w8NTV1+0VH+4YIKWyzdyxoABote4dIOwYH/9mHwAVs3vlHIgAAAJRSURBVHja7dShSqRRHMbhgyBjMDicaJMBLQMeDm750jDRYjFssBoEiwgatAwGr2Bh+6ZNDt8diLBdvCDde3gn+fzu4OH9n1POv21lObQ+Ddbq+OMy3vXhQbibj7LsQ+3BWq/HJd7k/i7c6qmc9rpOrj60+pKn776mV5/PyrKNLUn/OqH46mdlcpemv87KYuxZ+rTlD/5s5yhNf38ry/0+Rg++t738wW/9S9Of/x98za6+rnub+ObS9Mcvep2m28TqB/HQ0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHRN0rfb1F4bcd5+m6e/lEWvQ5J+bqNG6BPHtLy+awsWh+T9D7tL3H59tbqOdxqVk7Dq9eWp2+XnXl69cO3sqhD9K3XsZ2cx7uIP/Wj2/Lzd7xfl/Gu/sb78wlFo0fkzZ4s4AAAAABJRU5ErkJggg==",
-      },
-    },
-  },
-  amount: "600",
-  monthlyValue: 600,
-  nextPaymentDay: 1,
-  nextPaymentMonth: months[paymentMounthIndex],
-});
 export const allocatedContributions = writable({
   safe: 0,
   safeName: "0 of Total Contribution",
@@ -90,6 +65,8 @@ export const allocatedContributions = writable({
   founder: 0,
   founderName: "0 of Total Contribution",
 });
+export const sumOfPlans = writable(0)
+
 export let planData = [
   {
     sortName: "all",

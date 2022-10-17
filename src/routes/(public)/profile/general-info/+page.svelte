@@ -1,10 +1,13 @@
 <script>
+	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import Modal from '$lib/components/Modal.svelte';
 	import BrowseImg from './browse-img/BrowseImg.svelte';
 	import GeneralInfo from './general-contact/GeneralInfo.svelte';
 	import GeneralModal from './modals/GeneralModal.svelte';
 	import { modalClassName } from './profileStore';
 	import { t } from '$lib/translations/i18n.js';
+
+	scrollToTop();
 </script>
 
 <svelte:head>
@@ -36,7 +39,7 @@
 	}
 	@media only screen and (max-width: 991px) {
 		.profile__wrapper {
-			flex-wrap: wrap;
+			display: block;
 			padding: 2rem 20px;
 			margin-bottom: 4rem;
 		}

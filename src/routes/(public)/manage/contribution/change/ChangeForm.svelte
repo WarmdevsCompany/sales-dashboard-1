@@ -1,21 +1,25 @@
 <script>
 	import { t } from '$lib/translations/i18n.js';
+	import { isFetching } from '$lib/globalStore.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
-	import { publicApi } from '$lib/api/publicApi';
-	import { onMount } from 'svelte';
-	import Preloader from '$lib/components/Preloader.svelte';
-	import { fade, slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore';
-	import { getGeneralData, changeContribution } from '$lib/api/axios';
+	import { changeContribution, updateGlobalDataObj } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
-	let requrring;
+
+	let requrring = $globalData.data.current_contribution?.periodName || 'Monthly';
 	let requrringArray = [];
 	let fullRequrringArray = [];
-	let amountValue = null;
+	let amountValue = $globalData.data.current_contribution?.amount || 0;
 	let amountErrorState = false;
-	$: requrringArray;
+	let confirnBtnText = $t('CONFIRM_CHANGES');
+	$: requrringArray, amountErrorState;
+
+	requrringArray = $globalData.data.periods.map((item) => {
+		return item.periodName;
+	});
+	fullRequrringArray = [...$globalData.data.periods];
 
 	async function onSubmit() {
 		if (amountValue < 20) {
@@ -23,15 +27,20 @@
 			return false;
 		} else {
 			amountErrorState = false;
+			confirnBtnText = `${$t('LOADING')}...`;
+			$isFetching = true
 			const periodId = getPeriodId(requrring);
-			
+
 			const result = await changeContribution(amountValue, periodId);
-			console.log(result)
 			if (result.status) {
-				$globalData.data.membershipStatus.amount = amountValue;
-				$globalData.data.membershipStatus.greenSafeTotal = amountValue;
+
+				await updateGlobalDataObj()
 				getModal('confirm').open();
+				setTimeout(() => {
+					confirnBtnText = $t('CONFIRM_CHANGES');
+				}, 200);
 			}
+			$isFetching = false
 		}
 	}
 	function checkInputValue() {
@@ -40,21 +49,13 @@
 			this.value = this.value.slice(0, this.maxLength);
 		} else if (parseInt(this.value) < 20) {
 			this.classList.add('error');
+			amountErrorState = true;
 		} else if (parseInt(this.value) >= 20) {
 			if (this.classList.contains('error')) {
 				this.classList.remove('error');
+				amountErrorState = false;
 			}
 		}
-	}
-
-	async function getRecurringData() {
-		const rawResponse = await publicApi('GET', 'getPeriods');
-		const response = await rawResponse.json();
-		requrringArray = response.data.map((item) => {
-			return item.periodName;
-		});
-		fullRequrringArray = [...response.data];
-		console.log(fullRequrringArray);
 	}
 
 	function getPeriodId(periodName) {
@@ -66,62 +67,53 @@
 		});
 		return periodId;
 	}
-	
 
-	onMount(getRecurringData);
 </script>
 
-<form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
-	<div class="input__wrapper">
-		<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
-		<input
-			type="number"
-			id="amount"
-			class:error={amountErrorState}
-			placeholder="0"
-			min="20"
-			max="9999"
-			maxlength="4"
-			disabled={disabledState || errorState}
-			on:mousewheel={(e) => {
-				e.target.blur();
-			}}
-			on:input={checkInputValue}
-			bind:value={amountValue}
-		/>
-		<small />
-	</div>
-	<div class="input__wrapper">
-		<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
-		<div class="dropdown__wrapper ">
-			{#if requrringArray.length === 0}
-				<div class="relative">
-					<Dropdown
-						bind:activeItem={requrring}
-						itemsData={requrringArray}
-						disabled={disabledState || errorState}
-					/>
-					<div class="absolute d-flex align-center justify-cc">
-						<Preloader loaderWidth={2} loaderHeight={2} borderWidth={0.2} />
-					</div>
-				</div>
-			{:else}
-				<div in:fade={{ duration: 200, delay: 0 }}>
-					<Dropdown
-						bind:activeItem={requrring}
-						itemsData={requrringArray}
-						disabled={disabledState || errorState}
-					/>
-				</div>
+<div class="form_wrapper">
+	<form on:submit|preventDefault={onSubmit} class="d-flex justify-sb align-bottom">
+		<div class="input__wrapper ">
+			<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
+			<input
+				type="number"
+				id="amount"
+				class:error={amountErrorState}
+				placeholder=""
+				min="20"
+				max="9999"
+				maxlength="4"
+				disabled={disabledState || errorState}
+				on:mousewheel={(e) => {
+					e.target.blur();
+				}}
+				on:input={checkInputValue}
+				bind:value={amountValue}
+			/>
+			{#if amountErrorState}
+				<p class="text-left text-xsm error_text amount__error">
+					{$t('MANAGE_AMOUNT_ERROR')}
+					{$globalData.data.currency.symbol}
+				</p>
 			{/if}
 		</div>
-	</div>
-	<button class="btn confirm" disabled={disabledState || errorState}>{$t('CONFIRM_CHANGES')}</button
-	>
-</form>
+		<div class="input__wrapper">
+			<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
+			<div class="dropdown__wrapper ">
+				<div>
+					<Dropdown
+						bind:activeItem={requrring}
+						itemsData={requrringArray}
+						disabled={disabledState || errorState}
+					/>
+				</div>
+			</div>
+		</div>
+		<button class="btn confirm" disabled={disabledState || errorState} class:is_fetching={$isFetching}>{confirnBtnText}</button>
+	</form>
+</div>
 
 <style>
-	form {
+	.form_wrapper {
 		margin: 0.875rem auto 0 auto;
 		max-width: 721px;
 	}
@@ -140,14 +132,26 @@
 	::placeholder {
 		color: var(--green-dark-medium);
 	}
-	.absolute {
+	.amount__error {
 		position: absolute;
-		top: 0;
-		z-index: 2;
-		background-color: var(--white);
-		width: 100%;
-		height: 100%;
-		border-radius: 10px;
+		bottom: -35px;
+		left: 5px;
+	}
+
+
+	@media only screen and (min-width: 992px) and (max-width: 1199px) {
+		form {
+			gap: 1vw;
+			grid-gap: 1vw;
+		}
+		.input__wrapper {
+			width: 100%;
+			max-width: 28%;
+		}
+		input[type='number'],
+		.dropdown__wrapper {
+			min-width: 0;
+		}
 	}
 	@media only screen and (max-width: 991px) {
 		form {
@@ -164,18 +168,15 @@
 			padding-top: 18px;
 		}
 	}
-	@media only screen and (min-width: 992px) and (max-width: 1199px) {
-		form {
-			gap: 1vw;
-			grid-gap: 1vw;
+	/* @media only screen and (max-width: 480px) {
+		.form_wrapper {
+			padding: 0;
 		}
-		.input__wrapper {
-			width: 100%;
-			max-width: 28%;
+		.confirm__form{
+			max-height: 100vh;
+			border-radius: 0;
+			height: 100%;
+			margin: 0;
 		}
-		input[type='number'],
-		.dropdown__wrapper {
-			min-width: 0;
-		}
-	}
+	} */
 </style>
