@@ -6,7 +6,7 @@
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData, isFetching } from '$lib/globalStore';
-	import { restartContribution, pauseContribution, stopContribution } from '$lib/api/axios';
+	import { restartContribution, pauseContribution, stopContribution, updateGlobalDataObj } from '$lib/api/axios';
 	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	export let subscriptionStatus;
 	let stopCheckboxValue = false;
@@ -34,7 +34,6 @@
 		subscriptionStatus;
 		nextDate;
 	}
-
 	async function stop() {
 		stopBtnText = `${$t('LOADING')}...`;
 		$isFetching = true;
@@ -42,7 +41,8 @@
 		if (response.status) {
 			getModal('stop').close();
 			stopBtnText = $t('MANAGE_STOP');
-			$globalData.data.currentSubscription.status = 'Stopped';
+			await updateGlobalDataObj()
+			
 		}
 		$isFetching = false;
 	}
@@ -54,7 +54,8 @@
 			if (response.status) {
 				getModal('restart').close();
 				restartBtnText = $t('MANAGE_RES');
-				$globalData.data.currentSubscription.status = 'Restart';
+				await updateGlobalDataObj()
+				
 			}
 			$isFetching = false;
 		} else {
@@ -69,7 +70,7 @@
 		if (response.status) {
 			getModal('pause').close();
 			pauseBtnText = $t('MANAGE_PAUSE');
-			$globalData.data.currentSubscription.status = 'Paused';
+			await updateGlobalDataObj()
 		}
 		$isFetching = false;
 	}
