@@ -4,6 +4,7 @@ import axios from 'axios';
 import { setCookie } from '../functions/setCookie';
 import { goto } from '$app/navigation';
 import { deleteCookie } from '../functions/deleteCookie';
+import { updateFetching } from '../globalStore';
 const esiToken = getCookie('esiToken') || null;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['accept'] = 'application/json';
@@ -25,6 +26,7 @@ export const login = async (body) => {
 		if (response.data.status) {
 			setCookie('esiToken', response.data.data.token, { secure: true, 'max-age': 84600 });
 			privatePath.defaults.headers.common['Authorization'] = response.data.data.token;
+			updateFetching(false)
 			goto('/overview/general');
 		} else {
 			return response.data;
