@@ -1,7 +1,7 @@
 <script>
-	import { makeWithdrawal, getGeneralData } from '$lib/api/axios.js';
+	import { makeWithdrawal, updateGlobalDataObj } from '$lib/api/axios.js';
 	import { withdrawBalance, withdrawContribution } from './../withdrawStore.js';
-	import { verificationId, updateGlobalData, isFetching } from '$lib/globalStore.js';
+	import { verificationId, isFetching } from '$lib/globalStore.js';
 	import { t } from '$lib/translations/i18n.js';
 	export let withdrawMethods = [],
 		successFormStatus,
@@ -30,8 +30,7 @@
 			};
 			const res = await makeWithdrawal(body);
 			if (res.status) {
-				const globalData = await getGeneralData();
-				updateGlobalData(globalData);
+				await updateGlobalDataObj()
 				successFormStatus = true;
 			}
 			$isFetching = false;

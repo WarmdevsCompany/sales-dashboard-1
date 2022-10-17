@@ -15,7 +15,8 @@
 		addWithdrawalPaymentMethod,
 		getTypesForWithdrawal,
 		getGeneralData,
-		makeWithdrawal
+		makeWithdrawal,
+		updateGlobalDataObj
 	} from '$lib/api/axios';
 	export let submitBtnText = $t('SAVE'),
 		withdrawRequestProcessed;
@@ -205,8 +206,7 @@
 				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId);
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
-					const globalData = await getGeneralData();
-					updateGlobalData(globalData);
+					await updateGlobalDataObj()
 					withdrawRequestProcessed = true;
 				}
 			}
@@ -234,8 +234,7 @@
 				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId);
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
-					const globalData = await getGeneralData();
-					updateGlobalData(globalData);
+					await updateGlobalDataObj()
 					withdrawRequestProcessed = true;
 				}
 			}

@@ -3,8 +3,8 @@
 	import { isFetching } from '$lib/globalStore.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
-	import { globalData, updateGlobalData } from '$lib/globalStore';
-	import { changeContribution, getGeneralData } from '$lib/api/axios';
+	import { globalData } from '$lib/globalStore';
+	import { changeContribution, updateGlobalDataObj } from '$lib/api/axios';
 	export let disabledState;
 	export let errorState;
 
@@ -33,8 +33,8 @@
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-				const globalData = await getGeneralData();
-				updateGlobalData(globalData);
+
+				await updateGlobalDataObj()
 				getModal('confirm').open();
 				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');

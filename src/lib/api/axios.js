@@ -4,7 +4,7 @@ import axios from 'axios';
 import { setCookie } from '../functions/setCookie';
 import { goto } from '$app/navigation';
 import { deleteCookie } from '../functions/deleteCookie';
-import { updateFetching } from '../globalStore';
+import { updateFetching, updateGlobalData } from '../globalStore';
 const esiToken = getCookie('esiToken') || null;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.headers.common['accept'] = 'application/json';
@@ -120,19 +120,6 @@ export const makeWithdrawal = async (body) => {
 	}
 };
 
-export const test = async (body) => {
-	try {
-		let response = await privatePath.post('/getGeneralInfo', body);
-		return response.data;
-	} catch (error) {
-		console.error(error);
-		// redirect to 404
-		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
-			goto('/404');
-		// redirect to auth when
-		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
-	}
-};
 
 export const requestValidation = async (body) => {
 	try {
@@ -184,6 +171,10 @@ export const getGeneralData = async () => {
 		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
+export const updateGlobalDataObj = async ()=>{
+	const data = await getGeneralData()
+	updateGlobalData(data)
+}
 export const getAvatar = async () => {
 	try {
 		let response = await privatePath.post('/getAvatar');
