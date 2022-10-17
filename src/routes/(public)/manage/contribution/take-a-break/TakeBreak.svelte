@@ -8,7 +8,7 @@
 	import { globalData, isFetching } from '$lib/globalStore';
 	import { restartContribution, pauseContribution, stopContribution, updateGlobalDataObj } from '$lib/api/axios';
 	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
-	export let subscriptionStatus;
+	export let statusId;
 	let stopCheckboxValue = false;
 	let chackboxErrorStatus = false;
 	let timeframeArray = [];
@@ -31,7 +31,6 @@
 		if (stopCheckboxValue) {
 			chackboxErrorStatus = false;
 		}
-		subscriptionStatus;
 		nextDate;
 	}
 	async function stop() {
@@ -55,12 +54,15 @@
 				getModal('restart').close();
 				restartBtnText = $t('MANAGE_RES');
 				await updateGlobalDataObj()
+				stopCheckboxValue = false
 				
 			}
 			$isFetching = false;
+			
 		} else {
 			chackboxErrorStatus = true;
 		}
+
 	}
 	async function pause() {
 		pauseBtnText = `${$t('LOADING')}...`;
@@ -92,20 +94,20 @@
 		<button
 			class="btn pause mb-1"
 			on:click={() => getModal('pause').open()}
-			disabled={subscriptionStatus === 'Paused' ||
-				subscriptionStatus === 'Stopped' ||
-				subscriptionStatus === 'Suspended'}>{$t('MANAGE_PAUSE')}</button
+			disabled={statusId === 5236999 ||
+				statusId === 5237000 ||
+				statusId === 5237002}>{$t('MANAGE_PAUSE')}</button
 		>
 		<button
 			class="btn stop mb-1"
 			on:click={() => getModal('stop').open()}
-			disabled={subscriptionStatus === 'Stopped' || subscriptionStatus == 'Suspended'}
+			disabled={statusId === 5237000 || statusId == 5237002}
 			>{$t('MANAGE_STOP')}</button
 		>
 		<button
 			class="btn restart mb-1"
 			on:click={() => getModal('restart').open()}
-			disabled={subscriptionStatus === 'Active' || subscriptionStatus === 'Restart'}
+			disabled={statusId === 5236998 || statusId === 5237001}
 			>{$t('MANAGE_RES')}</button
 		>
 	</div>

@@ -19,7 +19,7 @@
 		<div class="contribution__data d-flex justify-sb relative">
 			<WalletValue {allMoney} {currencySymbol} />
 			<NextContribution {currencySymbol} {monthlySubscriptionText} />
-			<NextContrDate {nextContributionDate} />
+			<NextContrDate {nextContributionDate} status={status || 'active'} {statusId}/>
 			<SubscriptionStatus
 				status={status.toLowerCase() || 'active'} {statusId}
 			/>

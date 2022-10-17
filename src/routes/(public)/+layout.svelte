@@ -20,7 +20,6 @@
 		notificationSettings,
 		selectedNotification
 	} from '$lib/globalStore';
-
 	let loading = true;
 
 	onMount(async () => {
@@ -91,7 +90,7 @@
 				statusId ={$globalData.data.currentSubscription?.statusId} />
 			</div>
 
-			<div class="main-body">
+			<div class="main-body" >
 				<slot />
 			</div>
 		</div>
