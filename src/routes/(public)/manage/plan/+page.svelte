@@ -64,12 +64,13 @@
 	<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 </svelte:head>
 
-<ChangePlans />
+<ChangePlans isDisebled = {$globalData.data.currentSubscription.statusId === 5236999 || $globalData.data.currentSubscription.statusId === 5237000}/>
 <div class="d-flex justify-cc">
 	<button
 		class="btn confirm mt-1_5 box_shadow-medium"
 		on:click={changeContributionData}
 		class:is_fetching={$isFetching}
+		disabled ={$globalData.data.currentSubscription.statusId === 5236999 || $globalData.data.currentSubscription.statusId === 5237000}
 		>{confirmButtonText}
 	</button>
 </div>
