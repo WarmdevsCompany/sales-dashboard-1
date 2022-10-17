@@ -97,6 +97,11 @@ export const addWithdrawalPaymentMethod = async (body) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const makeWithdrawal = async (body) => {
@@ -105,6 +110,25 @@ export const makeWithdrawal = async (body) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
+	}
+};
+
+export const test = async (body) => {
+	try {
+		let response = await privatePath.post('/getGeneralInfo', body);
+		return response.data;
+	} catch (error) {
+		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 
@@ -116,6 +140,11 @@ export const requestValidation = async (body) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const verifyCode = async (body) => {
@@ -126,6 +155,11 @@ export const verifyCode = async (body) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 
@@ -141,27 +175,38 @@ export const getGeneralData = async () => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
-}
+};
 export const getAvatar = async () => {
 	try {
 		let response = await privatePath.post('/getAvatar');
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
-}
+};
 
 export const changeLang = async (langId) => {
 	try {
 		let response = await privatePath.post('/changeLang', { langId: langId });
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const setNotificationViewed = async (id) => {
@@ -171,19 +216,25 @@ export const setNotificationViewed = async (id) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const setNotificationRemoved = async (id) => {
 	let integerID = +id;
 	try {
 		let response = await privatePath.post('/hideNotification', { notificationId: integerID });
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changePhoto = async (objSrc) => {
@@ -192,6 +243,11 @@ export const changePhoto = async (objSrc) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changeUserName = async (username, verificationId) => {
@@ -201,6 +257,11 @@ export const changeUserName = async (username, verificationId) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changeFirstAndLastname = async (firstname, lastname, verificationId) => {
@@ -210,6 +271,11 @@ export const changeFirstAndLastname = async (firstname, lastname, verificationId
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changeGender = async (gender, verificationId) => {
@@ -219,6 +285,11 @@ export const changeGender = async (gender, verificationId) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changeDOB = async (dob, verificationId) => {
@@ -228,6 +299,11 @@ export const changeDOB = async (dob, verificationId) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changeEmail = async (email, verificationId) => {
@@ -237,6 +313,11 @@ export const changeEmail = async (email, verificationId) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changePassword = async (password, verificationId) => {
@@ -246,6 +327,11 @@ export const changePassword = async (password, verificationId) => {
 		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 
@@ -255,63 +341,68 @@ export const changeNotificationSettings = async (id, value) => {
 			notificationId: id,
 			notificationValue: value
 		});
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 
 export const changeContribution = async (amount, periodId) => {
 	try {
 		let response = await privatePath.post('/changeContribution', { amount, periodId });
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 
 export const pauseContribution = async (periodId) => {
 	try {
 		let response = await privatePath.post('/pauseContribution', { monthPeriodId: periodId });
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const restartContribution = async () => {
 	try {
 		let response = await privatePath.post('/restartContribution');
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const stopContribution = async () => {
 	try {
 		let response = await privatePath.post('/stopContribution');
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const changeContributionPlan = async (save, adv, founder) => {
@@ -322,12 +413,13 @@ export const changeContributionPlan = async (save, adv, founder) => {
 	};
 	try {
 		let response = await privatePath.post('/changeContributionPlan', body);
-		if (response.data.status) {
-			return response.data;
-		} else {
-			return response.data.errorMessage;
-		}
+		return response.data;
 	} catch (error) {
 		console.error(error);
+		// redirect to 404
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
+		// redirect to auth when
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
