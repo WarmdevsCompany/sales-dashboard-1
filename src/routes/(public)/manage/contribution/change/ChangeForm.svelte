@@ -14,6 +14,7 @@
 	let amountValue = $globalData.data.current_contribution?.amount || 0;
 	let amountErrorState = false;
 	let confirnBtnText = $t('CONFIRM_CHANGES');
+	let dbValidationError = false
 	$: requrringArray, amountErrorState;
 
 	requrringArray = $globalData.data.periods.map((item) => {
@@ -38,6 +39,9 @@
 				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');
 				}, 200);
+			}else{
+				dbValidationError = result.errorMessage
+				setTimeout(()=>{dbValidationError = false }, 5000)
 			}
 			$isFetching = false
 		}
