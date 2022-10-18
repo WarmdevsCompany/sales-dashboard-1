@@ -171,10 +171,12 @@ export const getGeneralData = async () => {
 		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
+
 export const updateGlobalDataObj = async ()=>{
 	const data = await getGeneralData()
 	updateGlobalData(data)
 }
+
 export const getAvatar = async () => {
 	try {
 		let response = await privatePath.post('/getAvatar');

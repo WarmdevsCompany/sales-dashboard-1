@@ -33,7 +33,6 @@
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-
 				await updateGlobalDataObj()
 				getModal('confirm').open();
 				setTimeout(() => {
@@ -95,6 +94,12 @@
 					{$globalData.data.currency.symbol}
 				</p>
 			{/if}
+			{#if dbValidationError}
+				<p class="text-left text-xsm error_text amount__error">
+					{dbValidationError}
+				</p>
+			{/if}
+
 		</div>
 		<div class="input__wrapper">
 			<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
