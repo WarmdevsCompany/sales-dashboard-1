@@ -224,6 +224,8 @@
 		display: flex;
 		justify-content: space-between;
 		padding: 11px 24px 11px 24px;
+		border-top-left-radius: 6px;
+		border-top-right-radius: 6px;
 	}
 	.plans__item.safe .item__head {
 		background: var(--plan-safe-bg);
@@ -240,6 +242,8 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
+		border-bottom-left-radius: 6px;
+		border-bottom-right-radius: 6px;
 	}
 	.plans__item.safe .item__body {
 		background: linear-gradient(
@@ -375,9 +379,9 @@
 		right: 30px;
 		top: 25px;
 	}
-	.dropdown.disabled{
-	 pointer-events: none;
-	 background: var(--grey-color);
+	.dropdown.disabled {
+		pointer-events: none;
+		background: var(--grey-color);
 	}
 	.dropdown.error {
 		border-color: var(--red-color);
