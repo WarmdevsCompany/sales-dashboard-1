@@ -3,4 +3,12 @@ export function checkInputNumber(e) {
 	if (keyCode === 38 || keyCode === 40) {
 		e.preventDefault();
 	}
+	const regex = RegExp(/[0-9]+/g);
+    const test_result = regex.test(e.target.value);
+
+	if(test_result){
+		e.target.defaultValue = e.target.value;
+	  }else{
+		e.target.value = e.target.defaultValue;
+	  }
 }

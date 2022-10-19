@@ -27,7 +27,7 @@
 		disabled={$$props.planInputState}
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}
-		on:change={checkInputNumber}
+		on:input={checkInputNumber}
 		step="any"
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {
