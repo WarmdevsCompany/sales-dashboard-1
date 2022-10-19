@@ -6,7 +6,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 
-	let radioValue, amountErrorMessage, withdrawMaxSum;
+	let radioValue, amountErrorMessage, withdrawMaxSum, balance = 0;
 	const minWithdrawSum = 10;
 
 	const options = [
@@ -38,6 +38,12 @@
 			$withdrawFormState = false;
 		}
 	}
+
+$:{
+		if(typeof balance != 'number'){
+		  $withdrawBalance = balance.replace(/[^0-9]/g, '');
+		}
+	}
 </script>
 
 <div class="withdraw__manager b-radius-8 box_shadow-medium">
@@ -55,13 +61,14 @@
 					type="number"
 					id="name"
 					name="name"
-					maxlength="4"
+					maxlength="6"
+					
 					on:mousewheel={(e) => {
 						e.target.blur();
 					}}
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
-					on:input={checkInputMaxLenght}
+					
 					bind:value={$withdrawBalance}
 					disabled={radioValue === '2' || withdrawMaxSum <= 0}
 				/>
