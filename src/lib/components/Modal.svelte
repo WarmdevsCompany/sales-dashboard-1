@@ -209,7 +209,6 @@
 	#modal-content {
 		max-width: calc(100vw - 20px);
 		max-height: calc(100vh - 20px);
-		overflow: auto;
 		border-radius: 10px;
 	}
 	#modal.greenForm .absolute {

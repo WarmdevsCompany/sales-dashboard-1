@@ -8,7 +8,8 @@
 >
 	<div class="d-flex justify-sb">
 		<div class="text-3 plan_name">{$$props.planName}</div>
-		<div class=" plan_persentage">{$$props.planPersentage}%</div>
+		<div class=" plan_persentage d-flex align-center">
+			<div>{$$props.planPersentage}%</div> </div>
 	</div>
 	<div class="d-flex justify-sb align-base">
 		<div class="text-xsm contr">{$$props.planAvailable}</div>
@@ -43,12 +44,10 @@
 	}
 
 	.plan_money {
-		
-
 		font-weight: var(--font-weight-bolder);
 	}
 	.plan_money.error {
-		opacity: .9;
+		opacity: 0.9;
 		color: var(--red-color);
 	}
 	.plan_persentage {

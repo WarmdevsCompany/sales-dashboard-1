@@ -246,25 +246,13 @@
 		border-bottom-right-radius: 6px;
 	}
 	.plans__item.safe .item__body {
-		background: linear-gradient(
-			90deg,
-			rgba(168, 224, 255, 0.56) 0.14%,
-			rgba(104, 191, 233, 0.42) 59.37%
-		);
+		background: #C0E4F6;
 	}
 	.plans__item.adventure .item__body {
-		background: linear-gradient(
-			243.71deg,
-			rgba(138, 196, 72, 0.86) 0%,
-			rgba(152, 206, 127, 0.79) 91.93%
-		);
+		background: #ABD790;
 	}
 	.plans__item.founder .item__body {
-		background: linear-gradient(
-			249.93deg,
-			rgba(195, 145, 217, 0.63) -0.25%,
-			rgba(244, 225, 252, 0.8) 100.33%
-		);
+		background: #F0DEF8;
 	}
 	.item__head__checkbox {
 		width: 24px;
