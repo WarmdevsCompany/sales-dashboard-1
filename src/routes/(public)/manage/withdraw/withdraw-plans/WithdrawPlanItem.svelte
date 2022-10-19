@@ -1,6 +1,15 @@
 <script>
 	export let planInputValue;
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
+	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+	function checkInputValue() {
+		if(isSafari){
+			this.value = this.value.replace(/[^0-9]/g, '');
+		}
+		if (this.value.length > this.maxLength) {
+			this.value = this.value.slice(0, this.maxLength);
+		} 
+	}
 </script>
 
 <div
@@ -23,11 +32,11 @@
 		class="withdraw__amount mt-1"
 		type="number"
 		placeholder="0"
-		maxlength="4"
+		maxlength="6"
 		disabled={$$props.planInputState}
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}
-		on:input={checkInputNumber}
+		on:input={checkInputValue}
 		step="any"
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {

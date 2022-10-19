@@ -39,11 +39,6 @@
 		}
 	}
 
-$:{
-		if(typeof balance != 'number'){
-		  $withdrawBalance = balance.replace(/[^0-9]/g, '');
-		}
-	}
 </script>
 
 <div class="withdraw__manager b-radius-8 box_shadow-medium">
@@ -62,13 +57,11 @@ $:{
 					id="name"
 					name="name"
 					maxlength="6"
-					
 					on:mousewheel={(e) => {
 						e.target.blur();
 					}}
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
-					
 					bind:value={$withdrawBalance}
 					disabled={radioValue === '2' || withdrawMaxSum <= 0}
 				/>
