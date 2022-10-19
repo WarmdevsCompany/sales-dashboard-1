@@ -126,7 +126,9 @@
 						class:disabled={isDisebled}
 						on:click_outside={handleClickOutside}
 					>
-						<Dropdown_ico />
+						<Dropdown_ico on:click={() => {
+							activeState = !activeState;
+						}}/>
 						<div
 							class="dropdown__item--current"
 							on:click={() => {
@@ -366,6 +368,7 @@
 		position: absolute;
 		right: 30px;
 		top: 25px;
+		z-index: 3;
 	}
 	.dropdown.disabled {
 		pointer-events: none;
