@@ -314,7 +314,7 @@
 		padding: 1.5rem 1.5rem 2rem 1.5rem;
 	}
 	.sidebar__bottom > img {
-		margin-right: 10px;
+		margin-right: 1.5rem;
 	}
 	.logout button {
 		padding: 20px 0;

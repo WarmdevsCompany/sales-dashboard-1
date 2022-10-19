@@ -25,7 +25,7 @@
 		feeSum = roundNumber(fee * $withdrawBalance, 2);
 		if (withdrawOfTotal > 100) {
 			withdrawOfTotal = 100;
-		} else if (withdrawOfTotal < 20) {
+		} else if (withdrawOfTotal <= 20) {
 			timeToTransfer = timeToTransferLessThan20;
 		} else if (withdrawOfTotal > 20) {
 			timeToTransfer = timeToTransferMoreThan20;

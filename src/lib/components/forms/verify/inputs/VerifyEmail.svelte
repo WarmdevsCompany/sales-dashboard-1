@@ -24,7 +24,9 @@
 				const res = await requestValidation(value.email);
 				if (res.status) {
 					$$props.sendVerifyCallback();
-				}
+				}else if(res.errorMessage === "INVALID_EMAIL"){
+					$errors['email'] =  'Invalid email'//$t('USER_NOT_FOUND')
+				 }
 			}else {
 				const res = await forgotPassword(value.email);
 				if (res.status) {

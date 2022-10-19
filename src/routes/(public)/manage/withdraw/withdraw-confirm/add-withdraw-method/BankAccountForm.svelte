@@ -76,7 +76,7 @@
 	<div class="mt-1">
 		<DisabledDropdown text={activeCurrency} />
 	</div>
-	{#if activeCurrency === 'EURO'}
+	{#if activeCurrency === 'EUR'}
 		<div class="mt-1">
 			<div class="input__wrapper">
 				<input

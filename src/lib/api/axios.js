@@ -93,13 +93,14 @@ export const setNewAuthHeaders = (header) => {
 	setCookie('esiToken', header, { secure: true, 'max-age': 84600 });
 	privatePath.defaults.headers.common['Authorization'] = header;
 };
+
 export const addWithdrawalPaymentMethod = async (body) => {
 	try {
 		let response = await privatePath.post('/addWithdrawalPaymentMethod', body);
 		return response.data;
 	} catch (error) {
 		console.error(error);
-		// redirect to 404
+		//redirect to 404
 		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
 			goto('/404');
 		// redirect to auth when

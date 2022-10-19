@@ -9,7 +9,8 @@
 	<div class="d-flex justify-sb">
 		<div class="text-3 plan_name">{$$props.planName}</div>
 		<div class=" plan_persentage d-flex align-center">
-			<div>{$$props.planPersentage}%</div> </div>
+			<div>{$$props.planPersentage}%</div>
+		</div>
 	</div>
 	<div class="d-flex justify-sb align-base">
 		<div class="text-xsm contr">{$$props.planAvailable}</div>
@@ -26,6 +27,7 @@
 		disabled={$$props.planInputState}
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}
+		on:change={checkInputNumber}
 		step="any"
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {

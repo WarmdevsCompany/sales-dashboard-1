@@ -119,7 +119,7 @@
 	const vsBussinessEURO = { ...yupBussiness, ...yupBankEuro, ...yupAddressData };
 
 	const checkFormStatus = () => {
-		if (activeCurrency === 'EURO') {
+		if (activeCurrency === 'EUR') {
 			validationFormData.initialValues = ivBussinessEURO;
 			validationFormData.validationSchema = vsBussinessEURO;
 
@@ -167,7 +167,7 @@
 			body.firstName = formData.firstName;
 			body.lastName = formData.lastName;
 		}
-		if (currency === 'EURO') {
+		if (currency === 'EUR') {
 			body.accountNumber = formData.iban;
 		} else if (countryId === 5235134) {
 			const accountTypeId = getIdByName(formData.accountType, accountMethodTypes);
@@ -303,7 +303,6 @@
 		<button class="btn btn_center" on:click={checkLegalType}>{$t('NEXT')}</button>
 	</div>
 {:else if formStep === 2}
-	{withdrawRequestProcessed}
 	<form on:submit|preventDefault={mainForm.handleSubmit}>
 		<BankAccountForm
 			{legalTypeId}

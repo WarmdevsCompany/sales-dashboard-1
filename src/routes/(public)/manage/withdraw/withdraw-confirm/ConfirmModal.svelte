@@ -68,7 +68,7 @@
 	<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
 		<div class="confirm__form text-center">
 			<img src={greenLogo} alt="esi logo img" />
-			<div class="modal_head_medium text-1">{$t('WITHDRAW')}</div>
+			<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
 			<div class="text-xsm last__step--subhead mb-1_5">
 				{$t('WHERE_WITHDRAW')}*
 			</div>
@@ -85,7 +85,8 @@
 						>
 					</div>
 
-					{$t('FOUNDER_BIG')}:<span class="text-green mobile-block"
+					{$t('FOUNDER_BIG')}:
+					<span class="text-green mobile-block"
 						>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
 					>
 				</div>

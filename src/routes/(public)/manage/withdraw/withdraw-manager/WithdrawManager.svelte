@@ -27,7 +27,7 @@
 	$: {
 		$withdrawMethod = radioValue;
 		withdrawMaxSum = $globalData.data.currentSubscription.balance;
-		if ($withdrawBalance < minWithdrawSum) {
+		if ($withdrawBalance < minWithdrawSum && withdrawMaxSum !=0) {
 			amountErrorMessage = `${$t('MANAGE_WITHDRAW_LESS_ERR')} ${minWithdrawSum}`;
 			$withdrawFormState = true;
 		} else if ($withdrawBalance > withdrawMaxSum) {
@@ -63,7 +63,7 @@
 					on:keyup={checkInputNumber}
 					on:input={checkInputMaxLenght}
 					bind:value={$withdrawBalance}
-					disabled={radioValue === '2'}
+					disabled={radioValue === '2' || withdrawMaxSum <= 0}
 				/>
 				{#if amountErrorMessage}
 					<p class="text-left text-xsm error_text amount__error">
@@ -79,7 +79,7 @@
 				{options}
 				fontSize={16}
 				bind:userSelected={radioValue}
-				disabledState={$withdrawFormState}
+				disabledState={$withdrawFormState || withdrawMaxSum <= 0}
 			/>
 		</div>
 	</div>

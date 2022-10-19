@@ -16,7 +16,7 @@
 		address: $t('ENTER_ADDRESS')
 	};
 	$: {
-		if (activeCurrency === 'EURO') {
+		if (activeCurrency === 'EUR') {
 			isRequiredAddressDate = false;
 		}
 	}

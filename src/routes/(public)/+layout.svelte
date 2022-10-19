@@ -24,7 +24,6 @@
 
 	onMount(async () => {
 		let lang = localStorage.getItem('lang');
-		locale.set(lang || 'EN');
 		const token = getCookie('esiToken');
 		if (!token || token == 'undefined') {
 			deleteCookie('esiToken');
@@ -40,16 +39,20 @@
 				}
 			});
 			const response = await rawResponse.json();
-
-			if(!response.status || response.data === null){
+			if (lang) {
+				locale.set(lang);
+			} else {
+				locale.set(response.data.lang.code);
+				localStorage.setItem('lang', response.data.lang.code);
+			}
+			if (!response.status || response.data === null) {
 				goto('/404');
 			}
 
-			if (response.errorMessage === 'FAILED_TO_FIND_USER' ) {
+			if (response.errorMessage === 'FAILED_TO_FIND_USER') {
 				deleteCookie('esiToken');
 				goto('/auth/login');
 			}
-
 
 			if (rawResponse.status == 200) {
 				$globalData = response;
@@ -60,13 +63,12 @@
 		}
 
 		if ($globalData) {
-			console.log($globalData)
+			console.log($globalData);
 			loading = false;
 			$notificationList = $globalData.data.notifications.data;
 			$notificationSettings = $globalData.data.notificationSettings;
 		}
 	});
-
 </script>
 
 <svelte:head>
@@ -82,15 +84,17 @@
 
 		<div in:fade class="main-content">
 			<div class="header_wrapper">
-				<Header currencySymbol = {$globalData.data.currency.symbol}
-				allMoney = {$globalData.data.currentSubscription?.balance || 0}
-				monthlySubscriptionText = {$globalData.data.currentSubscription?.subscriptionText || 0}
-				nextContributionDate = {$globalData.data.currentSubscription?.nextDate || 0}
-				status= {$globalData.data.currentSubscription?.status}
-				statusId ={$globalData.data.currentSubscription?.statusId} />
+				<Header
+					currencySymbol={$globalData.data.currency.symbol}
+					allMoney={$globalData.data.currentSubscription?.balance || 0}
+					monthlySubscriptionText={$globalData.data.currentSubscription?.subscriptionText || 0}
+					nextContributionDate={$globalData.data.currentSubscription?.nextDate || 0}
+					status={$globalData.data.currentSubscription?.status}
+					statusId={$globalData.data.currentSubscription?.statusId}
+				/>
 			</div>
 
-			<div class="main-body" >
+			<div class="main-body">
 				<slot />
 			</div>
 		</div>

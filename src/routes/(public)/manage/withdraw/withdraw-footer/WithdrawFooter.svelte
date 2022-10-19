@@ -21,40 +21,42 @@
 	};
 </script>
 
-<div class="withdraw__footer">
-	<div class="grid">
-		<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
-		<div class="grid-item-value text-sm">${$withdrawBalance}</div>
-		<div class="text-sm">{$t('MANAGE_WD_FEE')}:</div>
-		<div class="grid-item-value text-sm">${feeSum}</div>
-		<div class="text-sm">{$t('MANAGE_TIME_TO_TR')}:</div>
-		<div class="grid-item-value text-sm">{timeToTransfer} {$t('MANAGE_DAYS')}</div>
-		<div class="text-sm">{$t('MANAGE_WD_OF_T')}:</div>
-		<div class="grid-item-value text-sm">{withdrawOfTotal}%</div>
-	</div>
-	{#if confirmBtn === 'open'}
-		<div class="d-flex {btnAligment} buttons">
-			<button class="btn cancel mr-1_5">{$t('CANCEL')}</button>
+{#if $globalData.data.currentSubscription.balance > 0}
+	<div class="withdraw__footer">
+		<div class="grid">
+			<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
+			<div class="grid-item-value text-sm">${$withdrawBalance}</div>
+			<div class="text-sm">{$t('MANAGE_WD_FEE')}:</div>
+			<div class="grid-item-value text-sm">${feeSum}</div>
+			<div class="text-sm">{$t('MANAGE_TIME_TO_TR')}:</div>
+			<div class="grid-item-value text-sm">{timeToTransfer} {$t('MANAGE_DAYS')}</div>
+			<div class="text-sm">{$t('MANAGE_WD_OF_T')}:</div>
+			<div class="grid-item-value text-sm">{withdrawOfTotal}%</div>
+		</div>
+		{#if confirmBtn === 'open'}
+			<div class="d-flex {btnAligment} buttons">
+				<button class="btn cancel mr-1_5">{$t('CANCEL')}</button>
 
-			<button
-				disabled={$withdrawFormState}
-				class="btn confirm"
-				on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
-			>
-		</div>
-	{:else if confirmBtn === 'confirm'}
-		<div class="d-flex {btnAligment} buttons-confirm">
-			<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
-				>{$t('CANCEL')}</button
-			>
-			<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>
-		</div>
-	{/if}
-</div>
+				<button
+					disabled={$withdrawFormState}
+					class="btn confirm"
+					on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
+				>
+			</div>
+		{:else if confirmBtn === 'confirm'}
+			<div class="d-flex {btnAligment} buttons-confirm">
+				<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
+					>{$t('CANCEL')}</button
+				>
+				<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>
+			</div>
+		{/if}
+	</div>
+{/if}
 
 <style>
-	.withdraw__footer{
-	 margin-top: 1.5rem;
+	.withdraw__footer {
+		margin-top: 1.5rem;
 	}
 	.grid {
 		grid-column-gap: 20px;
@@ -101,7 +103,6 @@
 			max-height: 66px;
 		}
 		button.cancel {
-		
 			max-height: 66px;
 		}
 		.btn.confirm {
