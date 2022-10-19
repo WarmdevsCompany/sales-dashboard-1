@@ -16,7 +16,7 @@
 	import clickOutside from '$lib/functions/clickOutside';
 	import { logout, getAvatar } from '$lib/api/axios';
 	import { t } from '$lib/translations/i18n.js';
-	import { currentSideBarStatus, globalData } from '$lib/globalStore';
+	import { currentSideBarStatus, globalData, avatar } from '$lib/globalStore';
 	import { onMount } from 'svelte';
 	import HeaderPagesTooltip from '$lib/components/HeaderPagesTooltip.svelte';
 	let openedMenu = false;
@@ -34,7 +34,7 @@
 	
 	onMount(async () => {
 		const avaResponse = await getAvatar()
-		$globalData.data.photo = avaResponse.data.photo;
+		$avatar = avaResponse.data.photo;
 		if ($globalData) {
 			firstName = $globalData.data.personalInfo.firstname;
 			lastName = $globalData.data.personalInfo.lastname;
@@ -93,8 +93,8 @@
 					</div>
 				{/if}
 			</MediaQuery>
-			{#if $globalData.data.photo}
-				<AvatarIcon avatarIsSet={true} avatarImg={$globalData.data.photo} />
+			{#if $avatar}
+				<AvatarIcon avatarIsSet={true} avatarImg={$avatar} />
 			{:else}
 				<AvatarIcon avatarIsSet={false} avatarImg={false} />
 			{/if}

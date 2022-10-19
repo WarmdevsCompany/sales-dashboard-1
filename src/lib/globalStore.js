@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 export let userAuthToken = writable();
 export let globalData = writable();
+export let avatar = writable();
 export let contributionStatus = writable();
 export let notificationList = writable([]);
 export let notificationSettings = writable([]);

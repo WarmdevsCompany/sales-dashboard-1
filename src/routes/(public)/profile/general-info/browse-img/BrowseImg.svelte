@@ -3,7 +3,7 @@
 	import addImage from '$lib/assets/img/image-add.svg';
 	import border from '$lib/assets/img/border.png';
 	import { t } from '$lib/translations/i18n.js';
-	import { globalData } from '$lib/globalStore';
+	import { globalData, avatar } from '$lib/globalStore';
 	import { onMount } from 'svelte';
 	import { changePhoto } from '$lib/api/axios';
 	import { slide } from 'svelte/transition';
@@ -15,8 +15,8 @@
 	let uploading = false;
 
 	onMount(async () => {
-		if ($globalData) {
-			imageSrc = $globalData.data.photo;
+		if ($avatar) {
+			imageSrc = $avatar;
 			if (imageSrc) {
 				showImage = true;
 			}
