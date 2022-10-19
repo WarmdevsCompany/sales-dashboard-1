@@ -29,8 +29,10 @@
       position: absolute;
       top: -40px;
       left: 20px;
-      z-index: 3;
+      z-index: 99;
       width: 260px;
+
+      max-width: 90%;
       color: var(--red-color);
       font-size: 13px;
       line-height: 20px;
