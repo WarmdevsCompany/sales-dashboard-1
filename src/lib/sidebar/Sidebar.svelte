@@ -29,16 +29,9 @@
 		$currentSideBarStatus = 'profile';
 	}
 
-	export let firstName = '',
-		lastName = '';
-	
 	onMount(async () => {
-		const avaResponse = await getAvatar()
+		const avaResponse = await getAvatar();
 		$avatar = avaResponse.data.photo;
-		if ($globalData) {
-			firstName = $globalData.data.personalInfo.firstname;
-			lastName = $globalData.data.personalInfo.lastname;
-		}
 	});
 	function handleClickOutside() {
 		openedMenu = false;
@@ -100,8 +93,8 @@
 			{/if}
 
 			<div class="user__name d-flex justify-cc">
-				{firstName}
-				{lastName}
+				{$globalData.data.personalInfo.firstname}
+				{$globalData.data.personalInfo.lastname}
 			</div>
 		</div>
 		<div class="menu">
