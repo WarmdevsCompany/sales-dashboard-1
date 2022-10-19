@@ -61,7 +61,7 @@
 					}}
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
-					on:input={checkInputMaxLenght}
+					inputmode="numeric"
 					bind:value={$withdrawBalance}
 					disabled={radioValue === '2' || withdrawMaxSum <= 0}
 				/>
