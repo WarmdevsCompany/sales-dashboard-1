@@ -123,7 +123,7 @@ export default {
     "OVERVIEW_STATUS": "Membership status",
     "OVERVIEW_SINCE": "since",
     "OVERVIEW_EUCALYPTUS": "Eucalyptus",
-    "OVERVIEW_TOTAL": "total",
+    "OVERVIEW_TOTAL": "Total",
     "OVERVIEW_WITHDRAWS_DETAILS": "Withdraws Details",
     "OVERVIEW_SEED": "Seed",
     "OVERVIEW_SEQUOIA": "Sequoia",

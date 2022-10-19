@@ -112,6 +112,9 @@
 		bottom: -35px;
 		left: 5px;
 	}
+	.withdraw__label {
+			font-weight: var(--font-weight-bold);
+		}
 
 	@media only screen and (min-width: 0px) and (max-width: 1199px) {
 		.withdraw__manager {
@@ -129,6 +132,7 @@
 		}
 		.withdraw__label {
 			padding-left: 1rem;
+			padding-bottom: 0.5rem;
 		}
 	}
 </style>

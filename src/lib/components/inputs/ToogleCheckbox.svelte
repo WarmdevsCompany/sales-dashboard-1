@@ -50,7 +50,7 @@
 	.slider:before {
 		position: absolute;
 		content: '';
-		height: calc(100% - 2px);
+		height: calc(100% - 3px);
 		width: 7px;
 		left: 2px;
 		bottom: 0;
