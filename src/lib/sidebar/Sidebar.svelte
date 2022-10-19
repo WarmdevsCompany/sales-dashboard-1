@@ -239,6 +239,7 @@
 	.sidebar {
 		background: var(--green-dark-color);
 		min-width: 237px;
+		max-width: 237px;
 		height: 100%;
 	}
 	.sidebar__top {
@@ -246,6 +247,8 @@
 	}
 	.user__name {
 		margin-top: 0.5rem;
+		word-break: break-word;
+		padding: 0 1rem;
 	}
 	.menu {
 		max-width: 170px;
