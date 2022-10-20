@@ -1,4 +1,5 @@
 <script>
+	import { checkInputValue } from '$lib/functions/checkInputNumber.js';
 	import { t } from '$lib/translations/i18n.js';
 	import { isFetching } from '$lib/globalStore.js';
 	import { getModal } from '$lib/components/Modal.svelte';
@@ -46,20 +47,7 @@
 			$isFetching = false
 		}
 	}
-	function checkInputValue() {
-		this.value = this.value.replace(/[^0-9]/g, '');
-		if (this.value.length > this.maxLength) {
-			this.value = this.value.slice(0, this.maxLength);
-		} else if (parseInt(this.value) < 20) {
-			this.classList.add('error');
-			amountErrorState = true;
-		} else if (parseInt(this.value) >= 20) {
-			if (this.classList.contains('error')) {
-				this.classList.remove('error');
-				amountErrorState = false;
-			}
-		}
-	}
+	
 
 	function getPeriodId(periodName) {
 		let periodId;
@@ -78,13 +66,14 @@
 		<div class="input__wrapper ">
 			<label for="amount" class="label">{$t('MANAGE_AMOUNT')}</label>
 			<input
-				type="number"
+				type="text"
 				id="amount"
-				class:error={amountErrorState}
+				class:error={amountValue<20}
 				placeholder=""
 				min="20"
 				max="9999"
-				maxlength="4"
+				inputmode="decimal"
+				maxlength="6"
 				disabled={disabledState || errorState}
 				on:mousewheel={(e) => {
 					e.target.blur();
@@ -92,7 +81,7 @@
 				on:input={checkInputValue}
 				bind:value={amountValue}
 			/>
-			{#if amountErrorState}
+			{#if amountValue<20}
 				<p class="text-left text-xsm error_text amount__error">
 					{$t('MANAGE_AMOUNT_ERROR')}
 					{$globalData.data.currency.symbol}

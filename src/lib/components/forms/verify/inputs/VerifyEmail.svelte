@@ -25,7 +25,7 @@
 				if (res.status) {
 					$$props.sendVerifyCallback();
 				}else if(res.errorMessage === "INVALID_EMAIL"){
-					$errors['email'] =  'Invalid email'//$t('USER_NOT_FOUND')
+					$errors['email'] =  $t('INVALID_EMAIL')
 				 }
 			}else {
 				const res = await forgotPassword(value.email);
