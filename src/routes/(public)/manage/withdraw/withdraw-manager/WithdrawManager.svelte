@@ -1,5 +1,5 @@
 <script>
-	import { checkInputMaxLenght } from '$lib/functions/checkInputMaxLenght.js';
+	import { slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore.js';
 	import { withdrawMethod, withdrawBalance, withdrawFormState } from './../withdrawStore.js';
 	import Radio from '$lib/components/inputs/Radio.svelte';
@@ -61,6 +61,8 @@
 					on:mousewheel={(e) => {
 						e.target.blur();
 					}}
+
+				
 					on:input={checkInputValue}
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
@@ -68,7 +70,7 @@
 					disabled={radioValue === '2' || withdrawMaxSum <= 0}
 				/>
 				{#if amountErrorMessage}
-					<p class="text-left text-xsm error_text amount__error">
+					<p class="text-left text-xsm error_text amount__error" transition:slide|local>
 						{amountErrorMessage}
 						{$globalData.data.currency.symbol}
 					</p>
@@ -135,6 +137,10 @@
 		.withdraw__label {
 			padding-left: 1rem;
 			padding-bottom: 0.5rem;
+		}
+		.amount__error{
+		 position: static;
+		 margin: 0;
 		}
 	}
 </style>

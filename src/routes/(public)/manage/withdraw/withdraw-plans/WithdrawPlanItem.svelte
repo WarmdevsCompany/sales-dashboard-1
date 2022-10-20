@@ -9,7 +9,7 @@
 	<div class="d-flex justify-sb">
 		<div class="text-3 plan_name">{$$props.planName}</div>
 		<div class=" plan_persentage d-flex align-center">
-			<div>{$$props.planPersentage}%</div>
+			<div>{$$props.planPersentage || 0}%</div>
 		</div>
 	</div>
 	<div class="d-flex justify-sb align-base">

@@ -121,7 +121,7 @@
 	.input__wrapper {
 		max-width: 207px;
 	}
-	input[type='number'] {
+	input {
 		min-width: 207px;
 	}
 	input.error::placeholder {
@@ -146,7 +146,7 @@
 			width: 100%;
 			max-width: 28%;
 		}
-		input[type='number'],
+		input,
 		.dropdown__wrapper {
 			min-width: 0;
 		}

@@ -65,8 +65,9 @@
 	</div>
 </Modal>
 {#if $confirmModalState}
-	<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
-		<div class="confirm__form text-center">
+<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
+	<div class="confirm__form text-center">
+		<div class="overflow_wrapper">
 			<img src={greenLogo} alt="esi logo img" />
 			<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
 			<div class="text-xsm last__step--subhead mb-1_5">
@@ -111,6 +112,7 @@
 			/>
 		</div>
 	</div>
+</div>
 {/if}
 {#if successFormStatus}
 	<SuccessModal
@@ -213,6 +215,26 @@
 	.withdraw__row {
 		max-width: 100%;
 		padding: 0 1rem;
+	}
+	@media only screen and (max-width: 991px) {
+		.confirm__form {
+			min-height: 65vh;
+		}
+		.overflow_wrapper{
+		 height: 100vh;
+		 padding: 40px 0 80px 0;
+		 overflow: auto;
+		}
+			/* Hide scrollbar for Chrome, Safari and Opera */
+	.overflow_wrapper::-webkit-scrollbar {
+		display: none;
+	}
+
+	/* Hide scrollbar for IE, Edge and Firefox */
+	.overflow_wrapper {
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
+	}
 	}
 	@media only screen and (max-width: 480px) {
 		.form__wrapper {
