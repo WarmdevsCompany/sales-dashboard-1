@@ -1,21 +1,6 @@
 <script>
 	export let planInputValue;
-	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
-
-	function validate(s) {
-		const rgx = /^[0-9]*\.?[0-9]*$/;
-		return s.match(rgx);
-	}
-
-	function checkInputValue(e) {
-		const res = validate(this.value);
-		if (res === null) {
-			this.value = this.value.replace(/[^\d.-]/g, '');
-		}
-		if (this.value.length > this.maxLength) {
-			this.value = this.value.slice(0, this.maxLength);
-		}
-	}
+	import { checkInputNumber, checkInputValue } from '$lib/functions/checkInputNumber.js';
 </script>
 
 <div
@@ -37,7 +22,6 @@
 	<input
 		class="withdraw__amount mt-1"
 		type="text"
-		pattern="^\$\d{(1, 3)}(,\d{3})*(\.\d+)?$"
 		placeholder="0"
 		maxlength="7"
 		inputmode="decimal"
@@ -45,7 +29,7 @@
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}
 		on:input={checkInputValue}
-		step="any"
+		step="0.01"
 		bind:value={planInputValue}
 		on:mousewheel={(e) => {
 			e.target.blur();
@@ -53,7 +37,6 @@
 		class:error={$$props.planInputsErrorState || planInputValue > $$props.planAvailableMoney}
 	/>
 </div>
-
 <style>
 	.plan__item {
 		padding: 1rem 1rem 2.125rem 1rem;

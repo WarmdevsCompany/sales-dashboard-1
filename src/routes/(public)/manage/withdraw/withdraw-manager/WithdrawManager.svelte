@@ -4,7 +4,7 @@
 	import { withdrawMethod, withdrawBalance, withdrawFormState } from './../withdrawStore.js';
 	import Radio from '$lib/components/inputs/Radio.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
+	import { checkInputNumber, checkInputValue } from '$lib/functions/checkInputNumber.js';
 
 	let radioValue, amountErrorMessage, withdrawMaxSum, balance = 0;
 	const minWithdrawSum = 10;
@@ -53,13 +53,15 @@
 			<div class="withdraw__input relative">
 				<input
 					class:error={amountErrorMessage}
-					type="number"
+					type="text"
 					id="name"
 					name="name"
-					maxlength="6"
+					inputmode="decimal"
+					maxlength="7"
 					on:mousewheel={(e) => {
 						e.target.blur();
 					}}
+					on:input={checkInputValue}
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
 					bind:value={$withdrawBalance}
