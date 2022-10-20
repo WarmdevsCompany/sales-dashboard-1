@@ -2,14 +2,23 @@
 	export let planInputValue;
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
 	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-	function checkInputValue() {
-		if(isSafari){
+	var isIosIphoneOrIpad =
+		navigator.platform === 'iPhone' ||
+		navigator.platform === 'iPod' ||
+		navigator.platform === 'iPad';
+
+	function isNumber(value) {
+		return !isNaN(value);
+	}
+
+	function checkInputValue(e) {
+		 if (isSafari || isIosIphoneOrIpad) {
 			this.value = this.value.replace(/[^0-9]/g, '');
 		}
 		if (this.value.length > this.maxLength) {
 			this.value = this.value.slice(0, this.maxLength);
-		} 
-	}
+		}
+	}	
 </script>
 
 <div

@@ -98,7 +98,7 @@
 			margin-bottom: 4rem;
 		}
 		.buttons-confirm {
-			flex-direction: column-reverse;
+			
 			align-items: center;
 			max-height: 66px;
 		}
@@ -112,6 +112,9 @@
 		.btn.confirm-wd {
 			max-height: 66px;
 		}
+	}
+	@media only screen and (max-width: 580px) {
+	 
 	}
 	@media only screen and (max-width: 480px) {
 		.buttons {
