@@ -1,24 +1,21 @@
 <script>
 	export let planInputValue;
 	import { checkInputNumber } from '$lib/functions/checkInputNumber.js';
-	var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-	var isIosIphoneOrIpad =
-		navigator.platform === 'iPhone' ||
-		navigator.platform === 'iPod' ||
-		navigator.platform === 'iPad';
 
-	function isNumber(value) {
-		return !isNaN(value);
+	function validate(s) {
+		const rgx = /^[0-9]*\.?[0-9]*$/;
+		return s.match(rgx);
 	}
 
 	function checkInputValue(e) {
-		 if (isSafari || isIosIphoneOrIpad) {
-			this.value = this.value.replace(/[^0-9]/g, '');
+		const res = validate(this.value);
+		if (res === null) {
+			this.value = this.value.replace(/[^\d.-]/g, '');
 		}
 		if (this.value.length > this.maxLength) {
 			this.value = this.value.slice(0, this.maxLength);
 		}
-	}	
+	}
 </script>
 
 <div
@@ -39,9 +36,11 @@
 
 	<input
 		class="withdraw__amount mt-1"
-		type="number"
+		type="text"
+		pattern="^\$\d{(1, 3)}(,\d{3})*(\.\d+)?$"
 		placeholder="0"
-		maxlength="6"
+		maxlength="7"
+		inputmode="decimal"
 		disabled={$$props.planInputState}
 		on:keydown={checkInputNumber}
 		on:keyup={checkInputNumber}

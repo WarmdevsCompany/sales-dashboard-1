@@ -57,9 +57,9 @@
 		} else if ($withdrawMethod === '2') {
 			withdrawMaxSum = Math.round($globalData.data.currentSubscription.balance);
 			$withdrawBalance = Math.round(
-				$withdrawContribution.safeValue +
-					$withdrawContribution.adventureValue +
-					$withdrawContribution.founderValue
+				Number($withdrawContribution.safeValue) +
+				Number($withdrawContribution.adventureValue) +
+				Number($withdrawContribution.founderValue)
 			);
 			if (
 				$withdrawContribution.safePercentage === 33.34 &&
@@ -75,13 +75,13 @@
 				$withdrawFormState = false;
 				planInputsErrorState = false;
 				$withdrawContribution.safePercentage = Math.round(
-					($withdrawContribution.safeValue * 100) / $withdrawBalance
+					(Number($withdrawContribution.safeValue) * 100) / $withdrawBalance
 				);
 				$withdrawContribution.adventurePercentage = Math.round(
-					($withdrawContribution.adventureValue * 100) / $withdrawBalance
+					(Number($withdrawContribution.adventureValue) * 100) / $withdrawBalance
 				);
 				$withdrawContribution.founderPercentage = Math.round(
-					($withdrawContribution.founderValue * 100) / $withdrawBalance
+					(Number($withdrawContribution.founderValue) * 100) / $withdrawBalance
 				);
 			}
 		}
