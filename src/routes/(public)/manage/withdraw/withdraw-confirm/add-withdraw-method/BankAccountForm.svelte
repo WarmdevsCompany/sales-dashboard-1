@@ -19,7 +19,6 @@
 			if(accountType != accountTypeDropdownName){
 			   $form.accountType = accountType;
 			}
-		
 		} 
 	}
 	const onFocus = (item) => {

@@ -11,7 +11,7 @@
 		options = [],
 		isLoading = false,
 		submitBtnText = $t('NEXT');
-	console.log(withdrawMethods);
+	$:withdrawMethods;
 	withdrawMethods.forEach((item, index) => {
 		options[index] = { value: index };
 	});

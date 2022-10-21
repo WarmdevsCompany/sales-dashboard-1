@@ -39,7 +39,12 @@
 				}
 			});
 			const response = await rawResponse.json();
-			if (lang) {
+			console.log(response);
+			if (response.errorMessage === 'USER_DOES_NOT_FINISH_REGISTRATION') {
+				deleteCookie('esiToken');
+				goto('/404');
+			}
+			if (lang && response.data.lang.code === lang) {
 				locale.set(lang);
 			} else {
 				locale.set(response.data.lang.code);

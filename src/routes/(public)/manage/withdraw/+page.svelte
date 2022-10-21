@@ -17,8 +17,7 @@
 	const fee = $globalData.data.feeInfo.fee / 100;
 	const timeToTransferLessThan20 = $globalData.data.feeInfo.lessThen20;
 	const timeToTransferMoreThan20 = $globalData.data.feeInfo.moreThen20;
-	const balance = $globalData.data.currentSubscription.balance;
-	const withdrawMethods = $globalData.data.withdrawal_payment_methods;
+	let balance = $globalData.data.currentSubscription.balance;
 
 	$: {
 		withdrawOfTotal = roundNumber(($withdrawBalance * 100) / balance, 2);
@@ -46,4 +45,4 @@
 <WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
 
 <!-- Verify account -->
-<ConfirmModal {withdrawMethods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum}/>
+<ConfirmModal withdrawMethods={$globalData.data.withdrawal_payment_methods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum}/>

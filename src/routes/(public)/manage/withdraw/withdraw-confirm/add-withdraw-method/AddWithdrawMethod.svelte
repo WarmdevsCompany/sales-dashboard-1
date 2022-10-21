@@ -14,7 +14,6 @@
 	import {
 		addWithdrawalPaymentMethod,
 		getTypesForWithdrawal,
-		getGeneralData,
 		makeWithdrawal,
 		updateGlobalDataObj
 	} from '$lib/api/axios';
@@ -76,21 +75,23 @@
 	const ivBankUK = { sortCode: '', ibanOrAccountNumber: '' };
 
 	const yupBankUK = {
-		sortCode: yup.string().required($t('ENTER_SHORT_CODE')),
+		sortCode: yup.number().typeError($t('NUMBER_VALIDATION')).required($t('ENTER_SHORT_CODE')),
 		ibanOrAccountNumber: yup.string().required($t('ENTER_IBAN_OR_AN'))
 	};
 
 	const ivBankUS = { routingNumber: '', accountNumber: '', accountType: '' };
+
+
 	const yupBankUS = {
-		routingNumber: yup.string().required($t('ENTER_ROUTING_NUMB')),
-		accountNumber: yup.string().required($t('ENTER_ACCOUNT_NUMB')),
+		routingNumber: yup.number().typeError($t('NUMBER_VALIDATION')).required($t('ENTER_ROUTING_NUMB')),
+		accountNumber: yup.number().typeError($t('NUMBER_VALIDATION')).required($t('ENTER_ACCOUNT_NUMB')),
 		accountType: yup.string().required($t('CHOOSE_ACCOUNT_TYPE'))
 	};
 
 	const ivAddressData = { state: '', zipCode: '', city: '', address: '' };
 	let yupAddressDataRequired = {
 		state: yup.string().required($t('ENTER_STATE')),
-		zipCode: yup.string().required($t('ENTER_ZIP')),
+		zipCode: yup.number().typeError($t('NUMBER_VALIDATION')).required($t('ENTER_ZIP')),
 		city: yup.string().required($t('ENTER_CITY')),
 		address: yup.string().required($t('ENTER_ADDRESS'))
 	};
@@ -271,7 +272,7 @@
 	};
 
 	onMount(async () => {
-		const { data } = await getTypesForWithdrawal();
+		const { data } = await getTypesForWithdrawal($globalData.data.lang.idobject);
 		paymentMethodTypes = data.payment_method_types;
 		accountMethodTypes = data.account_types;
 		accountTypeArray = accountMethodTypes.map((item) => item.name);

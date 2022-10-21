@@ -17,7 +17,7 @@
 	let formStep = 1,
 		successFormStatus = false,
 		withdrawRequestProcessed = false;
-	$: formStep, successFormStatus;
+	$: formStep, successFormStatus, withdrawMethods;
 	const submitEmailOrPhone = () => (formStep = 2);
 	const submitVerificationCode = () => {
 		$confirmModalState = true;

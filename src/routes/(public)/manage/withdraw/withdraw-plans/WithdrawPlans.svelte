@@ -13,10 +13,10 @@
 	export let current_contribution;
 	export let currentSymbol;
 	const availableAmounts = {
-	 safe: $globalData.data.contributions.safePlan.totalSafe,
-	 adv: $globalData.data.contributions.adventurePlan.totalSafe,
-	 found: $globalData.data.contributions.founderPlan.totalSafe
-	}
+		safe: $globalData.data.contributions.safePlan.totalSafe,
+		adv: $globalData.data.contributions.adventurePlan.totalSafe,
+		found: $globalData.data.contributions.founderPlan.totalSafe
+	};
 
 	let planInputsErrorState = false,
 		withdrawMaxSum;
@@ -27,13 +27,16 @@
 		$withdrawContribution.founderPercentage = current_contribution.greenFounder;
 
 		$withdrawContribution.safeValue = round(
-			($withdrawContribution.safePercentage * $withdrawBalance) / 100, 2
+			($withdrawContribution.safePercentage * $withdrawBalance) / 100,
+			2
 		);
 		$withdrawContribution.adventureValue = round(
-			($withdrawContribution.adventurePercentage * $withdrawBalance) / 100,2
+			($withdrawContribution.adventurePercentage * $withdrawBalance) / 100,
+			2
 		);
 		$withdrawContribution.founderValue = round(
-			($withdrawContribution.founderPercentage * $withdrawBalance) / 100,2 
+			($withdrawContribution.founderPercentage * $withdrawBalance) / 100,
+			2
 		);
 	}
 	function setDataEqually() {
@@ -41,12 +44,11 @@
 		$withdrawContribution.adventurePercentage = 33.33;
 		$withdrawContribution.founderPercentage = 33.33;
 
-		const oneItemSum = roundNumber($withdrawBalance * 33.33 / 100);
-		const remainderFromDivision = roundNumber($withdrawBalance - (oneItemSum * 3));
+		const oneItemSum = roundNumber(($withdrawBalance * 33.33) / 100);
+		const remainderFromDivision = roundNumber($withdrawBalance - oneItemSum * 3);
 		$withdrawContribution.safeValue = roundNumber(oneItemSum + remainderFromDivision);
 		$withdrawContribution.adventureValue = roundNumber(oneItemSum);
 		$withdrawContribution.founderValue = roundNumber(oneItemSum);
-
 	}
 
 	$: {
@@ -58,8 +60,8 @@
 			withdrawMaxSum = Math.round($globalData.data.currentSubscription.balance);
 			$withdrawBalance = Math.round(
 				Number($withdrawContribution.safeValue) +
-				Number($withdrawContribution.adventureValue) +
-				Number($withdrawContribution.founderValue)
+					Number($withdrawContribution.adventureValue) +
+					Number($withdrawContribution.founderValue)
 			);
 			if (
 				$withdrawContribution.safePercentage === 33.34 &&
@@ -123,3 +125,11 @@
 		{planInputsErrorState}
 	/>
 </div>
+
+<style>
+	@media only screen and (max-width: 1150px) and (min-width: 991px) {
+		.grid-3 {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

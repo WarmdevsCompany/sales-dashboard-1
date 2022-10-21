@@ -24,3 +24,10 @@
 		planPersentage={$globalData.data.current_contribution?.greenFounder || 0}
 	/>
 </div>
+<style>
+		@media only screen and (max-width: 1150px) and (min-width: 991px) {
+		.grid-3 {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+</style>

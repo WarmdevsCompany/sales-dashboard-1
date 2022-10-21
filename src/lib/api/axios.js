@@ -75,9 +75,9 @@ export const changeForgotPassword = async (emailOrPhone, password, verificationI
 		console.error(error);
 	}
 };
-export const getTypesForWithdrawal = async () => {
+export const getTypesForWithdrawal = async (langId) => {
 	try {
-		let response = await publicPath.get('/getTypesForWithdrawal');
+		let response = await publicPath.post('/getTypesForWithdrawal',{langId});
 		return response.data;
 	} catch (error) {
 		console.error(error);
@@ -101,10 +101,10 @@ export const addWithdrawalPaymentMethod = async (body) => {
 	} catch (error) {
 		console.error(error);
 		//redirect to 404
-		// if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
-		// 	goto('/404');
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
 		// // redirect to auth when
-		// if (error.response.data === 'Bad Authorization string') goto('/auth/login');
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const makeWithdrawal = async (body) => {
@@ -114,10 +114,10 @@ export const makeWithdrawal = async (body) => {
 	} catch (error) {
 		console.error(error);
 		// redirect to 404
-		// if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
-		// 	goto('/404');
+		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+			goto('/404');
 		// // redirect to auth when
-		// if (error.response.data === 'Bad Authorization string') goto('/auth/login');
+		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 

@@ -37,6 +37,7 @@
 		class:error={$$props.planInputsErrorState || planInputValue > $$props.planAvailableMoney}
 	/>
 </div>
+
 <style>
 	.plan__item {
 		padding: 1rem 1rem 2.125rem 1rem;
