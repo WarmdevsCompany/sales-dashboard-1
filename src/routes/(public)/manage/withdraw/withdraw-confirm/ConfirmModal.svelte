@@ -222,7 +222,7 @@
 		}
 		.overflow_wrapper{
 		 height: 100vh;
-		 padding: 40px 0 120px 0;
+		 padding: 30px 0 160px 0;
 		 overflow: auto;
 		}
 			/* Hide scrollbar for Chrome, Safari and Opera */
