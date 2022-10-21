@@ -6,7 +6,10 @@
 	import { getModal } from '$lib/components/Modal.svelte';
 	import ChangePassModal from './modals/ChangePassModal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	const date = convertDateToUTC($globalData.data.passwordLastChangeDate);
+	let date = convertDateToUTC($globalData.data.passwordLastChangeDate);
+	$: {
+		date = convertDateToUTC($globalData.data.passwordLastChangeDate);
+	}
 	let passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 
 	scrollToTop();

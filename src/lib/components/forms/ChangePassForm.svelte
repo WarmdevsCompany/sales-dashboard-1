@@ -46,8 +46,8 @@
 				if (res.status) {
 					setNewAuthHeaders(res.data.token);
 					const date = new Date();
-					const currentDate = date.toLocaleString().substring(0, 10);
-					$globalData.data.passwordLastChangeDate = currentDate;
+					const currentDate = date.getTime();
+					$globalData.data.passwordLastChangeDate = parseInt(currentDate / 1000)
 					$$props.submitNewPassword();
 				} else {
 					$errors.confirmPassword = res.errorMessage;
