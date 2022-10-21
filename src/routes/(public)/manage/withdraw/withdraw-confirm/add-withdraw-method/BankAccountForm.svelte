@@ -10,10 +10,17 @@
 		isLoading,
 		handleChange;
 	export let accountTypeArray = [],
-	legalTypeId, accountType = $t('MANAGE_WITHDRAW_ACC_TYPE')+'*';
+	legalTypeId;
+	const accountTypeDropdownName = $t('MANAGE_WITHDRAW_ACC_TYPE')+'*'
+	let  accountType = accountTypeDropdownName;
 	$: {
 		accountType;
-		if ($form?.accountType || $form?.accountType  === "") $form.accountType = accountType;
+		if ($form?.accountType || $form?.accountType  === ""){
+			if(accountType != accountTypeDropdownName){
+			   $form.accountType = accountType;
+			}
+		
+		} 
 	}
 	const onFocus = (item) => {
 		$errors[item] = '';
