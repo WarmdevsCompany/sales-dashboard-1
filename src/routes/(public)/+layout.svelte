@@ -39,7 +39,6 @@
 				}
 			});
 			const response = await rawResponse.json();
-			console.log(response);
 			if (response.errorMessage === 'USER_DOES_NOT_FINISH_REGISTRATION') {
 				deleteCookie('esiToken');
 				goto('/404');
