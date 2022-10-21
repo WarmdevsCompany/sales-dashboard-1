@@ -1,13 +1,19 @@
 <script>
 	import { slide } from 'svelte/transition';
 	import { globalData } from '$lib/globalStore.js';
-	import { withdrawMethod, withdrawBalance, withdrawFormState } from './../withdrawStore.js';
+	import {
+		withdrawMethod,
+		withdrawBalance,
+		withdrawFormState,
+		radioValue
+	} from './../withdrawStore.js';
 	import Radio from '$lib/components/inputs/Radio.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { checkInputNumber, checkInputValue } from '$lib/functions/checkInputNumber.js';
 
-	let radioValue, amountErrorMessage, withdrawMaxSum, balance = 0;
+	let amountErrorMessage, withdrawMaxSum;
 	const minWithdrawSum = 10;
+	$radioValue = '0'
 
 	const options = [
 		{
@@ -25,9 +31,10 @@
 	];
 	$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5);
 	$: {
-		$withdrawMethod = radioValue;
+		$withdrawMethod = $radioValue;
+		// $withdrawBalance = isNaN($withdrawBalance) ? 0 : $withdrawBalance;
 		withdrawMaxSum = $globalData.data.currentSubscription.balance;
-		if ($withdrawBalance < minWithdrawSum && withdrawMaxSum !=0) {
+		if ($withdrawBalance < minWithdrawSum && withdrawMaxSum != 0) {
 			amountErrorMessage = `${$t('MANAGE_WITHDRAW_LESS_ERR')} ${minWithdrawSum}`;
 			$withdrawFormState = true;
 		} else if ($withdrawBalance > withdrawMaxSum) {
@@ -38,7 +45,6 @@
 			$withdrawFormState = false;
 		}
 	}
-
 </script>
 
 <div class="withdraw__manager b-radius-8 box_shadow-medium">
@@ -61,13 +67,11 @@
 					on:mousewheel={(e) => {
 						e.target.blur();
 					}}
-
-				
 					on:input={checkInputValue}
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
 					bind:value={$withdrawBalance}
-					disabled={radioValue === '2' || withdrawMaxSum <= 0}
+					disabled={$radioValue === '2' || withdrawMaxSum <= 0}
 				/>
 				{#if amountErrorMessage}
 					<p class="text-left text-xsm error_text amount__error" transition:slide|local>
@@ -82,7 +86,7 @@
 			<Radio
 				{options}
 				fontSize={16}
-				bind:userSelected={radioValue}
+				bind:userSelected={$radioValue}
 				disabledState={$withdrawFormState || withdrawMaxSum <= 0}
 			/>
 		</div>
@@ -117,8 +121,8 @@
 		left: 5px;
 	}
 	.withdraw__label {
-			font-weight: var(--font-weight-bold);
-		}
+		font-weight: var(--font-weight-bold);
+	}
 
 	@media only screen and (min-width: 0px) and (max-width: 1199px) {
 		.withdraw__manager {
@@ -138,9 +142,9 @@
 			padding-left: 1rem;
 			padding-bottom: 0.5rem;
 		}
-		.amount__error{
-		 position: static;
-		 margin: 0;
+		.amount__error {
+			position: static;
+			margin: 0;
 		}
 	}
 </style>

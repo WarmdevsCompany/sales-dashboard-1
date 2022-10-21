@@ -22,7 +22,9 @@ export function checkInputValue(e) {
 	}
 	const res = validate(this.value);
 	if (res === null) {
-		this.value = this.value.replace(/[^\d.-]/g, '');
+		this.value = this.value.replace(/[^\d.]/g, '').replace(/\.([.\d]+)$/, function(m, m1) {
+			return '.' + m1.replace(/\./g, '')
+		  })
 	}
 	if (this.value.length > this.maxLength) {
 		this.value = this.value.slice(0, this.maxLength);

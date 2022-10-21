@@ -61,16 +61,23 @@
 <svelte:head>
 	<title>{$t('PLAN')}</title>
 	<meta name="description" content="Plan page" />
-	<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+	{#if !window['lottie-player']}
+		<script
+			src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+	{/if}
 </svelte:head>
 
-<ChangePlans isDisebled = {$globalData.data.currentSubscription.statusId === 5236999 || $globalData.data.currentSubscription.statusId === 5237000}/>
+<ChangePlans
+	isDisebled={$globalData.data.currentSubscription.statusId === 5236999 ||
+		$globalData.data.currentSubscription.statusId === 5237000}
+/>
 <div class="d-flex justify-cc">
 	<button
 		class="btn confirm mt-1_5 box_shadow-medium"
 		on:click={changeContributionData}
 		class:is_fetching={$isFetching}
-		disabled ={$globalData.data.currentSubscription.statusId === 5236999 || $globalData.data.currentSubscription.statusId === 5237000}
+		disabled={$globalData.data.currentSubscription.statusId === 5236999 ||
+			$globalData.data.currentSubscription.statusId === 5237000}
 		>{confirmButtonText}
 	</button>
 </div>

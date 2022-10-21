@@ -21,7 +21,7 @@
 	let planInputsErrorState = false,
 		withdrawMaxSum;
 
-	function setDataAsCurrentContr() {
+	export function setDataAsCurrentContr() {
 		$withdrawContribution.safePercentage = current_contribution.greenSafe;
 		$withdrawContribution.adventurePercentage = current_contribution.greenAdventure;
 		$withdrawContribution.founderPercentage = current_contribution.greenFounder;

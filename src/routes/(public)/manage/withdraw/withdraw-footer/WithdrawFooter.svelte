@@ -3,22 +3,24 @@
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { roundNumber } from '$lib/functions/roundNumber.js';
-	import { confirmModalState, withdrawFormState, withdrawBalance } from '../withdrawStore';
+	import {
+		confirmModalState,
+		withdrawFormState,
+		withdrawBalance,
+		radioValue
+	} from '../withdrawStore';
 	export let btnAligment = 'justify-end',
 		confirmBtn = 'open',
 		closeModals,
 		timeToTransfer,
 		withdrawOfTotal,
 		feeSum;
-
-	export let confirmWithdraw = () => {
-		// $confirmModalState = false;
-		// if (withdrawMethods && withdrawMethods.length > 0) {
-		// 	formStep = 3;
-		// } else {
-		// 	formStep = 4;
-		// }
+	const resetWithdrawls = () => {
+		$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5);
+		$radioValue = '0';
 	};
+
+	export let confirmWithdraw = () => {};
 </script>
 
 {#if $globalData.data.currentSubscription.balance > 0}
@@ -35,7 +37,7 @@
 		</div>
 		{#if confirmBtn === 'open'}
 			<div class="d-flex {btnAligment} buttons">
-				<button class="btn cancel mr-1_5">{$t('CANCEL')}</button>
+				<button class="btn cancel mr-1_5" on:click={resetWithdrawls}>{$t('CANCEL')}</button>
 
 				<button
 					disabled={$withdrawFormState}
@@ -113,14 +115,13 @@
 		}
 	}
 	@media only screen and (max-width: 580px) {
-		.buttons-confirm{
-		 display: flex;
-		 flex-direction: column-reverse;
-		 
+		.buttons-confirm {
+			display: flex;
+			flex-direction: column-reverse;
 		}
 		.btn.confirm-wd {
-			width: 100%;margin-bottom: 
-			0.5rem;
+			width: 100%;
+			margin-bottom: 0.5rem;
 		}
 		.buttons-confirm button.btn.cancel {
 			width: 100%;
