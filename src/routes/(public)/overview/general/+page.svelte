@@ -27,7 +27,7 @@
 	let currentAmountCounter = currentAmount * 12;
 	let previousAmountCounter = previousAmount * 12;
 
-	if (previousAmount || previousAmount != null) {
+	if (previousAmount && previousAmount != null && previousAmount != currentAmount) {
 		yearsArray.forEach(() => {
 			currentTrajectory = [...currentTrajectory, currentAmountCounter];
 			currentAmountCounter = currentAmountCounter + currentAmount * 12;
@@ -84,6 +84,7 @@
 				{yearsArray}
 				currentTraject={currentTrajectory}
 				prevTraject={previousTrajectory}
+				currencySymbol={$globalData.data.currency.symbol}
 			/>
 		</div>
 	</div>

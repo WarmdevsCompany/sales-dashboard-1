@@ -65,54 +65,57 @@
 	</div>
 </Modal>
 {#if $confirmModalState}
-<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
-	<div class="confirm__form text-center">
-		<div class="overflow_wrapper">
-			<img src={greenLogo} alt="esi logo img" />
-			<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
-			<div class="text-xsm last__step--subhead mb-1_5">
-				{$t('WHERE_WITHDRAW')}*
-			</div>
-			<div class="last__step--body">
-				<div>
-					{$t('SAFE_PLAN_BIG')}:
-					<span class="text-green mobile-block"
-						>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
-					>
-					<div class="inline">
-						{$t('ADVENTURE_BIG')}:
-						<span class="text-green mobile-block"
-							>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
-						>
-					</div>
-
-					{$t('FOUNDER_BIG')}:
-					<span class="text-green mobile-block"
-						>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
-					>
+	<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
+		<div class="confirm__form text-center">
+			<div class="overflow_wrapper">
+				<img src={greenLogo} alt="esi logo img" />
+				<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
+				<div class="text-xsm last__step--subhead mb-1_5">
+					{$t('WHERE_WITHDRAW')}*
 				</div>
-				<div class="line mt-1_5 mb-1_5" />
-				<WithdrawFooter
-					btnAligment={'justify-cc'}
-					confirmBtn={'confirm'}
-					bind:formStep
-					{closeModals}
-					{withdrawMethods}
-					{feeSum}
-					{timeToTransfer}
-					{withdrawOfTotal}
-					{confirmWithdraw}
+				<div class="last__step--body">
+					<div>
+						<div class="inline">
+							{$t('SAFE_PLAN_BIG')}:
+							<span class="text-green mobile-block"
+								>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
+							>
+						</div>
+						<div class="inline">
+							{$t('ADVENTURE_BIG')}:
+							<span class="text-green mobile-block"
+								>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
+							>
+						</div>
+						<div class="inline">
+							{$t('FOUNDER_BIG')}:
+							<span class="text-green mobile-block"
+								>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
+							>
+						</div>
+					</div>
+					<div class="line mt-1_5 mb-1_5" />
+					<WithdrawFooter
+						btnAligment={'justify-cc'}
+						confirmBtn={'confirm'}
+						bind:formStep
+						{closeModals}
+						{withdrawMethods}
+						{feeSum}
+						{timeToTransfer}
+						{withdrawOfTotal}
+						{confirmWithdraw}
+					/>
+				</div>
+				<img
+					class="close_icon"
+					on:click={() => closeModals('withdraw')}
+					src={closeIcon}
+					alt="esi close icon"
 				/>
 			</div>
-			<img
-				class="close_icon"
-				on:click={() => closeModals('withdraw')}
-				src={closeIcon}
-				alt="esi close icon"
-			/>
 		</div>
 	</div>
-</div>
 {/if}
 {#if successFormStatus}
 	<SuccessModal
@@ -204,7 +207,7 @@
 	}
 	.last__step--body {
 		margin: 0 auto;
-		max-width: 632px;
+		max-width: 650px;
 	}
 
 	.line {
@@ -220,21 +223,21 @@
 		.confirm__form {
 			min-height: 65vh;
 		}
-		.overflow_wrapper{
-		 height: 100vh;
-		 padding: 30px 0 160px 0;
-		 overflow: auto;
+		.overflow_wrapper {
+			height: 100vh;
+			padding: 30px 0 170px 0;
+			overflow: auto;
 		}
-			/* Hide scrollbar for Chrome, Safari and Opera */
-	.overflow_wrapper::-webkit-scrollbar {
-		display: none;
-	}
+		/* Hide scrollbar for Chrome, Safari and Opera */
+		.overflow_wrapper::-webkit-scrollbar {
+			display: none;
+		}
 
-	/* Hide scrollbar for IE, Edge and Firefox */
-	.overflow_wrapper {
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
+		/* Hide scrollbar for IE, Edge and Firefox */
+		.overflow_wrapper {
+			-ms-overflow-style: none; /* IE and Edge */
+			scrollbar-width: none; /* Firefox */
+		}
 	}
 	@media only screen and (max-width: 480px) {
 		.form__wrapper {

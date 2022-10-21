@@ -3,53 +3,64 @@
 	import { onMount } from 'svelte';
 	import { numberWithCommas } from '$lib/functions/numberWithCommas';
 	import { t } from '$lib/translations/i18n.js';
+	import { createPopperActions } from 'svelte-popperjs';
+	import { fade } from 'svelte/transition';
+	const [popperRef, popperContent] = createPopperActions({
+		placement: 'bottom',
+		strategy: 'fixed'
+	});
+	const extraOpts = {
+		modifiers: [{ name: 'offset', options: { offset: [0, 8] } }]
+	};
+
+	let showTooltip = false;
 	let myChart;
-	let month = new Date().getMonth() + 1
-	if(month<10){
-		month = '0'+month
+	let month = new Date().getMonth() + 1;
+	if (month < 10) {
+		month = '0' + month;
 	}
-	const currentMonth = $t('MONTH_SHORT_' + month)
-	
+	const currentMonth = $t('MONTH_SHORT_' + month);
+
 	let dataSets = [
-			{
-				data: $$props.prevTraject ,
-				backgroundColor: '#6cc800',
-				borderColor: 'white',
-				pointRadius: 0,
-				pointHoverRadius: 0,
-				color: 'white',
-				pointHitRadius: 0,
-				tooltipText: 'some text'
-			},
-			{
-				data: $$props.currentTraject,
-				pointBackgroundColor: '#6cc800',
-				borderColor: '#6cc800',
-				pointBorderColor: 'white',
-				backgroundColor: '#6cc800',
-				color: '#6cc800',
-				pointRadius: 4,
-				pointHoverRadius: 5,
-				pointStyle: 'circle',
-				tooltipText: 'some text 2'
-			}
-		]
-		if(!$$props.prevTraject || $$props.prevTraject === null){
-			dataSets = [
-			{
-				data: $$props.currentTraject,
-				pointBackgroundColor: '#6cc800',
-				borderColor: '#6cc800',
-				pointBorderColor: 'white',
-				backgroundColor: '#6cc800',
-				color: '#6cc800',
-				pointRadius: 4,
-				pointHoverRadius: 5,
-				pointStyle: 'circle',
-				tooltipText: 'some text 2'
-			}
-		]
+		{
+			data: $$props.prevTraject,
+			backgroundColor: '#6cc800',
+			borderColor: 'white',
+			pointRadius: 0,
+			pointHoverRadius: 0,
+			color: 'white',
+			pointHitRadius: 0,
+			tooltipText: 'some text'
+		},
+		{
+			data: $$props.currentTraject,
+			pointBackgroundColor: '#6cc800',
+			borderColor: '#6cc800',
+			pointBorderColor: 'white',
+			backgroundColor: '#6cc800',
+			color: '#6cc800',
+			pointRadius: 4,
+			pointHoverRadius: 5,
+			pointStyle: 'circle',
+			tooltipText: 'some text 2'
 		}
+	];
+	if (!$$props.prevTraject || $$props.prevTraject === null) {
+		dataSets = [
+			{
+				data: $$props.currentTraject,
+				pointBackgroundColor: '#6cc800',
+				borderColor: '#6cc800',
+				pointBorderColor: 'white',
+				backgroundColor: '#6cc800',
+				color: '#6cc800',
+				pointRadius: 4,
+				pointHoverRadius: 5,
+				pointStyle: 'circle',
+				tooltipText: 'some text 2'
+			}
+		];
+	}
 
 	// drawHorisontalLines plugin
 	const drawHorisontalLines = {
@@ -119,11 +130,11 @@
 					displayColors: false,
 					callbacks: {
 						title: function (tooltipItem) {
-							return '$' + numberWithCommas(tooltipItem[0].raw, 0);
+							return $$props.currencySymbol + numberWithCommas(tooltipItem[0].raw, 0);
 						},
 						label: function (tooltipItem) {
 							//console.log(tooltipItem.dataset.tooltipText);
-							return 'Saving to ' + tooltipItem.label;
+							return `${$t('OVERVIEW_SAVING_TO')} ${tooltipItem.label}`;
 						}
 					}
 				}
@@ -140,7 +151,7 @@
 						padding: 10,
 						// Include a dollar sign in the ticks
 						callback: function (value, index, values) {
-							return '$' + numberWithCommas(value, 0);
+							return  $$props.currencySymbol + numberWithCommas(value, 0);
 						}
 					}
 				},
@@ -189,7 +200,26 @@
 	<div class="column">
 		<div class="row text-3 chat-top-head">{$t('OVERVIEW_SAVING_PROJECTION')}</div>
 		<div class="row d-flex align-top text-sm">
-			<span class="mr-0_5">{$t('OVERVIEW_TOTAL_SAVE_5')}</span><StatusIcon bgColor="white" />
+			<span class="mr-0_5">{$t('OVERVIEW_TOTAL_SAVE_5')}</span>
+			<div
+				use:popperRef
+				on:mouseenter={() => (showTooltip = true)}
+				on:mouseleave={() => (showTooltip = false)}
+			>
+				<StatusIcon bgColor="white" />
+			</div>
+			{#if showTooltip}
+				<div
+					id="tooltip"
+					class="b-radius-8 text-xsm "
+					transition:fade={{ duration: 80, offset: 0 }}
+					use:popperContent={extraOpts}
+				>
+					{$t('OVERVIEW_SAVING_PROJECTION')}
+
+					<div id="arrow" data-popper-arrow />
+				</div>
+			{/if}
 		</div>
 	</div>
 	<div class="column">
@@ -206,6 +236,28 @@
 </div>
 
 <style>
+	#tooltip {
+		padding: 0.75rem 0.75rem 0.75rem 0.75rem;
+		background: var(--white);
+		z-index: 10;
+		color: #5f5f5f;
+		max-width: 215px;
+		font-weight: var(--font-weight-normal);
+		box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.15);
+	}
+
+	#tooltip::after {
+		content: '';
+		position: absolute;
+		top: -5px;
+		right: 50%;
+		border-radius: 2px;
+		transform: translate(50%, 0) rotate(45deg);
+		border-top: 7px solid white;
+		border-bottom: 7px solid transparent;
+		border-left: 7px solid white;
+		border-right: 7px solid transparent;
+	}
 	button.chat-label {
 		display: block;
 		font-size: 12px;

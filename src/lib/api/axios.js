@@ -101,10 +101,10 @@ export const addWithdrawalPaymentMethod = async (body) => {
 	} catch (error) {
 		console.error(error);
 		//redirect to 404
-		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
-			goto('/404');
-		// redirect to auth when
-		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
+		// if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+		// 	goto('/404');
+		// // redirect to auth when
+		// if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 export const makeWithdrawal = async (body) => {
@@ -114,10 +114,10 @@ export const makeWithdrawal = async (body) => {
 	} catch (error) {
 		console.error(error);
 		// redirect to 404
-		if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
-			goto('/404');
-		// redirect to auth when
-		if (error.response.data === 'Bad Authorization string') goto('/auth/login');
+		// if (error.response.status != 401 && error.response.data != 'Bad Authorization string')
+		// 	goto('/404');
+		// // redirect to auth when
+		// if (error.response.data === 'Bad Authorization string') goto('/auth/login');
 	}
 };
 

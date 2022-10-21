@@ -3,6 +3,10 @@
 	export let chartName, className, chartValue;
 	let mainColor = '#6CC800';
 	let chartData = [];
+	let myChart;
+	let myChartCircle;
+	let borderRadius = chartValue === 100 ? 0 : 20;
+	
 	function checkClassNameAndSetStyle() {
 		switch (className) {
 			case 'seed':
@@ -31,8 +35,7 @@
 		generateDataArray();
 	}
 
-	let myChart;
-	let myChartCircle;
+
 
 	// draw text inside
 	const drawTextInsideChart = {
@@ -69,7 +72,7 @@
 					rotation: 0,
 					cutout: '90%',
 					circular: true,
-					borderRadius: 20,
+					borderRadius: borderRadius,
 					hoverOffset: 4
 				}
 			]
