@@ -6,7 +6,12 @@
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData, isFetching } from '$lib/globalStore';
-	import { restartContribution, pauseContribution, stopContribution, updateGlobalDataObj } from '$lib/api/axios';
+	import {
+		restartContribution,
+		pauseContribution,
+		stopContribution,
+		updateGlobalDataObj
+	} from '$lib/api/axios';
 	import { convertDateToUTC } from '$lib/functions/convertDateToUTC.js';
 	export let statusId;
 	let stopCheckboxValue = false;
@@ -40,8 +45,7 @@
 		if (response.status) {
 			getModal('stop').close();
 			stopBtnText = $t('MANAGE_STOP');
-			await updateGlobalDataObj()
-			
+			await updateGlobalDataObj();
 		}
 		$isFetching = false;
 	}
@@ -53,16 +57,13 @@
 			if (response.status) {
 				getModal('restart').close();
 				restartBtnText = $t('MANAGE_RES');
-				await updateGlobalDataObj()
-				stopCheckboxValue = false
-				
+				await updateGlobalDataObj();
+				stopCheckboxValue = false;
 			}
 			$isFetching = false;
-			
 		} else {
 			chackboxErrorStatus = true;
 		}
-
 	}
 	async function pause() {
 		pauseBtnText = `${$t('LOADING')}...`;
@@ -72,7 +73,7 @@
 		if (response.status) {
 			getModal('pause').close();
 			pauseBtnText = $t('MANAGE_PAUSE');
-			await updateGlobalDataObj()
+			await updateGlobalDataObj();
 		}
 		$isFetching = false;
 	}
@@ -94,20 +95,18 @@
 		<button
 			class="btn pause mb-1"
 			on:click={() => getModal('pause').open()}
-			disabled={statusId === 5236999 ||
-				statusId === 5237000 ||
-				statusId === 5237002}>{$t('MANAGE_PAUSE')}</button
+			disabled={statusId === 5236999 || statusId === 5237000 || statusId === 5237002}
+			>{$t('MANAGE_PAUSE')}</button
 		>
 		<button
 			class="btn stop mb-1"
 			on:click={() => getModal('stop').open()}
-			disabled={statusId === 5237000 || statusId == 5237002}
-			>{$t('MANAGE_STOP')}</button
+			disabled={statusId === 5237000 || statusId == 5237002}>{$t('MANAGE_STOP')}</button
 		>
 		<button
 			class="btn restart mb-1"
 			on:click={() => getModal('restart').open()}
-			disabled={statusId === 5236998 || statusId === 5237001}
+			disabled={statusId === 5236998 || statusId === 5237001 || statusId === 5237002}
 			>{$t('MANAGE_RES')}</button
 		>
 	</div>
