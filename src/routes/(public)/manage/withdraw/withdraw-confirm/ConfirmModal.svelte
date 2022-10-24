@@ -64,7 +64,7 @@
 		</div>
 	</div>
 </Modal>
-<!-- {#if $confirmModalState} -->
+{#if $confirmModalState}
 <div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
 	<div class="confirm__form text-center">
 		<div class="overflow_wrapper">
@@ -74,7 +74,7 @@
 				{$t('WHERE_WITHDRAW')}*
 			</div>
 			<div class="last__step--body">
-				<div>
+				<div class="last__step--flex">
 					<div class="inline">
 						{$t('SAFE_PLAN_BIG')}:
 						<span class="text-green mobile-block"
@@ -118,7 +118,7 @@
 		</div>
 	</div>
 </div>
-<!-- {/if} -->
+{/if}
 {#if successFormStatus}
 	<SuccessModal
 		closeModals={closeAllModals}
@@ -230,6 +230,11 @@
 		margin: 0 auto;
 		max-width: 650px;
 	}
+	.last__step--flex {
+		display: flex;
+
+		justify-content: space-around;
+	}
 
 	.line {
 		width: 100%;
@@ -253,6 +258,9 @@
 		.overflow_wrapper::-webkit-scrollbar {
 			display: none;
 		}
+		.last__step--flex {
+			display: block;
+		}
 
 		/* Hide scrollbar for IE, Edge and Firefox */
 		.overflow_wrapper {
@@ -262,9 +270,9 @@
 	}
 	@media (orientation: landscape) and (max-width: 991px) {
 		.close_icon--wrapper {
-		 top: 60px;
+			top: 60px;
 		}
-}
+	}
 	@media only screen and (max-width: 480px) {
 		.form__wrapper {
 			padding: 0;
