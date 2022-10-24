@@ -11,9 +11,9 @@
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
-	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
+	import SuccessWithdrawModal from '$lib/components/forms/SuccessWithdrawModal.svelte';
 
-	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum;
+	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum, selectedPaymentMethod;
 	let formStep = 1,
 		successFormStatus = false,
 		withdrawRequestProcessed = false;
@@ -57,9 +57,9 @@
 		</div>
 		<div class="withdraw__row">
 			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep bind:successFormStatus {withdrawMethods} />
+				<WithdrawsMethods bind:formStep bind:successFormStatus {withdrawMethods} bind:selectedPaymentMethod/>
 			{:else if formStep === 4}
-				<AddWithdrawMethod bind:withdrawRequestProcessed />
+				<AddWithdrawMethod bind:withdrawRequestProcessed bind:selectedPaymentMethod/>
 			{/if}
 		</div>
 	</div>
@@ -120,17 +120,19 @@
 </div>
 {/if}
 {#if successFormStatus}
-	<SuccessModal
+	<SuccessWithdrawModal
 		closeModals={closeAllModals}
 		mainText={$t('MANAGE_WITHDRAW_CONFIRMED')}
 		btnText={$t('BACK')}
+		{selectedPaymentMethod}
 	/>
 {/if}
 {#if withdrawRequestProcessed}
-	<SuccessModal
+	<SuccessWithdrawModal
 		closeModals={closeAllModals}
 		mainText={$t('MANAGE_WITHDRAW_PROCESSED')}
 		btnText={$t('BACK')}
+		{selectedPaymentMethod}
 	/>
 {/if}
 

@@ -4,9 +4,9 @@
 	import closeIcon from '$lib/assets/img/close.svg';
 	import logo from '$lib/assets/img/logo-green.svg';
 	export let mainText = $t('PROFILE_UPDATED'),
-		mainContent = false,
 		btnText = $t('BACK'),
-		closeModals = () => {};
+		closeModals = () => {},
+		selectedPaymentMethod;
 </script>
 
 <div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
@@ -16,10 +16,14 @@
 			<div class="modal_head_medium text-1">
 				{mainText}
 			</div>
-			{#if mainContent}
-				<div class="mt-2">{mainContent}</div>
-			{/if}
-
+			<div class="d-flex justify-cc mt-2">
+				<div class="withdraw__item active_item b-radius-10 p-2 relative text-left">
+					<div class="text-3">
+						{$t('BANK_TRANSFER')} #{selectedPaymentMethod.accountNumber}*{selectedPaymentMethod.currencyName}
+					</div>
+					<div class="text-xsm text-green mt-0_5">{selectedPaymentMethod.fullName || ''}</div>
+				</div>
+			</div>
 			<button class="btn success" on:click={closeModals}>{btnText}</button>
 		</div>
 		<img class="close_icon" on:click={closeModals} src={closeIcon} alt="esi close icon" />

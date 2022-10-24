@@ -3,6 +3,8 @@
 	import SettingsLanguage from './SettingsLanguage.svelte';
 	import SettingsNotifications from './SettingsNotifications.svelte';
 	import { t } from '$lib/translations/i18n.js';
+	import ClosingAccountModal from './ClosingAccountModal.svelte';
+	import { getModal } from '$lib/components/Modal.svelte';
 
 	scrollToTop();
 </script>
@@ -20,8 +22,10 @@
 			<SettingsLanguage />
 		</div>
 	</div>
-	<button class="btn confirm settings_btn" disabled>{$t('SETTINGS.CLOSING_AN_ACCOUNT')}</button>
+	<button class="btn confirm settings_btn" on:click={()=>{getModal('close_account').open()}}>{$t('SETTINGS.CLOSING_AN_ACCOUNT')}</button>
 </div>
+
+<ClosingAccountModal />
 
 <style>
 	.settings_main {
@@ -33,11 +37,22 @@
 	.settings_main .grid-2 {
 		margin-right: 170px;
 	}
-	button.btn.confirm.settings_btn:disabled {
-		border-color: #d8d8d8;
+	button.btn.confirm.settings_btn {
+		background: rgba(182, 182, 182, 0.2);
+		border: 1px solid #d8d8d8;
+		color: #929292;
 		padding: 13px;
 		width: 233px;
 		margin-left: auto;
+	}
+	button.btn.confirm.settings_btn:hover {
+		background: var(--primary-color);
+		border-color: var(--primary-color);
+		color: #fff;
+	}
+	button.btn.confirm.settings_btn:active {
+		background: #006effa4;
+		border-color: #006effa4;
 	}
 
 	:global(.settings_card) {

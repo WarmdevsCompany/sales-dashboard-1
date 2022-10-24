@@ -18,7 +18,7 @@
 		updateGlobalDataObj
 	} from '$lib/api/axios';
 	export let submitBtnText = $t('SAVE'),
-		withdrawRequestProcessed;
+		withdrawRequestProcessed, selectedPaymentMethod;
 	let isLoading = false,
 		formStep = 1,
 		verifyId = $verificationId,
@@ -204,9 +204,10 @@
 			);
 			const addWithdrawalResponse = await addWithdrawalPaymentMethod(body);
 			if (addWithdrawalResponse.status) {
-				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId);
+				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.idobject);
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
+					selectedPaymentMethod = addWithdrawalResponse.data
 					await updateGlobalDataObj()
 					withdrawRequestProcessed = true;
 				}
@@ -232,9 +233,10 @@
 			);
 			const addWithdrawalResponse = await addWithdrawalPaymentMethod(body);
 			if (addWithdrawalResponse.status) {
-				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.withdrawalMethodId);
+				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.idobject);
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
+					selectedPaymentMethod = addWithdrawalResponse.data
 					await updateGlobalDataObj()
 					withdrawRequestProcessed = true;
 				}

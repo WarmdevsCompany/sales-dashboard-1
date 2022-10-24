@@ -97,6 +97,7 @@ export default {
     "PROFILE": "Profile",
     "SECURITY": "Security",
     "PAYMENT": "Payment",
+    "BANK_TRANSFER":"Bank transfer",
     "NEXT": "Next",
     "SAVE": "Save",
     "ON": "on",
@@ -217,6 +218,7 @@ export default {
     "SETTINGS.MAKE_READ": "Mark as viewed",
     "SETTINGS.LAST_PW_CHANGE": "last date of password change",
     "SETTINGS_VERIFY_CODE": "Enter verification code",
+    "SETTINGS_VERIFY_CHANGES": "Verify changes",
     "SETTINGS_NOTIFICATION_ERROR": "Notifications failure",
     "SETTINGS_NOTIFICATION_SUCCESS": "Notifications success",
 
@@ -356,6 +358,7 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sicherheit",
     "PAYMENT": "Zahlung",
+    "BANK_TRANSFER":"Banküberweisung",
     "NEXT": "Nächste",
     "SAVE": "Speichern",
     "ON": "an",
@@ -476,6 +479,7 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Als ungelesen markieren",
     "SETTINGS.LAST_PW_CHANGE": "letztes Datum der Passwortänderung",
     "SETTINGS_VERIFY_CODE": "Bestätigungscode eingeben",
+    "SETTINGS_VERIFY_CHANGES":  "Änderungen überprüfen",
     "SETTINGS_NOTIFICATION_ERROR": "Benachrichtigungsfehler",
     "SETTINGS_NOTIFICATION_SUCCESS": "Benachrichtigungen erfolgreich",
     
@@ -614,6 +618,7 @@ export default {
     "PROFILE": "Profil",
     "SECURITY": "Sécurité",
     "PAYMENT": "Paiement",
+    "BANK_TRANSFER":"Virement",
     "NEXT": "Prochain",
     "SAVE": "Sauvegarder",
     "ON": "sur",
@@ -734,6 +739,7 @@ export default {
     "SETTINGS.MAKE_UNREAD": "Marquer comme non lu",
     "SETTINGS.LAST_PW_CHANGE": "dernière date de changement de mot de passe",
     "SETTINGS_VERIFY_CODE": "Entrez le code de vérification",
+    "SETTINGS_VERIFY_CHANGES":   "Vérifiez les changements",
     "SETTINGS_NOTIFICATION_ERROR": "Échec des notifications",
     "SETTINGS_NOTIFICATION_SUCCESS": "Succès des notifications",
 

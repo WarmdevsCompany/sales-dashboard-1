@@ -5,7 +5,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	export let withdrawMethods = [],
 		successFormStatus,
-		formStep;
+		formStep, selectedPaymentMethod;
 	const addNewItemKey = 'ADD_NEW_ITEM';
 	let radioValue = 0,
 		options = [],
@@ -31,6 +31,7 @@
 			const res = await makeWithdrawal(body);
 			if (res.status) {
 				await updateGlobalDataObj()
+				selectedPaymentMethod = withdrawMethods[radioValue]
 				successFormStatus = true;
 			}
 			$isFetching = false;
@@ -49,7 +50,7 @@
 			class:active_item={radioValue === index}
 			on:click={() => (radioValue = index)}
 		>
-			<div class="text-3">Bank transfer #{element.accountNumber}*{element.currencyName}</div>
+			<div class="text-3">{$t('BANK_TRANSFER')} #{element.accountNumber}*{element.currencyName}</div>
 			<div class="text-xsm text-green mt-0_5">{element.fullName || ''}</div>
 			<div class="absloute__radio">
 				<div class="group-container single_item">
@@ -78,15 +79,6 @@
 	.withdraw__methods {
 		grid-template-columns: 1fr 1fr;
 		grid-gap: 1rem;
-	}
-	.withdraw__item {
-		border: 1px solid var(--grey-color);
-		max-width: 360px;
-		cursor: pointer;
-		transition: all ease 0.3s;
-	}
-	.withdraw__item.active_item {
-		border-color: #6db94f;
 	}
 	.absloute__radio {
 		position: absolute;
@@ -244,9 +236,6 @@
 	@media only screen and (max-width: 767px) {
 		.withdraw__methods.grid {
 			grid-template-columns: 1fr;
-		}
-		.withdraw__item {
-			max-width: 100%;
 		}
 	}
 </style>

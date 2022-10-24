@@ -12,7 +12,7 @@
 	let modalClassName = 'greenForm',
 		timeToTransfer,
 		feeSum,
-		withdrawOfTotal;
+		withdrawOfTotal, selectedPaymentMethod;
 	const submit = () => true;
 	const fee = $globalData.data.feeInfo.fee / 100;
 	const timeToTransferLessThan20 = $globalData.data.feeInfo.lessThen20;
@@ -45,4 +45,4 @@
 <WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
 
 <!-- Verify account -->
-<ConfirmModal withdrawMethods={$globalData.data.withdrawal_payment_methods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum}/>
+<ConfirmModal withdrawMethods={$globalData.data.withdrawal_payment_methods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} {selectedPaymentMethod}/>
