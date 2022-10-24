@@ -3,9 +3,8 @@
 	import SettingsLanguage from './SettingsLanguage.svelte';
 	import SettingsNotifications from './SettingsNotifications.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import ClosingAccountModal from './ClosingAccountModal.svelte';
 	import { getModal } from '$lib/components/Modal.svelte';
-
+	import ClosingAccount from './closing-an-account/ClosingAccount.svelte';
 	scrollToTop();
 </script>
 
@@ -25,7 +24,7 @@
 	<button class="btn confirm settings_btn" on:click={()=>{getModal('close_account').open()}}>{$t('SETTINGS.CLOSING_AN_ACCOUNT')}</button>
 </div>
 
-<ClosingAccountModal />
+<ClosingAccount />
 
 <style>
 	.settings_main {

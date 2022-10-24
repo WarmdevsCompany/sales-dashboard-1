@@ -24,7 +24,7 @@
 					<div class="text-xsm text-green mt-0_5">{selectedPaymentMethod.fullName || ''}</div>
 				</div>
 			</div>
-			<button class="btn success" on:click={closeModals}>{btnText}</button>
+			<button class="btn btn_center_top_34" on:click={closeModals}>{btnText}</button>
 		</div>
 		<img class="close_icon" on:click={closeModals} src={closeIcon} alt="esi close icon" />
 	</div>
@@ -66,9 +66,6 @@
 	}
 	.close_icon:hover {
 		transform: scale(1.2);
-	}
-	.btn.success {
-		margin: 2.125rem auto 0 auto;
 	}
 	.finish__content {
 		margin: 0 auto;

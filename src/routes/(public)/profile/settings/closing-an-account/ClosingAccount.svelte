@@ -1,13 +1,14 @@
 <script>
   import greenLogo from "$lib/assets/img/logo-green.svg";
   import Modal, { getModal } from "$lib/components/Modal.svelte";
-  import { modalClassName, confirmModalState } from "../security/securityStore";
+  import { modalClassName, confirmModalState } from "../../security/securityStore";
   import LoginPassForm from "$lib/components/forms/LoginPassForm.svelte";
   import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   import ChangePassForm from "$lib/components/forms/ChangePassForm.svelte";
   import { t } from "$lib/translations/i18n.js";
 	import SuccessModal from "$lib/components/forms/SuccessModal.svelte";
 	import VerifyEmail from "$lib/components/forms/verify/inputs/VerifyEmail.svelte";
+	import ClosingAccountModal from "./ClosingAccountModal.svelte";
   let formStep = 1;
   let heading = $t("SETTINGS_VERIFY_CHANGES");
 
@@ -49,8 +50,8 @@
   </div>
 </Modal>
 {#if $confirmModalState === true}
-  <SuccessModal closeModals={closeChangePassModal}  mainText={$t('SETTINGS.CLOSING_AN_ACCOUNT')} btnText={$t("CLOSE")} mainContent={false}/>
-{/if}
+<ClosingAccountModal closeModals={closeChangePassModal}  mainText={$t('SETTINGS.CLOSING_AN_ACCOUNT')} btnText={$t("CLOSE")} />
+ {/if}
 
 <style>
   .modal_main {
