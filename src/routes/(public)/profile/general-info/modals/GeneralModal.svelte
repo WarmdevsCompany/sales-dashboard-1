@@ -2,9 +2,6 @@
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import { modalClassName, confirmModalState, profileEditForm } from '../profileStore';
-	import { fade } from 'svelte/transition';
-	import closeIcon from '$lib/assets/img/close.svg';
-	import FirstNameForm from './update-forms/FirstAndLastNamesForm.svelte';
 	import UserNameForm from './update-forms/UserNameForm.svelte';
 	import EmailForm from './update-forms/EmailForm.svelte';
 	import GenderForm from './update-forms/GenderForm.svelte';
@@ -12,7 +9,7 @@
 	import LoginPassForm from '$lib/components/forms/LoginPassForm.svelte';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
+	import SuccessModal from '$lib/components/modals/SuccessModal.svelte';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import FirstAndLastNamesForm from './update-forms/FirstAndLastNamesForm.svelte';
 

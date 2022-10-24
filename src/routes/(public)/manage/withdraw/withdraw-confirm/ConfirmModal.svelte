@@ -11,7 +11,7 @@
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
-	import SuccessWithdrawModal from '$lib/components/forms/SuccessWithdrawModal.svelte';
+	import SuccessWithdrawModal from '$lib/components/modals/SuccessWithdrawModal.svelte';
 
 	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum, selectedPaymentMethod;
 	let formStep = 1,

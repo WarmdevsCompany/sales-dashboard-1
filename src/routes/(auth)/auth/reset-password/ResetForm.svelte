@@ -3,8 +3,8 @@
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import ChangePassForm from '$lib/components/forms/ChangePassForm.svelte';
-	import SuccessModal from '$lib/components/forms/SuccessModal.svelte';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
+	import SuccessModal from '$lib/components/modals/SuccessModal.svelte';
 	let verifyBtnText = $t('RESET_PASSWORD');
 	let formStep = 1;
 	let email;

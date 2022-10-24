@@ -6,7 +6,7 @@
   import VerifyCodeForm from "$lib/components/forms/VerifyCodeForm.svelte";
   import ChangePassForm from "$lib/components/forms/ChangePassForm.svelte";
   import { t } from "$lib/translations/i18n.js";
-	import SuccessModal from "$lib/components/forms/SuccessModal.svelte";
+	import SuccessModal from "$lib/components/modals/SuccessModal.svelte";
 	import VerifyEmail from "$lib/components/forms/verify/inputs/VerifyEmail.svelte";
   let formStep = 1;
   let heading = $t("CHANGE_PASSWORD");
