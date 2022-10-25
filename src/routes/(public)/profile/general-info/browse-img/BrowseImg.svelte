@@ -34,7 +34,7 @@
 			response = await changePhoto(reader.result);
 			uploading = false;
 			if (response.status) {
-				$globalData.data.photo = reader.result;
+				$avatar = reader.result;
 			}
 		};
 

@@ -20,6 +20,8 @@
 		month = '0' + month;
 	}
 	const currentMonth = $t('MONTH_SHORT_' + month);
+	console.log($$props.prevTraject);
+	console.log($$props.currentTraject);
 
 	let dataSets = [
 		{
@@ -151,7 +153,7 @@
 						padding: 10,
 						// Include a dollar sign in the ticks
 						callback: function (value, index, values) {
-							return  $$props.currencySymbol + numberWithCommas(value, 0);
+							return $$props.currencySymbol + numberWithCommas(value, 0);
 						}
 					}
 				},
@@ -223,12 +225,14 @@
 		</div>
 	</div>
 	<div class="column">
-		<button class="chat-label green" on:click={() => toggleData(1)}
+		<button class="chat-label green" on:click={() => toggleData(0)}
 			>{$t('OVERVIEW_CURRENT_TRAJECTORY')}</button
 		>
-		<button class="chat-label" on:click={() => toggleData(0)}
-			>{$t('OVERVIEW_PREV_TRAJECTORY')}</button
-		>
+		{#if $$props.prevTraject}
+			<button class="chat-label" on:click={() => toggleData(1)}
+				>{$t('OVERVIEW_PREV_TRAJECTORY')}</button
+			>
+		{/if}
 	</div>
 </div>
 <div>

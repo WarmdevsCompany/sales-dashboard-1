@@ -98,7 +98,7 @@
 
 	let yupAddressData = {
 		state: yup.string(),
-		zipCode: yup.string(),
+		zipCode: yup.string().nullable(),
 		city: yup.string(),
 		address: yup.string()
 	};
