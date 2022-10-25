@@ -2,7 +2,6 @@
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
     import logo from '$lib/assets/img/logo-green.svg';
-    
 	export let 
 		closeModals = () => {};
 </script>

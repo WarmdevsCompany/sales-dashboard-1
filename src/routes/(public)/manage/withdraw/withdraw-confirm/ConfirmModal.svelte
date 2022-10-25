@@ -167,8 +167,8 @@
 	}
 	.close_icon--wrapper {
 		position: absolute;
-		top: 36px;
-		right: 34px;
+		top: 15px;
+		right: 0px;
 		width: 34px;
 		height: 34px;
 		display: flex;
@@ -189,17 +189,13 @@
 		height: 34px;
 		background-color: #fff;
 		border-radius: 50%;
-
 		margin: auto;
 		transform: translate(50% 50%);
 	}
 	.close_icon:hover {
 		transform: scale(1.2);
 	}
-	.modal_main.confirm__withdraw {
-		padding-top: 33px;
-		padding-bottom: 99px;
-	}
+
 	.modal_main .modal_head_medium {
 		color: var(--green-dark-color);
 		margin-top: 2.5rem;
@@ -210,14 +206,7 @@
 		color: #000;
 	}
 
-	.btn {
-		width: 218px;
-		margin: 2.125rem auto 0 auto;
-		transition: none;
-	}
-	input {
-		transition: none;
-	}
+
 	.last__step--subhead {
 		margin-top: 0.625rem;
 	}
@@ -255,6 +244,7 @@
 			height: 100vh;
 			padding: 30px 0 170px 0;
 			overflow: auto;
+			position: relative;
 		}
 		/* Hide scrollbar for Chrome, Safari and Opera */
 		.overflow_wrapper::-webkit-scrollbar {
@@ -273,6 +263,10 @@
 	@media (orientation: landscape) and (max-width: 991px) {
 		.close_icon--wrapper {
 			top: 60px;
+		}
+		.overflow_wrapper {
+			padding: 70px 0 100px 0;
+
 		}
 	}
 	@media only screen and (max-width: 480px) {

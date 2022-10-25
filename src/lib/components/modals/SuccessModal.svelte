@@ -1,6 +1,6 @@
 <script>
 	import { t } from '$lib/translations/i18n.js';
-	import SuccessSlot from '../modals/SuccessSlot.svelte';
+	import SuccessSlot from './SuccessSlot.svelte';
 	export let mainText = $t('PROFILE_UPDATED'),
 		btnText = $t('BACK'),
 		closeModals = () => {};
