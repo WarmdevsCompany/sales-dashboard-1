@@ -33,6 +33,8 @@
 						errorMessages = $t('INVALID_PASSWORD');
 					} else if (res.errorMessage === 'USER_NOT_FOUND') {
 						errorMessages = $t('USER_NOT_FOUND');
+					}else if(res.errorMessage === 'ACCOUNT_CLOSED'){
+						errorMessages = $t('ACCOUNT_CLOSED');
 					}
 					buttonText = $t('LOGIN');
 					$isFetching = false

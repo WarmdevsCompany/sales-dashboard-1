@@ -11,6 +11,8 @@
 		if (res.status) {
 			closeModals();
 			logout();
+		}else if(res.errorMessage === 'PROFILE_ALREADY_FROZEN_CLOSED'){
+			logout();
 		}
 	};
 </script>
