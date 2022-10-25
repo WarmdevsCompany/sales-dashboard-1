@@ -14,7 +14,8 @@
 		dobDate = '',
 		month,
 		day,
-		year;
+		year,
+		isDisabled = $globalData.data.currentSubscription.statusId === 5237002 || false;
 	$: {
 		firstName = $globalData.data.personalInfo.firstname;
 		lastName = $globalData.data.personalInfo.lastname;
@@ -25,7 +26,7 @@
 		// convert date to UTC
 		const date = convertDateToUTC(dobUNIX);
 		dobDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
-		firstName, lastName, username, gender, dobDate, dobUNIX, email, month, day, year;
+		firstName, lastName, username, gender, dobDate, dobUNIX, email, month, day, year, isDisabled;
 	}
 </script>
 
@@ -34,7 +35,7 @@
 	<div class="input__wrapper">
 		<label for="name" class="label">{$t('USER_NAME')}</label>
 		<div class="relative">
-			<input class="" type="text" value={username} />
+			<input class="" type="text" value={username} disabled={isDisabled}/>
 			<div class="abs__input__dots">
 				<Tooltip title={$t('CHANGE_USER_NAME')} width={280} formName={'userName'}
 					><ThreeDotsIcon bgColor="green" /></Tooltip
@@ -97,7 +98,7 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">Email</label>
 			<div class="relative">
-				<input class="" type="email" value={email} />
+				<input class="" type="email" value={email} disabled={isDisabled}/>
 				<div class="abs__input__dots">
 					<Tooltip title={$t('CHANGE_EMAIL')} width={225} formName={'email'}
 						><ThreeDotsIcon bgColor="green" /></Tooltip

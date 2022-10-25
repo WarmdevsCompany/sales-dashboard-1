@@ -5,6 +5,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import ClosingAccount from './closing-an-account/ClosingAccount.svelte';
+	import { globalData } from '$lib/globalStore';
 	scrollToTop();
 </script>
 
@@ -21,7 +22,7 @@
 			<SettingsLanguage />
 		</div>
 	</div>
-	<button class="btn confirm settings_btn" on:click={()=>{getModal('close_account').open()}}>{$t('SETTINGS.CLOSING_AN_ACCOUNT')}</button>
+	<button disabled={$globalData.data.currentSubscription.statusId === 5237002} class="btn confirm settings_btn" on:click={()=>{getModal('close_account').open()}}>{$t('SETTINGS.CLOSING_AN_ACCOUNT')}</button>
 </div>
 
 <ClosingAccount />

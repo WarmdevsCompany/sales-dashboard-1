@@ -69,7 +69,7 @@
 
 <ChangePlans
 	isDisebled={$globalData.data.currentSubscription.statusId === 5236999 ||
-		$globalData.data.currentSubscription.statusId === 5237000}
+		$globalData.data.currentSubscription.statusId === 5237000 || $globalData.data.currentSubscription.statusId === 5237002}
 />
 <div class="d-flex justify-cc">
 	<button
@@ -77,7 +77,7 @@
 		on:click={changeContributionData}
 		class:is_fetching={$isFetching}
 		disabled={$globalData.data.currentSubscription.statusId === 5236999 ||
-			$globalData.data.currentSubscription.statusId === 5237000}
+			$globalData.data.currentSubscription.statusId === 5237000 || $globalData.data.currentSubscription.statusId === 5237002}
 		>{confirmButtonText}
 	</button>
 </div>

@@ -27,7 +27,7 @@
 		<div class="text-xsm mt-0_5">
 			{$t('SETTINGS.LAST_PW_CHANGE')} - <span class="text-green">{passwordLastChangeDate}</span>
 		</div>
-		<button class="btn" on on:click={() => getModal('change-password').open()}
+		<button disabled={$globalData.data.currentSubscription.statusId === 5237002} class="btn confirm" on on:click={() => getModal('change-password').open()}
 			>{$t('CHANGE_PASSWORD')}</button
 		>
 	</div>

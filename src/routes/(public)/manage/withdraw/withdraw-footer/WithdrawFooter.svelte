@@ -40,7 +40,7 @@
 				<button class="btn cancel mr-1_5" on:click={resetWithdrawls}>{$t('CANCEL')}</button>
 
 				<button
-					disabled={$withdrawFormState}
+					disabled={$withdrawFormState || $globalData.data.currentSubscription.statusId === 5237002}
 					class="btn confirm"
 					on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
 				>

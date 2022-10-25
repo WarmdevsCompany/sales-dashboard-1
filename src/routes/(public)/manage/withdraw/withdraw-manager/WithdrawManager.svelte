@@ -71,7 +71,7 @@
 					on:keydown={checkInputNumber}
 					on:keyup={checkInputNumber}
 					bind:value={$withdrawBalance}
-					disabled={$radioValue === '2' || withdrawMaxSum <= 0}
+					disabled={$radioValue === '2' || withdrawMaxSum <= 0 || $globalData.data.currentSubscription.statusId === 5237002}
 				/>
 				{#if amountErrorMessage}
 					<p class="text-left text-xsm error_text amount__error" transition:slide|local>
@@ -87,7 +87,7 @@
 				{options}
 				fontSize={16}
 				bind:userSelected={$radioValue}
-				disabledState={$withdrawFormState || withdrawMaxSum <= 0}
+				disabledState={$withdrawFormState || withdrawMaxSum <= 0 || $globalData.data.currentSubscription.statusId === 5237002}
 			/>
 		</div>
 	</div>

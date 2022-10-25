@@ -1,4 +1,5 @@
 <script>
+	import { fade } from 'svelte/transition';
 	import { checkInputValue } from '$lib/functions/checkInputNumber.js';
 	import { t } from '$lib/translations/i18n.js';
 	import { isFetching } from '$lib/globalStore.js';
@@ -15,7 +16,7 @@
 	let amountValue = $globalData.data.current_contribution?.amount || 0;
 	let amountErrorState = false;
 	let confirnBtnText = $t('CONFIRM_CHANGES');
-	let dbValidationError = false
+	let dbValidationError = false;
 	$: requrringArray, amountErrorState;
 
 	requrringArray = $globalData.data.periods.map((item) => {
@@ -30,24 +31,25 @@
 		} else {
 			amountErrorState = false;
 			confirnBtnText = `${$t('LOADING')}...`;
-			$isFetching = true
+			$isFetching = true;
 			const periodId = getPeriodId(requrring);
 
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
-				await updateGlobalDataObj()
+				await updateGlobalDataObj();
 				getModal('confirm').open();
 				setTimeout(() => {
 					confirnBtnText = $t('CONFIRM_CHANGES');
 				}, 200);
-			}else{
-				dbValidationError = result.errorMessage
-				setTimeout(()=>{dbValidationError = false }, 5000)
+			} else {
+				dbValidationError = result.errorMessage;
+				setTimeout(() => {
+					dbValidationError = false;
+				}, 5000);
 			}
-			$isFetching = false
+			$isFetching = false;
 		}
 	}
-	
 
 	function getPeriodId(periodName) {
 		let periodId;
@@ -58,7 +60,6 @@
 		});
 		return periodId;
 	}
-
 </script>
 
 <div class="form_wrapper">
@@ -68,7 +69,7 @@
 			<input
 				type="text"
 				id="amount"
-				class:error={amountValue<20}
+				class:error={amountValue < 20}
 				placeholder=""
 				min="20"
 				max="9999"
@@ -81,18 +82,17 @@
 				on:input={checkInputValue}
 				bind:value={amountValue}
 			/>
-			{#if amountValue<20}
-				<p class="text-left text-xsm error_text amount__error">
+			{#if amountValue < 20}
+				<p transition:fade|local class="text-left text-xsm error_text amount__error">
 					{$t('MANAGE_AMOUNT_ERROR')}
 					{$globalData.data.currency.symbol}
 				</p>
 			{/if}
 			{#if dbValidationError}
-				<p class="text-left text-xsm error_text amount__error">
+				<p transition:fade|local class="text-left text-xsm error_text amount__error">
 					{dbValidationError}
 				</p>
 			{/if}
-
 		</div>
 		<div class="input__wrapper">
 			<div class="dropdown__label label">{$t('MANAGE_RECURRING')}</div>
@@ -106,7 +106,11 @@
 				</div>
 			</div>
 		</div>
-		<button class="btn confirm" disabled={disabledState || errorState} class:is_fetching={$isFetching}>{confirnBtnText}</button>
+		<button
+			class="btn confirm"
+			disabled={disabledState || errorState}
+			class:is_fetching={$isFetching}>{confirnBtnText}</button
+		>
 	</form>
 </div>
 
@@ -136,7 +140,6 @@
 		left: 5px;
 	}
 
-
 	@media only screen and (min-width: 992px) and (max-width: 1199px) {
 		form {
 			gap: 1vw;
@@ -164,6 +167,11 @@
 		}
 		.dropdown__label {
 			padding-top: 18px;
+		}
+		.amount__error {
+			padding-top: 0.5rem;
+			margin-bottom: 0;
+			position: static;
 		}
 	}
 </style>
