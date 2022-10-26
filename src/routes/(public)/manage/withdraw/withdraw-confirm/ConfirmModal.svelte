@@ -206,7 +206,6 @@
 		color: #000;
 	}
 
-
 	.last__step--subhead {
 		margin-top: 0.625rem;
 	}

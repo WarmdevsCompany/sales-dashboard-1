@@ -7,9 +7,12 @@
 	import { t } from '$lib/translations/i18n.js';
 	export let nextContributionDate, status, statusId;
 	// convert date to UTC
-	const date = convertDateToUTC(nextContributionDate);
-	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
-
+	let date; 
+	let nextDate;
+	$:{
+	 date = convertDateToUTC(nextContributionDate);
+	 nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+	}
 	const [popperRef, popperContent] = createPopperActions({
 		placement: 'bottom',
 		strategy: 'fixed'

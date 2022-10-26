@@ -25,8 +25,8 @@
 		restartBtnText = $t('MANAGE_RES');
 
 	// convert date to UTC
-	const date = convertDateToUTC($globalData.data.currentSubscription.nextDate);
-	let nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+	let date;
+	let nextDate;
 	// generateMonthArray
 	timeframeArray = periodsMonths.map((item) => {
 		return item.text;
@@ -37,6 +37,8 @@
 			chackboxErrorStatus = false;
 		}
 		nextDate;
+		date = convertDateToUTC($globalData.data.currentSubscription.nextDate);
+		nextDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 	}
 	async function stop() {
 		stopBtnText = `${$t('LOADING')}...`;
