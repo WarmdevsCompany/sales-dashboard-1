@@ -32,8 +32,15 @@
 			amountErrorState = false;
 			confirnBtnText = `${$t('LOADING')}...`;
 			$isFetching = true;
-			const periodId = getPeriodId(requrring);
 
+			if ($globalData.data.current_contribution.amount === amountValue) {
+				$isFetching = false;
+				confirnBtnText = $t('CONFIRM_CHANGES');
+				getModal('confirm').open();
+				return false;
+			}
+
+			const periodId = getPeriodId(requrring);
 			const result = await changeContribution(amountValue, periodId);
 			if (result.status) {
 				await updateGlobalDataObj();
