@@ -20,8 +20,6 @@
 		month = '0' + month;
 	}
 	const currentMonth = $t('MONTH_SHORT_' + month);
-	console.log($$props.prevTraject);
-	console.log($$props.currentTraject);
 
 	let dataSets = [
 		{

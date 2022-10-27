@@ -6,16 +6,28 @@
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
+	import { verificationId } from '$lib/globalStore.js';
 	import ClosingAccountModal from './ClosingAccountModal.svelte';
+	import { closeAccount } from '$lib/api/axios.js';
 	let formStep = 1;
 	let heading = $t('SETTINGS_VERIFY_CHANGES');
 
 	$: {
 		formStep;
+		if (formStep === 3) {
+			heading = $t('SETTINGS.CLOSING_AN_ACCOUNT');
+		}
 	}
 	const login = () => (formStep = 2);
-	const submitVerificationCode = () => {
-		$confirmModalState = true;
+	const submitVerificationCodeAndCloseAccount = async () => {
+		console.log('submitVerificationCodeAndCloseAccount')
+		const res = await closeAccount($verificationId);
+		if (res.status) {
+			console.log('$confirmModalState = true;')
+			$confirmModalState = true;
+		}else if(res.errorMessage === 'PROFILE_ALREADY_FROZEN_CLOSED'){
+			$confirmModalState = true;
+		}
 	};
 	const closeChangePassModal = () => {
 		$confirmModalState = false;
@@ -38,9 +50,9 @@
 					<VerifyEmail sendVerifyCallback={() => (formStep = 3)} />
 				</div>
 			{:else if formStep === 3}
-				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
+				<div class=" mt-1">{$t('ACCOUNT_CLOSE_VERIFY')}</div>
 				<div class="modal_main-row">
-					<VerifyCodeForm {submitVerificationCode} />
+					<VerifyCodeForm submitVerificationCode={submitVerificationCodeAndCloseAccount} />
 				</div>
 			{/if}
 		</div>
@@ -50,6 +62,7 @@
 	<ClosingAccountModal
 		closeModals={closeChangePassModal}
 		mainText={$t('SETTINGS.CLOSING_AN_ACCOUNT')}
+		mainContent={$t('ACCOUNT_CLOSE_REQUEST_SENT')}
 		btnText={$t('CLOSE')}
 	/>
 {/if}
