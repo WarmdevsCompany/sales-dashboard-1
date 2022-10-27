@@ -30,7 +30,6 @@
 			loading = false;
 			$notificationList = $globalData.data.notifications.data;
 			$notificationSettings = $globalData.data.notificationSettings;
-			$globalData.data.currentSubscription.statusId = 5237002
 		}
 	});
 </script>
