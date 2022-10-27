@@ -16,7 +16,9 @@
 		5236999: 'paused',
 		5237000: 'stopped',
 		5237001: 'active',
-		5237002: 'suspended'
+		5237002: 'suspended',
+		5237003: 'blocked',
+		5237004: 'frozen'
 	}
 
 	export let statusName, statusId;
@@ -71,7 +73,9 @@
 		width: 81px;
 		background-color: #5a7186;
 	}
-	.status.suspended {
+	.status.suspended,
+	.status.frozen,
+	.status.blocked {
 		width: 93px;
 		background-color: var(--red-color);
 	}

@@ -13,7 +13,7 @@
 	import { locale } from '$lib/translations/i18n.js';
 	import { getCookie } from '$lib/functions/getCookie';
 	import { deleteCookie } from '$lib/functions/deleteCookie';
-	import { variables } from '$lib/variables';
+	
 	import {
 		notificationList,
 		globalData,
@@ -21,52 +21,11 @@
 		selectedNotification
 	} from '$lib/globalStore';
 	let loading = true;
+	export let data;
 
 	onMount(async () => {
-		let lang = localStorage.getItem('lang');
-		const token = getCookie('esiToken');
-		if (!token || token == 'undefined') {
-			deleteCookie('esiToken');
-			goto('/auth/login');
-		} else {
-			const url = `${variables.privatePath}/getGeneralInfo`;
-			const rawResponse = await fetch(url, {
-				method: 'POST',
-				headers: {
-					accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: token
-				}
-			});
-			const response = await rawResponse.json();
-			if (response.errorMessage === 'USER_DOES_NOT_FINISH_REGISTRATION') {
-				deleteCookie('esiToken');
-				goto('/404');
-			}
-			if (lang && response.data.lang.code === lang) {
-				locale.set(lang);
-			} else {
-				locale.set(response.data.lang.code);
-				localStorage.setItem('lang', response.data.lang.code);
-			}
-			if (!response.status || response.data === null) {
-				goto('/404');
-			}
-
-			if (response.errorMessage === 'FAILED_TO_FIND_USER') {
-				deleteCookie('esiToken');
-				goto('/auth/login');
-			}
-
-			if (rawResponse.status == 200) {
-				$globalData = response;
-			} else if (rawResponse.status == 401) {
-				deleteCookie('esiToken');
-				goto('/auth/login');
-			}
-		}
-
-		if ($globalData) {
+		$globalData = data.general
+		if ($globalData ) {
 			console.log($globalData);
 			loading = false;
 			$notificationList = $globalData.data.notifications.data;
