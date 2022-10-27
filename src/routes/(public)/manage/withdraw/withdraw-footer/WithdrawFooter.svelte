@@ -23,8 +23,8 @@
 	export let confirmWithdraw = () => {};
 </script>
 
-{#if $globalData.data.currentSubscription.balance > 0}
-	<div class="withdraw__footer">
+<div class="withdraw__footer">
+	{#if $globalData.data.currentSubscription.balance > 0 && $globalData.data.currentSubscription.statusId != 5237002}
 		<div class="grid">
 			<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
 			<div class="grid-item-value text-sm">${$withdrawBalance}</div>
@@ -35,26 +35,29 @@
 			<div class="text-sm">{$t('MANAGE_WD_OF_T')}:</div>
 			<div class="grid-item-value text-sm">{withdrawOfTotal}%</div>
 		</div>
-		{#if confirmBtn === 'open'}
-			<div class="d-flex {btnAligment} buttons">
+	{/if}
+	{#if confirmBtn === 'open'}
+		<div class="d-flex {btnAligment} buttons">
+			{#if $globalData.data.currentSubscription.balance > 0 && $globalData.data.currentSubscription.statusId != 5237002}
 				<button class="btn cancel mr-1_5" on:click={resetWithdrawls}>{$t('CANCEL')}</button>
-
-				<button
-					disabled={$withdrawFormState || $globalData.data.currentSubscription.statusId === 5237002}
-					class="btn confirm"
-					on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
-				>
-			</div>
-		{:else if confirmBtn === 'confirm'}
-			<div class="d-flex {btnAligment} buttons-confirm">
-				<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
-					>{$t('CANCEL')}</button
-				>
-				<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>
-			</div>
-		{/if}
-	</div>
-{/if}
+			{/if}
+			<button
+				disabled={$withdrawFormState ||
+					$globalData.data.currentSubscription.statusId === 5237002 ||
+					$globalData.data.currentSubscription.balance <= 0}
+				class="btn confirm"
+				on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
+			>
+		</div>
+	{:else if confirmBtn === 'confirm'}
+		<div class="d-flex {btnAligment} buttons-confirm">
+			<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
+				>{$t('CANCEL')}</button
+			>
+			<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>
+		</div>
+	{/if}
+</div>
 
 <style>
 	.withdraw__footer {
