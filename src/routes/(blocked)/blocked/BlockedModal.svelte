@@ -1,6 +1,8 @@
 <script>
 	import logo from '$lib/assets/img/logo-green.svg';
 	import { t } from '$lib/translations/i18n.js';
+	import logoutIcon from '$lib/assets/img/logout-green.svg';
+	import { logout } from '$lib/api/axios';
 	export let statusId;
 </script>
 
@@ -15,6 +17,12 @@
 			{/if}
 		</div>
 		<a href="#" class="btn confirm support">{$t('CONTACT_SUPPORT')}</a>
+		<div class="logout">
+			<button class="btn d-flex text-sm" style="min-width:auto;" on:click={logout}
+				><img src={logoutIcon} alt="logout" />
+				<span>{$t('LOGOUT')}</span></button
+			>
+		</div>
 	</div>
 </div>
 
@@ -50,6 +58,21 @@
 	}
 	.support {
 		min-width: 282px;
+	}
+	.logout button {
+		padding: 20px 0;
+		justify-content: flex-start;
+		width: auto;
+		appearance: none;
+		background: transparent;
+		border: none;
+		color: var(--text-secondary-color);
+		font-weight: var(--font-weight-medium);
+		font-size: var(--text-font-small);
+		line-height: var(--text-line-height-small);
+	}
+	.logout img {
+		margin-right: 0.5rem;
 	}
 	@media only screen and (max-width: 991px) {
 		.modal {
