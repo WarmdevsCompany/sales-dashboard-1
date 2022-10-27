@@ -34,12 +34,9 @@
 					tabId = id;
 				}}
 				{value}
-				
 			/>
 			<label for={slugify(label)} class="verify_tab">
-				
-					{label}
-				
+				{label}
 
 				<span><div class="dot" /></span>
 			</label>
@@ -49,20 +46,26 @@
 	<div
 		role="radiogroup"
 		class="group-container"
-  
+		class:disabled={disabledState}
 		aria-labelledby={`label-${uniqueID}`}
 		style="font-size:{fontSize}px; flex-direction:{flexDirection}"
 		id={`group-${uniqueID}`}
 	>
 		<div class="legend" id={`label-${uniqueID}`} />
 		{#each options as { value, label }}
-			<input class="sr-only" type="radio" id={slugify(label)} bind:group={userSelected} {value} disabled = {disabledState}/>
+			<input
+				class="sr-only"
+				type="radio"
+				id={slugify(label)}
+				bind:group={userSelected}
+				{value}
+				disabled={disabledState}
+			/>
 
-			<label for={slugify(label)} >
+			<label for={slugify(label)}>
 				<span><div class="dot" /></span>
-			
-					{label}
-				
+
+				{label}
 			</label>
 		{/each}
 	</div>
@@ -79,7 +82,15 @@
 		display: flex;
 		flex-direction: row;
 	}
-
+	.group-container.disabled{
+	 opacity: 0.5;
+	}
+	.group-container.disabled input[type='radio'] + label span  {
+		border-color: #5A7186;
+	}
+	.group-container.disabled input[type='radio'] + label  {
+		color: #113535;
+	}
 
 	.legend {
 		font-weight: bold;
@@ -167,7 +178,7 @@
 	}
 
 	input[type='radio']:disabled + label span {
-		background: var(--gray, #ccc);
+		
 	}
 	/* gravy */
 

@@ -1,19 +1,13 @@
 <script>
 	import { scrollToTop } from '$lib/functions/scrollToTop.js';
 	import { roundNumber } from '$lib/functions/roundNumber.js';
-	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import WithdrawFooter from './withdraw-footer/WithdrawFooter.svelte';
 	import WithdrawManager from './withdraw-manager/WithdrawManager.svelte';
 	import WithdrawPlans from './withdraw-plans/WithdrawPlans.svelte';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import ConfirmModal from './withdraw-confirm/ConfirmModal.svelte';
 	import { globalData } from '$lib/globalStore';
 	import { withdrawBalance } from './withdrawStore';
-	let modalClassName = 'greenForm',
-		timeToTransfer,
-		feeSum,
-		withdrawOfTotal, selectedPaymentMethod;
-	const submit = () => true;
+	let timeToTransfer, withdrawOfTotal, selectedPaymentMethod;
 	const fee = $globalData.data.feeInfo.fee / 100;
 	const timeToTransferLessThan20 = $globalData.data.feeInfo.lessThen20;
 	const timeToTransferMoreThan20 = $globalData.data.feeInfo.moreThen20;
@@ -21,7 +15,6 @@
 
 	$: {
 		withdrawOfTotal = roundNumber(($withdrawBalance * 100) / balance, 2);
-		feeSum = roundNumber(fee * $withdrawBalance, 2);
 		if (withdrawOfTotal > 100) {
 			withdrawOfTotal = 100;
 		} else if (withdrawOfTotal <= 20) {
@@ -42,7 +35,14 @@
 	current_contribution={$globalData.data.current_contribution}
 	currentSymbol={$globalData.data.currency.symbol}
 />
-<WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} />
+<WithdrawFooter {fee} {timeToTransfer} {withdrawOfTotal}  />
 
 <!-- Verify account -->
-<ConfirmModal withdrawMethods={$globalData.data.withdrawal_payment_methods} {fee} {timeToTransfer} {withdrawOfTotal} {feeSum} {selectedPaymentMethod}/>
+<ConfirmModal
+	withdrawMethods={$globalData.data.withdrawal_payment_methods}
+	{fee}
+	{timeToTransfer}
+	{withdrawOfTotal}
+
+	{selectedPaymentMethod}
+/>

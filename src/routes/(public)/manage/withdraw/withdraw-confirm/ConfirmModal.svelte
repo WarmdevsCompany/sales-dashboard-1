@@ -13,7 +13,7 @@
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
 	import SuccessWithdrawModal from '$lib/components/modals/SuccessWithdrawModal.svelte';
 
-	export let withdrawMethods, timeToTransfer, withdrawOfTotal, feeSum, selectedPaymentMethod;
+	export let withdrawMethods, timeToTransfer, withdrawOfTotal, selectedPaymentMethod;
 	let formStep = 1,
 		successFormStatus = false,
 		withdrawRequestProcessed = false;
@@ -101,7 +101,6 @@
 					bind:formStep
 					{closeModals}
 					{withdrawMethods}
-					{feeSum}
 					{timeToTransfer}
 					{withdrawOfTotal}
 					{confirmWithdraw}

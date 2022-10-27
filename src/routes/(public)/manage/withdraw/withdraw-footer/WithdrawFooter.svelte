@@ -2,7 +2,6 @@
 	import { globalData } from '$lib/globalStore';
 	import { getModal } from '$lib/components/Modal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { roundNumber } from '$lib/functions/roundNumber.js';
 	import {
 		confirmModalState,
 		withdrawFormState,
@@ -13,8 +12,7 @@
 		confirmBtn = 'open',
 		closeModals,
 		timeToTransfer,
-		withdrawOfTotal,
-		feeSum;
+		withdrawOfTotal;
 	const resetWithdrawls = () => {
 		$withdrawBalance = Math.trunc($globalData.data.currentSubscription.balance / 5);
 		$radioValue = '0';
@@ -28,8 +26,6 @@
 		<div class="grid">
 			<div class="text-sm">{$t('MANAGE_TOTAL_WD_AM')}:</div>
 			<div class="grid-item-value text-sm">${$withdrawBalance}</div>
-			<div class="text-sm">{$t('MANAGE_WD_FEE')}:</div>
-			<div class="grid-item-value text-sm">${feeSum}</div>
 			<div class="text-sm">{$t('MANAGE_TIME_TO_TR')}:</div>
 			<div class="grid-item-value text-sm">{timeToTransfer} {$t('MANAGE_DAYS')}</div>
 			<div class="text-sm">{$t('MANAGE_WD_OF_T')}:</div>

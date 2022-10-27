@@ -1,5 +1,4 @@
 <script>
-	import { goto } from '$app/navigation';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import Header from '$lib/header/Header.svelte';
@@ -8,12 +7,8 @@
 	import logoForBg from '$lib/assets/img/logo-big.svg';
 	import { t } from '$lib/translations/i18n.js';
 	import Loader from '$lib/components/Loader.svelte';
-	import { afterUpdate, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
-	import { locale } from '$lib/translations/i18n.js';
-	import { getCookie } from '$lib/functions/getCookie';
-	import { deleteCookie } from '$lib/functions/deleteCookie';
-	
 	import {
 		notificationList,
 		globalData,
