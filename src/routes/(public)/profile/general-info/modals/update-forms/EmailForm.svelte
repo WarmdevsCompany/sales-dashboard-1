@@ -5,7 +5,7 @@
 	import { confirmModalState } from '../../profileStore';
 	import { globalData, verificationId, isFetching } from '$lib/globalStore';
 	import { t } from '$lib/translations/i18n.js';
-	import { changeEmail, setNewAuthHeaders } from '$lib/api/axios.js';
+	import { changeEmail, setNewAuthHeaders, updateGlobalDataObj } from '$lib/api/axios.js';
 	export let submitBtnText = $t('CONTINUE');
 	let isLoading = false;
 	let verifyId = $verificationId;
@@ -28,7 +28,7 @@
 			let res = await changeEmail(value.email, verifyId);
 			if (res.status) {
 				setNewAuthHeaders(res.data.token);
-				$globalData.data.personalInfo.email = value.email;
+				await updateGlobalDataObj()
 				$confirmModalState = true;
 				$$props.submitChanges();
 			} else if (res.errorMessage === 'EMAIL_ALREADY_EXISTS') {

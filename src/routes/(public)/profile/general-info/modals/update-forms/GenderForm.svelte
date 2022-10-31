@@ -2,7 +2,7 @@
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData, verificationId, isFetching } from '$lib/globalStore';
-	import { changeGender } from '$lib/api/axios';
+	import { changeGender, updateGlobalDataObj } from '$lib/api/axios';
 	export let submitBtnText = $t('CONTINUE');
 	let isLoading = false;
 	let verifyId = $verificationId;
@@ -20,7 +20,7 @@
 		const selectedGender = genderArrayForBackend[index];
 		const res = await changeGender(selectedGender, verifyId);
 		if (res.status) {
-			$globalData.data.personalInfo.gender = genderArrayForDropdown[index];
+			await updateGlobalDataObj();
 			$$props.submitChanges();
 		}
 		$isFetching = false;

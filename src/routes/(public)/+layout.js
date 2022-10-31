@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { browser } from '$app/environment';
 import { getCookie } from '$lib/functions/getCookie';
+import { deleteCookie } from '$lib/functions/deleteCookie';
 import { variables } from '$lib/variables';
 import { locale } from '$lib/translations/i18n.js';
 

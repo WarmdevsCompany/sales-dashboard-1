@@ -1,5 +1,5 @@
 <script>
-	import { setNewAuthHeaders, changeUserName } from '$lib/api/axios';
+	import { setNewAuthHeaders, changeUserName, updateGlobalDataObj } from '$lib/api/axios';
 	import { globalData, verificationId, isFetching } from '$lib/globalStore';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
@@ -31,8 +31,8 @@
 			console.log(res)
 			if (res.status) {
 				setNewAuthHeaders(res.data.token)
+				await updateGlobalDataObj()
 				$confirmModalState = true;
-				$globalData.data.personalInfo.username = value.userName;
 				$$props.submitChanges();
 			}
 			$isFetching = false 

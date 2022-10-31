@@ -189,6 +189,8 @@ export const getGeneralData = async () => {
 export const updateGlobalDataObj = async ()=>{
 	const data = await getGeneralData()
 	updateGlobalData(data)
+	const statusId = data.data.currentSubscription.statusId
+	if(	statusId === 5237003 || statusId === 5237004) goto('/blocked')
 }
 
 export const getAvatar = async () => {

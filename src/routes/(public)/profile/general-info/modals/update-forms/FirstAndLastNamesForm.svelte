@@ -1,7 +1,7 @@
 <script>
-	import { changeFirstAndLastname, setNewAuthHeaders } from '$lib/api/axios.js';
+	import { changeFirstAndLastname, updateGlobalDataObj } from '$lib/api/axios.js';
 	import { t } from '$lib/translations/i18n.js';
-	import { globalData, verificationId, isFetching } from '$lib/globalStore';
+	import { verificationId, isFetching } from '$lib/globalStore';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
@@ -34,9 +34,8 @@
 			$isFetching = true 
 			let res = await changeFirstAndLastname(value.firstName, value.lastName, verifyId);
 			if (res.status) {
+				await updateGlobalDataObj()
 				$confirmModalState = true;
-				$globalData.data.personalInfo.firstname = value.firstName;
-				$globalData.data.personalInfo.lastname = value.lastName;
 				$$props.submitChanges();
 			}
 			$isFetching = false 

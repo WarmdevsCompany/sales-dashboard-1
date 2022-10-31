@@ -3,7 +3,7 @@
 	import flatpickr from 'flatpickr';
 	import { onMount } from 'svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import { changeDOB } from '$lib/api/axios';
+	import { changeDOB, updateGlobalDataObj } from '$lib/api/axios';
 	import { slide } from 'svelte/transition';
 	import { underAgeValidate } from '$lib/functions/validateAge';
 	let datePicker;
@@ -34,7 +34,7 @@
 				$isFetching = true 
 				const res = await changeDOB(selectedDate, verifyId);
 				if (res.status) {
-					$globalData.data.personalInfo.dob = new Date(selectedDate).getTime() / 1000
+					await updateGlobalDataObj()
 					$$props.submitChanges();
 				}
 				$isFetching = false 
