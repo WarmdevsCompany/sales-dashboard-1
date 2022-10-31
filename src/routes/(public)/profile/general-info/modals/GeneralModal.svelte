@@ -12,6 +12,7 @@
 	import SuccessModal from '$lib/components/modals/SuccessModal.svelte';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import FirstAndLastNamesForm from './update-forms/FirstAndLastNamesForm.svelte';
+	import VerifyPhone from '../../../../../lib/components/forms/verify/inputs/VerifyPhone.svelte';
 
 	let formStep = 1;
 
@@ -28,7 +29,7 @@
 	};
 </script>
 
-<Modal id="general-info" className={$modalClassName} resetModalState={()=> formStep = 1}>
+<Modal id="general-info" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium text-1">{$t('WELCOME')}</div>
@@ -40,7 +41,11 @@
 			{:else if formStep === 2}
 				<div class="mt-1">{$t('VERIFY_ACCOUNT')}</div>
 				<div class="modal_main-row">
-					<VerifyEmail sendVerifyCallback={() => (formStep = 3)} />
+					{#if $profileEditForm === 'firstAndLastName' || $profileEditForm === 'email'}
+						<VerifyPhone sendVerifyCallback={() => (formStep = 3)} />
+					{:else}
+						<VerifyEmail sendVerifyCallback={() => (formStep = 3)} />
+					{/if}
 				</div>
 			{:else if formStep === 3}
 				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>

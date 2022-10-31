@@ -1,5 +1,5 @@
 <script>
-	import { changePassword, setNewAuthHeaders, changeForgotPassword } from '$lib/api/axios.js';
+	import { changePassword, setNewAuthHeaders, changeForgotPassword, updateGlobalDataObj } from '$lib/api/axios.js';
 	import { isFetching } from '$lib/globalStore.js';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
@@ -45,9 +45,7 @@
 				const res = await changePassword(value.password, verifyId);
 				if (res.status) {
 					setNewAuthHeaders(res.data.token);
-					const date = new Date();
-					const currentDate = date.getTime();
-					$globalData.data.passwordLastChangeDate = parseInt(currentDate / 1000)
+					await updateGlobalDataObj()
 					$$props.submitNewPassword();
 				} else {
 					$errors.confirmPassword = res.errorMessage;

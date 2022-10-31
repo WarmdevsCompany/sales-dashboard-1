@@ -8,10 +8,10 @@
 	import closeIcon from '$lib/assets/img/close.svg';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import WithdrawsMethods from './WithdrawsMethods.svelte';
 	import AddWithdrawMethod from './add-withdraw-method/AddWithdrawMethod.svelte';
 	import SuccessWithdrawModal from '$lib/components/modals/SuccessWithdrawModal.svelte';
+	import VerifyPhone from '$lib/components/forms/verify/inputs/VerifyPhone.svelte';
 
 	export let withdrawMethods, timeToTransfer, withdrawOfTotal, selectedPaymentMethod;
 	let formStep = 1,
@@ -50,7 +50,7 @@
 			{/if}
 
 			{#if formStep === 1}
-				<VerifyEmail sendVerifyCallback={submitEmailOrPhone} />
+				<VerifyPhone sendVerifyCallback={submitEmailOrPhone} />
 			{:else if formStep === 2}
 				<VerifyCodeForm {submitVerificationCode} />
 			{/if}

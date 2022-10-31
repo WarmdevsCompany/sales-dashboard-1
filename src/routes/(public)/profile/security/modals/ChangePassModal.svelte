@@ -8,8 +8,10 @@
   import { t } from "$lib/translations/i18n.js";
 	import SuccessModal from "$lib/components/modals/SuccessModal.svelte";
 	import VerifyEmail from "$lib/components/forms/verify/inputs/VerifyEmail.svelte";
+	import VerifyPhone from "$lib/components/forms/verify/inputs/VerifyPhone.svelte";
   let formStep = 1;
   let heading = $t("CHANGE_PASSWORD");
+  
 
   $: {
     formStep;
@@ -41,7 +43,7 @@
       {:else if formStep === 2}
         <div class="mt-1">{$t("VERIFY_ACCOUNT")}</div>
         <div class="modal_main-row">
-          <VerifyEmail sendVerifyCallback={() => (formStep = 3)}/>
+          <VerifyPhone sendVerifyCallback={() => (formStep = 3)}/>
           
         </div>
       {:else if formStep === 3}
