@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { verifyAccount } from '$lib/api/axios.js';
 	import { validatePasswordType } from '$lib/functions/validatePasswordType';
 	import { fade, slide } from 'svelte/transition';
@@ -22,24 +23,29 @@
 		onSubmit: async (values) => {
 			isLoading = true;
 			buttonText = `${$t('LOADING')}...`;
-			$isFetching = true 
+			$isFetching = true;
 			const body = {
 				login: values.userName,
 				password: values.password
 			};
-			
+
 			let res = await verifyAccount(body);
 			if (res.status) {
 				$$props.authDataCallback();
 			} else if (res.status === false) {
+				const statusId = res.data?.status;
 				isLoading = false;
 				if (res.errorMessage === 'INVALID_PASSWORD') {
 					errorMessages = $t('INVALID_PASSWORD');
 				} else if (res.errorMessage === 'USER_NOT_FOUND') {
 					errorMessages = $t('USER_NOT_FOUND');
+				} else if (res.errorMessage === 'ACCOUNT_BLOCKED') {
+					errorMessages = $t('ACCOUNT_BLOCKED');
+					goto('/blocked');
 				}
+				if ((statusId === 5237003, statusId === 5237004)) goto('/blocked');
 			}
-			$isFetching = false 
+			$isFetching = false;
 			buttonText = $t('LOGIN');
 		}
 	});

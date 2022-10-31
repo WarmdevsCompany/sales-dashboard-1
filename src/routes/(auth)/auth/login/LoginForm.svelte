@@ -29,13 +29,17 @@
 				let res = await login({ login: values.userName, password: values.password });
 				if (res?.status === false) {
 					isLoading = false;
+					const statusId = res.data?.status;
 					if (res.errorMessage === 'INVALID_PASSWORD') {
 						errorMessages = $t('INVALID_PASSWORD');
 					} else if (res.errorMessage === 'USER_NOT_FOUND') {
 						errorMessages = $t('USER_NOT_FOUND');
 					}else if(res.errorMessage === 'ACCOUNT_CLOSED'){
 						errorMessages = $t('ACCOUNT_CLOSED');
+					}else if(res.errorMessage === 'ACCOUNT_BLOCKED'){
+						errorMessages = $t('ACCOUNT_BLOCKED');
 					}
+					if ((statusId === 5237003, statusId === 5237004)) goto('/blocked');
 					buttonText = $t('LOGIN');
 					$isFetching = false
 				}
