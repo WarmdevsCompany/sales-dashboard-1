@@ -6,7 +6,6 @@
 		allocatedContributions,
 		errorMessageState,
 		subscribeAllState,
-		
 		sumOfPlans
 	} from './planStore';
 	import ChangePlanItem from './ChangePlanItem.svelte';
@@ -33,9 +32,9 @@
 	let activeDropdownAdv = false;
 	let activeDropdownFound = false;
 
-	$allocatedContributions.safe = $globalData.data.current_contribution.greenSafe
-	$allocatedContributions.adventure = $globalData.data.current_contribution.greenAdventure
-	$allocatedContributions.founder = $globalData.data.current_contribution.greenFounder
+	$allocatedContributions.safe = $globalData.data.current_contribution.greenSafe;
+	$allocatedContributions.adventure = $globalData.data.current_contribution.greenAdventure;
+	$allocatedContributions.founder = $globalData.data.current_contribution.greenFounder;
 
 	$: allowPercentageVal =
 		100 -
@@ -84,7 +83,6 @@
 		if ($sumOfPlans > 99 && $sumOfPlans <= 100) {
 			$errorMessageState = false;
 		}
-		
 	});
 </script>
 
@@ -93,7 +91,8 @@
 		<h3 class="h3-sv desktop">
 			{#if $sumOfPlans < 100}
 				{$t('MANAGE_ALLOCATE')}
-				<span class="plan_percentage_val" class:error={$errorMessageState}>{100 - $sumOfPlans}%</span
+				<span class="plan_percentage_val" class:error={$errorMessageState}
+					>{100 - $sumOfPlans}%</span
 				>
 				{$t('MANAGE_CONTR_BETW')}
 			{:else if $sumOfPlans === 100}
@@ -102,7 +101,7 @@
 		</h3>
 
 		<div class="mob__plan__h2">Select plans</div>
-		<div class="subscribe__all" on:click={subscribeAllPlans}>
+		<div class="subscribe__all" on:click={subscribeAllPlans} class:disabled={isDisebled}>
 			<div class="subscribe__checkbox">
 				<SubscribeAllIco className={$subscribeAllState ? 'active__cb' : ''} />
 			</div>
@@ -201,6 +200,10 @@
 		min-width: 200px;
 		margin-left: 10px;
 		margin-bottom: 10px;
+	}
+	.subscribe__all.disabled {
+		opacity: 0.5;
+		pointer-events: none;
 	}
 	.subscribe__checkbox {
 		width: 24px;

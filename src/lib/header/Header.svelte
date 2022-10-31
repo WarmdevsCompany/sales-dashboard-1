@@ -10,19 +10,23 @@
 	import NextContrDate from './header-items/NextContrDate.svelte';
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
 
-	export let currencySymbol, allMoney, monthlySubscriptionText, nextContributionDate, status, statusId
-	
+	export let currencySymbol,
+		allMoney,
+		monthlySubscriptionText,
+		nextContributionDate,
+		status,
+		statusId;
+	let activeStatus;
+	$: activeStatus = statusId === 5236998 ? true : false;
 </script>
 
 <header class="d-flex justify-sb b-radius-8 align-center text-white">
 	<div class="d-flex justify-cc header__left--column">
 		<div class="contribution__data d-flex justify-sb relative">
 			<WalletValue {allMoney} {currencySymbol} />
-			<NextContribution {currencySymbol} {monthlySubscriptionText} />
-			<NextContrDate {nextContributionDate} status={status || 'active'} {statusId}/>
-			<SubscriptionStatus
-				status={status.toLowerCase() || 'active'} {statusId}
-			/>
+			<NextContribution {currencySymbol} {monthlySubscriptionText} {activeStatus}/>
+			<NextContrDate {nextContributionDate} status={status || 'active'} {statusId} />
+			<SubscriptionStatus status={status.toLowerCase() || 'active'} {statusId} />
 		</div>
 	</div>
 	<MediaQuery query="(min-width: 992px)" let:matches>

@@ -26,7 +26,7 @@
 <div class="contribution__data--item d-flex align-top text-big">
 	<div class="d-flex align-center header_text">
 		<img src={nextContributionIcon} alt="all money" />
-		{#if statusId === 5237000}
+		{#if statusId === 5237000 || statusId === 5237002}
 			{status}
 		{:else}
 			{$t('ON')}
