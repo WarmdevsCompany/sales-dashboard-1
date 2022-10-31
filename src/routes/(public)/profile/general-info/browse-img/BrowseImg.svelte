@@ -3,9 +3,9 @@
 	import addImage from '$lib/assets/img/image-add.svg';
 	import border from '$lib/assets/img/border.png';
 	import { t } from '$lib/translations/i18n.js';
-	import { globalData, avatar } from '$lib/globalStore';
+	import { avatar } from '$lib/globalStore';
 	import { onMount } from 'svelte';
-	import { changePhoto } from '$lib/api/axios';
+	import { changePhoto, getAvatar } from '$lib/api/axios';
 	import { slide } from 'svelte/transition';
 
 	let input;
@@ -15,12 +15,22 @@
 	let uploading = false;
 
 	onMount(async () => {
+		if(!$avatar){
+			uploading = true
+		    const avaResponse = await getAvatar()
+		    $avatar = avaResponse.data.photo;
+			uploading = false
+		}
+		
+
 		if ($avatar) {
 			imageSrc = $avatar;
 			if (imageSrc) {
 				showImage = true;
 			}
 		}
+		setTimeout(()=>{},200)
+		
 	});
 
 	let response;
@@ -50,7 +60,6 @@
 		showImage = false;
 	}
 </script>
-
 <div class="d-flex flex-col">
 	<div class="browse__wrapper" class:active={!showImage}>
 		{#if uploading}
@@ -184,6 +193,7 @@
 		width: 100%;
 		height: 100%;
 		background: var(--white);
+		z-index: 5;
 	}
 	.browse-border,
 	.browse__wrapper input {

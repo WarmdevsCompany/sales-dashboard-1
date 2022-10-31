@@ -3,7 +3,6 @@
 	import NextContribution from './header-items/NextContribution.svelte';
 	import NextContrDate from './header-items/NextContrDate.svelte';
 	import SubscriptionStatus from './header-items/SubscriptionStatus.svelte';
-
 	export let status, statusId
 	
 </script>
