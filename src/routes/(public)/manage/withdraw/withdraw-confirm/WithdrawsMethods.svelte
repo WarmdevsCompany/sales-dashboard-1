@@ -4,42 +4,24 @@
 	import { verificationId, isFetching } from '$lib/globalStore.js';
 	import { t } from '$lib/translations/i18n.js';
 	export let withdrawMethods = [],
-		successFormStatus,
-		formStep, selectedPaymentMethod;
+		formStep,
+		selectedPaymentMethod;
 	const addNewItemKey = 'ADD_NEW_ITEM';
 	let radioValue = 0,
 		options = [],
 		isLoading = false,
 		submitBtnText = $t('NEXT');
-	$:withdrawMethods;
+	$: withdrawMethods;
 	withdrawMethods.forEach((item, index) => {
 		options[index] = { value: index };
 	});
-	const confirmSelection = async () => {
+	const confirmSelection = () => {
 		if (radioValue != addNewItemKey) {
-			isLoading = true;
-			submitBtnText = `${$t('LOADING')}...`;
-			$isFetching = true;
-			const body = {
-				verificationId: $verificationId,
-				withdrawalMethodId: withdrawMethods[radioValue].idobject,
-				amount: $withdrawBalance,
-				greenSafe: $withdrawContribution.safeValue,
-				greenAdventure: $withdrawContribution.adventureValue,
-				greenFounder: $withdrawContribution.founderValue
-			};
-			const res = await makeWithdrawal(body);
-			if (res.status) {
-				await updateGlobalDataObj()
-				selectedPaymentMethod = withdrawMethods[radioValue]
-				successFormStatus = true;
-			}
-			$isFetching = false;
-			isLoading = false;
-			submitBtnText = $t('SAVE');
+			selectedPaymentMethod = withdrawMethods[radioValue];
 		} else {
-			formStep = 4;
+			selectedPaymentMethod = addNewItemKey;
 		}
+		formStep = 2;
 	};
 </script>
 
@@ -50,7 +32,9 @@
 			class:active_item={radioValue === index}
 			on:click={() => (radioValue = index)}
 		>
-			<div class="text-3">{$t('BANK_TRANSFER')} #{element.accountNumber}*{element.currencyName}</div>
+			<div class="text-3">
+				{$t('BANK_TRANSFER')} #{element.accountNumber}*{element.currencyName}
+			</div>
 			<div class="text-xsm text-green mt-0_5">{element.fullName || ''}</div>
 			<div class="absloute__radio">
 				<div class="group-container single_item">

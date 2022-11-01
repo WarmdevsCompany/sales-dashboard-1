@@ -156,7 +156,13 @@
 			state: null,
 			zipcode: null,
 			city: null,
-			address: null
+			address: null,
+			verificationId: $verificationId,
+			withdrawalMethodId: null,
+			amount: $withdrawBalance,
+			greenSafe: $withdrawContribution.safeValue,
+			greenAdventure: $withdrawContribution.adventureValue,
+			greenFounder: $withdrawContribution.founderValue
 		};
 
 		if (legalTypeId === 5240596) {
@@ -202,16 +208,14 @@
 				userCurrencyId,
 				values
 			);
-			const addWithdrawalResponse = await addWithdrawalPaymentMethod(body);
-			if (addWithdrawalResponse.status) {
-				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.idobject);
+			
 				const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
-					selectedPaymentMethod = addWithdrawalResponse.data
+					selectedPaymentMethod = makeWithdrawalResponse.data
 					await updateGlobalDataObj()
 					withdrawRequestProcessed = true;
 				}
-			}
+			
 			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('SAVE');
@@ -221,7 +225,7 @@
 		initialValues: validationFormData.initialPrivateValues,
 		validationSchema: yup.object().shape(validationFormData.validationPrivateSchema),
 		onSubmit: async (values) => {
-			// withdrawRequestProcessed = true;
+			
 			isLoading = true;
 			submitBtnText = `${$t('LOADING')}...`;
 			$isFetching = true 
@@ -231,16 +235,14 @@
 				userCurrencyId,
 				values
 			);
-			const addWithdrawalResponse = await addWithdrawalPaymentMethod(body);
-			if (addWithdrawalResponse.status) {
-				const body = createMakeWithdrawalObj(addWithdrawalResponse.data.idobject);
-				const makeWithdrawalResponse = await makeWithdrawal(body);
+			
+			 	const makeWithdrawalResponse = await makeWithdrawal(body);
 				if (makeWithdrawalResponse.status) {
-					selectedPaymentMethod = addWithdrawalResponse.data
+					selectedPaymentMethod = makeWithdrawalResponse.data
 					await updateGlobalDataObj()
 					withdrawRequestProcessed = true;
 				}
-			}
+			//}
 			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('SAVE');
@@ -262,16 +264,6 @@
 		}
 	};
 
-	const createMakeWithdrawalObj = (withdrawalMethodId) => {
-		return {
-			verificationId: $verificationId,
-			withdrawalMethodId: withdrawalMethodId,
-			amount: $withdrawBalance,
-			greenSafe: $withdrawContribution.safeValue,
-			greenAdventure: $withdrawContribution.adventureValue,
-			greenFounder: $withdrawContribution.founderValue
-		};
-	};
 
 	onMount(async () => {
 		const { data } = await getTypesForWithdrawal($globalData.data.lang.idobject);

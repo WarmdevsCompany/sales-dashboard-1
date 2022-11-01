@@ -35,9 +35,9 @@
 	<div class="input__wrapper">
 		<label for="name" class="label">{$t('USER_NAME')}</label>
 		<div class="relative">
-			<input class="" type="text" value={username} disabled={isDisabled} />
-			<div class="abs__input__dots" class:disabled={isDisabled}>
-				<Tooltip title={$t('CHANGE_USER_NAME')} width={280} formName={'userName'} {isDisabled}
+			<input class="" type="text" value={username}  />
+			<div class="abs__input__dots" >
+				<Tooltip title={$t('CHANGE_USER_NAME')} width={280} formName={'userName'} 
 					><ThreeDotsIcon bgColor="green" /></Tooltip
 				>
 			</div>
@@ -47,9 +47,9 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('FIRST_NAME')}</label>
 			<div class="relative">
-				<input class="" type="text" value={firstName} />
-				<div class="abs__input__dots">
-					<Tooltip title={$t('CHANGE_FIRST_NAME')} width={208} formName={'firstAndLastName'}
+				<input class="" type="text" value={firstName} disabled={isDisabled} />
+				<div class="abs__input__dots" class:disabled={isDisabled}>
+					<Tooltip title={$t('CHANGE_FIRST_NAME')} width={208} formName={'firstAndLastName'} {isDisabled}
 						><ThreeDotsIcon bgColor="green" /></Tooltip
 					>
 				</div>
@@ -58,9 +58,9 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">{$t('LAST_NAME')}</label>
 			<div class="relative">
-				<input class="" type="text" value={lastName} />
-				<div class="abs__input__dots">
-					<Tooltip title={$t('CHANGE_LAST_NAME')} width={265} formName={'firstAndLastName'}
+				<input class="" type="text" value={lastName}  disabled={isDisabled}/>
+				<div class="abs__input__dots" class:disabled={isDisabled}>
+					<Tooltip title={$t('CHANGE_LAST_NAME')} width={265} formName={'firstAndLastName'} {isDisabled}
 						><ThreeDotsIcon bgColor="green" /></Tooltip
 					>
 				</div>

@@ -26,7 +26,7 @@
 				const res = await verifyCode(value.code);
 				if (res.status) {
 					$verificationId = res.data?.verificationId;
-					$$props.submitVerificationCode();
+					await $$props.submitVerificationCode();
 				} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
 					$errors['code'] = $t('WRONG_CODE');
 				}
@@ -34,7 +34,7 @@
 				const res = await verifyCodeForgotPassword(value.code, emailValue);
 				if (res.status) {
 					$verificationId = res.data?.verificationId;
-					$$props.submitVerificationCode();
+					await $$props.submitVerificationCode();
 				} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
 					$errors['code'] = $t('WRONG_CODE');
 				}

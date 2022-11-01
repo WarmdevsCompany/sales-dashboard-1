@@ -1,9 +1,15 @@
 <script>
-	import { globalData } from '$lib/globalStore';
+	import { makeWithdrawal, updateGlobalDataObj } from '$lib/api/axios.js';
+	import { globalData, verificationId } from '$lib/globalStore';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import WithdrawFooter from '../withdraw-footer/WithdrawFooter.svelte';
-	import { modalClassName, confirmModalState, withdrawContribution } from '../withdrawStore';
+	import {
+		modalClassName,
+		confirmModalState,
+		withdrawContribution,
+		withdrawBalance
+	} from '../withdrawStore';
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
@@ -18,10 +24,8 @@
 		successFormStatus = false,
 		withdrawRequestProcessed = false;
 	$: formStep, successFormStatus, withdrawMethods;
-	const submitEmailOrPhone = () => (formStep = 2);
-	const submitVerificationCode = () => {
-		$confirmModalState = true;
-	};
+	const submitEmailOrPhone = () => (formStep = 3);
+
 	const closeModals = (modalId) => {
 		$confirmModalState = false;
 		formStep = 1;
@@ -34,89 +38,131 @@
 	};
 	const confirmWithdraw = () => {
 		$confirmModalState = false;
-		withdrawMethods ? (formStep = 3) : (formStep = 4);
+		getModal('withdraw').open();
+	};
+	const makeWithdrawalFromDB = async (withdrawMethod) => {
+		let body = {
+			paymentMethodTypeId: null,
+			currencyId: null,
+			countryId: null,
+			fullName: null,
+			firstName: null,
+			lastName: null,
+			routingNumber: null,
+			sortCode: null,
+			accountNumber: null,
+			accountTypeId: null,
+			state: null,
+			zipcode: null,
+			city: null,
+			address: null,
+			verificationId: $verificationId,
+			withdrawalMethodId: withdrawMethod.idobject,
+			amount: $withdrawBalance,
+			greenSafe: $withdrawContribution.safeValue,
+			greenAdventure: $withdrawContribution.adventureValue,
+			greenFounder: $withdrawContribution.founderValue
+		};
+		const res = await makeWithdrawal(body);
+		if (res.status) {
+			await updateGlobalDataObj();
+			selectedPaymentMethod = res.data;
+			successFormStatus = true;
+		}
+	};
+
+	const submitVerificationCode = async () => {
+		if (selectedPaymentMethod === 'ADD_NEW_ITEM') {
+			formStep = 4;
+		} else {
+			await makeWithdrawalFromDB(selectedPaymentMethod);
+		}
 	};
 </script>
 
 <Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
 		<img src={greenLogo} alt="esi logo img" />
-
 		<div class="modal_head_medium text-1">{$t('WITHDRAW')}</div>
-
-		<div class="modal_main-row ">
-			{#if formStep < 3}
+		{#if formStep === 1}
+			<div class="withdraw__row">
+				<WithdrawsMethods
+					bind:formStep
+					bind:successFormStatus
+					{withdrawMethods}
+					bind:selectedPaymentMethod
+				/>
+			</div>
+		{:else if formStep === 2}
+			<div class="modal_main-row ">
 				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
-			{/if}
 
-			{#if formStep === 1}
 				<VerifyPhone sendVerifyCallback={submitEmailOrPhone} />
-			{:else if formStep === 2}
+			</div>
+		{:else if formStep === 3}
+			<div class="modal_main-row ">
+				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
+
 				<VerifyCodeForm {submitVerificationCode} />
-			{/if}
-		</div>
-		<div class="withdraw__row">
-			{#if formStep === 3}
-				<WithdrawsMethods bind:formStep bind:successFormStatus {withdrawMethods} bind:selectedPaymentMethod/>
-			{:else if formStep === 4}
-				<AddWithdrawMethod bind:withdrawRequestProcessed bind:selectedPaymentMethod/>
-			{/if}
-		</div>
+			</div>
+		{:else if formStep === 4}
+			<div class="withdraw__row">
+				<AddWithdrawMethod bind:withdrawRequestProcessed bind:selectedPaymentMethod />
+			</div>
+		{/if}
 	</div>
 </Modal>
 {#if $confirmModalState}
-<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
-	<div class="confirm__form text-center">
-		<div class="overflow_wrapper">
-			<img src={greenLogo} alt="esi logo img" />
-			<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
-			<div class="text-xsm last__step--subhead mb-1_5">
-				{$t('WHERE_WITHDRAW')}*
-			</div>
-			<div class="last__step--body">
-				<div class="last__step--flex">
-					<div class="inline">
-						{$t('SAFE_PLAN_BIG')}:
-						<span class="text-green mobile-block"
-							>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
-						>
-					</div>
-					<div class="inline">
-						{$t('ADVENTURE_BIG')}:
-						<span class="text-green mobile-block"
-							>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
-						>
-					</div>
-					<div class="inline">
-						{$t('FOUNDER_BIG')}:
-						<span class="text-green mobile-block"
-							>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
-						>
-					</div>
+	<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
+		<div class="confirm__form text-center">
+			<div class="overflow_wrapper">
+				<img src={greenLogo} alt="esi logo img" />
+				<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
+				<div class="text-xsm last__step--subhead mb-1_5">
+					{$t('WHERE_WITHDRAW')}*
 				</div>
-				<div class="line mt-1_5 mb-1_5" />
-				<WithdrawFooter
-					btnAligment={'justify-cc'}
-					confirmBtn={'confirm'}
-					bind:formStep
-					{closeModals}
-					{withdrawMethods}
-					{timeToTransfer}
-					{withdrawOfTotal}
-					{confirmWithdraw}
-				/>
-			</div>
-			<div class="close_icon--wrapper">
-				<img
-					class="close_icon"
-					on:click={() => closeModals('withdraw')}
-					src={closeIcon}
-					alt="esi close icon"
-				/>
+				<div class="last__step--body">
+					<div class="last__step--flex">
+						<div class="inline">
+							{$t('SAFE_PLAN_BIG')}:
+							<span class="text-green mobile-block"
+								>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
+							>
+						</div>
+						<div class="inline">
+							{$t('ADVENTURE_BIG')}:
+							<span class="text-green mobile-block"
+								>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
+							>
+						</div>
+						<div class="inline">
+							{$t('FOUNDER_BIG')}:
+							<span class="text-green mobile-block"
+								>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
+							>
+						</div>
+					</div>
+					<div class="line mt-1_5 mb-1_5" />
+					<WithdrawFooter
+						btnAligment={'justify-cc'}
+						confirmBtn={'confirm'}
+						{withdrawMethods}
+						{timeToTransfer}
+						{withdrawOfTotal}
+						{confirmWithdraw}
+					/>
+				</div>
+				<div class="close_icon--wrapper">
+					<img
+						class="close_icon"
+						on:click={() => closeModals('withdraw')}
+						src={closeIcon}
+						alt="esi close icon"
+					/>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 {/if}
 {#if successFormStatus}
 	<SuccessWithdrawModal
@@ -163,11 +209,12 @@
 		width: 100%;
 		max-width: 950px;
 		min-height: 584px;
+		margin-left: 257px;
 	}
 	.close_icon--wrapper {
 		position: absolute;
 		top: 15px;
-		right: 0px;
+		right: 15px;
 		width: 34px;
 		height: 34px;
 		display: flex;
@@ -234,9 +281,15 @@
 		max-width: 100%;
 		padding: 0 1rem;
 	}
+	@media only screen and (max-width: 1080px) {
+		.close_icon--wrapper {
+			right: 0;
+		}
+	}
 	@media only screen and (max-width: 991px) {
 		.confirm__form {
 			min-height: 65vh;
+			margin-left: 0px;
 		}
 		.overflow_wrapper {
 			height: 100vh;
@@ -264,7 +317,6 @@
 		}
 		.overflow_wrapper {
 			padding: 70px 0 100px 0;
-
 		}
 	}
 	@media only screen and (max-width: 480px) {

@@ -10,7 +10,6 @@
 	} from '../withdrawStore';
 	export let btnAligment = 'justify-end',
 		confirmBtn = 'open',
-		closeModals,
 		timeToTransfer,
 		withdrawOfTotal;
 	const resetWithdrawls = () => {
@@ -42,12 +41,12 @@
 					$globalData.data.currentSubscription.statusId === 5237002 ||
 					$globalData.data.currentSubscription.balance <= 0}
 				class="btn confirm"
-				on:click={() => getModal('withdraw').open()}>{$t('WITHDRAW')}</button
+				on:click={() => $confirmModalState = true}>{$t('WITHDRAW')}</button
 			>
 		</div>
 	{:else if confirmBtn === 'confirm'}
 		<div class="d-flex {btnAligment} buttons-confirm">
-			<button class="btn cancel mr-1_5" on:click={() => closeModals('withdraw')}
+			<button class="btn cancel mr-1_5" on:click={() => $confirmModalState = false}
 				>{$t('CANCEL')}</button
 			>
 			<div class="btn confirm-wd" on:click={confirmWithdraw}>{$t('MANAGE_CONF_WD')}</div>

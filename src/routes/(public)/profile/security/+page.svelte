@@ -10,7 +10,6 @@
 	$: {
 		date = convertDateToUTC($globalData.data.passwordLastChangeDate);
 		passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
-		console.log(passwordLastChangeDate)
 	}
 
 	scrollToTop();
