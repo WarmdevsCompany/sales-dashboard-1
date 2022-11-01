@@ -9,12 +9,12 @@
 	import { validatePasswordType } from '$lib/functions/validatePasswordType';
 	import { t } from '$lib/translations/i18n.js';
 	export let userIsAuth = true;
-	export let emailValue = null;
+	export let phoneValue = null;
 	export let submitBtnText = $t('CONTINUE');
 	let isLoading = false;
 	let verifyId = $verificationId;
 	$: verifyId;
-	// emailValue={email} userIsAuth={false}
+
 
 	const passwordRegEx = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
@@ -51,7 +51,7 @@
 					$errors.confirmPassword = res.errorMessage;
 				}
 			} else {
-				const res = await changeForgotPassword(emailValue, value.password, verifyId);
+				const res = await changeForgotPassword(phoneValue, value.password, verifyId);
 				if (res.status) {
 					$$props.submitNewPassword();
 				} else {

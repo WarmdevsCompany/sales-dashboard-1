@@ -8,7 +8,7 @@
 	import { t } from '$lib/translations/i18n.js';
 	import {checkInputNumber} from '$lib/functions/checkInputNumber.js'
 	export let userIsAuth = true;
-	export let emailValue = null;
+	export let phoneValue = null;
 	let submitBtnText = $t('CONTINUE');
 	let isLoading = false;
 	const { form, errors, state, handleChange, handleSubmit } = createForm({
@@ -31,7 +31,7 @@
 					$errors['code'] = $t('WRONG_CODE');
 				}
 			} else {
-				const res = await verifyCodeForgotPassword(value.code, emailValue);
+				const res = await verifyCodeForgotPassword(value.code, phoneValue);
 				if (res.status) {
 					$verificationId = res.data?.verificationId;
 					await $$props.submitVerificationCode();

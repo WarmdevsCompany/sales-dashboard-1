@@ -1,13 +1,13 @@
 <script>
 	import { goto } from '$app/navigation';
-	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	import ChangePassForm from '$lib/components/forms/ChangePassForm.svelte';
 	import VerifyCodeForm from '$lib/components/forms/VerifyCodeForm.svelte';
 	import SuccessModal from '$lib/components/modals/SuccessModal.svelte';
+	import VerifyPhone from '$lib/components/forms/verify/inputs/VerifyPhone.svelte';
 	let verifyBtnText = $t('RESET_PASSWORD');
 	let formStep = 1;
-	let email;
+	let phone;
 	$: formStep;
 	let successFormStatus = false;
 	function returnToLogin() {
@@ -26,11 +26,11 @@
 
 <div class="verify_wrapper">
 	{#if formStep === 1}
-		<VerifyEmail submitBtnText={verifyBtnText} sendVerifyCallback={verifyEmail} userIsAuth={false} bind:importedEmail={email}/>
+		<VerifyPhone submitBtnText={verifyBtnText} sendVerifyCallback={verifyEmail} userIsAuth={false} bind:importedPhone={phone}/>
 	{:else if formStep === 2}
-		<VerifyCodeForm submitVerificationCode={verifyCode} emailValue={email} userIsAuth={false}/>
+		<VerifyCodeForm submitVerificationCode={verifyCode} phoneValue={phone} userIsAuth={false}/>
 	{:else if formStep === 3}
-		<ChangePassForm {submitNewPassword} emailValue={email} userIsAuth={false}/>
+		<ChangePassForm {submitNewPassword} phoneValue={phone} userIsAuth={false}/>
 	{/if}
 	{#if successFormStatus}
 		<SuccessModal

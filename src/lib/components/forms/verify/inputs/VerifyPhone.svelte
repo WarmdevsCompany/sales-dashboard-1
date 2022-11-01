@@ -1,5 +1,5 @@
 <script>
-	import { requestValidation } from '$lib/api/axios.js';
+	import { requestValidation, forgotPassword } from '$lib/api/axios.js';
 	import { slide } from 'svelte/transition';
 	import { createForm } from 'svelte-forms-lib';
 	import * as yup from 'yup';
@@ -21,15 +21,18 @@
 			submitBtnText = `${$t('LOADING')}...`;
 			$isFetching = true;
 
-			const res = await requestValidation(value.phone);
+			
 			if (userIsAuth) {
+				const res = await requestValidation(value.phone);
 				if (res.status) {
 					$$props.sendVerifyCallback();
 				} else if (res.errorMessage === 'INVALID_CONTACT_DATA') {
 					$errors['phone'] = $t('INVALID_CONTACT_DATA');
 				}
 			} else {
+				console.log("here")
 				const res = await forgotPassword(value.phone);
+				console.log("res",res)
 				if (res.status) {
 					importedPhone = value.phone;
 					$$props.sendVerifyCallback();
