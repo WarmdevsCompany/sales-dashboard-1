@@ -1,4 +1,4 @@
-<div class="dots d-flex justify-cc align-center ">
+<div class="dots d-flex justify-cc align-center" class:disabled={$$props.isDisabled}>
    <span class="relative b-radius-50 {$$props.bgColor}"></span>
 </div>
 
@@ -7,6 +7,9 @@
         width: 24px;
         height: 24px;
         
+    }
+    .dots.disabled{
+       pointer-events: none;
     }
     span{
         width: 4px;

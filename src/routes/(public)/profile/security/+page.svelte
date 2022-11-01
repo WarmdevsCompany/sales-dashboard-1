@@ -6,11 +6,12 @@
 	import { getModal } from '$lib/components/Modal.svelte';
 	import ChangePassModal from './modals/ChangePassModal.svelte';
 	import { t } from '$lib/translations/i18n.js';
-	let date = convertDateToUTC($globalData.data.passwordLastChangeDate);
+	let date, passwordLastChangeDate;
 	$: {
 		date = convertDateToUTC($globalData.data.passwordLastChangeDate);
+		passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
+		console.log(passwordLastChangeDate)
 	}
-	let passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 
 	scrollToTop();
 </script>
@@ -27,8 +28,11 @@
 		<div class="text-xsm mt-0_5">
 			{$t('SETTINGS.LAST_PW_CHANGE')} - <span class="text-green">{passwordLastChangeDate}</span>
 		</div>
-		<button disabled={$globalData.data.currentSubscription.statusId === 5237002} class="btn confirm" on on:click={() => getModal('change-password').open()}
-			>{$t('CHANGE_PASSWORD')}</button
+		<button
+			disabled={$globalData.data.currentSubscription.statusId === 5237002}
+			class="btn confirm"
+			on
+			on:click={() => getModal('change-password').open()}>{$t('CHANGE_PASSWORD')}</button
 		>
 	</div>
 </div>

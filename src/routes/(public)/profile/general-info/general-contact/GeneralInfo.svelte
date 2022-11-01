@@ -35,9 +35,9 @@
 	<div class="input__wrapper">
 		<label for="name" class="label">{$t('USER_NAME')}</label>
 		<div class="relative">
-			<input class="" type="text" value={username} disabled={isDisabled}/>
-			<div class="abs__input__dots">
-				<Tooltip title={$t('CHANGE_USER_NAME')} width={280} formName={'userName'}
+			<input class="" type="text" value={username} disabled={isDisabled} />
+			<div class="abs__input__dots" class:disabled={isDisabled}>
+				<Tooltip title={$t('CHANGE_USER_NAME')} width={280} formName={'userName'} {isDisabled}
 					><ThreeDotsIcon bgColor="green" /></Tooltip
 				>
 			</div>
@@ -98,10 +98,10 @@
 		<div class="input__wrapper">
 			<label for="name" class="label">Email</label>
 			<div class="relative">
-				<input class="" type="email" value={email} disabled={isDisabled}/>
-				<div class="abs__input__dots">
-					<Tooltip title={$t('CHANGE_EMAIL')} width={225} formName={'email'}
-						><ThreeDotsIcon bgColor="green" /></Tooltip
+				<input class="" type="email" value={email} disabled={isDisabled} />
+				<div class="abs__input__dots" class:disabled={isDisabled}>
+					<Tooltip title={$t('CHANGE_EMAIL')} width={225} formName={'email'} {isDisabled}
+						><ThreeDotsIcon bgColor="green" {isDisabled} /></Tooltip
 					>
 				</div>
 			</div>
@@ -129,11 +129,11 @@
 	}
 
 	@media only screen and (max-width: 1300px) {
-		.grid-2{
-		 grid-template-columns: 1fr;
+		.grid-2 {
+			grid-template-columns: 1fr;
 		}
-		.mt-3{
-		 margin-top: 1.5rem;
+		.mt-3 {
+			margin-top: 1.5rem;
 		}
 	}
 	@media only screen and (max-width: 991px) {

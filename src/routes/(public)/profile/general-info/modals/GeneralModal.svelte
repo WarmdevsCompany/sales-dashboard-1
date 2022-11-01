@@ -12,7 +12,7 @@
 	import SuccessModal from '$lib/components/modals/SuccessModal.svelte';
 	import VerifyEmail from '$lib/components/forms/verify/inputs/VerifyEmail.svelte';
 	import FirstAndLastNamesForm from './update-forms/FirstAndLastNamesForm.svelte';
-	import VerifyPhone from '../../../../../lib/components/forms/verify/inputs/VerifyPhone.svelte';
+	import VerifyPhone from '$lib/components/forms/verify/inputs/VerifyPhone.svelte';
 
 	let formStep = 1;
 

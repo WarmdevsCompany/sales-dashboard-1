@@ -335,6 +335,9 @@ input.error::placeholder {
 	right: 24px;
 	cursor: pointer;
 }
+.abs__input__dots.disabled {
+	pointer-events: none;
+}
 /* input password icon  */
 .eyeWrapper {
 	position: absolute;
