@@ -21,8 +21,7 @@
 
 	export let withdrawMethods, timeToTransfer, withdrawOfTotal, selectedPaymentMethod;
 	let formStep = 1,
-		successFormStatus = false,
-		withdrawRequestProcessed = false;
+		successFormStatus = false;
 	$: formStep, successFormStatus, withdrawMethods;
 	const submitEmailOrPhone = () => (formStep = 3);
 
@@ -33,7 +32,6 @@
 	};
 	const closeAllModals = () => {
 		successFormStatus = false;
-		withdrawRequestProcessed = false;
 		closeModals('withdraw');
 	};
 	const confirmWithdraw = () => {
@@ -107,7 +105,7 @@
 			</div>
 		{:else if formStep === 4}
 			<div class="withdraw__row">
-				<AddWithdrawMethod bind:withdrawRequestProcessed bind:selectedPaymentMethod />
+				<AddWithdrawMethod bind:successFormStatus bind:selectedPaymentMethod />
 			</div>
 		{/if}
 	</div>
@@ -168,14 +166,6 @@
 	<SuccessWithdrawModal
 		closeModals={closeAllModals}
 		mainText={$t('MANAGE_WITHDRAW_CONFIRMED')}
-		btnText={$t('BACK')}
-		{selectedPaymentMethod}
-	/>
-{/if}
-{#if withdrawRequestProcessed}
-	<SuccessWithdrawModal
-		closeModals={closeAllModals}
-		mainText={$t('MANAGE_WITHDRAW_PROCESSED')}
 		btnText={$t('BACK')}
 		{selectedPaymentMethod}
 	/>

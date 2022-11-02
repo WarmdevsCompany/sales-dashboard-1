@@ -18,7 +18,7 @@
 		updateGlobalDataObj
 	} from '$lib/api/axios';
 	export let submitBtnText = $t('SAVE'),
-		withdrawRequestProcessed, selectedPaymentMethod;
+	successFormStatus, selectedPaymentMethod;
 	let isLoading = false,
 		formStep = 1,
 		verifyId = $verificationId,
@@ -44,7 +44,7 @@
 		verifyId,
 			globalLegalType,
 			globalLegalTypeError,
-			withdrawRequestProcessed,
+			successFormStatus,
 			validationFormData,
 			mainForm;
 	}
@@ -213,7 +213,7 @@
 				if (makeWithdrawalResponse.status) {
 					selectedPaymentMethod = makeWithdrawalResponse.data
 					await updateGlobalDataObj()
-					withdrawRequestProcessed = true;
+					successFormStatus = true;
 				}
 			
 			$isFetching = false 
@@ -240,9 +240,9 @@
 				if (makeWithdrawalResponse.status) {
 					selectedPaymentMethod = makeWithdrawalResponse.data
 					await updateGlobalDataObj()
-					withdrawRequestProcessed = true;
+					successFormStatus = true;
 				}
-			//}
+			
 			$isFetching = false 
 			isLoading = false;
 			submitBtnText = $t('SAVE');
