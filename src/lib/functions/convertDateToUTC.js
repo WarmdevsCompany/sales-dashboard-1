@@ -12,7 +12,7 @@ export function convertDateToUTC(date) {
 		)
 	);
 	month = dateUTC.getMonth() +1;
-
+   console.log('dateUTC : ',dateUTC)
 	if (month < 10) {
 		month = '0' + month;
 	}

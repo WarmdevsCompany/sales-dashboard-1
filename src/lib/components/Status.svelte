@@ -32,6 +32,7 @@
 		use:popperRef
 		on:mouseenter={() => (showTooltip = true)}
 		on:mouseleave={() => (showTooltip = false)}
+		on:click={() => (showTooltip = true)}
 		class="status__btn-icon"
 	>
 		<StatusIcon bgColor={iconColor} />
