@@ -7,10 +7,8 @@
 	import ChangePassModal from './modals/ChangePassModal.svelte';
 	import { t } from '$lib/translations/i18n.js';
 	let date, passwordLastChangeDate;
-	
+
 	$: {
-		console.log('passData - ', new Date($globalData.data.passwordLastChangeDate * 1000))
-		console.log('passUTC - ', $globalData.data.passwordLastChangeDate)
 		date = convertDateToUTC($globalData.data.passwordLastChangeDate);
 		passwordLastChangeDate = `${date.day} ${$t('MONTH_SHORT_' + date.month)} ${date.year}`;
 	}

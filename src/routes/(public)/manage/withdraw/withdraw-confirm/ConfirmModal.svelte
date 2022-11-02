@@ -1,4 +1,5 @@
 <script>
+	import LoginPassForm from '$lib/components/forms/LoginPassForm.svelte';
 	import { makeWithdrawal, updateGlobalDataObj } from '$lib/api/axios.js';
 	import { globalData, verificationId } from '$lib/globalStore';
 	import greenLogo from '$lib/assets/img/logo-green.svg';
@@ -23,7 +24,8 @@
 	let formStep = 1,
 		successFormStatus = false;
 	$: formStep, successFormStatus, withdrawMethods;
-	const submitEmailOrPhone = () => (formStep = 3);
+	console.log(withdrawMethods)
+	const submitEmailOrPhone = () => (formStep = 4);
 
 	const closeModals = (modalId) => {
 		$confirmModalState = false;
@@ -36,7 +38,13 @@
 	};
 	const confirmWithdraw = () => {
 		$confirmModalState = false;
+		if(!withdrawMethods || withdrawMethods === null){
+			formStep = 2;
+		}
 		getModal('withdraw').open();
+	};
+	const confirmLogin = () => {
+		formStep = 3;
 	};
 	const makeWithdrawalFromDB = async (withdrawMethod) => {
 		let body = {
@@ -71,7 +79,7 @@
 
 	const submitVerificationCode = async () => {
 		if (selectedPaymentMethod === 'ADD_NEW_ITEM') {
-			formStep = 4;
+			formStep = 5;
 		} else {
 			await makeWithdrawalFromDB(selectedPaymentMethod);
 		}
@@ -92,18 +100,22 @@
 				/>
 			</div>
 		{:else if formStep === 2}
-			<div class="modal_main-row ">
+			<div class="modal_main-body ">
 				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
-
-				<VerifyPhone sendVerifyCallback={submitEmailOrPhone} />
+				<LoginPassForm authDataCallback={confirmLogin} />
 			</div>
 		{:else if formStep === 3}
+			<div class="modal_main-row ">
+				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
+				<VerifyPhone sendVerifyCallback={submitEmailOrPhone} />
+			</div>
+		{:else if formStep === 4}
 			<div class="modal_main-row ">
 				<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
 
 				<VerifyCodeForm {submitVerificationCode} />
 			</div>
-		{:else if formStep === 4}
+		{:else if formStep === 5}
 			<div class="withdraw__row">
 				<AddWithdrawMethod bind:successFormStatus bind:selectedPaymentMethod />
 			</div>
@@ -230,6 +242,10 @@
 	}
 	.close_icon:hover {
 		transform: scale(1.2);
+	}
+	.modal_main-body {
+		max-width: 587px;
+		margin: 0 auto;
 	}
 
 	.modal_main .modal_head_medium {

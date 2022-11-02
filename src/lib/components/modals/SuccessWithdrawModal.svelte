@@ -7,7 +7,7 @@
 		selectedPaymentMethod;
 </script>
 
-<SuccessSlot>
+<SuccessSlot {closeModals}>
 	<div class="modal_head_medium text-1">
 		{mainText}
 	</div>

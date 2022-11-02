@@ -26,6 +26,8 @@
 					$$props.sendVerifyCallback();
 				}else if(res.errorMessage === "INVALID_EMAIL"){
 					$errors['email'] =  $t('INVALID_EMAIL')
+				 }else if(res.errorMessage === "INVALID_CONTACT_DATA"){
+					$errors['email'] =  $t('INVALID_EMAIL')
 				 }
 			}else {
 				const res = await forgotPassword(value.email);
