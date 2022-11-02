@@ -29,6 +29,7 @@
 		use:popperRef
 		on:mouseenter={() => (showTooltip = true)}
 		on:mouseleave={() => (showTooltip = false)}
+		on:click={() => (showTooltip = true)}
 	>
 		<StatusIcon bgColor="white" />
 	</div>

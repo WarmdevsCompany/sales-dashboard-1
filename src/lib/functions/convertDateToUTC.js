@@ -1,15 +1,7 @@
 export function convertDateToUTC(date) {
 	let year, month, day, hours, minutes;
-	const date_0 = new Date(date * 1000);
 	const dateUTC = new Date(
-		Date.UTC(
-			date_0.getFullYear(),
-			date_0.getMonth(),
-			date_0.getDate(),
-			date_0.getHours(),
-			date_0.getMinutes(),
-			0
-		)
+		date * 1000
 	);
 	month = dateUTC.getMonth() +1;
    console.log('dateUTC : ',dateUTC)
