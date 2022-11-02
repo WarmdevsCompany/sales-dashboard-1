@@ -166,7 +166,14 @@
 				</div>
 				<div>
 					<div class="text-sm subtitle">{$t('MANAGE_NEXT_DATE')}</div>
-					<div class="restart__value text-green text-2 mt-1_5">{nextDate}</div>
+
+					<div class="restart__value text-green text-2 mt-1_5">
+						{#if statusId === 5237000}
+							{$globalData.data.currentSubscription.subscriptionText}
+						{:else}
+							{nextDate}
+						{/if}
+					</div>
 				</div>
 			</div>
 			<div class="terms__checkbox">
