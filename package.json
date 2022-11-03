@@ -31,7 +31,6 @@
 		"cookie": "^0.4.1",
 		"datejs": "^1.0.0-rc3",
 		"flatpickr": "^4.6.13",
-		"lodash": "^4.17.21",
 		"svelte-chartjs": "^2.0.1",
 		"svelte-forms-lib": "^2.0.1",
 		"svelte-i18n": "^3.4.0",
