@@ -30,7 +30,6 @@
 					$errors['phone'] = $t('INVALID_CONTACT_DATA');
 				}
 			} else {
-				console.log("here")
 				const res = await forgotPassword(value.phone);
 				console.log("res",res)
 				if (res.status) {

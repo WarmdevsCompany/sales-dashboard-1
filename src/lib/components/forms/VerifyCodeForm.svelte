@@ -27,6 +27,7 @@
 				if (res.status) {
 					$verificationId = res.data?.verificationId;
 					await $$props.submitVerificationCode();
+					console.log('here')
 				} else if (res.errorMessage === 'INTERNAL_VERIFICATION_ERROR') {
 					$errors['code'] = $t('WRONG_CODE');
 				}

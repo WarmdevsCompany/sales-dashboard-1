@@ -24,7 +24,7 @@
 	let formStep = 1,
 		successFormStatus = false;
 	$: formStep, successFormStatus, withdrawMethods;
-	console.log(withdrawMethods)
+	console.log(withdrawMethods);
 	const submitEmailOrPhone = () => (formStep = 4);
 
 	const closeModals = (modalId) => {
@@ -38,8 +38,9 @@
 	};
 	const confirmWithdraw = () => {
 		$confirmModalState = false;
-		if(!withdrawMethods || withdrawMethods === null){
+		if (!withdrawMethods || withdrawMethods === null) {
 			formStep = 2;
+			selectedPaymentMethod = 'ADD_NEW_ITEM';
 		}
 		getModal('withdraw').open();
 	};
@@ -80,7 +81,7 @@
 	const submitVerificationCode = async () => {
 		if (selectedPaymentMethod === 'ADD_NEW_ITEM') {
 			formStep = 5;
-		} else {
+		} else if (selectedPaymentMethod && selectedPaymentMethod != 'ADD_NEW_ITEM') {
 			await makeWithdrawalFromDB(selectedPaymentMethod);
 		}
 	};
