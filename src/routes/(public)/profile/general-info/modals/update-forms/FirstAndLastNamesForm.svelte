@@ -78,6 +78,6 @@
 		{#if $errors.lastName}
 			<small transition:slide|local class="error_text last">{$errors.lastName}</small>
 		{/if}
-		<button class="btn _218" class:is_fetching={$isFetching}>{$t('CONTINUE')}</button>
+		<button class="btn _218" class:is_fetching={$isFetching}>{submitBtnText}</button>
 	</form>
 </div>
