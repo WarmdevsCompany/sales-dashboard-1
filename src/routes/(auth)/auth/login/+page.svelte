@@ -1,5 +1,4 @@
 <script>
-	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import LoginForm from './LoginForm.svelte';
 	import { t } from '$lib/translations/i18n.js';
 </script>
@@ -11,7 +10,6 @@
 <div class="greenForm">
 	<div class="box_shadow-medium form__content">
 		<div class="content d-flex flex-col justify-cc align-center">
-			<img src={greenLogo} alt="esi logo img" />
 			<div class="text-1 mb-1">{$t('LOGIN')}</div>
 			<LoginForm />
 		</div>
@@ -29,7 +27,7 @@
 		justify-content: center;
 		width: 100%;
 		min-height: 100vh;
-		background: linear-gradient(0deg, #053900, #053900), #ffffff;
+		background: linear-gradient(0deg, #020039, #06358b), #ffffff;
 	}
 
 	.form__content {

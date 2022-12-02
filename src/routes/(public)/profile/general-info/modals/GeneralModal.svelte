@@ -1,5 +1,4 @@
 <script>
-	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import { modalClassName, confirmModalState, profileEditForm } from '../profileStore';
 	import UserNameForm from './update-forms/UserNameForm.svelte';
@@ -31,7 +30,6 @@
 
 <Modal id="general-info" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium text-1">{$t('WELCOME')}</div>
 		<div class="modal_main-body ">
 			{#if formStep === 1}

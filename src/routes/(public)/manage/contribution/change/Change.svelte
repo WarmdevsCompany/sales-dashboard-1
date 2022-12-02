@@ -1,7 +1,7 @@
 <script>
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import Dropdown from '$lib/components/Dropdown.svelte';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
+
 	import { t } from '$lib/translations/i18n.js';
 	import { globalData } from '$lib/globalStore';
 	import ChangeForm from './ChangeForm.svelte';
@@ -41,13 +41,13 @@
 </div>
 <Modal id="confirm">
 	<div class="modal_main confirm text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-sb align-bottom">
 			<div class="text-xsm d-flex align-center mobile-block">
 				{$t('MANAGE_NEW_CONTRIBUTION')}:
 				<span class="text-3 text-blue mobile-block"
-					>{$globalData?.data?.currency.symbol}{$globalData.data.current_contribution.amount }/mo</span
+					>{$globalData?.data?.currency.symbol}{$globalData.data.current_contribution
+						.amount}/mo</span
 				>
 			</div>
 			<div class="text-xsm d-flex align-center mobile-block">

@@ -46,16 +46,16 @@
 		background: #338df3;
 	}
 	.general__plan--item.adventure {
-		background: #dce9d3;
+		background: rgb(169, 213, 255);
 	}
 	.general__plan--item.adventure .plan--item--top {
-		background: #6cc800;
+		background: rgb(7 89 133);
 	}
 	.general__plan--item.founder {
-		background: #f1e2fa;
+		background: rgb(169, 202, 255);
 	}
 	.general__plan--item.founder .plan--item--top {
-		background: #8336e4;
+		background: rgb(12 74 110);
 	}
 	@media only screen and (min-width: 992px) and (max-width: 1200px) {
 		.total {

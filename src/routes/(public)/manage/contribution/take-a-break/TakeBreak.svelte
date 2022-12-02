@@ -1,7 +1,6 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import Dropdown from '$lib/components/Dropdown.svelte';
 	import Checkbox from '$lib/components/inputs/Checkbox.svelte';
 	import { t } from '$lib/translations/i18n.js';
@@ -115,7 +114,6 @@
 </div>
 <Modal id="pause">
 	<div class="modal_main pause text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium mt-2">
 			{$t('MANAGE_PAUSE_TITLE')}
 		</div>
@@ -132,7 +130,6 @@
 </Modal>
 <Modal id="stop">
 	<div class="modal_main stop text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium mt-2">
 			{$t('MANAGE_STOP_TITLE')}
 		</div>
@@ -145,7 +142,6 @@
 </Modal>
 <Modal id="restart">
 	<div class="modal_main restart text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium mt-2">
 			{$t('MANAGE_RES_TITLE')}
 		</div>

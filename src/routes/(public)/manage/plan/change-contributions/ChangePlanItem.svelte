@@ -103,7 +103,7 @@
 		<div class="column">
 			<img class="plan__icon" src={currentSvgIcon} alt="" />
 
-			<div class="item__head__name">{$t('MANAGE_SELECT')} {label}</div>
+			<div class="item__head__name">SELECT {label}</div>
 		</div>
 		<div class="column">
 			<div class="item__head__checkbox" class:visible={$allocatedContributions[className] != 0}>
@@ -117,7 +117,7 @@
 	<div class="item__body">
 		<div>
 			<div class="item__top">
-				<div class="item__top__head">{$t('MANAGE_TO_GREEN')}</div>
+				<div class="item__top__head">You contribute to {label}</div>
 				<div class="dropdown__wrapper">
 					<div
 						class="dropdown  {activeState ? activeClass : ''} plan__dropdown"
@@ -126,9 +126,11 @@
 						class:disabled={isDisebled}
 						on:click_outside={handleClickOutside}
 					>
-						<Dropdown_ico on:click={() => {
-							activeState = !activeState;
-						}}/>
+						<Dropdown_ico
+							on:click={() => {
+								activeState = !activeState;
+							}}
+						/>
 						<div
 							class="dropdown__item--current"
 							on:click={() => {
@@ -188,7 +190,7 @@
 			<!-- <Portfolio name={className} /> -->
 		</div>
 		<PlanBtn
-			content={btnText}
+			content={label + ' info'}
 			className={btnClass}
 			on:click={() => {
 				getModal('planModal').open();
@@ -244,17 +246,27 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
-		border-bottom-left-radius: 6px;
-		border-bottom-right-radius: 6px;
 	}
 	.plans__item.safe .item__body {
-		background: #C0E4F6;
+		background: linear-gradient(
+			90deg,
+			rgba(168, 224, 255, 0.56) 0.14%,
+			rgba(104, 191, 233, 0.42) 59.37%
+		);
 	}
 	.plans__item.adventure .item__body {
-		background: #ABD790;
+		background: linear-gradient(
+			243.71deg,
+			rgba(36, 169, 221, 0.46) 0%,
+			rgba(4, 143, 212, 0.79) 91.93%
+		);
 	}
 	.plans__item.founder .item__body {
-		background: #F0DEF8;
+		background: linear-gradient(
+			249.93deg,
+			rgba(59, 130, 246, 0.63) -0.25%,
+			rgba(37, 112, 252, 0.7) 100.33%
+		);
 	}
 	.item__head__checkbox {
 		width: 24px;

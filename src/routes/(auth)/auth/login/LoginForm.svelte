@@ -24,7 +24,7 @@
 			try {
 				buttonText = `${$t('LOADING')}...`;
 				isLoading = true;
-				$isFetching = true
+				$isFetching = true;
 
 				let res = await login({ login: values.userName, password: values.password });
 				if (res?.status === false) {
@@ -34,18 +34,18 @@
 						errorMessages = $t('INVALID_PASSWORD');
 					} else if (res.errorMessage === 'USER_NOT_FOUND') {
 						errorMessages = $t('USER_NOT_FOUND');
-					}else if(res.errorMessage === 'ACCOUNT_CLOSED'){
+					} else if (res.errorMessage === 'ACCOUNT_CLOSED') {
 						errorMessages = $t('ACCOUNT_CLOSED');
-					}else if(res.errorMessage === 'ACCOUNT_BLOCKED'){
+					} else if (res.errorMessage === 'ACCOUNT_BLOCKED') {
 						errorMessages = $t('ACCOUNT_BLOCKED');
 					}
 					if ((statusId === 5237003, statusId === 5237004)) goto('/blocked');
 					buttonText = $t('LOGIN');
-					$isFetching = false
+					$isFetching = false;
 				}
 			} catch (e) {
 				buttonText = $t('LOGIN');
-				$isFetching = false
+				$isFetching = false;
 				errorMessages = e;
 			}
 		}
@@ -99,8 +99,7 @@
 	</div>
 	<div class="login__btn__wrapper d-flex justify-sb align-center ">
 		<div class="register">
-			<div class="register__head">{$t('NOT_GREENSAVER')}</div>
-			<a href="https://esi.webflow.io/subscribe-test" class="text-green">{$t('START_NOW')}</a>
+			<a href="/auth/register" class="btn sign_up">Sign Up</a>
 		</div>
 		<button class="btn login" class:is_fetching={$isFetching}>{buttonText}</button>
 	</div>
@@ -116,6 +115,12 @@
 		width: 229px;
 		margin: 0 0 0 auto;
 		transition: none;
+	}
+	.register .sign_up {
+		background: transparent;
+		color: #006eff;
+		font-weight: 500;
+		border: 1px solid #006eff;
 	}
 
 	.forgot__btn {
@@ -168,8 +173,7 @@
 			padding-bottom: 1rem;
 		}
 		.login__btn__wrapper {
-		flex-direction: column;
-	}
+			flex-direction: column;
+		}
 	}
 </style>
-

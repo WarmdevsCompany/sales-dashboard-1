@@ -54,7 +54,7 @@
 <div class="grid-3 mb-2">
 	<GeneralPlan
 		className="safe"
-		planName={$t('SAFE_PLAN_BIG')}
+		planName="Plan 1"
 		currencySymbol={$globalData?.data?.currency.symbol}
 		contribution={$globalData.data.contributions.safePlan.contribution}
 		revenue={$globalData.data.contributions.safePlan.revenue}
@@ -62,7 +62,7 @@
 	/>
 	<GeneralPlan
 		className="adventure"
-		planName={$t('ADVENTURE_BIG')}
+		planName="Plan 2"
 		currencySymbol={$globalData?.data?.currency.symbol}
 		contribution={$globalData.data.contributions.adventurePlan.contribution}
 		revenue={$globalData.data.contributions.adventurePlan.revenue}
@@ -70,7 +70,7 @@
 	/>
 	<GeneralPlan
 		className="founder"
-		planName={$t('FOUNDER_BIG')}
+		planName="Plan 3"
 		currencySymbol={$globalData?.data?.currency.symbol}
 		contribution={$globalData.data.contributions.founderPlan.contribution}
 		revenue={$globalData.data.contributions.founderPlan.revenue}

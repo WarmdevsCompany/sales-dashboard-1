@@ -129,7 +129,7 @@
 			{current}
 			currentPlan={savePlan}
 			className="safe"
-			label={$t('MANAGE_SAFE')}
+			label="Plan 1"
 			{allowPercentageVal}
 			{savePercentages}
 			currentPrice={safePrice}
@@ -143,7 +143,7 @@
 			{current}
 			currentPlan={advPlan}
 			className="adventure"
-			label={$t('MANAGE_ADVENTURE')}
+			label="Plan 2"
 			{allowPercentageVal}
 			{savePercentages}
 			currentPrice={adventurePrice}
@@ -157,7 +157,7 @@
 			{current}
 			currentPlan={foundPlan}
 			className="founder"
-			label={$t('MANAGE_FOUNDER')}
+			label="Plan 3"
 			{allowPercentageVal}
 			{savePercentages}
 			currentPrice={founderPrice}

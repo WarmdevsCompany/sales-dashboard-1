@@ -1,7 +1,7 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import { browser } from '$app/environment';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
+
 	import { t, locale } from '$lib/translations/i18n.js';
 	import { afterUpdate, onMount } from 'svelte';
 	import '../app.css';
@@ -10,7 +10,7 @@
 
 	onMount(() => {
 		if (browser) {
-			$locale = localStorage.getItem('lang') || "EN";
+			$locale = localStorage.getItem('lang') || 'EN';
 			(error_404 = $t('404_ERROR')), (goToDashboard = $t('GO_TO_DASHBOARD'));
 		}
 	});
@@ -20,7 +20,6 @@
 	<div class="box_shadow-medium form__content">
 		{#if error_404 != '' && goToDashboard != ''}
 			<div class="content d-flex flex-col justify-cc align-center" in:fade>
-				<img src={greenLogo} alt="esi logo img" />
 				<div class="text-404"><h1>404</h1></div>
 
 				<p class="text-center">{error_404}</p>

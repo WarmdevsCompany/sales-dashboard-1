@@ -6,9 +6,9 @@
 	--white-secondary: #f3f7f0;
 	--white-third: #f6f6f6;
 	--primary-color: #0085ff;
-	--secondary-color: #6cc800;
-	--third-color: #8336e4;
-	--green-dark-color: #053900;
+	--secondary-color: rgb(7 89 133);
+	--third-color: rgb(12 74 110);
+	--green-dark-color: rgb(24, 50, 124);
 	--green-medium-color: #0faa3a;
 	--error-bg-color: #f2e1e0;
 	--red-color: #ff2e00;
@@ -31,13 +31,13 @@
 	--plan-safe-portfolio-border: rgba(0, 110, 255, 0.7);
 	--plan-safe-popup-bg: #006eff;
 
-	--plan-adventure-bg: #6cc800;
-	--plan-adventure-portfolio-bg: rgba(89, 165, 0, 0.25);
-	--plan-adventure-portfolio-border: rgba(89, 165, 0, 0.7);
-	--plan-adventure-popup-bg: #6db94f;
+	--plan-adventure-bg: rgb(6 182 212);
+	--plan-adventure-portfolio-bg: rgb(7 89 133);
+	--plan-adventure-portfolio-border: rgb(7 89 133);
+	--plan-adventure-popup-bg: rgb(3 105 161);
 
-	--plan-founder-bg: #8336e4;
-	--plan-founder-portfolio-bg: rgba(94, 11, 201, 0.25);
+	--plan-founder-bg: rgb(12 74 110);
+	--plan-founder-portfolio-bg: rgba(12, 74, 110, 0.25);
 	--plan-founder-portfolio-border: rgba(94, 11, 201, 0.7);
 	--plan-founder-popup-bg: #5e0bc9;
 
@@ -633,7 +633,6 @@ body::-webkit-scrollbar {
 	background: transparent;
 }
 
-
 .forgot__pass {
 	padding-top: 0.875rem;
 }
@@ -704,8 +703,8 @@ body::-webkit-scrollbar {
 	}
 }
 
-@media screen and (max-device-width: 480px){
-	body{
-	  -webkit-text-size-adjust: none;
+@media screen and (max-device-width: 480px) {
+	body {
+		-webkit-text-size-adjust: none;
 	}
-  }
+}

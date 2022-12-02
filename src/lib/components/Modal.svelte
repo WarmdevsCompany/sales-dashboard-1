@@ -165,7 +165,7 @@
 	#modal.greenForm {
 		padding: 0;
 		overflow: hidden;
-		background: linear-gradient(0deg, #053900, #053900), #ffffff;
+		background: linear-gradient(0deg, #020039, #06358b), #ffffff;
 		border-radius: 0;
 		max-width: none;
 		height: 100%;

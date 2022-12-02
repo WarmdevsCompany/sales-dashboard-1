@@ -218,7 +218,6 @@
 		</div>
 	</div>
 	<div class="sidebar__bottom d-flex justify-sb align-center">
-		<img src={logo} alt="logo" />
 		<div class="logout">
 			<button class="btn d-flex text-sm" style="min-width:auto;" on:click={logout}
 				><img src={logoutIcon} alt="logout" />
@@ -269,7 +268,6 @@
 	}
 	.menu__item--wrapper ul li a:hover,
 	.menu__item--wrapper ul li a.active {
-		color: var(--secondary-color);
 		background: rgba(255, 255, 255, 0.2);
 	}
 	.menu__item--wrapper ul li a:active {

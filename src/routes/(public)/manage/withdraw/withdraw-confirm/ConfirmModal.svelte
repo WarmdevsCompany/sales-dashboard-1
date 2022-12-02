@@ -2,7 +2,7 @@
 	import LoginPassForm from '$lib/components/forms/LoginPassForm.svelte';
 	import { makeWithdrawal, updateGlobalDataObj } from '$lib/api/axios.js';
 	import { globalData, verificationId } from '$lib/globalStore';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
+
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import WithdrawFooter from '../withdraw-footer/WithdrawFooter.svelte';
 	import {
@@ -89,7 +89,6 @@
 
 <Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium text-1">{$t('WITHDRAW')}</div>
 		{#if formStep === 1}
 			<div class="withdraw__row">
@@ -127,7 +126,6 @@
 	<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
 		<div class="confirm__form text-center">
 			<div class="overflow_wrapper">
-				<img src={greenLogo} alt="esi logo img" />
 				<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
 				<div class="text-xsm last__step--subhead mb-1_5">
 					{$t('WHERE_WITHDRAW')}*

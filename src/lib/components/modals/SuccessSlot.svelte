@@ -1,16 +1,13 @@
 <script>
 	import { fade } from 'svelte/transition';
 	import closeIcon from '$lib/assets/img/close.svg';
-    import logo from '$lib/assets/img/logo-green.svg';
-	export let 
-		closeModals = () => {};
+	export let closeModals = () => {};
 </script>
 
 <div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
 	<div class="confirm__form text-center d-flex flex-col justify-cc">
 		<div class="finish__content">
-            <img src={logo} class="mb-1_5" alt="logo" />
-			<slot></slot>
+			<slot />
 		</div>
 		<img class="close_icon" on:click={closeModals} src={closeIcon} alt="esi close icon" />
 	</div>

@@ -1,6 +1,6 @@
 <script>
-	import  VerifyPhone from '$lib/components/forms/verify/inputs/VerifyPhone.svelte';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
+	import VerifyPhone from '$lib/components/forms/verify/inputs/VerifyPhone.svelte';
+
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import { modalClassName, confirmModalState } from '../../security/securityStore';
 	import LoginPassForm from '$lib/components/forms/LoginPassForm.svelte';
@@ -23,7 +23,7 @@
 		const res = await closeAccount($verificationId);
 		if (res.status) {
 			$confirmModalState = true;
-		}else if(res.errorMessage === 'PROFILE_ALREADY_FROZEN_CLOSED'){
+		} else if (res.errorMessage === 'PROFILE_ALREADY_FROZEN_CLOSED') {
 			$confirmModalState = true;
 		}
 	};
@@ -36,7 +36,6 @@
 
 <Modal id="close_account" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium text-1">{heading}</div>
 		<div class="modal_main-body ">
 			{#if formStep === 1}

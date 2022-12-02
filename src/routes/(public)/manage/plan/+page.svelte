@@ -12,7 +12,6 @@
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import PlansMain from './change-bottom/ChangePlansMain.svelte';
 	import ChangePlans from './change-contributions/ChangePlans.svelte';
-	import greenLogo from '$lib/assets/img/logo-green.svg';
 	import { t } from '$lib/translations/i18n.js';
 	import UpdatedPlanItems from './UpdatedPlanItems.svelte';
 	let confirmButtonText = $t('CONFIRM_CHANGES');
@@ -69,7 +68,8 @@
 
 <ChangePlans
 	isDisebled={$globalData.data.currentSubscription.statusId === 5236999 ||
-		$globalData.data.currentSubscription.statusId === 5237000 || $globalData.data.currentSubscription.statusId === 5237002}
+		$globalData.data.currentSubscription.statusId === 5237000 ||
+		$globalData.data.currentSubscription.statusId === 5237002}
 />
 <div class="d-flex justify-cc">
 	<button
@@ -77,14 +77,14 @@
 		on:click={changeContributionData}
 		class:is_fetching={$isFetching}
 		disabled={$globalData.data.currentSubscription.statusId === 5236999 ||
-			$globalData.data.currentSubscription.statusId === 5237000 || $globalData.data.currentSubscription.statusId === 5237002}
+			$globalData.data.currentSubscription.statusId === 5237000 ||
+			$globalData.data.currentSubscription.statusId === 5237002}
 		>{confirmButtonText}
 	</button>
 </div>
 
 <Modal id="confirmPlan">
 	<div class="modal_main confirm text-center">
-		<img src={greenLogo} alt="esi logo img" />
 		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-cc ">
 			<div class="text-xsm d-flex align-base">
