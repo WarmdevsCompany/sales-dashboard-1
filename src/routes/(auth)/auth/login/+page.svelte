@@ -10,6 +10,10 @@
 <div class="greenForm">
 	<div class="box_shadow-medium form__content">
 		<div class="content d-flex flex-col justify-cc align-center">
+			<img
+				src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+				alt=""
+			/>
 			<div class="text-1 mb-1">{$t('LOGIN')}</div>
 			<LoginForm />
 		</div>

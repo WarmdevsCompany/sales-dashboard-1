@@ -10,6 +10,10 @@
 <div class="greenForm">
 	<div class="box_shadow-medium form__content">
 		<div class="content d-flex flex-col justify-cc align-center">
+			<img
+				src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+				alt=""
+			/>
 			<div class="text-1 mb-1">{$t('RESET_PASSWORD')}</div>
 			<div class=" mt-1">{$t('VERIFY_ACCOUNT')}</div>
 
@@ -29,7 +33,7 @@
 		justify-content: center;
 		width: 100%;
 		min-height: 100vh;
-		background: linear-gradient(0deg, #053900, #053900), #ffffff;
+		background: linear-gradient(0deg, #020039, #06358b), #ffffff;
 	}
 
 	.form__content {

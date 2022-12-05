@@ -1,19 +1,17 @@
 <script>
-	import { onMount } from 'svelte';
 	import Preloader from '../../../../lib/components/Preloader.svelte';
-	const sleep = (ms) => new Promise((f) => setTimeout(f, ms));
-	let loading = false;
+	import SignUp from './SignUp.svelte';
 
-	onMount(async () => {
-		await sleep(1); // simulate network delay
-		(await import('./bundle.css')).default;
-		(await import('./bundle')).default;
-		loading = false;
-	});
+	let loading = false;
 </script>
 
+<svelte:head>
+	<title>Sign up</title>
+	<meta name="description" content="Sign up page" />
+</svelte:head>
+
 <div class="wrapper">
-	<div id="app" />
+	<SignUp />
 	{#if loading}
 		<div class="absolute_loader">
 			<Preloader loaderWidth={10} loaderHeight={10} borderWidth={0.8} />

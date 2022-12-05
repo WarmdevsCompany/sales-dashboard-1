@@ -89,6 +89,10 @@
 
 <Modal id="withdraw" className={$modalClassName} resetModalState={() => (formStep = 1)}>
 	<div class="modal_main text-center">
+		<img
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt=""
+		/>
 		<div class="modal_head_medium text-1">{$t('WITHDRAW')}</div>
 		{#if formStep === 1}
 			<div class="withdraw__row">
@@ -125,6 +129,10 @@
 {#if $confirmModalState}
 	<div class="form__wrapper" out:fade={{ delay: 50, duration: 110 }}>
 		<div class="confirm__form text-center">
+			<img
+				src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+				alt=""
+			/>
 			<div class="overflow_wrapper">
 				<div class="modal_head_medium mt-2  text-1">{$t('WITHDRAW')}</div>
 				<div class="text-xsm last__step--subhead mb-1_5">

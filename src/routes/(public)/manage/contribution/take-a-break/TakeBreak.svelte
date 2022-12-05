@@ -114,6 +114,10 @@
 </div>
 <Modal id="pause">
 	<div class="modal_main pause text-center">
+		<img
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt=""
+		/>
 		<div class="modal_head_medium mt-2">
 			{$t('MANAGE_PAUSE_TITLE')}
 		</div>
@@ -130,6 +134,10 @@
 </Modal>
 <Modal id="stop">
 	<div class="modal_main stop text-center">
+		<img
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt=""
+		/>
 		<div class="modal_head_medium mt-2">
 			{$t('MANAGE_STOP_TITLE')}
 		</div>
@@ -142,6 +150,10 @@
 </Modal>
 <Modal id="restart">
 	<div class="modal_main restart text-center">
+		<img
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt=""
+		/>
 		<div class="modal_head_medium mt-2">
 			{$t('MANAGE_RES_TITLE')}
 		</div>

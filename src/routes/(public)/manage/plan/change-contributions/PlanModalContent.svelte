@@ -10,25 +10,8 @@
 		lottieWidth = 370;
 	}
 
-	let name,
-		desc = '';
-
-	switch ($plansModalData.name) {
-		case 'Green Safe':
-			name = $t('MANAGE_GREEN_SAFE');
-			desc = $t('MANAGE_POPUP_SAFE_DESC');
-			break;
-		case 'Green Adventure':
-			name = $t('MANAGE_GREEN_ADV');
-			desc = $t('MANAGE_POPUP_ADV_DESC');
-			break;
-		case 'Green Change':
-			name = $t('MANAGE_GREEN_CHANGE');
-			desc = $t('MANAGE_POPUP_CHANGE_DESC');
-			break;
-		default:
-			console.log('no translate for ' + $plansModalData.name + '.');
-	}
+	let name = $plansModalData.name,
+		desc = $plansModalData.desc;
 
 	afterUpdate(() => {
 		if (windowWidth < 1100) {
@@ -51,14 +34,10 @@
 	</div>
 	<div class="column">
 		<div class="littie__wrapper">
-			<lottie-player
-			    id={$plansModalData.name}
-				src={$plansModalData.lottie}
-				background="transparent"
-				speed="1"
-				style="width:{lottieWidth}px;"
-				loop
-				autoplay
+			<img
+				src="https://assets-global.website-files.com/6089254f4962ce24139217ac/63517350b640ab7fb15e4d3f_hero_major_image.svg"
+				alt=""
+				style="max-width: 100%;"
 			/>
 		</div>
 	</div>

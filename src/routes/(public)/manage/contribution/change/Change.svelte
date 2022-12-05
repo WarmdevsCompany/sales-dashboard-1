@@ -41,6 +41,10 @@
 </div>
 <Modal id="confirm">
 	<div class="modal_main confirm text-center">
+		<img
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt=""
+		/>
 		<div class="modal_head_medium mt-2">{$t('MANAGE_UPDATED')}</div>
 		<div class="modal_main-row d-flex justify-sb align-bottom">
 			<div class="text-xsm d-flex align-center mobile-block">
