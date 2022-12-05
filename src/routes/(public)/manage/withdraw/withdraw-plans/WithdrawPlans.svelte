@@ -93,7 +93,7 @@
 <div class="plan__items grid-3 mt-2">
 	<WithdrawPlanItem
 		planClass={'safe'}
-		planName={$t('SAFE_PLAN_BIG')}
+		planName="Plan 1"
 		planAvailable={$t('MANAGE_AV_AM')}
 		planAvailableMoney={availableAmounts.safe}
 		planPersentage={$withdrawContribution.safePercentage}
@@ -104,7 +104,7 @@
 	/>
 	<WithdrawPlanItem
 		planClass={'adventure'}
-		planName={$t('ADVENTURE_BIG')}
+		planName="Plan 2"
 		planAvailable={$t('MANAGE_AV_AM')}
 		planAvailableMoney={availableAmounts.adv}
 		planPersentage={$withdrawContribution.adventurePercentage}
@@ -115,7 +115,7 @@
 	/>
 	<WithdrawPlanItem
 		planClass={'founder'}
-		planName={$t('FOUNDER_BIG')}
+		planName="Plan 3"
 		planAvailable={$t('MANAGE_AV_AM')}
 		planAvailableMoney={availableAmounts.found}
 		planPersentage={$withdrawContribution.founderPercentage}

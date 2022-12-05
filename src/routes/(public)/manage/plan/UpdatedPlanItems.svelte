@@ -7,21 +7,21 @@
 <div class="plan__items grid-3 mt-2">
 	<PlanItem
 		planClass={'safe'}
-		planName={$t('MANAGE_SAFE')}
+		planName="Plan 1"
 		planMoney={$globalData.data.current_contribution.greenSafeTotal}
 		planPersentage={$globalData.data.current_contribution.greenSafe}
 		planFontClass="small"
 	/>
 	<PlanItem
 		planClass={'adventure'}
-		planName={$t('MANAGE_ADVENTURE')}
+		planName="Plan 2"
 		planMoney={$globalData.data.current_contribution.greenAdventureTotal}
 		planPersentage={$globalData.data.current_contribution.greenAdventure}
 		planFontClass="small"
 	/>
 	<PlanItem
 		planClass={'founder'}
-		planName={$t('MANAGE_FOUNDER')}
+		planName="Plan 3"
 		planMoney={$globalData.data.current_contribution.greenFounderTotal}
 		planPersentage={$globalData.data.current_contribution.greenFounder}
 		planFontClass="small"

@@ -9,23 +9,27 @@
 <div class="plan__items grid-3 mobile-block">
 	<PlanItem
 		planClass={'safe'}
-		planName={$t('SAFE_PLAN_BIG')}
+		planName="Plan 1"
 		planCurrentMoney={$globalData.data.current_contribution.greenSafeTotal}
-		planNewMoney={($allocatedContributions.safe * $globalData.data.current_contribution.amount) / 100}
+		planNewMoney={($allocatedContributions.safe * $globalData.data.current_contribution.amount) /
+			100}
 		planPersentage={$allocatedContributions.safe}
 	/>
 	<PlanItem
 		planClass={'adventure'}
-		planName={$t('ADVENTURE_BIG')}
+		planName="Plan 2"
 		planCurrentMoney={$globalData.data.current_contribution.greenAdventureTotal}
-		planNewMoney={($allocatedContributions.adventure * $globalData.data.current_contribution.amount) / 100}
+		planNewMoney={($allocatedContributions.adventure *
+			$globalData.data.current_contribution.amount) /
+			100}
 		planPersentage={$allocatedContributions.adventure}
 	/>
 	<PlanItem
 		planClass={'founder'}
-		planName={$t('FOUNDER_BIG')}
+		planName="Plan 3"
 		planCurrentMoney={$globalData.data.current_contribution.greenFounderTotal}
-		planNewMoney={($allocatedContributions.founder * $globalData.data.current_contribution.amount) / 100}
+		planNewMoney={($allocatedContributions.founder * $globalData.data.current_contribution.amount) /
+			100}
 		planPersentage={$allocatedContributions.founder}
 	/>
 </div>

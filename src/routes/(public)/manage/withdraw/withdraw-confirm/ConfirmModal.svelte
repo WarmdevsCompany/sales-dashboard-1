@@ -141,19 +141,19 @@
 				<div class="last__step--body">
 					<div class="last__step--flex">
 						<div class="inline">
-							{$t('SAFE_PLAN_BIG')}:
+							Plan 1:
 							<span class="text-green mobile-block"
 								>{$globalData.data.currency.symbol}{$withdrawContribution.safeValue}</span
 							>
 						</div>
 						<div class="inline">
-							{$t('ADVENTURE_BIG')}:
+							Plan 2:
 							<span class="text-green mobile-block"
 								>{$globalData.data.currency.symbol}{$withdrawContribution.adventureValue}</span
 							>
 						</div>
 						<div class="inline">
-							{$t('FOUNDER_BIG')}:
+							Plan 3:
 							<span class="text-green mobile-block"
 								>{$globalData.data.currency.symbol}{$withdrawContribution.founderValue}</span
 							>
