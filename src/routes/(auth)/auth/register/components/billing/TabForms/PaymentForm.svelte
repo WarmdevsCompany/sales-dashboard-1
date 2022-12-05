@@ -84,7 +84,10 @@
 			event.preventDefault();
 			preloaderState = true;
 			// set data to pass to webflow
-			localStorage.setItem('stripe_PK', 'process.env.stripe_PK');
+			localStorage.setItem(
+				'stripe_PK',
+				'pk_test_51JAyWcC77lileg3b0o6iLVl0d1gk3KbajmNK1CZZNeh22fK67ZJg7s0fUUkToSVxPGdiLFlwyvKeihifBFS6UL1b005wevv4GM'
+			);
 			localStorage.setItem('AuthToken', $userAuthToken);
 
 			const { error } = await stripe.confirmSetup({
