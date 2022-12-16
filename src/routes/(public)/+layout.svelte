@@ -1,5 +1,5 @@
 <script>
-	import greenLogo from '$lib/assets/img/logo-green.svg';
+	
 	import Modal, { getModal } from '$lib/components/Modal.svelte';
 	import Header from '$lib/header/Header.svelte';
 	import Sidebar from '$lib/sidebar/Sidebar.svelte';
@@ -59,7 +59,7 @@
 		<img in:fade class="logo_bg" src={logoForBg} alt="esi logo" />
 		<Modal id="notification">
 			<div class="notification_modal text-center">
-				<img src={greenLogo} alt="esi logo img" />
+				
 				<div class="modal_head_medium mt-2">
 					{$selectedNotification.head}
 				</div>

@@ -1,6 +1,5 @@
 <script>
 	import '../../app.css';
-	import logoForBg from '$lib/assets/img/logo-big.svg';
 	import Loader from '$lib/components/Loader.svelte';
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
@@ -33,7 +32,12 @@
 			<slot />
 		</div>
 
-		<img in:fade class="logo_bg" src={logoForBg} alt="esi logo" />
+		<img
+			in:fade
+			class="logo_bg"
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt="esi logo"
+		/>
 	{:else}
 		<Loader />
 	{/if}
@@ -89,6 +93,5 @@
 			max-height: 100%;
 			overflow: visible;
 		}
-	
 	}
 </style>

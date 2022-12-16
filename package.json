@@ -33,6 +33,7 @@
 		"datejs": "^1.0.0-rc3",
 		"flatpickr": "^4.6.13",
 		"sirv-cli": "^2.0.2",
+		"svelecte": "^3.12.0",
 		"svelte-chartjs": "^2.0.1",
 		"svelte-collapsible": "^0.2.1",
 		"svelte-forms-lib": "^2.0.1",

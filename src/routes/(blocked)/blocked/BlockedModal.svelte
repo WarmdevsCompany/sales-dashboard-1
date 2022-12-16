@@ -8,7 +8,11 @@
 
 <div class="modal d-flex justify-cc align-center">
 	<div class="content d-flex justify-cc align-center flex-col">
-		<img class="logo" src={logo} alt="esi logo" />
+		<img
+			class="logo"
+			src="https://assets-global.website-files.com/6089254f4962ce24139217ac/62fb58aa7d076b85fe8a58bf_WarmDevs_Logo_Horizontal.svg"
+			alt="logo"
+		/>
 		<div class="message">
 			{#if statusId === 5237003}
 				{$t('ACCOUNT_BLOCKED')}
@@ -79,8 +83,8 @@
 			padding-top: 160px;
 			align-items: flex-start;
 		}
-		.content{
-		padding: 0 30px;
+		.content {
+			padding: 0 30px;
 		}
 	}
 </style>
